@@ -1,26 +1,36 @@
-import type { ApiFeature, ApiMode } from './api.types';
+import { getAppConfig } from '../config/appConfig';
+import type { ApiMode, ApiResourceId } from './api.types';
 
-function readMode(raw: unknown): ApiMode | undefined {
-  if (raw === 'mock' || raw === 'real') return raw;
-  return undefined;
-}
-
-/** Global API mode. Defaults to mock when unset. */
-export function getApiMode(feature?: ApiFeature): ApiMode {
-  if (feature === 'landing') {
-    const override = readMode(import.meta.env.VITE_LANDING_API_MODE);
+/** Resolve mock|real for a resource: resource override → defaultMode → mock. */
+export function getApiMode(resource?: ApiResourceId): ApiMode {
+  const { api } = getAppConfig();
+  if (resource) {
+    const override = api.resources[resource]?.mode;
     if (override) return override;
   }
-  return readMode(import.meta.env.VITE_API_MODE) ?? 'mock';
+  return api.defaultMode ?? 'mock';
 }
 
-/** Blank/relative in mock mode; VITE_API_BASE_URL in real mode. */
-export function getApiBaseUrl(feature?: ApiFeature): string {
-  if (getApiMode(feature) === 'mock') return '';
-  const base = import.meta.env.VITE_API_BASE_URL;
-  return typeof base === 'string' ? base.replace(/\/$/, '') : '';
+/**
+ * Base URL for real mode. Mock mode always uses relative URLs (MSW).
+ * Per-resource baseUrl overrides global api.baseUrl when set.
+ */
+export function getApiBaseUrl(resource?: ApiResourceId): string {
+  if (getApiMode(resource) === 'mock') return '';
+  const { api } = getAppConfig();
+  if (resource) {
+    const override = api.resources[resource]?.baseUrl;
+    if (typeof override === 'string') return override.replace(/\/$/, '');
+  }
+  return api.baseUrl.replace(/\/$/, '');
 }
 
-export function shouldStartMsw(feature: ApiFeature = 'landing'): boolean {
-  return getApiMode(feature) === 'mock';
+/**
+ * Start MSW when any resource would still be served as mock
+ * (default mock, or an explicit resource mode of mock).
+ */
+export function shouldStartMsw(): boolean {
+  const { api } = getAppConfig();
+  if (api.defaultMode === 'mock') return true;
+  return Object.values(api.resources).some((r) => r.mode === 'mock');
 }

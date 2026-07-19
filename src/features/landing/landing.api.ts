@@ -3,6 +3,7 @@ import type { ApiResult } from '../../app/api/api.types';
 import { adaptLandingMetrics } from './landing.adapter';
 import type { LandingMetricsResponse } from './landing.types';
 
+export const LANDING_METRICS_RESOURCE = 'landingMetrics';
 export const LANDING_METRICS_PATH = '/api/v1/marketplace/landing/metrics';
 
 export async function fetchLandingMetrics(options?: {
@@ -10,7 +11,7 @@ export async function fetchLandingMetrics(options?: {
 }): Promise<ApiResult<LandingMetricsResponse>> {
   const result = await httpGet<LandingMetricsResponse>(LANDING_METRICS_PATH, {
     signal: options?.signal,
-    feature: 'landing',
+    resource: LANDING_METRICS_RESOURCE,
   });
 
   if (!result.ok) return result;

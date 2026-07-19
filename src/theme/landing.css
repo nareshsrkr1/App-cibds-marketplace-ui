@@ -32,7 +32,7 @@
 .pl-diagram{background:linear-gradient(160deg,#fbfaf8,#f3efe7);border:1px solid var(--gold-mid);border-radius:16px;padding:22px 20px;box-shadow:0 20px 50px -20px rgba(23,48,79,.25)}
 .pl-dg-h{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-bottom:16px;text-align:center}
 .pl-dg-flow{display:flex;flex-direction:column;align-items:center;gap:0}
-.pl-dg-node{width:100%;background:#fff;border:1px solid var(--border);border-radius:10px;padding:11px 15px;display:flex;flex-direction:column;gap:2px}
+.pl-dg-node{width:100%;background:#fff;border:1px solid var(--border);border-radius:10px;padding:11px 15px;display:flex;flex-direction:column;gap:2px;position:relative;transition:.2s}
 .pl-dg-node.offer{border-color:var(--gold);background:#fffdf8}
 .pl-dg-node.dataset{border-color:var(--navy);border-width:1.5px}
 .pl-dg-node.sub{border-color:var(--green);background:var(--green-lt)}

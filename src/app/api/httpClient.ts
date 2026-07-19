@@ -1,13 +1,14 @@
 import { getApiBaseUrl } from './apiConfig';
-import type { ApiFeature, ApiResult } from './api.types';
+import type { ApiResourceId, ApiResult } from './api.types';
 
 type HttpGetOptions = {
   signal?: AbortSignal;
-  feature?: ApiFeature;
+  /** Stable API resource id for phased mock/real selection. */
+  resource?: ApiResourceId;
 };
 
-function buildUrl(path: string, feature?: ApiFeature): string {
-  const base = getApiBaseUrl(feature);
+function buildUrl(path: string, resource?: ApiResourceId): string {
+  const base = getApiBaseUrl(resource);
   if (!base) return path;
   return `${base}${path.startsWith('/') ? path : `/${path}`}`;
 }
@@ -16,7 +17,7 @@ export async function httpGet<T>(
   path: string,
   options?: HttpGetOptions,
 ): Promise<ApiResult<T>> {
-  const url = buildUrl(path, options?.feature);
+  const url = buildUrl(path, options?.resource);
   try {
     const response = await fetch(url, {
       method: 'GET',

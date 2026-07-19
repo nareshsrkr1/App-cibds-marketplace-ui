@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { fetchLandingMetrics } from './landing.api';
 import type { Capability, DiagramNode, FaqItem, LandingMetric, PipelineStep } from './landing.types';
 import './landing.css';
@@ -103,8 +103,8 @@ export function LandingPage() {
             <div className="pl-diagram">
               <div className="pl-dg-h">How data moves</div>
               <div className="pl-dg-flow">
-                {DIAGRAM.map((node, i) => (
-                  <div key={node.id}>
+                {DIAGRAM.map((node) => (
+                  <Fragment key={node.id}>
                     <div className={`pl-dg-node ${node.kind}`}>
                       <span className="pl-dg-k">{node.k}</span>
                       <span className="pl-dg-id">{node.id}</span>
@@ -115,8 +115,7 @@ export function LandingPage() {
                         <span className="pl-dg-lbl">{node.connLabel}</span>
                       </div>
                     ) : null}
-                    {i < 0 ? null : null}
-                  </div>
+                  </Fragment>
                 ))}
               </div>
             </div>

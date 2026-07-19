@@ -1,0 +1,11 @@
+{
+  "api": {
+    "defaultMode": "mock",
+    "baseUrl": "",
+    "resources": {
+      "landingMetrics": {
+        "mode": "mock"
+      }
+    }
+  }
+}

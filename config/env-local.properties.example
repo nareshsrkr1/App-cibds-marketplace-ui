@@ -1,0 +1,16 @@
+# Local developer configuration (do not commit env-local.properties).
+# Copy to env-local.properties and run: npm run config:generate
+#
+# Phase examples:
+#   All mock (default): leave resource modes unset
+#   Landing real only:  LANDING_METRICS_MODE=real + API_BASE_URL=https://api.company.com
+
+# mock | real — default for all API resources
+API_DEFAULT_MODE=mock
+
+# Used when a resource (or default) is real
+API_BASE_URL=
+
+# Optional per-resource overrides (mock | real)
+LANDING_METRICS_MODE=mock
+# NOTIFICATIONS_MODE=mock

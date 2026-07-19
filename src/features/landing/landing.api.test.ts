@@ -1,15 +1,16 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getApiBaseUrl, getApiMode } from '../../app/api/apiConfig';
+import { afterEach, describe, expect, it } from 'vitest';
+import { getApiBaseUrl, getApiMode, shouldStartMsw } from '../../app/api/apiConfig';
+import { resetAppConfig, setAppConfig } from '../../app/config/appConfig';
 import {
   setLandingMockDelay,
   setLandingMockScenario,
 } from '../../mocks/landing/handlers';
-import { fetchLandingMetrics } from './landing.api';
+import { fetchLandingMetrics, LANDING_METRICS_RESOURCE } from './landing.api';
 
 afterEach(() => {
   setLandingMockScenario('success');
   setLandingMockDelay(280);
-  vi.unstubAllEnvs();
+  resetAppConfig();
 });
 
 describe('fetchLandingMetrics', () => {
@@ -57,17 +58,35 @@ describe('fetchLandingMetrics', () => {
     expect(res.ok).toBe(true);
   });
 
-  it('selects mock mode by default and real mode via env', () => {
-    expect(getApiMode()).toBe('mock');
-    expect(getApiBaseUrl('landing')).toBe('');
+  it('supports phased resource modes via runtime app config', () => {
+    expect(getApiMode(LANDING_METRICS_RESOURCE)).toBe('mock');
+    expect(getApiBaseUrl(LANDING_METRICS_RESOURCE)).toBe('');
+    expect(shouldStartMsw()).toBe(true);
 
-    vi.stubEnv('VITE_API_MODE', 'real');
-    vi.stubEnv('VITE_API_BASE_URL', 'https://api.example.com');
-    expect(getApiMode()).toBe('real');
-    expect(getApiBaseUrl('landing')).toBe('https://api.example.com');
+    // Phase: landing real, default still mock (notifications etc. stay mocked)
+    setAppConfig({
+      api: {
+        defaultMode: 'mock',
+        baseUrl: 'https://api.example.com',
+        resources: {
+          landingMetrics: { mode: 'real' },
+        },
+      },
+    });
+    expect(getApiMode(LANDING_METRICS_RESOURCE)).toBe('real');
+    expect(getApiBaseUrl(LANDING_METRICS_RESOURCE)).toBe('https://api.example.com');
+    expect(getApiMode('notifications')).toBe('mock');
+    expect(shouldStartMsw()).toBe(true);
 
-    vi.stubEnv('VITE_LANDING_API_MODE', 'mock');
-    expect(getApiMode('landing')).toBe('mock');
-    expect(getApiBaseUrl('landing')).toBe('');
+    // Final phase: all real
+    setAppConfig({
+      api: {
+        defaultMode: 'real',
+        baseUrl: 'https://api.example.com',
+        resources: {},
+      },
+    });
+    expect(getApiMode(LANDING_METRICS_RESOURCE)).toBe('real');
+    expect(shouldStartMsw()).toBe(false);
   });
 });

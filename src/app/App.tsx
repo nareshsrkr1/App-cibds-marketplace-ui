@@ -12,12 +12,12 @@ export function App() {
   // Vitest uses the MSW node server from src/test/setup.ts — skip the browser worker there.
   const skipBrowserWorker = import.meta.env.MODE === 'test';
   const [ready, setReady] = useState(
-    () => skipBrowserWorker || !shouldStartMsw('landing'),
+    () => skipBrowserWorker || !shouldStartMsw(),
   );
 
   useEffect(() => {
     let cancelled = false;
-    if (skipBrowserWorker || !shouldStartMsw('landing')) {
+    if (skipBrowserWorker || !shouldStartMsw()) {
       setReady(true);
       return;
     }
