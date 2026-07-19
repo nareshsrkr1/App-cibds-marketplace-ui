@@ -1,4 +1,5 @@
 import { ConsoleHeader } from './ConsoleHeader';
+import { personalizedGreeting } from '../greeting';
 import type { ConsoleSummary } from '../workspace.types';
 
 export type AdminConsoleProps = {
@@ -6,11 +7,13 @@ export type AdminConsoleProps = {
 };
 
 export function AdminConsole({ data }: AdminConsoleProps) {
+  const greeting = personalizedGreeting(data.displayName);
+
   return (
     <div className="admin-console">
       <ConsoleHeader
         eyebrow={data.eyebrow}
-        greeting={data.greeting}
+        greeting={greeting}
         subtitle={data.subtitle}
       />
       <div className="sh-kpis" aria-label="Admin KPIs">

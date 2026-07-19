@@ -7,7 +7,6 @@
   "roles": ["PRODUCER"],
   "entitlements": ["WORKSPACE_VIEW"],
   "defaultPersona": "PRODUCER",
-  "userSubtitle": "Endur · Data Owner",
   "availablePersonas": ["PRODUCER", "GOVERNANCE", "CONSUMER", "ADMIN"],
   "enabledPersonas": ["PRODUCER"]
 }

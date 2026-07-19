@@ -1,4 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
+import { personalizedGreeting } from '../../features/workspace/greeting';
 import context from '../session/context.json';
 import producerConsole from './producer-console.json';
 
@@ -24,18 +25,12 @@ export function setWorkspaceMockDelay(ms: number) {
 export const SESSION_CONTEXT_URL = '/api/v1/session/context';
 export const WORKSPACE_CONSOLE_URL = '/api/v1/workspace/console';
 
-/** Greeting from session mock user — keep names out of handler strings. */
-function afternoonGreeting(displayName: string): string {
-  const first = displayName.trim().split(/\s+/)[0] || 'there';
-  return `Good afternoon, ${first}.`;
-}
-
 function withSessionUser<T extends Record<string, unknown>>(payload: T) {
   const displayName = context.user.displayName;
   return {
     ...payload,
     displayName,
-    greeting: afternoonGreeting(displayName),
+    greeting: personalizedGreeting(displayName),
   };
 }
 

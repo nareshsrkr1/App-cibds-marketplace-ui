@@ -1,5 +1,6 @@
 import { ConsoleCharts } from './ConsoleCharts';
 import { ConsoleHeader } from './ConsoleHeader';
+import { personalizedGreeting } from '../greeting';
 import type { ConsoleSummary } from '../workspace.types';
 
 export type ProducerConsoleProps = {
@@ -9,12 +10,13 @@ export type ProducerConsoleProps = {
 export function ProducerConsole({ data }: ProducerConsoleProps) {
   const actions = data.actions ?? [];
   const panels = data.panels ?? [];
+  const greeting = personalizedGreeting(data.displayName);
 
   return (
     <div className="producer-console" data-testid="producer-console">
       <ConsoleHeader
         eyebrow={data.eyebrow}
-        greeting={data.greeting}
+        greeting={greeting}
         subtitle={data.subtitle}
       />
 

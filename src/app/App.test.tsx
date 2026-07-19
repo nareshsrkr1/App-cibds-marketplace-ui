@@ -33,7 +33,9 @@ describe('App routes', () => {
     setConsoleMockScenario('success');
     renderAt('/workspace');
     await waitFor(() => expect(screen.getByTestId('workspace-shell')).toBeInTheDocument());
-    await waitFor(() => expect(screen.getByText(/Good afternoon, Test\./i)).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeInTheDocument(),
+    );
     expect(screen.getByRole('button', { name: 'Producer' })).toHaveAttribute('aria-pressed', 'true');
   });
 

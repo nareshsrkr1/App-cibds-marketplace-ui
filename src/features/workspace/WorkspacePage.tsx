@@ -145,7 +145,12 @@ export function WorkspacePage() {
       onPersonaChange={setPersona}
       userInitials={session.user.initials}
       userName={session.user.displayName}
-      userSubtitle={session.userSubtitle}
+      userSubtitle={
+        session.userSubtitle ??
+        PERSONA_LABELS[persona] ??
+        PERSONA_LABELS[session.defaultPersona] ??
+        session.roles[0]
+      }
     >
       {consoleStatus === 'loading' && (
         <div className="workspace-loading workspace-loading--main" role="status" aria-label="Loading">

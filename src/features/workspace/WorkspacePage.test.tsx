@@ -37,7 +37,7 @@ describe('WorkspacePage', () => {
   it('renders Producer console greeting, KPIs, and actions from mock API', async () => {
     renderPage();
     await waitFor(() =>
-      expect(screen.getByText(/Good afternoon, Test\./i)).toBeInTheDocument(),
+      expect(screen.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeInTheDocument(),
     );
     expect(
       screen.getByText(/Everything you produce — governed, bound, and accounted for/i),

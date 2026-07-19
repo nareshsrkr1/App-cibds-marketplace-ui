@@ -100,7 +100,7 @@
 .appshell { display: none; }
 .appshell.show { display: flex; min-height: 100vh; background: var(--bg); }
 .sb {
-  width: 244px;
+  width: 280px;
   flex-shrink: 0;
   background: linear-gradient(180deg, var(--navy), #12253d);
   color: #e8e3d8;
@@ -309,8 +309,14 @@
 .sh-charts {
   padding: 0 44px 8px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
+}
+@media (max-width: 1280px) {
+  .sh-charts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .sh-charts { grid-template-columns: 1fr; }
 }
 .bi-card {
   background: var(--white);
