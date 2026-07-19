@@ -3,10 +3,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import { setLandingMockScenario } from '../mocks/landing/handlers';
+import { setConsoleMockScenario, setSessionMockScenario } from '../mocks/workspace/handlers';
 import { App } from './App';
 
 afterEach(() => {
   setLandingMockScenario('success');
+  setSessionMockScenario('success');
+  setConsoleMockScenario('success');
 });
 
 function renderAt(path: string) {
@@ -23,6 +26,15 @@ describe('App routes', () => {
     renderAt('/');
     await waitFor(() => expect(screen.getByText('CIB Data Services')).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText('Physical datasets')).toBeInTheDocument());
+  });
+
+  it('renders workspace console at /workspace', async () => {
+    setSessionMockScenario('success');
+    setConsoleMockScenario('success');
+    renderAt('/workspace');
+    await waitFor(() => expect(screen.getByTestId('workspace-shell')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/Good afternoon, Test\./i)).toBeInTheDocument());
+    expect(screen.getByRole('button', { name: 'Producer' })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('redirects unknown paths to landing (no catalogue/shell routes)', async () => {

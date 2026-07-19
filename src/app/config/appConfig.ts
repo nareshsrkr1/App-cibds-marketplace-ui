@@ -5,11 +5,17 @@ export type { AppConfig, ApiRuntimeConfig, ApiResourceConfig };
 const DEFAULT_API: ApiRuntimeConfig = {
   defaultMode: 'mock',
   baseUrl: '',
-  resources: {},
+  resources: {
+    sessionContext: { mode: 'mock' },
+    workspaceConsole: { mode: 'mock' },
+  },
 };
 
 const DEFAULT_CONFIG: AppConfig = {
-  api: { ...DEFAULT_API, resources: {} },
+  api: {
+    ...DEFAULT_API,
+    resources: { ...DEFAULT_API.resources },
+  },
 };
 
 let current: AppConfig = structuredClone(DEFAULT_CONFIG);

@@ -1,0 +1,13 @@
+{
+  "user": {
+    "id": "mock-producer-001",
+    "displayName": "Test user",
+    "initials": "TU"
+  },
+  "roles": ["PRODUCER"],
+  "entitlements": ["WORKSPACE_VIEW"],
+  "defaultPersona": "PRODUCER",
+  "userSubtitle": "Endur · Data Owner",
+  "availablePersonas": ["PRODUCER", "GOVERNANCE", "CONSUMER", "ADMIN"],
+  "enabledPersonas": ["PRODUCER"]
+}

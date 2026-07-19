@@ -5,6 +5,12 @@
     "resources": {
       "landingMetrics": {
         "mode": "mock"
+      },
+      "sessionContext": {
+        "mode": "mock"
+      },
+      "workspaceConsole": {
+        "mode": "mock"
       }
     }
   }

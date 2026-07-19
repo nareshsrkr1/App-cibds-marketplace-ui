@@ -1,0 +1,80 @@
+{
+  "persona": "ADMIN",
+  "eyebrow": "Admin Console",
+  "subtitle": "Platform health, registries, and work that needs an admin eye \u2014 in one view.",
+  "kpis": [
+    {
+      "id": "apps",
+      "value": 12,
+      "label": "Registered apps"
+    },
+    {
+      "id": "datasets",
+      "value": 48,
+      "label": "Datasets"
+    },
+    {
+      "id": "pending",
+      "value": 5,
+      "label": "Pending reviews",
+      "warn": true
+    },
+    {
+      "id": "audits",
+      "value": 3,
+      "label": "Audit flags",
+      "warn": true
+    },
+    {
+      "id": "gaps",
+      "value": 1,
+      "label": "Coverage gaps"
+    }
+  ],
+  "summaries": [
+    {
+      "id": "sum-reg",
+      "title": "Registry",
+      "body": "12 applications with active offer contracts."
+    },
+    {
+      "id": "sum-gov",
+      "title": "Governance",
+      "body": "5 items awaiting platform admin attention."
+    }
+  ],
+  "actionItems": [
+    {
+      "id": "AI-1",
+      "title": "Approve dataset registration",
+      "subtitle": "Endur P&L and Greeks \u00b7 DS-CIB-40121",
+      "age": "1d",
+      "tag": "Review",
+      "tagKind": "proposed"
+    },
+    {
+      "id": "AI-2",
+      "title": "Resolve audit exception",
+      "subtitle": "Access change without dual control \u00b7 AUD-8821",
+      "age": "2d",
+      "tag": "Audit",
+      "tagKind": "unmapped"
+    }
+  ],
+  "recentActivity": [
+    {
+      "id": "ACT-1",
+      "title": "Dataset registered",
+      "detail": "Catalyst Positions published under Investments Operations",
+      "by": "Platform Admin",
+      "age": "4h"
+    },
+    {
+      "id": "ACT-2",
+      "title": "Persona switched",
+      "detail": "Governance \u2192 Consumer",
+      "by": "Platform Admin",
+      "age": "2d"
+    }
+  ]
+}

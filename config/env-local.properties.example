@@ -13,4 +13,6 @@ API_BASE_URL=
 
 # Optional per-resource overrides (mock | real)
 LANDING_METRICS_MODE=mock
+SESSION_CONTEXT_MODE=mock
+WORKSPACE_CONSOLE_MODE=mock
 # NOTIFICATIONS_MODE=mock

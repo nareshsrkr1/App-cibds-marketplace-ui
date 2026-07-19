@@ -8,6 +8,8 @@ export type ApiResourceId =
   | 'businessTerms'
   | 'governance'
   | 'search'
+  | 'sessionContext'
+  | 'workspaceConsole'
   | (string & {});
 
 export type ApiResourceConfig = {

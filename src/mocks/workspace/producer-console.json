@@ -1,0 +1,155 @@
+{
+  "persona": "PRODUCER",
+  "eyebrow": "Producer Console",
+  "subtitle": "Everything you produce — governed, bound, and accounted for. In one view.",
+  "kpis": [
+    { "id": "datasets", "value": 6, "label": "My datasets" },
+    { "id": "offers", "value": 2, "label": "Offers held" },
+    { "id": "pendingGov", "value": 3, "label": "Pending governance", "warn": true },
+    { "id": "subreq", "value": 2, "label": "Subscription requests", "warn": true },
+    { "id": "gaps", "value": 1, "label": "Coverage gaps" }
+  ],
+  "actions": [
+    { "id": "register", "label": "Register a dataset", "variant": "primary", "enabled": false },
+    { "id": "bulkpde", "label": "Bulk upload PDEs", "variant": "secondary", "enabled": false },
+    { "id": "bind", "label": "Bind columns", "variant": "secondary", "enabled": false },
+    { "id": "workflow", "label": "Track workflow", "variant": "secondary", "enabled": false }
+  ],
+  "charts": [
+    {
+      "id": "sd_bde",
+      "title": "Elements by sub-domain",
+      "subtitle": "74 business data elements",
+      "kind": "bars",
+      "data": { "Trading": 20, "CIB Reference": 25, "Frontline Risk": 21, "Markets": 8 },
+      "color": "var(--navy)"
+    },
+    {
+      "id": "coverage",
+      "title": "Binding coverage",
+      "subtitle": "realised vs. gap",
+      "kind": "donut",
+      "realised": 73,
+      "gap": 1
+    },
+    {
+      "id": "sor_pde",
+      "title": "Physical columns by source",
+      "subtitle": "263 PDEs across systems of record",
+      "kind": "split",
+      "segments": { "Endur": 181, "Catalyst": 82 }
+    },
+    {
+      "id": "cls",
+      "title": "Elements by classification",
+      "subtitle": "sensitivity profile",
+      "kind": "hbars",
+      "rows": [
+        ["Internal", 39],
+        ["Confidential", 33],
+        ["PII", 2]
+      ]
+    },
+    {
+      "id": "reps",
+      "title": "Elements by representation",
+      "subtitle": "data shape",
+      "kind": "hbars",
+      "rows": [
+        ["Identifier", 15],
+        ["Amount", 15],
+        ["Code", 11],
+        ["Rate", 11],
+        ["Name", 11],
+        ["Date", 6],
+        ["Quantity", 3],
+        ["Attribute", 2]
+      ]
+    },
+    {
+      "id": "cde",
+      "title": "Critical Data Elements",
+      "subtitle": "BCBS 239 coverage",
+      "kind": "donut",
+      "realised": 13,
+      "gap": 61,
+      "footer": "13 of 74 elements are CDEs"
+    },
+    {
+      "id": "reuse",
+      "title": "Element reuse",
+      "subtitle": "datasets each element appears in",
+      "kind": "bars",
+      "data": { "1": 36, "2": 8, "3": 8, "4+": 21 },
+      "color": "var(--gold-deep)"
+    },
+    {
+      "id": "sa_bde",
+      "title": "Elements by subject area",
+      "subtitle": "top governance groupings",
+      "kind": "hbars",
+      "rows": [
+        ["Trade Valuation & Economics", 8],
+        ["Trade Lifecycle", 7],
+        ["Instrument & Product Reference", 6],
+        ["Market Risk Sensitivities", 6],
+        ["Counterparty Credit Risk", 6],
+        ["Valuation & P&L", 5]
+      ]
+    }
+  ],
+  "panels": [
+    {
+      "id": "subreq",
+      "title": "Subscription requests · awaiting your approval",
+      "moreLabel": "All",
+      "items": [
+        {
+          "id": "SUB-REQ-5501",
+          "title": "Market Risk · Risk Analytics",
+          "subtitleHtml": "wants <b>Endur P&L and Greeks</b> · <span class=\"mono\">DS-CIB-40121</span>",
+          "age": "1d",
+          "approve": true
+        },
+        {
+          "id": "SUB-REQ-5502",
+          "title": "Regulatory Reporting",
+          "subtitleHtml": "wants <b>Endur OTC Commodity Trades</b> · <span class=\"mono\">DS-CIB-40118</span>",
+          "age": "3d",
+          "approve": true
+        }
+      ]
+    },
+    {
+      "id": "govsent",
+      "title": "Sent to governance",
+      "moreLabel": "All",
+      "items": [
+        {
+          "id": "BDE-PROP-2041",
+          "title": "Cleared Notional",
+          "subtitle": "Proposed BDE · Endur OTC Commodity Trades",
+          "age": "2d",
+          "tag": "Proposed",
+          "tagKind": "proposed"
+        },
+        {
+          "id": "BDE-PROP-2042",
+          "title": "Give-up Broker Code",
+          "subtitle": "Proposed BDE · Endur Exchange Commodity Trades",
+          "age": "1d",
+          "tag": "Proposed",
+          "tagKind": "proposed"
+        },
+        {
+          "id": "GAP-8817",
+          "title": "settle_ccy_2",
+          "subtitle": "Unmapped column · Catalyst Positions",
+          "age": "4d",
+          "tag": "Gap",
+          "tagKind": "unmapped"
+        }
+      ]
+    }
+  ]
+}

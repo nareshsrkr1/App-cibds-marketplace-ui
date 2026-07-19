@@ -1,4 +1,8 @@
 import { Fragment, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Spinner } from '../../components/feedback/Spinner/Spinner';
+import { fetchSessionContext, hasEntitlement } from '../session/session.api';
+import { WORKSPACE_VIEW } from '../session/session.types';
 import { fetchLandingMetrics } from './landing.api';
 import type { Capability, DiagramNode, FaqItem, LandingMetric, PipelineStep } from './landing.types';
 import './landing.css';
@@ -40,10 +44,28 @@ function scrollToId(id: string) {
 }
 
 export function LandingPage() {
+  const navigate = useNavigate();
   const [stats, setStats] = useState<LandingMetric[] | null>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
   const [error, setError] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [workspaceState, setWorkspaceState] = useState<'loading' | 'enabled' | 'disabled'>('loading');
+
+  useEffect(() => {
+    let cancelled = false;
+    setWorkspaceState('loading');
+    void fetchSessionContext().then((res) => {
+      if (cancelled) return;
+      if (!res.ok || !hasEntitlement(res.data, WORKSPACE_VIEW)) {
+        setWorkspaceState('disabled');
+        return;
+      }
+      setWorkspaceState('enabled');
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -84,7 +106,28 @@ export function LandingPage() {
         </div>
         <div className="pl-navr">
           <button type="button" className="btn-ghost" disabled title="Catalogue is out of scope for this delivery">Browse catalogue</button>
-          <button type="button" className="btn-dk pl-nav-cta" disabled title="Workspace is out of scope for this delivery">Open workspace →</button>
+          <button
+            type="button"
+            className="btn-dk pl-nav-cta"
+            disabled={workspaceState !== 'enabled'}
+            title={
+              workspaceState === 'loading'
+                ? 'Loading workspace access…'
+                : workspaceState === 'enabled'
+                  ? 'Open workspace'
+                  : 'Workspace is unavailable for your account'
+            }
+            aria-busy={workspaceState === 'loading' || undefined}
+            onClick={() => navigate('/workspace')}
+          >
+            {workspaceState === 'loading' ? (
+              <>
+                <Spinner size="sm" label="Loading" /> Open workspace →
+              </>
+            ) : (
+              'Open workspace →'
+            )}
+          </button>
         </div>
       </nav>
 
@@ -95,7 +138,28 @@ export function LandingPage() {
             <h1>Data that moves the<br /><em>firm forward.</em></h1>
             <p className="pl-hero-p">The single governed marketplace for the firm's data. Teams publish the data they own; it’s checked and classified; and anyone across the firm can find it, understand it, and get access under clear terms — with full traceability from source to consumer.</p>
             <div className="pl-hero-actions">
-              <button type="button" className="btn-dk btn-lg" disabled title="Workspace is out of scope for this delivery">Open workspace →</button>
+              <button
+                type="button"
+                className="btn-dk btn-lg"
+                disabled={workspaceState !== 'enabled'}
+                title={
+                  workspaceState === 'loading'
+                    ? 'Loading workspace access…'
+                    : workspaceState === 'enabled'
+                      ? 'Open workspace'
+                      : 'Workspace is unavailable for your account'
+                }
+                aria-busy={workspaceState === 'loading' || undefined}
+                onClick={() => navigate('/workspace')}
+              >
+                {workspaceState === 'loading' ? (
+                  <>
+                    <Spinner size="sm" label="Loading" /> Open workspace →
+                  </>
+                ) : (
+                  'Open workspace →'
+                )}
+              </button>
               <button type="button" className="btn-lt btn-lg" disabled title="Catalogue is out of scope for this delivery">Browse the catalogue</button>
             </div>
           </div>

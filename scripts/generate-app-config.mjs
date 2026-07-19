@@ -10,6 +10,8 @@ const outFile = path.join(root, 'public', 'app-config.json');
 /** Map PROPERTY_NAME → app-config resource id */
 const RESOURCE_MODE_KEYS = {
   LANDING_METRICS_MODE: 'landingMetrics',
+  SESSION_CONTEXT_MODE: 'sessionContext',
+  WORKSPACE_CONSOLE_MODE: 'workspaceConsole',
   NOTIFICATIONS_MODE: 'notifications',
   DATASETS_MODE: 'datasets',
   BUSINESS_TERMS_MODE: 'businessTerms',

@@ -1,17 +1,28 @@
 /** @vitest-environment jsdom */
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import { setLandingMockScenario } from '../../mocks/landing/handlers';
+import { setSessionMockScenario } from '../../mocks/workspace/handlers';
 import { LandingPage } from './LandingPage';
 
 afterEach(() => {
   setLandingMockScenario('success');
+  setSessionMockScenario('success');
 });
+
+function renderLanding() {
+  return render(
+    <MemoryRouter>
+      <LandingPage />
+    </MemoryRouter>,
+  );
+}
 
 describe('LandingPage', () => {
   it('renders brand, hero, and section anchors from the HTML reference', async () => {
     setLandingMockScenario('success');
-    render(<LandingPage />);
+    renderLanding();
     expect(screen.getByText('CIB Data Services')).toBeInTheDocument();
     expect(screen.getAllByText('Data Marketplace').length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Data that moves the/i);
@@ -25,21 +36,37 @@ describe('LandingPage', () => {
     expect(screen.getByText('Frequently asked questions.')).toBeInTheDocument();
   });
 
-  it('disables out-of-scope catalogue and workspace CTAs', async () => {
+  it('keeps catalogue CTAs disabled and enables Workspace after Admin context loads', async () => {
     setLandingMockScenario('success');
-    render(<LandingPage />);
+    setSessionMockScenario('success');
+    renderLanding();
     const browseButtons = screen.getAllByRole('button', { name: /Browse/i });
-    const workspaceButtons = screen.getAllByRole('button', { name: /Open workspace/i });
-    for (const btn of [...browseButtons, ...workspaceButtons]) {
+    for (const btn of browseButtons) {
       expect(btn).toBeDisabled();
     }
-    await waitFor(() => expect(screen.getByText('Business terms')).toBeInTheDocument());
+    await waitFor(() => {
+      const workspaceButtons = screen.getAllByRole('button', { name: /Open workspace/i });
+      for (const btn of workspaceButtons) {
+        expect(btn).not.toBeDisabled();
+      }
+    });
+  });
+
+  it('keeps Workspace disabled when user lacks WORKSPACE_VIEW', async () => {
+    setSessionMockScenario('noWorkspace');
+    renderLanding();
+    await waitFor(() => {
+      const workspaceButtons = screen.getAllByRole('button', { name: /Open workspace/i });
+      for (const btn of workspaceButtons) {
+        expect(btn).toBeDisabled();
+      }
+    });
   });
 
   it('shows loading then ready proof strip from mock API', async () => {
     setLandingMockScenario('success');
-    render(<LandingPage />);
-    expect(screen.getByRole('status')).toHaveTextContent(/Loading marketplace metrics/i);
+    renderLanding();
+    expect(screen.getByText(/Loading marketplace metrics/i)).toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getByText('Physical datasets')).toBeInTheDocument();
       expect(screen.getByText('68')).toBeInTheDocument();
@@ -48,7 +75,7 @@ describe('LandingPage', () => {
 
   it('shows themed empty state when mock returns no stats', async () => {
     setLandingMockScenario('empty');
-    render(<LandingPage />);
+    renderLanding();
     await waitFor(() => {
       expect(screen.getByText(/No marketplace metrics available yet/i)).toBeInTheDocument();
     });
@@ -57,7 +84,7 @@ describe('LandingPage', () => {
 
   it('shows themed error state when mock fails', async () => {
     setLandingMockScenario('error');
-    render(<LandingPage />);
+    renderLanding();
     await waitFor(() => {
       expect(screen.getByRole('alert')).toHaveTextContent(/Unable to retrieve landing metrics/i);
     });
@@ -65,7 +92,7 @@ describe('LandingPage', () => {
 
   it('toggles FAQ accordion open and closed', async () => {
     setLandingMockScenario('success');
-    render(<LandingPage />);
+    renderLanding();
     const faq = screen.getByRole('button', {
       name: /What is the difference between a business term/i,
     });

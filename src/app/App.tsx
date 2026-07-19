@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { LandingPage } from '../features/landing/LandingPage';
+import { WorkspacePage } from '../features/workspace/WorkspacePage';
 import { AppErrorBoundary } from './AppErrorBoundary';
 import { ToastProvider } from '../components/feedback/Toast/ToastProvider';
 import { shouldStartMsw } from './api/apiConfig';
@@ -26,7 +27,8 @@ export function App() {
       .then(() => {
         if (!cancelled) setReady(true);
       })
-      .catch(() => {
+      .catch((error: unknown) => {
+        console.error('[MSW] Failed to start mock worker — API calls will not be mocked.', error);
         if (!cancelled) setReady(true);
       });
     return () => {
@@ -40,6 +42,7 @@ export function App() {
     <AppErrorBoundary>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/workspace" element={<WorkspacePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <ToastProvider />
