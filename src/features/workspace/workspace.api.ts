@@ -1,3 +1,4 @@
+import { API_ENDPOINTS, withPersonaQuery } from '../../api';
 import { httpGet } from '../../app/api/httpClient';
 import type { ApiResult } from '../../app/api/api.types';
 import type {
@@ -6,26 +7,25 @@ import type {
   ConsolePanelResponse,
 } from './workspace.types';
 
-export const WORKSPACE_CONSOLE_HERO_RESOURCE = 'workspaceConsoleHero';
-export const WORKSPACE_CONSOLE_CHARTS_RESOURCE = 'workspaceConsoleCharts';
-export const WORKSPACE_CONSOLE_SUB_REQUESTS_RESOURCE = 'workspaceConsoleSubRequests';
-export const WORKSPACE_CONSOLE_GOVERNANCE_RESOURCE = 'workspaceConsoleGovernance';
+export const WORKSPACE_CONSOLE_HERO_RESOURCE = API_ENDPOINTS.workspaceConsoleHero.id;
+export const WORKSPACE_CONSOLE_CHARTS_RESOURCE = API_ENDPOINTS.workspaceConsoleCharts.id;
+export const WORKSPACE_CONSOLE_SUB_REQUESTS_RESOURCE =
+  API_ENDPOINTS.workspaceConsoleSubRequests.id;
+export const WORKSPACE_CONSOLE_GOVERNANCE_RESOURCE =
+  API_ENDPOINTS.workspaceConsoleGovernance.id;
 
-export const WORKSPACE_CONSOLE_HERO_PATH = '/api/v1/workspace/console/hero';
-export const WORKSPACE_CONSOLE_CHARTS_PATH = '/api/v1/workspace/console/charts';
+export const WORKSPACE_CONSOLE_HERO_PATH = API_ENDPOINTS.workspaceConsoleHero.path;
+export const WORKSPACE_CONSOLE_CHARTS_PATH = API_ENDPOINTS.workspaceConsoleCharts.path;
 export const WORKSPACE_CONSOLE_SUB_REQUESTS_PATH =
-  '/api/v1/workspace/console/subscription-requests';
-export const WORKSPACE_CONSOLE_GOVERNANCE_PATH = '/api/v1/workspace/console/governance';
-
-function withPersona(path: string, persona: string): string {
-  return `${path}?persona=${encodeURIComponent(persona)}`;
-}
+  API_ENDPOINTS.workspaceConsoleSubRequests.path;
+export const WORKSPACE_CONSOLE_GOVERNANCE_PATH =
+  API_ENDPOINTS.workspaceConsoleGovernance.path;
 
 export async function fetchConsoleHero(
   persona: string,
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsoleHero>> {
-  return httpGet<ConsoleHero>(withPersona(WORKSPACE_CONSOLE_HERO_PATH, persona), {
+  return httpGet<ConsoleHero>(withPersonaQuery(WORKSPACE_CONSOLE_HERO_PATH, persona), {
     signal: options?.signal,
     resource: WORKSPACE_CONSOLE_HERO_RESOURCE,
   });
@@ -36,7 +36,7 @@ export async function fetchConsoleCharts(
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsoleChartsResponse>> {
   return httpGet<ConsoleChartsResponse>(
-    withPersona(WORKSPACE_CONSOLE_CHARTS_PATH, persona),
+    withPersonaQuery(WORKSPACE_CONSOLE_CHARTS_PATH, persona),
     {
       signal: options?.signal,
       resource: WORKSPACE_CONSOLE_CHARTS_RESOURCE,
@@ -49,7 +49,7 @@ export async function fetchConsoleSubscriptionRequests(
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsolePanelResponse>> {
   return httpGet<ConsolePanelResponse>(
-    withPersona(WORKSPACE_CONSOLE_SUB_REQUESTS_PATH, persona),
+    withPersonaQuery(WORKSPACE_CONSOLE_SUB_REQUESTS_PATH, persona),
     {
       signal: options?.signal,
       resource: WORKSPACE_CONSOLE_SUB_REQUESTS_RESOURCE,
@@ -62,7 +62,7 @@ export async function fetchConsoleGovernance(
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsolePanelResponse>> {
   return httpGet<ConsolePanelResponse>(
-    withPersona(WORKSPACE_CONSOLE_GOVERNANCE_PATH, persona),
+    withPersonaQuery(WORKSPACE_CONSOLE_GOVERNANCE_PATH, persona),
     {
       signal: options?.signal,
       resource: WORKSPACE_CONSOLE_GOVERNANCE_RESOURCE,

@@ -1,4 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
+import { API_ENDPOINTS } from '../../api';
 import { personalizedGreeting } from '../../features/workspace/greeting';
 import context from '../session/context.json';
 import producerCharts from './producer-charts.json';
@@ -43,12 +44,13 @@ export function setWorkspaceMockDelay(ms: number) {
   delayMs = ms;
 }
 
-export const SESSION_CONTEXT_URL = '/api/v1/session/context';
-export const WORKSPACE_CONSOLE_HERO_URL = '/api/v1/workspace/console/hero';
-export const WORKSPACE_CONSOLE_CHARTS_URL = '/api/v1/workspace/console/charts';
+export const SESSION_CONTEXT_URL = API_ENDPOINTS.sessionContext.path;
+export const WORKSPACE_CONSOLE_HERO_URL = API_ENDPOINTS.workspaceConsoleHero.path;
+export const WORKSPACE_CONSOLE_CHARTS_URL = API_ENDPOINTS.workspaceConsoleCharts.path;
 export const WORKSPACE_CONSOLE_SUB_REQUESTS_URL =
-  '/api/v1/workspace/console/subscription-requests';
-export const WORKSPACE_CONSOLE_GOVERNANCE_URL = '/api/v1/workspace/console/governance';
+  API_ENDPOINTS.workspaceConsoleSubRequests.path;
+export const WORKSPACE_CONSOLE_GOVERNANCE_URL =
+  API_ENDPOINTS.workspaceConsoleGovernance.path;
 
 function personaFrom(request: Request): string {
   return (new URL(request.url).searchParams.get('persona') ?? 'PRODUCER').toUpperCase();

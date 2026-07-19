@@ -1,10 +1,11 @@
+import { API_ENDPOINTS } from '../../api';
 import { httpGet } from '../../app/api/httpClient';
 import type { ApiResult } from '../../app/api/api.types';
 import { adaptLandingMetrics } from './landing.adapter';
 import type { LandingMetricsResponse } from './landing.types';
 
-export const LANDING_METRICS_RESOURCE = 'landingMetrics';
-export const LANDING_METRICS_PATH = '/api/v1/marketplace/landing/metrics';
+export const LANDING_METRICS_RESOURCE = API_ENDPOINTS.landingMetrics.id;
+export const LANDING_METRICS_PATH = API_ENDPOINTS.landingMetrics.path;
 
 export async function fetchLandingMetrics(options?: {
   signal?: AbortSignal;

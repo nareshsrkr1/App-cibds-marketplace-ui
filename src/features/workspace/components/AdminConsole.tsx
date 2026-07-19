@@ -39,10 +39,10 @@ export function AdminConsole({ data }: AdminConsoleProps) {
           <div className="sh-bh">
             <h3>Action items</h3>
           </div>
-          {data.actionItems.length === 0 ? (
+          {(data.actionItems?.length ?? 0) === 0 ? (
             <p className="sh-empty">No action items.</p>
           ) : (
-            data.actionItems.map((item) => (
+            data.actionItems?.map((item) => (
               <div className="wf-row" key={item.id}>
                 <div className="wf-main">
                   <div className="wf-t">{item.title}</div>
@@ -62,10 +62,10 @@ export function AdminConsole({ data }: AdminConsoleProps) {
           <div className="sh-bh">
             <h3>Recent activity</h3>
           </div>
-          {data.recentActivity.length === 0 ? (
+          {(data.recentActivity?.length ?? 0) === 0 ? (
             <p className="sh-empty">No recent activity.</p>
           ) : (
-            data.recentActivity.map((item) => (
+            data.recentActivity?.map((item) => (
               <div className="wf-row" key={item.id}>
                 <div className="wf-main">
                   <div className="wf-t">{item.title}</div>

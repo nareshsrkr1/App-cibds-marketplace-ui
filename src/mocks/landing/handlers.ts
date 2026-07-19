@@ -1,4 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
+import { API_ENDPOINTS } from '../../api';
 import metrics from './metrics.json';
 
 export type LandingMockScenario = 'success' | 'empty' | 'error' | 'delayed';
@@ -18,7 +19,7 @@ export function getLandingMockScenario() {
   return scenario;
 }
 
-export const LANDING_METRICS_URL = '/api/v1/marketplace/landing/metrics';
+export const LANDING_METRICS_URL = API_ENDPOINTS.landingMetrics.path;
 
 /** Wildcard so jsdom (absolute origin) and relative browser fetches both match. */
 export const landingHandlers = [

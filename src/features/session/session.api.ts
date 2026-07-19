@@ -1,9 +1,10 @@
+import { API_ENDPOINTS } from '../../api';
 import { httpGet } from '../../app/api/httpClient';
 import type { ApiResult } from '../../app/api/api.types';
 import type { SessionContext } from './session.types';
 
-export const SESSION_CONTEXT_RESOURCE = 'sessionContext';
-export const SESSION_CONTEXT_PATH = '/api/v1/session/context';
+export const SESSION_CONTEXT_RESOURCE = API_ENDPOINTS.sessionContext.id;
+export const SESSION_CONTEXT_PATH = API_ENDPOINTS.sessionContext.path;
 
 export async function fetchSessionContext(options?: {
   signal?: AbortSignal;
