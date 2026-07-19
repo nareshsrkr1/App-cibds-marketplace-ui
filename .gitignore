@@ -38,3 +38,7 @@ Desktop.ini
 
 # Cursor / agent local
 .cursor/mcp.json
+
+# Graphify local artifacts
+graphify-out/
+

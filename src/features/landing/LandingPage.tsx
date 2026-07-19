@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchLandingProofStats } from './landing.api';
 import type { Capability, DiagramNode, FaqItem, PipelineStep, ProofStat } from './landing.types';
+import './landing.css';
 
 const DIAGRAM: DiagramNode[] = [
   { kind: 'app', k: 'A team has data', id: 'Producer', d: 'e.g. a trading desk', connLabel: 'lists it' },
@@ -184,21 +185,16 @@ export function LandingPage() {
           <h2 className="pl-sec-h">Frequently asked questions.</h2>
           <div className="pl-faqs">
             {FAQS.map((f, i) => (
-              <div
-                key={f.q}
-                className={`pl-faq-item${openFaq === i ? ' open' : ''}`}
-                role="button"
-                tabIndex={0}
-                aria-expanded={openFaq === i}
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setOpenFaq(openFaq === i ? null : i);
-                  }
-                }}
-              >
-                <div className="pl-faq-q"><span>{f.q}</span><span className="pl-faq-i">+</span></div>
+              <div key={f.q} className={`pl-faq-item${openFaq === i ? ' open' : ''}`}>
+                <button
+                  type="button"
+                  className="pl-faq-q"
+                  aria-expanded={openFaq === i}
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
+                  <span>{f.q}</span>
+                  <span className="pl-faq-i" aria-hidden="true">+</span>
+                </button>
                 <div className="pl-faq-a">{f.a}</div>
               </div>
             ))}

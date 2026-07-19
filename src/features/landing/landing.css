@@ -1,0 +1,58 @@
+/* Landing-specific layout chrome moved from tokens.css.
+   Broader .pl-* rules (if present elsewhere) remain the visual source for the page. */
+
+#home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-elevated);
+}
+
+.state-banner {
+  margin: var(--space-4) 52px;
+  padding: 14px var(--space-4);
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.state-banner.loading {
+  background: var(--gold-lt);
+  border: var(--border-width) solid var(--gold-mid);
+  color: var(--gold-deep);
+}
+
+.state-banner.empty {
+  background: var(--surface-page);
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.state-banner.error {
+  background: var(--status-danger-bg);
+  border: var(--border-width) solid #e2b4b4;
+  color: var(--status-danger);
+}
+.pl-faq-q {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  width: 100%;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+@media (max-width: 820px) {
+  .state-banner {
+    margin: var(--space-3) var(--space-5);
+  }
+}

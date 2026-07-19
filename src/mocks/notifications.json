@@ -1,0 +1,42 @@
+[
+  {
+    "id": "n1",
+    "category": "Information",
+    "title": "Welcome to Data Marketplace",
+    "message": "Shared services are ready for future authenticated screens.",
+    "timestamp": "2026-07-19T10:00:00.000Z",
+    "read": false
+  },
+  {
+    "id": "n2",
+    "category": "Success",
+    "title": "Theme tokens published",
+    "message": "Global design tokens are available application-wide.",
+    "timestamp": "2026-07-19T10:05:00.000Z",
+    "read": false
+  },
+  {
+    "id": "n3",
+    "category": "Warning",
+    "title": "Workspace still disabled",
+    "message": "Workspace entry points remain out of scope for this delivery.",
+    "timestamp": "2026-07-19T09:30:00.000Z",
+    "read": true
+  },
+  {
+    "id": "n4",
+    "category": "Action required",
+    "title": "Review accessibility checklist",
+    "message": "Confirm focus rings and keyboard paths on shared controls.",
+    "timestamp": "2026-07-18T16:00:00.000Z",
+    "read": false
+  },
+  {
+    "id": "n5",
+    "category": "System notice",
+    "title": "Mock notifications active",
+    "message": "This feed uses local mock data only.",
+    "timestamp": "2026-07-18T12:00:00.000Z",
+    "read": true
+  }
+]

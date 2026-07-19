@@ -72,7 +72,7 @@ describe('LandingPage', () => {
     expect(faq).toHaveAttribute('aria-expanded', 'false');
     fireEvent.click(faq);
     expect(faq).toHaveAttribute('aria-expanded', 'true');
-    expect(faq.className).toContain('open');
+    expect(faq.closest('.pl-faq-item')?.className).toContain('open');
     fireEvent.click(faq);
     expect(faq).toHaveAttribute('aria-expanded', 'false');
   });
