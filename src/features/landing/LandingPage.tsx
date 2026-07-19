@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, type CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Spinner } from '../../components/feedback/Spinner/Spinner';
 import { fetchSessionContext, hasEntitlement } from '../session/session.api';
@@ -229,7 +229,10 @@ export function LandingPage() {
           <div className="pl-sec-eyebrow">How it works</div>
           <h2 className="pl-sec-h">From one team to another — safely, and traceably.</h2>
           <p className="pl-sec-lead">Every dataset follows the same simple path — with meaning and traceability captured at every step. Underneath, a shared ontology and context fabric link it all together, so the marketplace can explain any dataset in plain language while people stay in control of every decision.</p>
-          <div className="pl-pipeline">
+          <div
+            className="pl-pipeline"
+            style={{ '--pl-steps': STEPS.length } as CSSProperties}
+          >
             {STEPS.map((s) => (
               <div className="pl-pstep" key={s.n}>
                 <div className="pl-pdot">{s.n}</div>

@@ -21,7 +21,7 @@ env.*
 !.env.example
 !env.example
 *.local
-config/env-local.properties
+#config/env-local.properties
 
 # Logs
 logs/
