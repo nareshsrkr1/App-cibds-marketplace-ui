@@ -7,7 +7,10 @@ const DEFAULT_API: ApiRuntimeConfig = {
   baseUrl: '',
   resources: {
     sessionContext: { mode: 'mock' },
-    workspaceConsole: { mode: 'mock' },
+    workspaceConsoleHero: { mode: 'mock' },
+    workspaceConsoleCharts: { mode: 'mock' },
+    workspaceConsoleSubRequests: { mode: 'mock' },
+    workspaceConsoleGovernance: { mode: 'mock' },
   },
 };
 

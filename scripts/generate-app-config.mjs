@@ -11,7 +11,10 @@ const outFile = path.join(root, 'public', 'app-config.json');
 const RESOURCE_MODE_KEYS = {
   LANDING_METRICS_MODE: 'landingMetrics',
   SESSION_CONTEXT_MODE: 'sessionContext',
-  WORKSPACE_CONSOLE_MODE: 'workspaceConsole',
+  WORKSPACE_CONSOLE_HERO_MODE: 'workspaceConsoleHero',
+  WORKSPACE_CONSOLE_CHARTS_MODE: 'workspaceConsoleCharts',
+  WORKSPACE_CONSOLE_SUB_REQUESTS_MODE: 'workspaceConsoleSubRequests',
+  WORKSPACE_CONSOLE_GOVERNANCE_MODE: 'workspaceConsoleGovernance',
   NOTIFICATIONS_MODE: 'notifications',
   DATASETS_MODE: 'datasets',
   BUSINESS_TERMS_MODE: 'businessTerms',

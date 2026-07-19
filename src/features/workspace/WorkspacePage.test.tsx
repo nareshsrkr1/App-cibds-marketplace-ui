@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   setConsoleMockScenario,
+  setConsoleSectionScenario,
   setSessionMockScenario,
 } from '../../mocks/workspace/handlers';
 import { WorkspacePage } from './WorkspacePage';
@@ -34,7 +35,7 @@ describe('WorkspacePage', () => {
     }
   });
 
-  it('renders Producer console greeting, KPIs, and actions from mock API', async () => {
+  it('loads hero, charts, and panels from separate mock APIs', async () => {
     renderPage();
     await waitFor(() =>
       expect(screen.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeInTheDocument(),
@@ -59,18 +60,42 @@ describe('WorkspacePage', () => {
       expect(btn, name).toBeTruthy();
       expect(btn).toBeDisabled();
     }
-    expect(screen.getByText('Elements by sub-domain')).toBeInTheDocument();
-    expect(
-      consoleRoot.querySelector('.sh-bh h3')?.textContent,
-    ).toMatch(/Subscription requests/);
+    await waitFor(() => {
+      expect(screen.getByText('Elements by sub-domain')).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      expect(
+        screen.getByRole('heading', {
+          level: 3,
+          name: /Subscription requests · awaiting your approval/i,
+        }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { level: 3, name: 'Sent to governance' }),
+      ).toBeInTheDocument();
+    });
     expect(screen.getByRole('button', { name: 'Console' })).toHaveAttribute('aria-current', 'page');
   });
 
-  it('shows console error state when console API fails', async () => {
-    setConsoleMockScenario('error');
+  it('shows console error state when hero API fails', async () => {
+    setConsoleSectionScenario('hero', 'error');
     renderPage();
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent(/Unable to load console|Unable to retrieve console/i);
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        /Unable to load console|Unable to retrieve console/i,
+      );
     });
+  });
+
+  it('keeps hero visible when charts API fails', async () => {
+    setConsoleSectionScenario('charts', 'error');
+    renderPage();
+    await waitFor(() =>
+      expect(screen.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeInTheDocument(),
+    );
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toHaveTextContent(/Unable to retrieve console charts/i);
+    });
+    expect(screen.getByTestId('producer-console')).toBeInTheDocument();
   });
 });

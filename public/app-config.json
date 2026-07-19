@@ -9,7 +9,16 @@
       "sessionContext": {
         "mode": "mock"
       },
-      "workspaceConsole": {
+      "workspaceConsoleHero": {
+        "mode": "mock"
+      },
+      "workspaceConsoleCharts": {
+        "mode": "mock"
+      },
+      "workspaceConsoleSubRequests": {
+        "mode": "mock"
+      },
+      "workspaceConsoleGovernance": {
         "mode": "mock"
       }
     }

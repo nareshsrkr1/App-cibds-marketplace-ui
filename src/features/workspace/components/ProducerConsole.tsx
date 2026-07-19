@@ -1,27 +1,85 @@
+import { Spinner } from '../../../components/feedback/Spinner/Spinner';
+import { personalizedGreeting } from '../greeting';
+import type {
+  ConsoleChart,
+  ConsoleHero,
+  ConsolePanel,
+} from '../workspace.types';
 import { ConsoleCharts } from './ConsoleCharts';
 import { ConsoleHeader } from './ConsoleHeader';
-import { personalizedGreeting } from '../greeting';
-import type { ConsoleSummary } from '../workspace.types';
+import { ConsolePanelBlock } from './ConsolePanelBlock';
+
+export type SectionStatus = 'loading' | 'ready' | 'empty' | 'error';
 
 export type ProducerConsoleProps = {
-  data: ConsoleSummary;
+  hero: ConsoleHero;
+  charts: ConsoleChart[];
+  chartsStatus: SectionStatus;
+  chartsError?: string | null;
+  subscriptionPanel: ConsolePanel | null;
+  subscriptionStatus: SectionStatus;
+  subscriptionError?: string | null;
+  governancePanel: ConsolePanel | null;
+  governanceStatus: SectionStatus;
+  governanceError?: string | null;
 };
 
-export function ProducerConsole({ data }: ProducerConsoleProps) {
-  const actions = data.actions ?? [];
-  const panels = data.panels ?? [];
-  const greeting = personalizedGreeting(data.displayName);
+function SectionStatusBlock({
+  status,
+  error,
+  emptyLabel,
+  loadingLabel,
+}: {
+  status: SectionStatus;
+  error?: string | null;
+  emptyLabel: string;
+  loadingLabel: string;
+}) {
+  if (status === 'loading') {
+    return (
+      <div className="console-section-status" role="status" aria-label={loadingLabel}>
+        <Spinner size="sm" label={loadingLabel} />
+      </div>
+    );
+  }
+  if (status === 'error') {
+    return (
+      <div className="console-section-status console-section-status--error" role="alert">
+        {error ?? 'Unable to load this section.'}
+      </div>
+    );
+  }
+  if (status === 'empty') {
+    return <p className="sh-empty">{emptyLabel}</p>;
+  }
+  return null;
+}
+
+export function ProducerConsole({
+  hero,
+  charts,
+  chartsStatus,
+  chartsError,
+  subscriptionPanel,
+  subscriptionStatus,
+  subscriptionError,
+  governancePanel,
+  governanceStatus,
+  governanceError,
+}: ProducerConsoleProps) {
+  const actions = hero.actions ?? [];
+  const greeting = personalizedGreeting(hero.displayName);
 
   return (
     <div className="producer-console" data-testid="producer-console">
       <ConsoleHeader
-        eyebrow={data.eyebrow}
+        eyebrow={hero.eyebrow}
         greeting={greeting}
-        subtitle={data.subtitle}
+        subtitle={hero.subtitle}
       />
 
       <div className="sh-kpis" aria-label="Producer KPIs">
-        {data.kpis.map((k) => (
+        {hero.kpis.map((k) => (
           <div key={k.id} className={`sh-kpi${k.warn ? ' warn' : ''}`}>
             <span className="kn">{k.value}</span>
             <span className="kl">{k.label}</span>
@@ -45,59 +103,52 @@ export function ProducerConsole({ data }: ProducerConsoleProps) {
         </div>
       ) : null}
 
-      <ConsoleCharts charts={data.charts ?? []} />
-
-      {panels.length > 0 ? (
-        <div className="sh-cols">
-          {panels.map((panel) => (
-            <div className="sh-block" key={panel.id}>
-              <div className="sh-bh">
-                <h3>{panel.title}</h3>
-                {panel.moreLabel ? (
-                  <span className="sh-more" title="Available in a future release">
-                    {panel.moreLabel}
-                  </span>
-                ) : null}
-              </div>
-              {panel.items.length === 0 ? (
-                <p className="sh-empty">Nothing here yet.</p>
-              ) : (
-                panel.items.map((item) => (
-                  <div className="wf-row" key={item.id}>
-                    <div className="wf-main">
-                      <div className="wf-t">{item.title}</div>
-                      {item.subtitleHtml ? (
-                        <div
-                          className="wf-s"
-                          dangerouslySetInnerHTML={{ __html: item.subtitleHtml }}
-                        />
-                      ) : item.subtitle ? (
-                        <div className="wf-s">{item.subtitle}</div>
-                      ) : null}
-                    </div>
-                    <div className="wf-side">
-                      {item.tag ? (
-                        <span className={`wf-tag ${item.tagKind ?? 'ok'}`}>{item.tag}</span>
-                      ) : null}
-                      {item.age ? <span className="wf-age">{item.age}</span> : null}
-                      {item.approve ? (
-                        <button
-                          type="button"
-                          className="wf-approve"
-                          disabled
-                          title="Available in a future release"
-                        >
-                          Approve
-                        </button>
-                      ) : null}
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          ))}
+      {chartsStatus === 'ready' ? (
+        <ConsoleCharts charts={charts} />
+      ) : (
+        <div className="sh-charts">
+          <SectionStatusBlock
+            status={chartsStatus}
+            error={chartsError}
+            emptyLabel="No statistics to show yet."
+            loadingLabel="Loading statistics"
+          />
         </div>
-      ) : null}
+      )}
+
+      <div className="sh-cols">
+        {subscriptionStatus === 'ready' && subscriptionPanel ? (
+          <ConsolePanelBlock panel={subscriptionPanel} />
+        ) : (
+          <div className="sh-block">
+            <div className="sh-bh">
+              <h3>Subscription requests · awaiting your approval</h3>
+            </div>
+            <SectionStatusBlock
+              status={subscriptionStatus}
+              error={subscriptionError}
+              emptyLabel="Nothing here yet."
+              loadingLabel="Loading subscription requests"
+            />
+          </div>
+        )}
+
+        {governanceStatus === 'ready' && governancePanel ? (
+          <ConsolePanelBlock panel={governancePanel} />
+        ) : (
+          <div className="sh-block">
+            <div className="sh-bh">
+              <h3>Sent to governance</h3>
+            </div>
+            <SectionStatusBlock
+              status={governanceStatus}
+              error={governanceError}
+              emptyLabel="Nothing here yet."
+              loadingLabel="Loading governance items"
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

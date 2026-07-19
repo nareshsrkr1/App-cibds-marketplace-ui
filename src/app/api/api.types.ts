@@ -9,7 +9,10 @@ export type ApiResourceId =
   | 'governance'
   | 'search'
   | 'sessionContext'
-  | 'workspaceConsole'
+  | 'workspaceConsoleHero'
+  | 'workspaceConsoleCharts'
+  | 'workspaceConsoleSubRequests'
+  | 'workspaceConsoleGovernance'
   | (string & {});
 
 export type ApiResourceConfig = {

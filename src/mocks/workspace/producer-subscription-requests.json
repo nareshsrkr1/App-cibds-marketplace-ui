@@ -1,0 +1,24 @@
+{
+  "persona": "PRODUCER",
+  "panel": {
+    "id": "subreq",
+    "title": "Subscription requests · awaiting your approval",
+    "moreLabel": "All",
+    "items": [
+      {
+        "id": "SUB-REQ-5501",
+        "title": "Market Risk · Risk Analytics",
+        "subtitleHtml": "wants <b>Endur P&L and Greeks</b> · <span class=\"mono\">DS-CIB-40121</span>",
+        "age": "1d",
+        "approve": true
+      },
+      {
+        "id": "SUB-REQ-5502",
+        "title": "Regulatory Reporting",
+        "subtitleHtml": "wants <b>Endur OTC Commodity Trades</b> · <span class=\"mono\">DS-CIB-40118</span>",
+        "age": "3d",
+        "approve": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "persona": "PRODUCER",
+  "eyebrow": "Producer Console",
+  "subtitle": "Everything you produce — governed, bound, and accounted for. In one view.",
+  "kpis": [
+    { "id": "datasets", "value": 6, "label": "My datasets" },
+    { "id": "offers", "value": 2, "label": "Offers held" },
+    { "id": "pendingGov", "value": 3, "label": "Pending governance", "warn": true },
+    { "id": "subreq", "value": 2, "label": "Subscription requests", "warn": true },
+    { "id": "gaps", "value": 1, "label": "Coverage gaps" }
+  ],
+  "actions": [
+    { "id": "register", "label": "Register a dataset", "variant": "primary", "enabled": false },
+    { "id": "bulkpde", "label": "Bulk upload PDEs", "variant": "secondary", "enabled": false },
+    { "id": "bind", "label": "Bind columns", "variant": "secondary", "enabled": false },
+    { "id": "workflow", "label": "Track workflow", "variant": "secondary", "enabled": false }
+  ]
+}

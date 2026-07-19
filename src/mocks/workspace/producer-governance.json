@@ -1,0 +1,34 @@
+{
+  "persona": "PRODUCER",
+  "panel": {
+    "id": "govsent",
+    "title": "Sent to governance",
+    "moreLabel": "All",
+    "items": [
+      {
+        "id": "BDE-PROP-2041",
+        "title": "Cleared Notional",
+        "subtitle": "Proposed BDE · Endur OTC Commodity Trades",
+        "age": "2d",
+        "tag": "Proposed",
+        "tagKind": "proposed"
+      },
+      {
+        "id": "BDE-PROP-2042",
+        "title": "Give-up Broker Code",
+        "subtitle": "Proposed BDE · Endur Exchange Commodity Trades",
+        "age": "1d",
+        "tag": "Proposed",
+        "tagKind": "proposed"
+      },
+      {
+        "id": "GAP-8817",
+        "title": "settle_ccy_2",
+        "subtitle": "Unmapped column · Catalyst Positions",
+        "age": "4d",
+        "tag": "Gap",
+        "tagKind": "unmapped"
+      }
+    ]
+  }
+}

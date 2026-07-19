@@ -67,17 +67,31 @@ export type ConsolePanel = {
   items: ConsolePanelItem[];
 };
 
-export type ConsoleSummary = {
+/** Hero: KPIs + actions + copy (greeting computed client-side). */
+export type ConsoleHero = {
   persona: string;
   eyebrow: string;
-  greeting: string;
   subtitle: string;
   displayName: string;
+  greeting?: string;
   kpis: ConsoleKpi[];
   actions?: ConsoleAction[];
+};
+
+export type ConsoleChartsResponse = {
+  persona: string;
+  charts: ConsoleChart[];
+};
+
+export type ConsolePanelResponse = {
+  persona: string;
+  panel: ConsolePanel;
+};
+
+/** @deprecated Combined console payload — prefer section types. */
+export type ConsoleSummary = ConsoleHero & {
   charts?: ConsoleChart[];
   panels?: ConsolePanel[];
-  /** Legacy admin-shaped fields (optional). */
   actionItems?: Array<{
     id: string;
     title: string;

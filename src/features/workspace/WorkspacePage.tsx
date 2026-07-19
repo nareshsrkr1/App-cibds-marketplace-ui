@@ -7,9 +7,21 @@ import { WorkspaceShell } from '../../components/layout/WorkspaceShell/Workspace
 import type { PersonaOption } from '../../components/persona/PersonaSelector/PersonaSelector';
 import { fetchSessionContext } from '../session/session.api';
 import { ALL_PERSONAS, type SessionContext } from '../session/session.types';
-import { ProducerConsole } from './components/ProducerConsole';
-import { fetchConsoleSummary } from './workspace.api';
-import type { ConsoleSummary } from './workspace.types';
+import {
+  ProducerConsole,
+  type SectionStatus,
+} from './components/ProducerConsole';
+import {
+  fetchConsoleCharts,
+  fetchConsoleGovernance,
+  fetchConsoleHero,
+  fetchConsoleSubscriptionRequests,
+} from './workspace.api';
+import type {
+  ConsoleChart,
+  ConsoleHero,
+  ConsolePanel,
+} from './workspace.types';
 
 const PERSONA_LABELS: Record<string, string> = {
   ADMIN: 'Admin',
@@ -41,8 +53,8 @@ function personasFromContext(ctx: SessionContext): PersonaOption[] {
   });
 }
 
-function isConsoleReady(data: ConsoleSummary): boolean {
-  return (data.kpis?.length ?? 0) > 0 || (data.panels?.length ?? 0) > 0;
+function isHeroReady(data: ConsoleHero): boolean {
+  return (data.kpis?.length ?? 0) > 0 || (data.actions?.length ?? 0) > 0;
 }
 
 export function WorkspacePage() {
@@ -50,10 +62,23 @@ export function WorkspacePage() {
   const [sessionStatus, setSessionStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [sessionError, setSessionError] = useState<string | null>(null);
   const [persona, setPersona] = useState('PRODUCER');
-  const [consoleData, setConsoleData] = useState<ConsoleSummary | null>(null);
-  const [consoleStatus, setConsoleStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
-  const [consoleError, setConsoleError] = useState<string | null>(null);
   const [reloadToken, setReloadToken] = useState(0);
+
+  const [hero, setHero] = useState<ConsoleHero | null>(null);
+  const [heroStatus, setHeroStatus] = useState<SectionStatus>('loading');
+  const [heroError, setHeroError] = useState<string | null>(null);
+
+  const [charts, setCharts] = useState<ConsoleChart[]>([]);
+  const [chartsStatus, setChartsStatus] = useState<SectionStatus>('loading');
+  const [chartsError, setChartsError] = useState<string | null>(null);
+
+  const [subscriptionPanel, setSubscriptionPanel] = useState<ConsolePanel | null>(null);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<SectionStatus>('loading');
+  const [subscriptionError, setSubscriptionError] = useState<string | null>(null);
+
+  const [governancePanel, setGovernancePanel] = useState<ConsolePanel | null>(null);
+  const [governanceStatus, setGovernanceStatus] = useState<SectionStatus>('loading');
+  const [governanceError, setGovernanceError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -79,25 +104,64 @@ export function WorkspacePage() {
   useEffect(() => {
     if (sessionStatus !== 'ready' || !session) return;
     let cancelled = false;
-    setConsoleStatus('loading');
-    void fetchConsoleSummary(persona).then((res) => {
+
+    setHeroStatus('loading');
+    setChartsStatus('loading');
+    setSubscriptionStatus('loading');
+    setGovernanceStatus('loading');
+    setHeroError(null);
+    setChartsError(null);
+    setSubscriptionError(null);
+    setGovernanceError(null);
+
+    void fetchConsoleHero(persona).then((res) => {
       if (cancelled) return;
       if (!res.ok) {
-        setConsoleStatus('error');
-        setConsoleError(res.error);
-        setConsoleData(null);
+        setHeroStatus('error');
+        setHeroError(res.error);
+        setHero(null);
         return;
       }
-      const data = res.data;
-      if (!data || !isConsoleReady(data)) {
-        setConsoleData(data);
-        setConsoleStatus('empty');
-        return;
-      }
-      setConsoleData(data);
-      setConsoleStatus('ready');
-      setConsoleError(null);
+      setHero(res.data);
+      setHeroStatus(isHeroReady(res.data) ? 'ready' : 'empty');
     });
+
+    void fetchConsoleCharts(persona).then((res) => {
+      if (cancelled) return;
+      if (!res.ok) {
+        setChartsStatus('error');
+        setChartsError(res.error);
+        setCharts([]);
+        return;
+      }
+      setCharts(res.data.charts ?? []);
+      setChartsStatus((res.data.charts?.length ?? 0) > 0 ? 'ready' : 'empty');
+    });
+
+    void fetchConsoleSubscriptionRequests(persona).then((res) => {
+      if (cancelled) return;
+      if (!res.ok) {
+        setSubscriptionStatus('error');
+        setSubscriptionError(res.error);
+        setSubscriptionPanel(null);
+        return;
+      }
+      setSubscriptionPanel(res.data.panel);
+      setSubscriptionStatus('ready');
+    });
+
+    void fetchConsoleGovernance(persona).then((res) => {
+      if (cancelled) return;
+      if (!res.ok) {
+        setGovernanceStatus('error');
+        setGovernanceError(res.error);
+        setGovernancePanel(null);
+        return;
+      }
+      setGovernancePanel(res.data.panel);
+      setGovernanceStatus('ready');
+    });
+
     return () => {
       cancelled = true;
     };
@@ -152,32 +216,44 @@ export function WorkspacePage() {
         session.roles[0]
       }
     >
-      {consoleStatus === 'loading' && (
+      {heroStatus === 'loading' && (
         <div className="workspace-loading workspace-loading--main" role="status" aria-label="Loading">
           <Spinner size="lg" label="Loading" />
         </div>
       )}
-      {consoleStatus === 'error' && (
+      {heroStatus === 'error' && (
         <div className="workspace-state workspace-state--main">
           <ErrorState
             title="Unable to load console"
-            description={consoleError ?? 'Console data is unavailable.'}
+            description={heroError ?? 'Console hero is unavailable.'}
             onRetry={() => setReloadToken((n) => n + 1)}
           />
         </div>
       )}
-      {consoleStatus === 'empty' && (
+      {heroStatus === 'empty' && hero && (
         <div className="workspace-state workspace-state--main">
           <EmptyState
-            title={consoleData?.greeting ?? 'No console data'}
+            title={hero.greeting ?? 'No console data'}
             description={
-              consoleData?.subtitle ??
-              'There is nothing to show for this persona yet.'
+              hero.subtitle ?? 'There is nothing to show for this persona yet.'
             }
           />
         </div>
       )}
-      {consoleStatus === 'ready' && consoleData ? <ProducerConsole data={consoleData} /> : null}
+      {heroStatus === 'ready' && hero ? (
+        <ProducerConsole
+          hero={hero}
+          charts={charts}
+          chartsStatus={chartsStatus}
+          chartsError={chartsError}
+          subscriptionPanel={subscriptionPanel}
+          subscriptionStatus={subscriptionStatus}
+          subscriptionError={subscriptionError}
+          governancePanel={governancePanel}
+          governanceStatus={governanceStatus}
+          governanceError={governanceError}
+        />
+      ) : null}
     </WorkspaceShell>
   );
 }

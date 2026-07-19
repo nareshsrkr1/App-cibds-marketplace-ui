@@ -467,6 +467,17 @@
 .workspace-loading--main,
 .workspace-state--main { min-height: 60vh; }
 .workspace-back a { color: var(--gold-deep); font-weight: 600; }
+.console-section-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 120px;
+  padding: 16px;
+  color: var(--mid);
+  font-size: 13.5px;
+}
+.console-section-status--error { color: var(--red); }
 @media (max-width: 900px) {
   .sb { width: 64px; }
   .sb-bn, .sb-bs, .sb-plabel, .sb-it-l, .sb-gl, .sb-un, .sb-ur, .sb-persona { display: none; }
