@@ -1,11 +1,25 @@
-export type ProofStat = {
-  value: string;
-  label: string;
-};
+export type LandingMetricKey =
+  | 'physical-datasets'
+  | 'subject-areas'
+  | 'logical-datasets'
+  | 'data-elements'
+  | 'business-terms';
 
-export type LandingProofStats = {
-  stats: ProofStat[];
-};
+export interface LandingMetric {
+  key: LandingMetricKey;
+  value: number;
+  label: string;
+}
+
+export interface LandingMetricsResponse {
+  stats: LandingMetric[];
+}
+
+/** @deprecated Use LandingMetric */
+export type ProofStat = LandingMetric;
+
+/** @deprecated Use LandingMetricsResponse */
+export type LandingProofStats = LandingMetricsResponse;
 
 export type Capability = {
   n: string;

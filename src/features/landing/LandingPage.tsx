@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { fetchLandingProofStats } from './landing.api';
-import type { Capability, DiagramNode, FaqItem, PipelineStep, ProofStat } from './landing.types';
+import { fetchLandingMetrics } from './landing.api';
+import type { Capability, DiagramNode, FaqItem, LandingMetric, PipelineStep } from './landing.types';
 import './landing.css';
 
 const DIAGRAM: DiagramNode[] = [
@@ -40,7 +40,7 @@ function scrollToId(id: string) {
 }
 
 export function LandingPage() {
-  const [stats, setStats] = useState<ProofStat[] | null>(null);
+  const [stats, setStats] = useState<LandingMetric[] | null>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
   const [error, setError] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -48,7 +48,7 @@ export function LandingPage() {
   useEffect(() => {
     let cancelled = false;
     setStatus('loading');
-    fetchLandingProofStats().then((res) => {
+    void fetchLandingMetrics().then((res) => {
       if (cancelled) return;
       if (!res.ok) {
         setStatus('error');
@@ -115,7 +115,6 @@ export function LandingPage() {
                         <span className="pl-dg-lbl">{node.connLabel}</span>
                       </div>
                     ) : null}
-                    {/* keep key usage stable */}
                     {i < 0 ? null : null}
                   </div>
                 ))}
@@ -133,7 +132,7 @@ export function LandingPage() {
         <div className="pl-proof">
           <div className="pl-proof-in">
             {stats.map((s) => (
-              <div className="pl-pf" key={s.label}>
+              <div className="pl-pf" key={s.key}>
                 <span className="pl-pf-v">{s.value}</span>
                 <span className="pl-pf-l">{s.label}</span>
               </div>

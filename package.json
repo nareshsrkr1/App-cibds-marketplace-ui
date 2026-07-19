@@ -25,8 +25,14 @@
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^2.1.8",
     "jsdom": "^25.0.1",
+    "msw": "^2.15.0",
     "typescript": "~5.7.2",
     "vite": "^6.0.6",
     "vitest": "^2.1.8"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

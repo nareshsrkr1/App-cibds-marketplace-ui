@@ -1,18 +1,18 @@
-import { apiGet, type ApiResult } from '../../app/apiClient';
-import type { LandingProofStats } from './landing.types';
+import { httpGet } from '../../app/api/httpClient';
+import type { ApiResult } from '../../app/api/api.types';
+import { adaptLandingMetrics } from './landing.adapter';
+import type { LandingMetricsResponse } from './landing.types';
 
-const FIXTURE: LandingProofStats = {
-  stats: [
-    { value: '6', label: 'Physical datasets' },
-    { value: '14', label: 'Subject areas' },
-    { value: '27', label: 'Logical datasets' },
-    { value: '74', label: 'Data elements' },
-    { value: '68', label: 'Business terms' },
-  ],
-};
+export const LANDING_METRICS_PATH = '/api/v1/marketplace/landing/metrics';
 
-const EMPTY: LandingProofStats = { stats: [] };
+export async function fetchLandingMetrics(options?: {
+  signal?: AbortSignal;
+}): Promise<ApiResult<LandingMetricsResponse>> {
+  const result = await httpGet<LandingMetricsResponse>(LANDING_METRICS_PATH, {
+    signal: options?.signal,
+    feature: 'landing',
+  });
 
-export async function fetchLandingProofStats(): Promise<ApiResult<LandingProofStats>> {
-  return apiGet('/mock/landing/proof-stats', FIXTURE, EMPTY);
+  if (!result.ok) return result;
+  return { ok: true, data: adaptLandingMetrics(result.data) };
 }

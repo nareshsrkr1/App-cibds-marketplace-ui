@@ -1,16 +1,16 @@
 /** @vitest-environment jsdom */
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
-import { setMockFetchMode } from '../../app/apiClient';
+import { setLandingMockScenario } from '../../mocks/landing/handlers';
 import { LandingPage } from './LandingPage';
 
 afterEach(() => {
-  setMockFetchMode('success');
+  setLandingMockScenario('success');
 });
 
 describe('LandingPage', () => {
   it('renders brand, hero, and section anchors from the HTML reference', async () => {
-    setMockFetchMode('success');
+    setLandingMockScenario('success');
     render(<LandingPage />);
     expect(screen.getByText('CIB Data Services')).toBeInTheDocument();
     expect(screen.getAllByText('Data Marketplace').length).toBeGreaterThan(0);
@@ -26,7 +26,7 @@ describe('LandingPage', () => {
   });
 
   it('disables out-of-scope catalogue and workspace CTAs', async () => {
-    setMockFetchMode('success');
+    setLandingMockScenario('success');
     render(<LandingPage />);
     const browseButtons = screen.getAllByRole('button', { name: /Browse/i });
     const workspaceButtons = screen.getAllByRole('button', { name: /Open workspace/i });
@@ -37,7 +37,7 @@ describe('LandingPage', () => {
   });
 
   it('shows loading then ready proof strip from mock API', async () => {
-    setMockFetchMode('success');
+    setLandingMockScenario('success');
     render(<LandingPage />);
     expect(screen.getByRole('status')).toHaveTextContent(/Loading marketplace metrics/i);
     await waitFor(() => {
@@ -47,7 +47,7 @@ describe('LandingPage', () => {
   });
 
   it('shows themed empty state when mock returns no stats', async () => {
-    setMockFetchMode('empty');
+    setLandingMockScenario('empty');
     render(<LandingPage />);
     await waitFor(() => {
       expect(screen.getByText(/No marketplace metrics available yet/i)).toBeInTheDocument();
@@ -56,15 +56,15 @@ describe('LandingPage', () => {
   });
 
   it('shows themed error state when mock fails', async () => {
-    setMockFetchMode('error');
+    setLandingMockScenario('error');
     render(<LandingPage />);
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent(/Mock failure/i);
+      expect(screen.getByRole('alert')).toHaveTextContent(/Unable to retrieve landing metrics/i);
     });
   });
 
   it('toggles FAQ accordion open and closed', async () => {
-    setMockFetchMode('success');
+    setLandingMockScenario('success');
     render(<LandingPage />);
     const faq = screen.getByRole('button', {
       name: /What is the difference between a business term/i,

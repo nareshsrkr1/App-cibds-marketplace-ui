@@ -1,0 +1,29 @@
+{
+  "stats": [
+    {
+      "key": "physical-datasets",
+      "value": 6,
+      "label": "Physical datasets"
+    },
+    {
+      "key": "subject-areas",
+      "value": 14,
+      "label": "Subject areas"
+    },
+    {
+      "key": "logical-datasets",
+      "value": 27,
+      "label": "Logical datasets"
+    },
+    {
+      "key": "data-elements",
+      "value": 74,
+      "label": "Data elements"
+    },
+    {
+      "key": "business-terms",
+      "value": 68,
+      "label": "Business terms"
+    }
+  ]
+}
