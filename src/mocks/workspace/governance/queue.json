@@ -1,0 +1,34 @@
+{
+  "persona": "GOVERNANCE",
+  "panel": {
+    "id": "govqueue",
+    "title": "Endorsement queue",
+    "moreLabel": "Full queue",
+    "items": [
+      {
+        "id": "BDE-PROP-2041",
+        "title": "Cleared Notional",
+        "subtitle": "Proposed BDE · Endur OTC Commodity Trades · by Pranav Shukla",
+        "age": "2d",
+        "approve": true,
+        "actionLabel": "Endorse"
+      },
+      {
+        "id": "BDE-PROP-2042",
+        "title": "Give-up Broker Code",
+        "subtitle": "Proposed BDE · Endur Exchange Commodity Trades · by Pranav Shukla",
+        "age": "1d",
+        "approve": true,
+        "actionLabel": "Endorse"
+      },
+      {
+        "id": "GAP-8817",
+        "title": "settle_ccy_2",
+        "subtitle": "Unmapped column · Catalyst Positions",
+        "age": "4d",
+        "approve": true,
+        "actionLabel": "Endorse"
+      }
+    ]
+  }
+}

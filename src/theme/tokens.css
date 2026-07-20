@@ -7,17 +7,17 @@
   --border-2: #d8d5cd;
   --bg: #f6f5f2;
   --white: #fff;
-  --gold: #b08a4f;
-  --gold-deep: #8a6a34;
-  --gold-lt: #f7f1e6;
-  --gold-mid: #d9c297;
+  --gold: #b8924a;
+  --gold-deep: #8f6e32;
+  --gold-lt: #f8f2e6;
+  --gold-mid: #e0c48a;
   --navy: #0f2338;
   --navy2: #1b3a5b;
   --navy-2: #0b1c2e;
   --blue: #4a80b4;
   --green: #2b6748;
   --green-lt: #ecf5ef;
-  --amber: #b8791f;
+  --amber: #c4841c;
   --amber-lt: #fbf1de;
   --red: #9e2a2a;
   --red-lt: #fbf1f1;
@@ -27,6 +27,8 @@
   /* Typography */
   --sans: "IBM Plex Sans", -apple-system, sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
+  /* Isolated face for KPI numerals — do not share with accent italic 400 */
+  --serif-kpi: "Cormorant KPI", Georgia, serif;
   --display: "Fraunces", Georgia, serif;
   --mono: "IBM Plex Mono", Menlo, monospace;
 
@@ -46,8 +48,10 @@
   --radius-md: var(--r);
   --radius-lg: 12px;
   --border-width: 1px;
-  --shadow-sm: 0 1px 2px rgba(15, 35, 56, 0.06);
-  --shadow-md: 0 8px 24px rgba(15, 35, 56, 0.12);
+  --shadow-sm: 0 1px 2px rgba(15, 35, 56, 0.06), 0 1px 3px rgba(15, 35, 56, 0.04);
+  --shadow: 0 4px 12px -4px rgba(15, 35, 56, 0.12), 0 2px 6px -2px rgba(15, 35, 56, 0.08);
+  --shadow-md: var(--shadow);
+  --shadow-lg: 0 18px 44px -18px rgba(15, 35, 56, 0.28);
   --control-height: 40px;
   --control-height-sm: 32px;
   --control-height-lg: 48px;

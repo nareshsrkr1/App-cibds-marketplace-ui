@@ -25,7 +25,7 @@ describe('fetchLandingMetrics', () => {
         value: 6,
         label: 'Physical datasets',
       });
-      expect(res.data.stats.map((s) => s.label)).toContain('Business terms');
+      expect(res.data.stats.map((s) => s.label)).toContain('Glossary terms');
     }
   });
 

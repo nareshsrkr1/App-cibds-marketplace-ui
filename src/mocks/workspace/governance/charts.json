@@ -1,0 +1,148 @@
+{
+  "persona": "GOVERNANCE",
+  "tiers": [
+    {
+      "id": "ops",
+      "label": "Operational health",
+      "chartIds": ["endorsement_sla", "aging", "throughput"]
+    },
+    {
+      "id": "quality",
+      "label": "Data quality",
+      "chartIds": ["completeness", "orphans", "lifecycle"]
+    },
+    {
+      "id": "glance",
+      "label": "Governance at a glance",
+      "chartIds": ["binding", "cde", "sor_pde"]
+    },
+    {
+      "id": "composition",
+      "label": "Composition",
+      "chartIds": ["by_sa", "by_cls", "reuse"]
+    }
+  ],
+  "charts": [
+    {
+      "id": "endorsement_sla",
+      "title": "Endorsement SLA adherence",
+      "subtitle": "Proposals endorsed within the 2-business-day SLA",
+      "kind": "gauge",
+      "value": 87,
+      "target": 90,
+      "unitLabel": "within SLA",
+      "footer": "41 on time · 6 breached"
+    },
+    {
+      "id": "aging",
+      "title": "Open proposals by age",
+      "subtitle": "Governance queue aging",
+      "kind": "hbars",
+      "rows": [
+        ["0-2d", 23],
+        ["3-5d", 11],
+        ["6-10d", 5],
+        ["10d+", 3]
+      ],
+      "footer": "42 awaiting endorsement"
+    },
+    {
+      "id": "throughput",
+      "title": "Governance throughput",
+      "subtitle": "Proposed vs endorsed · last 6 weeks",
+      "kind": "trend",
+      "seriesA": [8, 12, 9, 15, 11, 14],
+      "seriesB": [5, 9, 11, 10, 13, 12],
+      "labels": ["Proposed", "Endorsed"]
+    },
+    {
+      "id": "completeness",
+      "title": "Definition completeness",
+      "subtitle": "BDEs with full ISO 11179 structure, definition & steward",
+      "kind": "gauge",
+      "value": 87,
+      "target": 90,
+      "unitLabel": "complete",
+      "footer": "9 partial · 2 missing"
+    },
+    {
+      "id": "orphans",
+      "title": "Orphan physical columns",
+      "subtitle": "PDEs not yet bound to a business element",
+      "kind": "donut",
+      "realised": 255,
+      "gap": 8,
+      "footer": "8 orphan PDEs to triage"
+    },
+    {
+      "id": "lifecycle",
+      "title": "Element lifecycle",
+      "subtitle": "Status distribution across the vocabulary",
+      "kind": "hbars",
+      "rows": [
+        ["Draft", 4],
+        ["Proposed", 14],
+        ["In review", 6],
+        ["Endorsed", 58]
+      ]
+    },
+    {
+      "id": "binding",
+      "title": "Binding coverage",
+      "subtitle": "How much data is mapped to business meaning",
+      "kind": "donut",
+      "realised": 73,
+      "gap": 1,
+      "footer": "73 of 74 elements bound"
+    },
+    {
+      "id": "cde",
+      "title": "Critical Data Elements",
+      "subtitle": "BCBS 239 coverage",
+      "kind": "donut",
+      "realised": 13,
+      "gap": 61,
+      "footer": "13 of 74 elements are CDEs"
+    },
+    {
+      "id": "sor_pde",
+      "title": "Physical columns by source",
+      "subtitle": "Where the data physically lives",
+      "kind": "split",
+      "segments": { "Endur": 181, "Catalyst": 82 }
+    },
+    {
+      "id": "by_sa",
+      "title": "By subject area",
+      "subtitle": "Top governance groupings",
+      "kind": "hbars",
+      "rows": [
+        ["Trade Valuation & Economics", 8],
+        ["Trade Lifecycle", 7],
+        ["Instrument & Product Reference", 6],
+        ["Market Risk Sensitivities", 6],
+        ["Counterparty Credit Risk", 6],
+        ["Position & Inventory", 5]
+      ]
+    },
+    {
+      "id": "by_cls",
+      "title": "By classification",
+      "subtitle": "Sensitivity profile",
+      "kind": "hbars",
+      "rows": [
+        ["Internal", 39],
+        ["Confidential", 33],
+        ["PII", 2]
+      ]
+    },
+    {
+      "id": "reuse",
+      "title": "Element reuse",
+      "subtitle": "Datasets each element appears in",
+      "kind": "bars",
+      "data": { "1": 36, "2": 8, "3": 8, "4+": 21 },
+      "color": "var(--gold-deep)"
+    }
+  ]
+}

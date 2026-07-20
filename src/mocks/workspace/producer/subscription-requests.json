@@ -8,7 +8,7 @@
       {
         "id": "SUB-REQ-5501",
         "title": "Market Risk · Risk Analytics",
-        "subtitleHtml": "wants <b>Endur P&L and Greeks</b> · <span class=\"mono\">DS-CIB-40121</span>",
+        "subtitleHtml": "wants <b>Endur P&amp;L and Greeks</b> · <span class=\"mono\">DS-CIB-40121</span>",
         "age": "1d",
         "approve": true
       },

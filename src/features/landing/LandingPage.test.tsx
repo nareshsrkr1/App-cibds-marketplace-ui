@@ -63,10 +63,10 @@ describe('LandingPage', () => {
     });
   });
 
-  it('shows loading then ready proof strip from mock API', async () => {
+  it('shows proof strip from mock API when metrics resolve', async () => {
     setLandingMockScenario('success');
     renderLanding();
-    expect(screen.getByText(/Loading marketplace metrics/i)).toBeInTheDocument();
+    expect(screen.queryByText('Physical datasets')).not.toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getByText('Physical datasets')).toBeInTheDocument();
       expect(screen.getByText('68')).toBeInTheDocument();
@@ -93,8 +93,8 @@ describe('LandingPage', () => {
   it('toggles FAQ accordion open and closed', async () => {
     setLandingMockScenario('success');
     renderLanding();
-    const faq = screen.getByRole('button', {
-      name: /What is the difference between a business term/i,
+    const faq = await screen.findByRole('button', {
+      name: /What is the difference between a glossary term/i,
     });
     expect(faq).toHaveAttribute('aria-expanded', 'false');
     fireEvent.click(faq);

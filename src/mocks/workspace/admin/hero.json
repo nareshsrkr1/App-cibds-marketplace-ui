@@ -1,0 +1,17 @@
+{
+  "persona": "ADMIN",
+  "eyebrow": "Admin Console",
+  "subtitle": "Full platform view — producer health, consumer activity, and governance coverage in one place.",
+  "kpis": [
+    { "id": "apps", "value": 2, "label": "Registered applications" },
+    { "id": "bdes", "value": 82, "label": "Endorsed BDEs" },
+    { "id": "pending", "value": 3, "label": "Pending governance", "warn": true },
+    { "id": "pdes", "value": 263, "label": "Physical columns" },
+    { "id": "sla", "value": "96%", "label": "Delivery SLA" }
+  ],
+  "actions": [
+    { "id": "registry", "label": "Registry", "variant": "primary", "enabled": false },
+    { "id": "audit", "label": "Audit log", "variant": "secondary", "enabled": false },
+    { "id": "govqueue", "label": "Endorsement queue", "variant": "secondary", "enabled": false }
+  ]
+}

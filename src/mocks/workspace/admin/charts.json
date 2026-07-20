@@ -1,0 +1,307 @@
+{
+  "persona": "ADMIN",
+  "tiers": [
+    {
+      "id": "prod_view",
+      "label": "Producer view",
+      "heading": "section",
+      "chartIds": []
+    },
+    {
+      "id": "prod_health",
+      "label": "My production health",
+      "chartIds": ["pub_sla", "bind", "feed"]
+    },
+    {
+      "id": "prod_data",
+      "label": "My data",
+      "chartIds": ["sub_turnaround", "by_sa", "contracts"]
+    },
+    {
+      "id": "cons_view",
+      "label": "Consumer view",
+      "heading": "section",
+      "chartIds": []
+    },
+    {
+      "id": "cons_health",
+      "label": "My consumption health",
+      "chartIds": ["cons_sla", "cons_subs", "cons_trend"]
+    },
+    {
+      "id": "cons_fresh",
+      "label": "Freshness & sources",
+      "chartIds": ["cons_freshness", "cons_source", "cons_coverage"]
+    },
+    {
+      "id": "gov_view",
+      "label": "Governance view",
+      "heading": "section",
+      "chartIds": []
+    },
+    {
+      "id": "gov_ops",
+      "label": "Operational health",
+      "chartIds": ["gov_sla", "gov_aging", "gov_throughput"]
+    },
+    {
+      "id": "gov_quality",
+      "label": "Data quality",
+      "chartIds": ["gov_completeness", "gov_orphans", "gov_lifecycle"]
+    },
+    {
+      "id": "gov_glance",
+      "label": "Governance at a glance",
+      "chartIds": ["gov_binding", "gov_cde", "gov_sor"]
+    },
+    {
+      "id": "gov_comp",
+      "label": "Composition",
+      "chartIds": ["gov_by_sa", "gov_by_cls", "gov_reuse"]
+    }
+  ],
+  "charts": [
+    {
+      "id": "pub_sla",
+      "title": "Publish SLA adherence",
+      "subtitle": "My datasets registered within the publication SLA",
+      "kind": "gauge",
+      "value": 85,
+      "target": 90,
+      "unitLabel": "on time",
+      "footer": "11 on time · 2 late"
+    },
+    {
+      "id": "bind",
+      "title": "Binding progress",
+      "subtitle": "My columns bound to business elements",
+      "kind": "donut",
+      "realised": 41,
+      "gap": 8,
+      "footer": "8 columns still to bind"
+    },
+    {
+      "id": "feed",
+      "title": "Feed delivery on-time",
+      "subtitle": "My data feeds delivered on schedule · 6 weeks",
+      "kind": "trend",
+      "seriesA": [98, 97, 99, 96, 99, 98],
+      "seriesB": [95, 95, 95, 95, 95, 95],
+      "labels": ["Actual %", "Target 95%"]
+    },
+    {
+      "id": "sub_turnaround",
+      "title": "Subscription turnaround",
+      "subtitle": "How fast I approve subscription requests",
+      "kind": "hbars",
+      "rows": [
+        ["0-1d", 6],
+        ["2-3d", 3],
+        ["4-5d", 2],
+        ["5d+", 1]
+      ],
+      "footer": "Faster approval improves consumer trust"
+    },
+    {
+      "id": "by_sa",
+      "title": "My elements by subject area",
+      "subtitle": "Where my governed data concentrates",
+      "kind": "hbars",
+      "rows": [
+        ["Trade Economics", 18],
+        ["Trade Lifecycle", 14],
+        ["Positions", 11],
+        ["P&L", 8],
+        ["Reference", 6]
+      ]
+    },
+    {
+      "id": "contracts",
+      "title": "Producer contracts",
+      "subtitle": "Datasets under each of my producer contracts",
+      "kind": "split",
+      "segments": { "Endur": 181, "Catalyst": 82 }
+    },
+    {
+      "id": "cons_sla",
+      "title": "Data delivery SLA",
+      "subtitle": "Subscribed data delivered within my SLA",
+      "kind": "gauge",
+      "value": 92,
+      "target": 95,
+      "unitLabel": "within SLA",
+      "footer": "23 met · 2 missed"
+    },
+    {
+      "id": "cons_subs",
+      "title": "My subscriptions",
+      "subtitle": "Status of the contracts I consume",
+      "kind": "hbars",
+      "rows": [
+        ["Active", 9],
+        ["Pending", 2],
+        ["Expired", 1]
+      ],
+      "footer": "9 active feeds"
+    },
+    {
+      "id": "cons_trend",
+      "title": "Access trend",
+      "subtitle": "Datasets I accessed per week · 6 weeks",
+      "kind": "trend",
+      "seriesA": [120, 140, 135, 160, 155, 175],
+      "seriesB": [148, 148, 148, 148, 148, 148],
+      "labels": ["Accesses", "Average"]
+    },
+    {
+      "id": "cons_freshness",
+      "title": "Data freshness",
+      "subtitle": "Hours since last refresh, by dataset (lower is better)",
+      "kind": "hbars",
+      "rows": [
+        ["1CAT Trades", 2],
+        ["Endur OTC", 4],
+        ["Positions", 1],
+        ["P&L", 6]
+      ],
+      "footer": "All feeds within contracted refresh windows"
+    },
+    {
+      "id": "cons_source",
+      "title": "Subscriptions by source",
+      "subtitle": "Which systems of record I depend on",
+      "kind": "split",
+      "segments": { "Endur": 6, "Catalyst": 4 }
+    },
+    {
+      "id": "cons_coverage",
+      "title": "Contract coverage",
+      "subtitle": "Share of my needs met under governed contract",
+      "kind": "donut",
+      "realised": 9,
+      "gap": 1,
+      "footer": "9 of 10 needs under contract"
+    },
+    {
+      "id": "gov_sla",
+      "title": "Endorsement SLA adherence",
+      "subtitle": "Proposals endorsed within the 2-business-day SLA",
+      "kind": "gauge",
+      "value": 87,
+      "target": 90,
+      "unitLabel": "within SLA",
+      "footer": "41 on time · 6 breached"
+    },
+    {
+      "id": "gov_aging",
+      "title": "Open proposals by age",
+      "subtitle": "Governance queue aging",
+      "kind": "hbars",
+      "rows": [
+        ["0-2d", 23],
+        ["3-5d", 11],
+        ["6-10d", 5],
+        ["10d+", 3]
+      ],
+      "footer": "42 awaiting endorsement"
+    },
+    {
+      "id": "gov_throughput",
+      "title": "Governance throughput",
+      "subtitle": "Proposed vs endorsed · last 6 weeks",
+      "kind": "trend",
+      "seriesA": [8, 12, 9, 15, 11, 14],
+      "seriesB": [5, 9, 11, 10, 13, 12],
+      "labels": ["Proposed", "Endorsed"]
+    },
+    {
+      "id": "gov_completeness",
+      "title": "Definition completeness",
+      "subtitle": "BDEs with full ISO 11179 structure, definition & steward",
+      "kind": "gauge",
+      "value": 87,
+      "target": 90,
+      "unitLabel": "complete",
+      "footer": "9 partial · 2 missing"
+    },
+    {
+      "id": "gov_orphans",
+      "title": "Orphan physical columns",
+      "subtitle": "PDEs not yet bound to a business element",
+      "kind": "donut",
+      "realised": 255,
+      "gap": 8,
+      "footer": "8 orphan PDEs to triage"
+    },
+    {
+      "id": "gov_lifecycle",
+      "title": "Element lifecycle",
+      "subtitle": "Status distribution across the vocabulary",
+      "kind": "hbars",
+      "rows": [
+        ["Draft", 4],
+        ["Proposed", 14],
+        ["In review", 6],
+        ["Endorsed", 58]
+      ]
+    },
+    {
+      "id": "gov_binding",
+      "title": "Binding coverage",
+      "subtitle": "How much data is mapped to business meaning",
+      "kind": "donut",
+      "realised": 73,
+      "gap": 1,
+      "footer": "73 of 74 elements bound"
+    },
+    {
+      "id": "gov_cde",
+      "title": "Critical Data Elements",
+      "subtitle": "BCBS 239 coverage",
+      "kind": "donut",
+      "realised": 13,
+      "gap": 61,
+      "footer": "13 of 74 elements are CDEs"
+    },
+    {
+      "id": "gov_sor",
+      "title": "Physical columns by source",
+      "subtitle": "Where the data physically lives",
+      "kind": "split",
+      "segments": { "Endur": 181, "Catalyst": 82 }
+    },
+    {
+      "id": "gov_by_sa",
+      "title": "By subject area",
+      "subtitle": "Top governance groupings",
+      "kind": "hbars",
+      "rows": [
+        ["Trade Valuation & Economics", 8],
+        ["Trade Lifecycle", 7],
+        ["Instrument & Product Reference", 6],
+        ["Market Risk Sensitivities", 6],
+        ["Counterparty Credit Risk", 6],
+        ["Position & Inventory", 5]
+      ]
+    },
+    {
+      "id": "gov_by_cls",
+      "title": "By classification",
+      "subtitle": "Sensitivity profile",
+      "kind": "hbars",
+      "rows": [
+        ["Internal", 39],
+        ["Confidential", 33],
+        ["PII", 2]
+      ]
+    },
+    {
+      "id": "gov_reuse",
+      "title": "Element reuse",
+      "subtitle": "Datasets each element appears in",
+      "kind": "bars",
+      "data": { "1": 36, "2": 8, "3": 8, "4+": 21 },
+      "color": "var(--gold-deep)"
+    }
+  ]
+}

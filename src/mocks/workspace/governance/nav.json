@@ -1,0 +1,43 @@
+{
+  "persona": "GOVERNANCE",
+  "groups": [
+    {
+      "id": "governance",
+      "label": "Data governance",
+      "items": [
+        { "id": "console", "label": "Console", "icon": "◇", "enabled": true, "active": true },
+        { "id": "govqueue", "label": "Endorsement queue", "icon": "◎", "enabled": false }
+      ]
+    },
+    {
+      "id": "vocabulary",
+      "label": "Vocabulary",
+      "sub": true,
+      "items": [
+        { "id": "addbde", "label": "Add a BDE", "icon": "◆", "enabled": false },
+        { "id": "bulkbde", "label": "Bulk upload BDEs", "icon": "❖", "enabled": false },
+        { "id": "addterm", "label": "Add a glossary term", "icon": "●", "enabled": false },
+        { "id": "bulkterm", "label": "Bulk upload terms", "icon": "⁘", "enabled": false }
+      ]
+    },
+    {
+      "id": "catalogue",
+      "label": "Catalogue",
+      "sub": true,
+      "items": [
+        { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": false },
+        { "id": "log", "label": "Logical model", "icon": "◇", "enabled": false },
+        { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": false }
+      ]
+    },
+    {
+      "id": "intelligence",
+      "label": "Intelligence",
+      "items": [
+        { "id": "search", "label": "Explore catalogue", "icon": "◐", "enabled": false },
+        { "id": "lineage", "label": "Lineage explorer", "icon": "◫", "enabled": false },
+        { "id": "gaps", "label": "Coverage & gaps", "icon": "◐", "enabled": false }
+      ]
+    }
+  ]
+}

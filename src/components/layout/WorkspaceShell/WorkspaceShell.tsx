@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { PersonaSelector, type PersonaOption } from '../../persona/PersonaSelector/PersonaSelector';
 import { ConsoleSidebar } from '../../../features/workspace/components/ConsoleSidebar';
+import type { NavGroup } from '../../../features/workspace/nav.types';
 
 export type WorkspaceShellProps = {
   personas: PersonaOption[];
@@ -10,6 +11,9 @@ export type WorkspaceShellProps = {
   userInitials: string;
   userName: string;
   userSubtitle?: string;
+  navGroups: NavGroup[];
+  navStatus?: 'loading' | 'ready' | 'error';
+  navRefreshing?: boolean;
   children: ReactNode;
 };
 
@@ -20,6 +24,9 @@ export function WorkspaceShell({
   userInitials,
   userName,
   userSubtitle,
+  navGroups,
+  navStatus = 'ready',
+  navRefreshing = false,
   children,
 }: WorkspaceShellProps) {
   return (
@@ -37,13 +44,17 @@ export function WorkspaceShell({
           activePersonaId={activePersonaId}
           onChange={onPersonaChange}
         />
-        <ConsoleSidebar persona={activePersonaId} />
+        <ConsoleSidebar groups={navGroups} status={navStatus} refreshing={navRefreshing} />
         <div className="sb-foot">
           <div className="sb-user">
             <span className="sb-av">{userInitials}</span>
             <div>
               <div className="sb-un">{userName}</div>
-              {userSubtitle ? <div className="sb-ur">{userSubtitle}</div> : null}
+              {userSubtitle ? (
+                <div key={userSubtitle} className="sb-ur sb-ur--fade">
+                  {userSubtitle}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>

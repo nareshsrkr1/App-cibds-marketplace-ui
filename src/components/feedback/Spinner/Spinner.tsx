@@ -8,10 +8,11 @@ export type SpinnerProps = {
   className?: string;
 };
 
-const SIZE_PX: Record<SpinnerSize, number> = { sm: 16, md: 28, lg: 40 };
+/** Theme spinner: blue + gold arcs (page palette). */
+const SIZE_PX: Record<SpinnerSize, number> = { sm: 28, md: 48, lg: 64 };
 
 export function Spinner({
-  size = 'md',
+  size = 'lg',
   label = 'Loading',
   className = '',
 }: SpinnerProps) {
@@ -27,7 +28,9 @@ export function Spinner({
       role="status"
       aria-label={label}
     >
-      <span className="ui-spinner__ring" aria-hidden="true" />
+      <span className="ui-spinner__track" aria-hidden="true" />
+      <span className="ui-spinner__arc ui-spinner__arc--blue" aria-hidden="true" />
+      <span className="ui-spinner__arc ui-spinner__arc--gold" aria-hidden="true" />
     </span>
   );
 }

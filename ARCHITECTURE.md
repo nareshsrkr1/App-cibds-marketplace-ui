@@ -13,9 +13,9 @@ Today it includes:
 | Area | Route | Purpose |
 |------|--------|---------|
 | Marketing / landing | `/` | Brand story, “How data moves”, metrics strip, CTAs |
-| Workspace console | `/workspace` | Persona-aware Producer console (KPIs, charts, approval panels) |
+| Workspace console | `/workspace` | Persona-aware console (nav, hero/KPIs, charts, panels) for Producer, Governance, Consumer, Admin |
 
-Catalogue and other personas are reserved for later; CTAs may be disabled until entitlements allow them.
+Catalogue and other deep views are reserved for later; many nav items and actions are visible but disabled until those stories land.
 
 ---
 
@@ -76,6 +76,7 @@ App-cibds-marketplace-ui/
 │   └── env-local.properties.example  # Template for new developers
 ├── public/
 │   ├── app-config.json               # Runtime config loaded by the app
+│   ├── fonts/                        # Vendored IBM Plex / Cormorant / Fraunces
 │   └── mockServiceWorker.js          # MSW service worker (browser mocks)
 ├── scripts/
 │   └── generate-app-config.mjs       # Builds public/app-config.json from env properties
@@ -93,6 +94,9 @@ App-cibds-marketplace-ui/
 │   │   ├── session/
 │   │   └── workspace/
 │   ├── mocks/                        # TEMPORARY: MSW handlers + JSON (until backends exist)
+│   │   ├── session/context.json
+│   │   ├── landing/{metrics,content,handlers}.…
+│   │   └── workspace/{producer,governance,consumer,admin}/…
 │   ├── services/                     # Cross-cutting helpers (toast, notifications seed)
 │   ├── theme/                        # Design tokens, fonts, global/component CSS
 │   ├── test/                         # Vitest setup (MSW node server)
@@ -116,7 +120,7 @@ App-cibds-marketplace-ui/
 ## 5. Application bootstrap
 
 1. `index.html` loads the Vite entry (`src/main.tsx`).
-2. `main.tsx` imports **Fontsource** fonts, design tokens, then `loadAppConfig()` from `/app-config.json`.
+2. `main.tsx` imports vendored fonts (`src/theme/fonts.css` via `fonts.ts`), design tokens, then `loadAppConfig()` from `/app-config.json`.
 3. React renders `<App />` inside `<BrowserRouter>`.
 4. If any resource is still in **mock** mode, `App` starts the MSW browser worker.
 5. Routes render Landing or Workspace.
@@ -158,14 +162,17 @@ Single source of truth for every known HTTP API:
 
 **Wired today**
 
-| Resource id | Path |
-|-------------|------|
-| `landingMetrics` | `/api/v1/marketplace/landing/metrics` |
-| `sessionContext` | `/api/v1/session/context` |
-| `workspaceConsoleHero` | `/api/v1/workspace/console/hero?persona=` |
-| `workspaceConsoleCharts` | `/api/v1/workspace/console/charts?persona=` |
-| `workspaceConsoleSubRequests` | `/api/v1/workspace/console/subscription-requests?persona=` |
-| `workspaceConsoleGovernance` | `/api/v1/workspace/console/governance?persona=` |
+| Resource id | Path | Feature API |
+|-------------|------|-------------|
+| `landingMetrics` | `/api/v1/marketplace/landing/metrics` | `fetchLandingMetrics` |
+| `landingContent` | `/api/v1/marketplace/landing/content` | `fetchLandingContent` |
+| `sessionContext` | `/api/v1/session/context` | `fetchSessionContext` |
+| `workspaceNav` | `/api/v1/workspace/nav?persona=` | `fetchWorkspaceNav` |
+| `workspaceConsoleHero` | `/api/v1/workspace/console/hero?persona=` | `fetchConsoleHero` |
+| `workspaceConsoleCharts` | `/api/v1/workspace/console/charts?persona=` | `fetchConsoleCharts` |
+| `workspaceConsoleSubRequests` | `/api/v1/workspace/console/subscription-requests?persona=` | `fetchConsoleSubscriptionRequests` |
+| `workspaceConsoleConsumers` | `/api/v1/workspace/console/consumers?persona=` | `fetchConsoleConsumers` |
+| `workspaceConsoleGovernance` | `/api/v1/workspace/console/governance?persona=` | `fetchConsoleGovernance` |
 
 **Planned (not wired in UI yet)**
 
@@ -181,9 +188,11 @@ Single source of truth for every known HTTP API:
 
 Thin wrappers that call `httpGet` with the catalog path + resource id:
 
-- `src/features/landing/landing.api.ts`
-- `src/features/session/session.api.ts`
-- `src/features/workspace/workspace.api.ts`
+| Module | File |
+|--------|------|
+| Landing | `src/features/landing/landing.api.ts` |
+| Session | `src/features/session/session.api.ts` |
+| Workspace | `src/features/workspace/workspace.api.ts` |
 
 Pages import these functions — never call `fetch` directly for marketplace APIs.
 
@@ -206,10 +215,13 @@ API_DEFAULT_MODE=mock
 API_BASE_URL=
 
 LANDING_METRICS_MODE=mock
+LANDING_CONTENT_MODE=mock
 SESSION_CONTEXT_MODE=mock
+WORKSPACE_NAV_MODE=mock
 WORKSPACE_CONSOLE_HERO_MODE=mock
 WORKSPACE_CONSOLE_CHARTS_MODE=mock
 WORKSPACE_CONSOLE_SUB_REQUESTS_MODE=mock
+WORKSPACE_CONSOLE_CONSUMERS_MODE=mock
 WORKSPACE_CONSOLE_GOVERNANCE_MODE=mock
 ```
 
@@ -222,22 +234,147 @@ API_BASE_URL=https://api.example.com
 
 No page rewrite required.
 
-### 7.4 Producer console: four section APIs
+---
 
-Workspace does **not** load one giant console payload. It loads four sections in parallel:
+## 8. Complete request flow (end-to-end)
 
-1. **Hero** — eyebrow, subtitle, KPIs, action buttons  
-2. **Charts** — statistics graphs  
-3. **Subscription requests** — awaiting approval list  
-4. **Governance** — sent-to-governance list  
+This is the structure as implemented today: **which screen calls which API, where the call lives, and which mock JSON answers in mock mode.**
 
-Hero can render while charts/panels are still loading. A failed section shows an inline error; it does not blank the whole console.
+### 8.1 Shared call stack (every wired API)
 
-Greeting (`Good morning/afternoon/evening, …`) is computed **on the client** from the system clock + user display name (`src/features/workspace/greeting.ts`).
+```text
+Page / component
+  → features/*/….api.ts          (named fetchX)
+  → httpGet(path, { resource })  (src/app/api/httpClient.ts)
+  → getApiMode(resource)         (src/app/api/apiConfig.ts + app-config.json)
+  → fetch(url)
+       ├─ mode=mock → MSW handler in src/mocks/**/handlers.ts → JSON fixture
+       └─ mode=real → API_BASE_URL + path → backend
+  → ApiResult<T>                 ({ ok, data } | { ok:false, error })
+  → page setState → UI section
+```
+
+### 8.2 Landing page (`/`) — `LandingPage.tsx`
+
+On mount, three calls run (session + metrics + content):
+
+| Step | Called from | Feature API | Resource id | HTTP path | Mock handler / fixture |
+|------|-------------|-------------|-------------|-----------|------------------------|
+| 1 | `LandingPage` | `fetchSessionContext()` | `sessionContext` | `GET /api/v1/session/context` | `src/mocks/workspace/handlers.ts` + `src/mocks/session/context.json` |
+| 2 | `LandingPage` | `fetchLandingMetrics()` | `landingMetrics` | `GET /api/v1/marketplace/landing/metrics` | `src/mocks/landing/handlers.ts` + `src/mocks/landing/metrics.json` |
+| 3 | `LandingPage` | `fetchLandingContent()` | `landingContent` | `GET /api/v1/marketplace/landing/content` | `src/mocks/landing/handlers.ts` + `src/mocks/landing/content.json` |
+
+**UI use**
+
+- Session → enable Workspace CTA when `WORKSPACE_VIEW` is present
+- Metrics → proof strip numbers
+- Content → diagram, capabilities, pipeline, FAQs (no hardcoded section copy)
+
+### 8.3 Workspace page (`/workspace`) — `WorkspacePage.tsx`
+
+#### A. First load
+
+```text
+1. fetchSessionContext()
+      → user name/initials, personas, entitlements, personaProfiles.subtitle
+      → WorkspaceShell (persona switcher + footer “Test user / Test Owner”)
+
+2. In parallel (active persona, default PRODUCER):
+      fetchWorkspaceNav(persona)
+      fetchConsoleHero(persona)
+      fetchConsoleCharts(persona)
+      + persona-specific panels (see table below)
+```
+
+Only the **first** hero load shows the full-page spinner in the main pane. Later persona switches keep the wishes/hero/KPIs/actions visible and only refresh charts + panels.
+
+#### B. Persona switch
+
+```text
+User clicks Governance / Consumer / Admin / Producer
+  → setPersona(next)
+  → same parallel fetches with ?persona=<NEXT>
+  → left nav updates from workspaceNav
+  → hero KPIs/actions soft-replace when hero returns
+  → charts + panels clear → reload → soft enter animation
+```
+
+#### C. Which console APIs run per persona
+
+| Persona | Always | Also | Renders |
+|---------|--------|------|---------|
+| **PRODUCER** | nav, hero, charts | consumers + subscription-requests | KPIs, actions, 6 charts (2 tiers), two panels |
+| **GOVERNANCE** | nav, hero, charts | governance | KPIs, charts, endorsement queue panel |
+| **CONSUMER** | nav, hero, charts | — | KPIs, charts (panels empty) |
+| **ADMIN** | nav, hero, charts | — | KPIs, charts (panels empty) |
+
+#### D. Workspace API ↔ code ↔ mock map
+
+| UI region | Called in | Feature API (`workspace.api.ts`) | Resource id | Path | Mock JSON (by persona folder) |
+|-----------|-----------|----------------------------------|-------------|------|-------------------------------|
+| Left nav groups | `WorkspacePage` → `ConsoleSidebar` | `fetchWorkspaceNav` | `workspaceNav` | `/api/v1/workspace/nav?persona=` | `src/mocks/workspace/{persona}/nav.json` |
+| Wishes / greeting / subtitle | `ProducerConsole` → `ConsoleHeader` | `fetchConsoleHero` | `workspaceConsoleHero` | `/api/v1/workspace/console/hero?persona=` | `…/{persona}/hero.json` (+ greeting computed client-side) |
+| KPI strip | `ProducerConsole` | same hero | same | same | `hero.kpis` |
+| Action buttons | `ProducerConsole` | same hero | same | same | `hero.actions` |
+| Statistics charts | `ProducerConsole` → `ConsoleCharts` | `fetchConsoleCharts` | `workspaceConsoleCharts` | `/api/v1/workspace/console/charts?persona=` | `…/{persona}/charts.json` |
+| “My consumers…” panel | `ProducerConsole` → `ConsolePanelBlock` | `fetchConsoleConsumers` | `workspaceConsoleConsumers` | `/api/v1/workspace/console/consumers?persona=` | `producer/consumers.json` |
+| “Subscription requests…” | same | `fetchConsoleSubscriptionRequests` | `workspaceConsoleSubRequests` | `/api/v1/workspace/console/subscription-requests?persona=` | `producer/subscription-requests.json` |
+| Endorsement queue | same | `fetchConsoleGovernance` | `workspaceConsoleGovernance` | `/api/v1/workspace/console/governance?persona=` | `governance/queue.json` |
+| Sidebar footer subtitle | `WorkspaceShell` | from session (not a separate API) | `sessionContext` | `/api/v1/session/context` | `personaProfiles[PERSONA].subtitle` (e.g. Producer → `Test Owner`) |
+
+Handlers live in **`src/mocks/workspace/handlers.ts`**. They read `?persona=`, pick the matching persona JSON, and apply optional latency from `src/mocks/mockDelay.ts`.
+
+#### E. Client-only (not from API)
+
+| Concern | Where |
+|---------|--------|
+| Time-of-day greeting (`Good morning/afternoon/evening, {name}.`) | `src/features/workspace/greeting.ts` — clock + `displayName` from session/hero |
+| Persona switch animation (charts/panels only) | `WorkspacePage` + `.console-body-stage` in `components.css` |
+| Disabled nav / actions (“Available in a future release”) | Flags on mock JSON (`enabled: false`) |
+
+### 8.4 Sequence diagram — workspace first load (Producer)
+
+```text
+Browser                WorkspacePage           Feature APIs              MSW / Backend
+   │                         │                      │                          │
+   │  open /workspace        │                      │                          │
+   │────────────────────────▶│                      │                          │
+   │                         │ fetchSessionContext  │                          │
+   │                         │─────────────────────▶│─────────────────────────▶│
+   │                         │◀─────────────────────│◀ session/context.json    │
+   │                         │                      │                          │
+   │                         │ fetchWorkspaceNav(PRODUCER)                     │
+   │                         │ fetchConsoleHero(PRODUCER)                      │
+   │                         │ fetchConsoleCharts(PRODUCER)                    │
+   │                         │ fetchConsoleConsumers(PRODUCER)                 │
+   │                         │ fetchConsoleSubscriptionRequests(PRODUCER)      │
+   │                         │─────────────────────▶│─────────────────────────▶│
+   │                         │◀── nav / hero / charts / panels (parallel) ─────│
+   │  paint shell + sections │                      │                          │
+   │◀────────────────────────│                      │                          │
+```
+
+### 8.5 File cheat-sheet
+
+| Concern | File |
+|---------|------|
+| Path + resource catalog | `src/api/endpoints.ts` |
+| Session fetch | `src/features/session/session.api.ts` |
+| Landing fetches | `src/features/landing/landing.api.ts` |
+| Workspace fetches | `src/features/workspace/workspace.api.ts` |
+| Orchestration (when to call what) | `src/features/workspace/WorkspacePage.tsx` |
+| Console layout | `src/features/workspace/components/ProducerConsole.tsx` |
+| Shell / sidebar / footer | `src/components/layout/WorkspaceShell/WorkspaceShell.tsx` |
+| Session mock | `src/mocks/session/context.json` |
+| Workspace mocks | `src/mocks/workspace/{producer,governance,consumer,admin}/` |
+| MSW workspace routes | `src/mocks/workspace/handlers.ts` |
+| MSW landing routes | `src/mocks/landing/handlers.ts` |
+| Mock latency toggle | `src/mocks/mockDelay.ts` |
+| Env → app-config | `scripts/generate-app-config.mjs` + `config/env-local.properties` |
 
 ---
 
-## 8. Mocks (`src/mocks`) — what they are
+## 9. Mocks (`src/mocks`) — what they are
 
 Mocks use **MSW** to intercept the same paths as the real API.
 
@@ -259,13 +396,24 @@ Delete the whole `mocks` folder only when:
 
 Until then, flipping config is enough.
 
+Persona fixtures are segregated:
+
+```text
+src/mocks/workspace/
+├── handlers.ts
+├── producer/   { nav, hero, charts, consumers, subscription-requests }.json
+├── governance/ { nav, hero, charts, queue }.json
+├── consumer/   { nav, hero, charts }.json
+└── admin/      { nav, hero, charts }.json
+```
+
 ---
 
-## 9. Design system — tokens & theme
+## 10. Design system — tokens & theme
 
 Tokens live in `src/theme/tokens.css` as CSS custom properties on `:root`.
 
-### 9.1 Colour palette
+### 10.1 Colour palette
 
 | Token | Value | Typical use |
 |-------|-------|-------------|
@@ -289,7 +437,7 @@ Semantic aliases (prefer these in shared components):
 - `--color-accent`, `--color-brand`
 - `--status-success`, `--status-warning`, `--status-danger`, `--status-info` (+ `*-bg`)
 
-### 9.2 Typography
+### 10.2 Typography
 
 | Token | Font stack | Role |
 |-------|------------|------|
@@ -298,9 +446,9 @@ Semantic aliases (prefer these in shared components):
 | `--display` | Fraunces | Headlines, section titles |
 | `--mono` | IBM Plex Mono | Labels, codes, meta |
 
-Fonts are **vendored** as latin `.woff2` files in `public/fonts/`, declared in `src/theme/fonts.css`, and imported via `src/theme/fonts.ts` from `main.tsx`. There is no Google Fonts CDN and no Fontsource npm dependency (important for restricted corporate networks).
+Fonts are **vendored** as latin `.woff2` files in `public/fonts/`, declared in `src/theme/fonts.css` (Sans 300–700, Mono 400/500, Cormorant italic + 500/600, Fraunces 400/500, plus a KPI family for thick italic numerals), and imported via `src/theme/fonts.ts` from `main.tsx`. Gold/navy accents and console shadows are tuned toward the HTML SoT vibrancy. There is no Google Fonts CDN and no Fontsource npm dependency (important for restricted corporate networks).
 
-### 9.3 Spacing, radius, elevation
+### 10.3 Spacing, radius, elevation
 
 | Token family | Examples |
 |--------------|----------|
@@ -311,11 +459,12 @@ Fonts are **vendored** as latin `.woff2` files in `public/fonts/`, declared in `
 | Focus | `--focus-ring` gold-tinted outline |
 | Breakpoints (reference) | `--bp-md` 820px, `--bp-lg` 1100px |
 
-### 9.4 CSS file map
+### 10.4 CSS file map
 
 | File | Contents |
 |------|----------|
-| `theme/fonts.ts` | Fontsource weight imports |
+| `theme/fonts.ts` | Imports `fonts.css` |
+| `theme/fonts.css` | `@font-face` for vendored woff2 |
 | `theme/tokens.css` | Design tokens |
 | `theme/globals.css` | Box model, base body styles |
 | `theme/components.css` | Shared + workspace shell / console styles |
@@ -326,27 +475,32 @@ Visual language: warm off-white canvas, navy + gold brand accents, serif/display
 
 ---
 
-## 10. UI composition
+## 11. UI composition
 
 ### Landing (`/`)
 
 - Sticky nav, hero with “How data moves” diagram  
 - Metrics proof strip (from `landingMetrics` API)  
-- Capabilities, pipeline (“How it works”), FAQ, CTA, footer  
+- Capabilities, pipeline (“How it works”), FAQ, CTA, footer (from `landingContent` API)  
 - Workspace CTA enabled when session has `WORKSPACE_VIEW`
 
 ### Workspace (`/workspace`)
 
 - `WorkspaceShell` — left nav (~252px), brand, persona switcher (2×2 grid), nav groups, user footer  
-- `ProducerConsole` — hero + KPIs + actions + charts (4 per row on wide screens) + two panels  
-- Personas: Producer / Governance / Consumer / Admin (only enabled personas are clickable; others visible but disabled)  
-- Subtitle under user name comes from role/persona (not a hardcoded system name)
+- `ProducerConsole` — shared console layout for all personas: hero + KPIs + actions + charts + optional panels  
+- Personas aligned to latest HTML SoT (`CIBD_Updated.html`):
+  - **Producer** — 5 KPIs, 4 actions, 6 charts (2 tiers), consumers + subscription panels  
+  - **Governance** — 4 KPIs (Endorsed BDEs / Glossary / Pending / Unmapped), vocabulary actions, 12 charts (4 tiers), endorsement queue  
+  - **Consumer** — 5 KPIs, 3 actions, 6 charts (2 tiers)  
+  - **Admin** — 5 KPIs, 3 actions, full Producer+Consumer+Governance chart stack with section headings  
+- Footer subtitle from `session.personaProfiles[persona].subtitle`  
+- Persona switch: wishes/hero stay; charts and panels refresh with a soft enter
 
 Shared building blocks under `src/components/`: Button, Badge, Card, Modal, Alert, Empty/Error/Loading states, Toast, Spinner, PersonaSelector, WorkspaceShell, notification UI (foundation).
 
 ---
 
-## 11. Testing
+## 12. Testing
 
 | Type | Tool | Entry |
 |------|------|-------|
@@ -364,7 +518,7 @@ Mock scenarios for tests (examples):
 
 ---
 
-## 12. Common developer tasks
+## 13. Common developer tasks
 
 ### Run locally
 
@@ -404,13 +558,13 @@ Keep `src/api/` and feature `*.api.ts` — those are the real client.
 
 ---
 
-## 13. Mental model (one paragraph)
+## 14. Mental model (one paragraph)
 
-Think of this app as **a real frontend that talks to real URL contracts**. While backends are incomplete, MSW pretends to be the server. Design tokens and Fontsource fonts define the look. When a backend arrives, you flip a config switch for that resource. When every backend is ready and tests no longer need MSW, you can delete the mocks folder without redesigning the application.
+Think of this app as **a real frontend that talks to real URL contracts**. While backends are incomplete, MSW pretends to be the server. Design tokens and vendored fonts define the look. When a backend arrives, you flip a config switch for that resource. When every backend is ready and tests no longer need MSW, you can delete the mocks folder without redesigning the application.
 
 ---
 
-## 14. Quick reference — npm scripts
+## 15. Quick reference — npm scripts
 
 | Script | What it does |
 |--------|----------------|
@@ -423,4 +577,4 @@ Think of this app as **a real frontend that talks to real URL contracts**. While
 
 ---
 
-*Last aligned with the `feature-global-space` codebase (Producer console section APIs, vendored fonts, central `src/api` catalog).*
+*Last updated: workspace section APIs, persona-segregated mocks, vendor fonts, full call-flow map in §8.*

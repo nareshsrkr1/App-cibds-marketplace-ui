@@ -1,0 +1,78 @@
+{
+  "persona": "PRODUCER",
+  "tiers": [
+    {
+      "id": "health",
+      "label": "My production health",
+      "chartIds": ["publish_sla", "bind_progress", "feed_ontime"]
+    },
+    {
+      "id": "mydata",
+      "label": "My data",
+      "chartIds": ["sub_turnaround", "by_sa", "contracts"]
+    }
+  ],
+  "charts": [
+    {
+      "id": "publish_sla",
+      "title": "Publish SLA adherence",
+      "subtitle": "My datasets registered within the publication SLA",
+      "kind": "gauge",
+      "value": 85,
+      "target": 90,
+      "unitLabel": "on time",
+      "footer": "11 on time · 2 late"
+    },
+    {
+      "id": "bind_progress",
+      "title": "Binding progress",
+      "subtitle": "My columns bound to business elements",
+      "kind": "donut",
+      "realised": 41,
+      "gap": 8,
+      "footer": "8 columns still to bind"
+    },
+    {
+      "id": "feed_ontime",
+      "title": "Feed delivery on-time",
+      "subtitle": "My data feeds delivered on schedule · 6 weeks",
+      "kind": "trend",
+      "seriesA": [98, 97, 99, 96, 99, 98],
+      "seriesB": [95, 95, 95, 95, 95, 95],
+      "labels": ["Actual %", "Target 95%"]
+    },
+    {
+      "id": "sub_turnaround",
+      "title": "Subscription turnaround",
+      "subtitle": "How fast I approve subscription requests",
+      "kind": "hbars",
+      "rows": [
+        ["0-1d", 6],
+        ["2-3d", 3],
+        ["4-5d", 2],
+        ["5d+", 1]
+      ],
+      "footer": "Faster approval improves consumer trust"
+    },
+    {
+      "id": "by_sa",
+      "title": "My elements by subject area",
+      "subtitle": "Where my governed data concentrates",
+      "kind": "hbars",
+      "rows": [
+        ["Trade Economics", 18],
+        ["Trade Lifecycle", 14],
+        ["Positions", 11],
+        ["P&L", 8],
+        ["Reference", 6]
+      ]
+    },
+    {
+      "id": "contracts",
+      "title": "Producer contracts",
+      "subtitle": "Datasets under each of my producer contracts",
+      "kind": "split",
+      "segments": { "Endur": 181, "Catalyst": 82 }
+    }
+  ]
+}

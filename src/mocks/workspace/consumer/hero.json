@@ -1,0 +1,17 @@
+{
+  "persona": "CONSUMER",
+  "eyebrow": "Consumer Console",
+  "subtitle": "Everything you consume — discovered, subscribed, and delivered under contract. In one view.",
+  "kpis": [
+    { "id": "subs", "value": 9, "label": "Active subscriptions" },
+    { "id": "pending", "value": 2, "label": "Pending requests", "warn": true },
+    { "id": "sources", "value": 4, "label": "Sources consumed" },
+    { "id": "sla", "value": "96%", "label": "Delivery SLA" },
+    { "id": "expiring", "value": 1, "label": "Expiring soon", "warn": true }
+  ],
+  "actions": [
+    { "id": "browse", "label": "Browse the catalogue", "variant": "primary", "enabled": false },
+    { "id": "explore", "label": "Explore data", "variant": "secondary", "enabled": false },
+    { "id": "requests", "label": "My requests", "variant": "secondary", "enabled": false }
+  ]
+}

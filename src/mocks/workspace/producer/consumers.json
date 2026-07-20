@@ -1,0 +1,26 @@
+{
+  "persona": "PRODUCER",
+  "panel": {
+    "id": "consumers",
+    "title": "My consumers · last delivery & SLA",
+    "moreLabel": "2",
+    "items": [
+      {
+        "id": "cons-mr",
+        "title": "Market Risk · Risk Analytics",
+        "subtitle": "Risk · SLA 06:00 daily",
+        "tag": "on-time",
+        "tagKind": "on-time",
+        "meta": "Endur P&L and Greeks · 05:52"
+      },
+      {
+        "id": "cons-rr",
+        "title": "Regulatory Reporting",
+        "subtitle": "Compliance · SLA 07:00 daily",
+        "tag": "late",
+        "tagKind": "late",
+        "meta": "Endur OTC Commodity Trades · 07:14"
+      }
+    ]
+  }
+}

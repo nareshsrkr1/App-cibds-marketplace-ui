@@ -10,10 +10,13 @@ const outFile = path.join(root, 'public', 'app-config.json');
 /** Map PROPERTY_NAME → app-config resource id */
 const RESOURCE_MODE_KEYS = {
   LANDING_METRICS_MODE: 'landingMetrics',
+  LANDING_CONTENT_MODE: 'landingContent',
   SESSION_CONTEXT_MODE: 'sessionContext',
+  WORKSPACE_NAV_MODE: 'workspaceNav',
   WORKSPACE_CONSOLE_HERO_MODE: 'workspaceConsoleHero',
   WORKSPACE_CONSOLE_CHARTS_MODE: 'workspaceConsoleCharts',
   WORKSPACE_CONSOLE_SUB_REQUESTS_MODE: 'workspaceConsoleSubRequests',
+  WORKSPACE_CONSOLE_CONSUMERS_MODE: 'workspaceConsoleConsumers',
   WORKSPACE_CONSOLE_GOVERNANCE_MODE: 'workspaceConsoleGovernance',
   NOTIFICATIONS_MODE: 'notifications',
   DATASETS_MODE: 'datasets',

@@ -6,10 +6,14 @@ const DEFAULT_API: ApiRuntimeConfig = {
   defaultMode: 'mock',
   baseUrl: '',
   resources: {
+    landingMetrics: { mode: 'mock' },
+    landingContent: { mode: 'mock' },
     sessionContext: { mode: 'mock' },
+    workspaceNav: { mode: 'mock' },
     workspaceConsoleHero: { mode: 'mock' },
     workspaceConsoleCharts: { mode: 'mock' },
     workspaceConsoleSubRequests: { mode: 'mock' },
+    workspaceConsoleConsumers: { mode: 'mock' },
     workspaceConsoleGovernance: { mode: 'mock' },
   },
 };

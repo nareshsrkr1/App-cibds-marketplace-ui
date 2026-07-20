@@ -6,7 +6,13 @@
       "landingMetrics": {
         "mode": "mock"
       },
+      "landingContent": {
+        "mode": "mock"
+      },
       "sessionContext": {
+        "mode": "mock"
+      },
+      "workspaceNav": {
         "mode": "mock"
       },
       "workspaceConsoleHero": {
@@ -16,6 +22,9 @@
         "mode": "mock"
       },
       "workspaceConsoleSubRequests": {
+        "mode": "mock"
+      },
+      "workspaceConsoleConsumers": {
         "mode": "mock"
       },
       "workspaceConsoleGovernance": {

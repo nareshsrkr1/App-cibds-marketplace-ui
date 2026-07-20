@@ -8,5 +8,17 @@
   "entitlements": ["WORKSPACE_VIEW"],
   "defaultPersona": "PRODUCER",
   "availablePersonas": ["PRODUCER", "GOVERNANCE", "CONSUMER", "ADMIN"],
-  "enabledPersonas": ["PRODUCER"]
+  "enabledPersonas": ["PRODUCER", "GOVERNANCE", "CONSUMER", "ADMIN"],
+  "personaLabels": {
+    "PRODUCER": "Producer",
+    "GOVERNANCE": "Governance",
+    "CONSUMER": "Consumer",
+    "ADMIN": "Admin"
+  },
+  "personaProfiles": {
+    "PRODUCER": { "subtitle": "Endur Owner" },
+    "GOVERNANCE": { "subtitle": "CIB · Steward" },
+    "CONSUMER": { "subtitle": "Consumer · Risk Analytics" },
+    "ADMIN": { "subtitle": "CIB · Full access" }
+  }
 }

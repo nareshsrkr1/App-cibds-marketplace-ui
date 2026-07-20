@@ -1,0 +1,17 @@
+{
+  "persona": "GOVERNANCE",
+  "eyebrow": "Data Governance",
+  "subtitle": "Own the vocabulary. Endorse what producers send — new elements, unmapped columns.",
+  "kpis": [
+    { "id": "endorsed", "value": 74, "label": "Endorsed BDEs" },
+    { "id": "glossary", "value": 68, "label": "Glossary terms" },
+    { "id": "pending", "value": 2, "label": "Pending endorsement", "warn": true },
+    { "id": "gaps", "value": 1, "label": "Unmapped gaps", "warn": true }
+  ],
+  "actions": [
+    { "id": "addbde", "label": "Add a BDE", "variant": "primary", "enabled": false },
+    { "id": "bulkbde", "label": "Bulk upload BDEs", "variant": "secondary", "enabled": false },
+    { "id": "addterm", "label": "Add a term", "variant": "secondary", "enabled": false },
+    { "id": "bulkterm", "label": "Bulk upload terms", "variant": "secondary", "enabled": false }
+  ]
+}

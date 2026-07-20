@@ -1,0 +1,77 @@
+{
+  "persona": "CONSUMER",
+  "tiers": [
+    {
+      "id": "health",
+      "label": "My consumption health",
+      "chartIds": ["delivery_sla", "subs", "access_trend"]
+    },
+    {
+      "id": "fresh",
+      "label": "Freshness & sources",
+      "chartIds": ["freshness", "by_source", "coverage"]
+    }
+  ],
+  "charts": [
+    {
+      "id": "delivery_sla",
+      "title": "Data delivery SLA",
+      "subtitle": "Subscribed data delivered within my SLA",
+      "kind": "gauge",
+      "value": 92,
+      "target": 95,
+      "unitLabel": "within SLA",
+      "footer": "23 met · 2 missed"
+    },
+    {
+      "id": "subs",
+      "title": "My subscriptions",
+      "subtitle": "Status of the contracts I consume",
+      "kind": "hbars",
+      "rows": [
+        ["Active", 9],
+        ["Pending", 2],
+        ["Expired", 1]
+      ],
+      "footer": "9 active feeds"
+    },
+    {
+      "id": "access_trend",
+      "title": "Access trend",
+      "subtitle": "Datasets I accessed per week · 6 weeks",
+      "kind": "trend",
+      "seriesA": [120, 140, 135, 160, 155, 175],
+      "seriesB": [148, 148, 148, 148, 148, 148],
+      "labels": ["Accesses", "Average"]
+    },
+    {
+      "id": "freshness",
+      "title": "Data freshness",
+      "subtitle": "Hours since last refresh, by dataset (lower is better)",
+      "kind": "hbars",
+      "rows": [
+        ["1CAT Trades", 2],
+        ["Endur OTC", 4],
+        ["Positions", 1],
+        ["P&L", 6]
+      ],
+      "footer": "All feeds within contracted refresh windows"
+    },
+    {
+      "id": "by_source",
+      "title": "Subscriptions by source",
+      "subtitle": "Which systems of record I depend on",
+      "kind": "split",
+      "segments": { "Endur": 6, "Catalyst": 4 }
+    },
+    {
+      "id": "coverage",
+      "title": "Contract coverage",
+      "subtitle": "Share of my needs met under governed contract",
+      "kind": "donut",
+      "realised": 9,
+      "gap": 1,
+      "footer": "9 of 10 needs under contract"
+    }
+  ]
+}

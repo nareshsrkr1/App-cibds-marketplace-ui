@@ -11,6 +11,7 @@ test.describe('Workspace Producer console', () => {
     await expect(page.getByTestId('workspace-shell')).toBeVisible();
     await expect(page.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeVisible();
     await expect(page.getByRole('button', { name: 'Producer' })).toHaveAttribute('aria-pressed', 'true');
-    await expect(page.getByText('Test user')).toBeVisible();
+    await expect(page.getByText('Register a physical dataset')).toBeVisible();
+    await expect(page.getByText('Publish SLA adherence')).toBeVisible();
   });
 });

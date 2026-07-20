@@ -1,4 +1,9 @@
-/* Self-hosted latin fonts under /fonts (no Fontsource / Google CDN). */
+/**
+ * Self-hosted latin fonts under /fonts (no Fontsource / Google CDN).
+ *
+ * KPI numerals use isolated family "Cormorant KPI" (italic 600/700 only) so
+ * accent italic 400 cannot rematch and cause a bold→light swap flash.
+ */
 
 /* IBM Plex Sans */
 @font-face {
@@ -53,14 +58,7 @@
   src: url('/fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
 }
 
-/* Cormorant Garamond */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/cormorant-garamond-latin-400-normal.woff2') format('woff2');
-}
+/* Cormorant — accents (landing em, etc.) */
 @font-face {
   font-family: 'Cormorant Garamond';
   font-style: italic;
@@ -82,12 +80,25 @@
   font-display: swap;
   src: url('/fonts/cormorant-garamond-latin-600-normal.woff2') format('woff2');
 }
+
+/*
+ * KPI / proof numerals — isolated family so italic 400 never rematches
+ * these (that was the bold→light blink: faux-bold 400, then swap to light cut).
+ * font-display:block avoids fallback flash; preload in index.html.
+ */
 @font-face {
-  font-family: 'Cormorant Garamond';
-  font-style: normal;
+  font-family: 'Cormorant KPI';
+  font-style: italic;
+  font-weight: 600;
+  font-display: block;
+  src: url('/fonts/cormorant-garamond-latin-600-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant KPI';
+  font-style: italic;
   font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/cormorant-garamond-latin-700-normal.woff2') format('woff2');
+  font-display: block;
+  src: url('/fonts/cormorant-garamond-latin-700-italic.woff2') format('woff2');
 }
 
 /* Fraunces */

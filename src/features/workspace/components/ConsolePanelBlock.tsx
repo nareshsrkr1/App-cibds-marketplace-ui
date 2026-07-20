@@ -30,6 +30,7 @@ export function ConsolePanelBlock({ panel }: ConsolePanelBlockProps) {
               ) : item.subtitle ? (
                 <div className="wf-s">{item.subtitle}</div>
               ) : null}
+              {item.meta ? <div className="wf-meta">{item.meta}</div> : null}
             </div>
             <div className="wf-side">
               {item.tag ? (
@@ -43,7 +44,7 @@ export function ConsolePanelBlock({ panel }: ConsolePanelBlockProps) {
                   disabled
                   title="Available in a future release"
                 >
-                  Approve
+                  {item.actionLabel ?? 'Approve'}
                 </button>
               ) : null}
             </div>

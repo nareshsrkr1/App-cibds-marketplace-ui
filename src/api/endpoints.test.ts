@@ -12,10 +12,13 @@ describe('API_ENDPOINTS catalog', () => {
     expect(wired).toEqual(
       expect.arrayContaining([
         'landingMetrics',
+        'landingContent',
         'sessionContext',
+        'workspaceNav',
         'workspaceConsoleHero',
         'workspaceConsoleCharts',
         'workspaceConsoleSubRequests',
+        'workspaceConsoleConsumers',
         'workspaceConsoleGovernance',
       ]),
     );

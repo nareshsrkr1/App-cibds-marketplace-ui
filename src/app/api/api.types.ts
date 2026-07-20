@@ -3,15 +3,18 @@ export type ApiMode = 'mock' | 'real';
 /** Stable API resource IDs used for phased mock/real rollout. */
 export type ApiResourceId =
   | 'landingMetrics'
+  | 'landingContent'
   | 'notifications'
   | 'datasets'
   | 'businessTerms'
   | 'governance'
   | 'search'
   | 'sessionContext'
+  | 'workspaceNav'
   | 'workspaceConsoleHero'
   | 'workspaceConsoleCharts'
   | 'workspaceConsoleSubRequests'
+  | 'workspaceConsoleConsumers'
   | 'workspaceConsoleGovernance'
   | (string & {});
 

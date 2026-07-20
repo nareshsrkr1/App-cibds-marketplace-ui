@@ -1,5 +1,5 @@
 /** @vitest-environment jsdom */
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import {
@@ -23,19 +23,16 @@ function renderPage() {
 }
 
 describe('WorkspacePage', () => {
-  it('shows all personas with Producer active and others disabled', async () => {
+  it('shows all personas enabled with Producer active by default', async () => {
     renderPage();
     await waitFor(() => expect(screen.getByTestId('workspace-shell')).toBeInTheDocument());
     expect(screen.getByRole('button', { name: 'Producer' })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByRole('button', { name: 'Producer' })).not.toBeDisabled();
-    for (const label of ['Governance', 'Consumer', 'Admin']) {
-      const btn = screen.getByRole('button', { name: label });
-      expect(btn).toBeDisabled();
-      expect(btn).toBeVisible();
+    for (const label of ['Producer', 'Governance', 'Consumer', 'Admin']) {
+      expect(screen.getByRole('button', { name: label })).not.toBeDisabled();
     }
   });
 
-  it('loads hero, charts, and panels from separate mock APIs', async () => {
+  it('loads hero, tiered charts, consumers, and subscription panels from APIs', async () => {
     renderPage();
     await waitFor(() =>
       expect(screen.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeInTheDocument(),
@@ -45,10 +42,10 @@ describe('WorkspacePage', () => {
     ).toBeInTheDocument();
     const consoleRoot = screen.getByTestId('producer-console');
     expect(consoleRoot.querySelector('.sh-kpis')?.textContent).toMatch(/My datasets/);
-    expect(consoleRoot.querySelector('.sh-kpis')?.textContent).toMatch(/Offers held/);
+    expect(consoleRoot.querySelector('.sh-kpis')?.textContent).toMatch(/Producer contracts held/);
     expect(consoleRoot.querySelector('.sh-actions')).toBeTruthy();
     const actionNames = [
-      'Register a dataset',
+      'Register a physical dataset',
       'Bulk upload PDEs',
       'Bind columns',
       'Track workflow',
@@ -61,20 +58,55 @@ describe('WorkspacePage', () => {
       expect(btn).toBeDisabled();
     }
     await waitFor(() => {
-      expect(screen.getByText('Elements by sub-domain')).toBeInTheDocument();
+      expect(screen.getByText('My production health')).toBeInTheDocument();
+      expect(screen.getByText('Publish SLA adherence')).toBeInTheDocument();
+      expect(document.querySelector('.bi-tier-l')?.textContent).toMatch(/My production health/);
+      expect(
+        Array.from(document.querySelectorAll('.bi-tier-l')).some((el) =>
+          el.textContent?.includes('My data'),
+        ),
+      ).toBe(true);
     });
     await waitFor(() => {
+      expect(
+        screen.getByRole('heading', {
+          level: 3,
+          name: /My consumers · last delivery & SLA/i,
+        }),
+      ).toBeInTheDocument();
       expect(
         screen.getByRole('heading', {
           level: 3,
           name: /Subscription requests · awaiting your approval/i,
         }),
       ).toBeInTheDocument();
-      expect(
-        screen.getByRole('heading', { level: 3, name: 'Sent to governance' }),
-      ).toBeInTheDocument();
     });
+    expect(screen.queryByRole('heading', { level: 3, name: 'Sent to governance' })).toBeNull();
     expect(screen.getByRole('button', { name: 'Console' })).toHaveAttribute('aria-current', 'page');
+    await waitFor(() => {
+      expect(
+        screen.getAllByRole('button', { name: 'Register a physical dataset' }).length,
+      ).toBeGreaterThanOrEqual(1);
+    });
+  });
+
+  it('switches left nav when persona changes', async () => {
+    renderPage();
+    await waitFor(() => expect(screen.getByTestId('workspace-shell')).toBeInTheDocument());
+    await waitFor(() => {
+      expect(
+        screen.getAllByRole('button', { name: 'Register a physical dataset' }).length,
+      ).toBeGreaterThanOrEqual(1);
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: 'Governance' }));
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Endorsement queue' })).toBeInTheDocument();
+    });
+    expect(screen.queryAllByRole('button', { name: 'Register a physical dataset' })).toHaveLength(0);
+    await waitFor(() => {
+      expect(screen.getByText(/Own the vocabulary/i)).toBeInTheDocument();
+    });
   });
 
   it('shows console error state when hero API fails', async () => {

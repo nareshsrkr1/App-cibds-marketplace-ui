@@ -29,6 +29,13 @@ export const API_ENDPOINTS = {
     wired: true,
     summary: 'Landing page proof-strip metrics',
   },
+  landingContent: {
+    id: 'landingContent',
+    method: 'GET',
+    path: '/api/v1/marketplace/landing/content',
+    wired: true,
+    summary: 'Landing page sections: diagram, capabilities, pipeline, FAQs',
+  },
   sessionContext: {
     id: 'sessionContext',
     method: 'GET',
@@ -36,19 +43,26 @@ export const API_ENDPOINTS = {
     wired: true,
     summary: 'Authenticated user, roles, entitlements, personas',
   },
+  workspaceNav: {
+    id: 'workspaceNav',
+    method: 'GET',
+    path: '/api/v1/workspace/nav',
+    wired: true,
+    summary: 'Left-nav groups for the active persona (?persona=)',
+  },
   workspaceConsoleHero: {
     id: 'workspaceConsoleHero',
     method: 'GET',
     path: '/api/v1/workspace/console/hero',
     wired: true,
-    summary: 'Producer console hero: eyebrow, subtitle, KPIs, actions (?persona=)',
+    summary: 'Console hero: eyebrow, subtitle, KPIs, actions (?persona=)',
   },
   workspaceConsoleCharts: {
     id: 'workspaceConsoleCharts',
     method: 'GET',
     path: '/api/v1/workspace/console/charts',
     wired: true,
-    summary: 'Producer console statistics charts (?persona=)',
+    summary: 'Console statistics charts (?persona=)',
   },
   workspaceConsoleSubRequests: {
     id: 'workspaceConsoleSubRequests',
@@ -57,12 +71,19 @@ export const API_ENDPOINTS = {
     wired: true,
     summary: 'Subscription requests awaiting approval (?persona=)',
   },
+  workspaceConsoleConsumers: {
+    id: 'workspaceConsoleConsumers',
+    method: 'GET',
+    path: '/api/v1/workspace/console/consumers',
+    wired: true,
+    summary: 'Producer consumers · last delivery & SLA (?persona=)',
+  },
   workspaceConsoleGovernance: {
     id: 'workspaceConsoleGovernance',
     method: 'GET',
     path: '/api/v1/workspace/console/governance',
     wired: true,
-    summary: 'Items sent to governance (?persona=)',
+    summary: 'Governance queue / items sent to governance (?persona=)',
   },
 
   /* —— Planned (not wired in UI yet) —— */

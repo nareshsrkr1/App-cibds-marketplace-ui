@@ -1,0 +1,30 @@
+{
+  "diagram": [
+    { "kind": "app", "k": "A team has data", "id": "Producer", "d": "e.g. a trading desk", "connLabel": "lists it" },
+    { "kind": "offer", "k": "They publish it to the marketplace", "id": "Published dataset", "d": "described, classified, owned", "connLabel": "someone finds it" },
+    { "kind": "dataset", "k": "Another team wants it", "id": "Consumer", "d": "e.g. risk or reporting", "connLabel": "requests access" },
+    { "kind": "contract", "k": "The owner approves", "id": "Agreement", "d": "terms agreed & recorded", "connLabel": "data flows", "thinConn": true },
+    { "kind": "sub", "k": "Data is delivered", "id": "Live feed", "d": "governed, traceable" }
+  ],
+  "capabilities": [
+    { "n": "01", "title": "List your data", "body": "A team publishes the data it owns to the marketplace — what it is, who owns it, and how sensitive it is. This becomes the single source everyone can rely on.", "tags": ["Ownership", "Sensitivity", "Description"] },
+    { "n": "02", "title": "Explain what it means", "body": "Each field is matched to a shared business definition, so a column like “cpty_id” is understood by everyone as “Counterparty” — no guesswork, no tribal knowledge.", "tags": ["Shared definitions", "Lineage", "Approved"] },
+    { "n": "03", "title": "Keep it trusted", "body": "Nothing moves until it’s checked, classified and approved. Every access is controlled and recorded, so the firm always knows who has what and why.", "tags": ["Contracts", "Audit", "Access control"] },
+    { "n": "04", "title": "Give it meaning", "body": "Numbers alone are noise. The marketplace captures plain-English definitions and context, so anyone can understand a dataset — not just open it.", "tags": ["Plain-English", "Definitions", "Domain"] },
+    { "n": "05", "title": "Trace it end to end", "body": "See exactly where any piece of data came from and where it goes — from the original source all the way to the person consuming it.", "tags": ["Source to consumer", "Traceability", "Provenance"] },
+    { "n": "06", "title": "A shared ontology, made navigable", "body": "Every dataset, definition, owner and lineage path is woven into one ontology — a connected model of what the firm’s data means. The context fabric sits over it, so you can ask in plain English what data exists, what it means and where it flows, and get an answer grounded in that shared context rather than guesswork.", "tags": ["Ontology", "Connected context", "Ask in plain English"], "ai": true, "aiTag": "Context Fabric" }
+  ],
+  "pipeline": [
+    { "n": "1", "title": "Produce", "body": "A team creates data as part of its daily work" },
+    { "n": "2", "title": "Publish", "body": "They list it in the marketplace and describe what each field means" },
+    { "n": "3", "title": "Govern", "body": "It's checked, classified and approved before anyone can use it" },
+    { "n": "4", "title": "Share", "body": "Another team requests it; the owner approves and terms are agreed" },
+    { "n": "5", "title": "Consume", "body": "Data is delivered as a trusted, traceable feed" }
+  ],
+  "faqs": [
+    { "q": "What is the difference between a glossary term, a data element, and a column?", "a": "A glossary term is the language the business speaks. A business data element (BDE) is the governed definition beneath it. A physical data element (PDE) is the actual column in a source file. Binding connects a column to an element; the element realises a term." },
+    { "q": "Who can publish bindings without governance review?", "a": "A producer can publish directly when every column binds to an already-endorsed business data element. When a producer proposes a new element, or a column can't be mapped, that item routes to Data Governance for endorsement before it can be published." },
+    { "q": "How is a dataset classified?", "a": "Classification is inherited from the business data elements a dataset's columns bind to, rather than declared by hand. Sensitivity, PII status and criticality travel with the element, so the dataset's governance profile is derived from what it actually contains." },
+    { "q": "What is the registration approval SLA?", "a": "The standard review SLA is 2 business days from submission. Datasets flagged for PII or classified as Confidential may require up to 5 business days. Expedited review is available for production-critical submissions — coordinate with the Data Marketplace governance team." }
+  ]
+}

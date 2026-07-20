@@ -15,6 +15,10 @@ export type SessionContext = {
   availablePersonas?: string[];
   /** Personas the user may select; others render disabled but visible. */
   enabledPersonas?: string[];
+  /** Display labels for persona switcher buttons. */
+  personaLabels?: Record<string, string>;
+  /** Per-persona footer / profile copy from session API. */
+  personaProfiles?: Record<string, { subtitle?: string }>;
 };
 
 export const WORKSPACE_VIEW = 'WORKSPACE_VIEW';

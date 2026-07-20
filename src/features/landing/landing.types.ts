@@ -41,6 +41,13 @@ export type FaqItem = {
   a: string;
 };
 
+export type LandingContentResponse = {
+  diagram: DiagramNode[];
+  capabilities: Capability[];
+  pipeline: PipelineStep[];
+  faqs: FaqItem[];
+};
+
 export type DiagramNode = {
   kind: 'app' | 'offer' | 'dataset' | 'contract' | 'sub';
   k: string;

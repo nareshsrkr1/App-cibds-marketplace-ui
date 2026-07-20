@@ -12,6 +12,14 @@ export type ConsoleAction = {
   enabled?: boolean;
 };
 
+export type ConsoleChartTier = {
+  id: string;
+  label: string;
+  chartIds: string[];
+  /** Admin persona uses `section` (bi-sechd); default is tier label (bi-tier-l). */
+  heading?: 'tier' | 'section';
+};
+
 export type ConsoleChart =
   | {
       id: string;
@@ -46,6 +54,26 @@ export type ConsoleChart =
       kind: 'hbars';
       rows: Array<[string, number]>;
       footer?: string;
+    }
+  | {
+      id: string;
+      title: string;
+      subtitle: string;
+      kind: 'gauge';
+      value: number;
+      target: number;
+      unitLabel?: string;
+      footer?: string;
+    }
+  | {
+      id: string;
+      title: string;
+      subtitle: string;
+      kind: 'trend';
+      seriesA: number[];
+      seriesB: number[];
+      labels?: [string, string];
+      footer?: string;
     };
 
 export type ConsolePanelItem = {
@@ -56,8 +84,11 @@ export type ConsolePanelItem = {
   subtitleHtml?: string;
   age?: string;
   tag?: string;
-  tagKind?: 'proposed' | 'unmapped' | 'ok';
+  tagKind?: 'proposed' | 'unmapped' | 'ok' | 'on-time' | 'late';
   approve?: boolean;
+  /** Button label when approve is true (e.g. Endorse on governance queue). */
+  actionLabel?: string;
+  meta?: string;
 };
 
 export type ConsolePanel = {
@@ -80,6 +111,7 @@ export type ConsoleHero = {
 
 export type ConsoleChartsResponse = {
   persona: string;
+  tiers?: ConsoleChartTier[];
   charts: ConsoleChart[];
 };
 

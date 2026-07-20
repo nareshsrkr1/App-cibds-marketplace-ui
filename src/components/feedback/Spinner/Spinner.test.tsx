@@ -5,9 +5,9 @@ import { Spinner } from './Spinner';
 
 describe('Spinner', () => {
   it('exposes an accessible loading status', () => {
-    render(<Spinner size="md" label="Loading" />);
+    render(<Spinner size="lg" label="Loading" />);
     const el = screen.getByRole('status', { name: 'Loading' });
     expect(el).toBeInTheDocument();
-    expect(el.className).toContain('ui-spinner--md');
+    expect(el.className).toContain('ui-spinner--lg');
   });
 });
