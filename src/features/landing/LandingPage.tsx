@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState, type CSSProperties } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchSessionContext, hasEntitlement } from '../session/session.api';
+import { hasEntitlement } from '../session/session.api';
+import { useSession } from '../session/SessionProvider';
 import { WORKSPACE_VIEW } from '../session/session.types';
 import { fetchLandingContent, fetchLandingMetrics } from './landing.api';
 import type {
@@ -19,39 +20,37 @@ function scrollToId(id: string) {
 export function LandingPage() {
   const navigate = useNavigate();
   const [stats, setStats] = useState<LandingMetric[] | null>(null);
-  const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
+  const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>(
+    'loading',
+  );
   const [error, setError] = useState<string | null>(null);
   const [diagram, setDiagram] = useState<DiagramNode[]>([]);
   const [caps, setCaps] = useState<Capability[]>([]);
   const [steps, setSteps] = useState<PipelineStep[]>([]);
   const [faqs, setFaqs] = useState<FaqItem[]>([]);
-  const [contentStatus, setContentStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [contentStatus, setContentStatus] = useState<'loading' | 'ready' | 'error'>(
+    'loading',
+  );
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [workspaceState, setWorkspaceState] = useState<'loading' | 'enabled' | 'disabled'>('loading');
 
-  // One bootstrap: three distinct APIs in parallel (not three separate mount cycles).
+  // Session context is fetched once by SessionProvider and shared with Workspace —
+  // this page only derives workspace-access state from it.
+  const { session, status: sessionStatus } = useSession();
+  const workspaceState: 'loading' | 'enabled' | 'disabled' =
+    sessionStatus === 'loading'
+      ? 'loading'
+      : hasEntitlement(session, WORKSPACE_VIEW)
+        ? 'enabled'
+        : 'disabled';
+
+  // Bootstrap: two distinct APIs in parallel (not two separate mount cycles).
   // httpClient also dedupes concurrent identical GETs (React Strict Mode remount).
   useEffect(() => {
     const ac = new AbortController();
     const { signal } = ac;
 
-    setWorkspaceState('loading');
     setStatus('loading');
     setContentStatus('loading');
-
-    void fetchSessionContext({ signal })
-      .then((res) => {
-        if (signal.aborted) return;
-        if (!res.ok || !hasEntitlement(res.data, WORKSPACE_VIEW)) {
-          setWorkspaceState('disabled');
-          return;
-        }
-        setWorkspaceState('enabled');
-      })
-      .catch((err: unknown) => {
-        if (err instanceof DOMException && err.name === 'AbortError') return;
-        setWorkspaceState('disabled');
-      });
 
     void fetchLandingMetrics({ signal })
       .then((res) => {
@@ -117,12 +116,43 @@ export function LandingPage() {
           <div className="b2">Data Marketplace</div>
         </div>
         <div className="pl-navlinks">
-          <a href="#pl-cap" onClick={(e) => { e.preventDefault(); scrollToId('pl-cap'); }}>Capabilities</a>
-          <a href="#pl-how" onClick={(e) => { e.preventDefault(); scrollToId('pl-how'); }}>How it works</a>
-          <a href="#pl-faq" onClick={(e) => { e.preventDefault(); scrollToId('pl-faq'); }}>FAQ</a>
+          <a
+            href="#pl-cap"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId('pl-cap');
+            }}
+          >
+            Capabilities
+          </a>
+          <a
+            href="#pl-how"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId('pl-how');
+            }}
+          >
+            How it works
+          </a>
+          <a
+            href="#pl-faq"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToId('pl-faq');
+            }}
+          >
+            FAQ
+          </a>
         </div>
         <div className="pl-navr">
-          <button type="button" className="btn-ghost" disabled title="Catalogue is out of scope for this delivery">Browse catalogue</button>
+          <button
+            type="button"
+            className="btn-ghost"
+            disabled
+            title="Catalogue is out of scope for this delivery"
+          >
+            Browse catalogue
+          </button>
           <button
             type="button"
             className="btn-dk pl-nav-cta"
@@ -144,17 +174,20 @@ export function LandingPage() {
       <section className="pl-hero">
         <div className="pl-hero-in">
           <div className="pl-hero-l">
-            <div className="pl-eyebrow">Wells Fargo · Corporate &amp; Investment Banking</div>
+            <div className="pl-eyebrow">
+              Wells Fargo · Corporate &amp; Investment Banking
+            </div>
             <h1>
               Data that
-              <br />
-              {' '}
-              moves the
-              <br />
-              {' '}
-              <em>firm forward.</em>
+              <br /> moves the
+              <br /> <em>firm forward.</em>
             </h1>
-            <p className="pl-hero-p">The single governed marketplace for the firm's data. Teams publish the data they own; it’s checked and classified; and anyone across the firm can find it, understand it, and get access under clear terms — with full traceability from source to consumer.</p>
+            <p className="pl-hero-p">
+              The single governed marketplace for the firm's data. Teams publish the data
+              they own; it’s checked and classified; and anyone across the firm can find
+              it, understand it, and get access under clear terms — with full traceability
+              from source to consumer.
+            </p>
             <div className="pl-hero-actions">
               <button
                 type="button"
@@ -171,7 +204,14 @@ export function LandingPage() {
               >
                 Open workspace →
               </button>
-              <button type="button" className="btn-lt btn-lg" disabled title="Catalogue is out of scope for this delivery">Browse the catalogue</button>
+              <button
+                type="button"
+                className="btn-lt btn-lg"
+                disabled
+                title="Catalogue is out of scope for this delivery"
+              >
+                Browse the catalogue
+              </button>
             </div>
           </div>
           <div className="pl-hero-r">
@@ -201,7 +241,9 @@ export function LandingPage() {
       </section>
 
       {status === 'error' && (
-        <div className="state-banner error" role="alert">{error ?? 'Unable to load metrics.'}</div>
+        <div className="state-banner error" role="alert">
+          {error ?? 'Unable to load metrics.'}
+        </div>
       )}
       {status === 'empty' && (
         <div className="state-banner empty">No marketplace metrics available yet.</div>
@@ -224,17 +266,26 @@ export function LandingPage() {
         <div className="pl-sec-in">
           <div className="pl-sec-eyebrow">Platform capabilities</div>
           <h2 className="pl-sec-h">Six reasons data moves with confidence.</h2>
-          <p className="pl-sec-lead">The Data Marketplace is not a filing system. It is the infrastructure that turns raw data into a firm asset &mdash; discoverable, trusted, and ready to use.</p>
+          <p className="pl-sec-lead">
+            The Data Marketplace is not a filing system. It is the infrastructure that
+            turns raw data into a firm asset &mdash; discoverable, trusted, and ready to
+            use.
+          </p>
           {contentStatus === 'ready' && caps.length > 0 ? (
             <div className="pl-caps">
               {caps.map((c) => (
                 <div className={`pl-cap${c.ai ? ' pl-cap-ai' : ''}`} key={c.n}>
                   <div className="pl-cap-n">
-                    {c.n}{c.aiTag ? <span className="pl-cap-ai-tag">{c.aiTag}</span> : null}
+                    {c.n}
+                    {c.aiTag ? <span className="pl-cap-ai-tag">{c.aiTag}</span> : null}
                   </div>
                   <div className="pl-cap-h">{c.title}</div>
                   <p>{c.body}</p>
-                  <div className="pl-cap-tags">{c.tags.map((t) => <span key={t}>{t}</span>)}</div>
+                  <div className="pl-cap-tags">
+                    {c.tags.map((t) => (
+                      <span key={t}>{t}</span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -246,7 +297,12 @@ export function LandingPage() {
         <div className="pl-sec-in">
           <div className="pl-sec-eyebrow">How it works</div>
           <h2 className="pl-sec-h">From one team to another — safely, and traceably.</h2>
-          <p className="pl-sec-lead">Every dataset follows the same simple path — with meaning and traceability captured at every step. Underneath, a shared ontology and context fabric link it all together, so the marketplace can explain any dataset in plain language while people stay in control of every decision.</p>
+          <p className="pl-sec-lead">
+            Every dataset follows the same simple path — with meaning and traceability
+            captured at every step. Underneath, a shared ontology and context fabric link
+            it all together, so the marketplace can explain any dataset in plain language
+            while people stay in control of every decision.
+          </p>
           {contentStatus === 'ready' && steps.length > 0 ? (
             <div
               className="pl-pipeline"
@@ -279,7 +335,9 @@ export function LandingPage() {
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     <span>{f.q}</span>
-                    <span className="pl-faq-i" aria-hidden="true">+</span>
+                    <span className="pl-faq-i" aria-hidden="true">
+                      +
+                    </span>
                   </button>
                   <div className="pl-faq-a">{f.a}</div>
                 </div>
@@ -292,10 +350,24 @@ export function LandingPage() {
       <div className="pl-cta">
         <div className="pl-cta-in">
           <div className="pl-cta-eyebrow">Get started</div>
-          <h2 className="pl-cta-h">Your data has value.<br />Let the firm <em>use it.</em></h2>
-          <p className="pl-cta-p">Publish to the Data Marketplace &mdash; governed, contextualised, and discoverable from the moment you register.</p>
+          <h2 className="pl-cta-h">
+            Your data has value.
+            <br />
+            Let the firm <em>use it.</em>
+          </h2>
+          <p className="pl-cta-p">
+            Publish to the Data Marketplace &mdash; governed, contextualised, and
+            discoverable from the moment you register.
+          </p>
           <div className="pl-cta-btns">
-            <button type="button" className="btn-dk btn-lg" disabled title="Catalogue is out of scope for this delivery">Browse the catalogue</button>
+            <button
+              type="button"
+              className="btn-dk btn-lg"
+              disabled
+              title="Catalogue is out of scope for this delivery"
+            >
+              Browse the catalogue
+            </button>
           </div>
         </div>
       </div>

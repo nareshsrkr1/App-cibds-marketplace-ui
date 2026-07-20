@@ -5,8 +5,19 @@
       "id": "workspace",
       "label": "Workspace",
       "items": [
-        { "id": "console", "label": "Console", "icon": "◇", "enabled": true, "active": true },
-        { "id": "register", "label": "Register a physical dataset", "icon": "■", "enabled": false },
+        {
+          "id": "console",
+          "label": "Console",
+          "icon": "◇",
+          "enabled": true,
+          "active": true
+        },
+        {
+          "id": "register",
+          "label": "Register a physical dataset",
+          "icon": "■",
+          "enabled": false
+        },
         { "id": "bind", "label": "Bind columns", "icon": "⊞", "enabled": false },
         { "id": "bulkpde", "label": "Bulk upload PDEs", "icon": "▤", "enabled": false },
         { "id": "workflow", "label": "Workflow", "icon": "◷", "enabled": false }

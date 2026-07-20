@@ -10,8 +10,18 @@
   ],
   "actions": [
     { "id": "addbde", "label": "Add a BDE", "variant": "primary", "enabled": false },
-    { "id": "bulkbde", "label": "Bulk upload BDEs", "variant": "secondary", "enabled": false },
+    {
+      "id": "bulkbde",
+      "label": "Bulk upload BDEs",
+      "variant": "secondary",
+      "enabled": false
+    },
     { "id": "addterm", "label": "Add a term", "variant": "secondary", "enabled": false },
-    { "id": "bulkterm", "label": "Bulk upload terms", "variant": "secondary", "enabled": false }
+    {
+      "id": "bulkterm",
+      "label": "Bulk upload terms",
+      "variant": "secondary",
+      "enabled": false
+    }
   ]
 }

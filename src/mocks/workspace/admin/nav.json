@@ -5,7 +5,13 @@
       "id": "overview",
       "label": "Overview",
       "items": [
-        { "id": "console", "label": "Console", "icon": "◇", "enabled": true, "active": true },
+        {
+          "id": "console",
+          "label": "Console",
+          "icon": "◇",
+          "enabled": true,
+          "active": true
+        },
         { "id": "workflow", "label": "Workflow", "icon": "◷", "enabled": false }
       ]
     },
@@ -14,7 +20,12 @@
       "label": "Register data",
       "sub": true,
       "items": [
-        { "id": "registerds", "label": "Register a physical dataset", "icon": "■", "enabled": false },
+        {
+          "id": "registerds",
+          "label": "Register a physical dataset",
+          "icon": "■",
+          "enabled": false
+        },
         { "id": "bulkpde", "label": "Bulk upload PDEs", "icon": "▤", "enabled": false },
         { "id": "bind", "label": "Bind columns", "icon": "⊞", "enabled": false }
       ]
@@ -26,7 +37,12 @@
       "items": [
         { "id": "addbde", "label": "Add a BDE", "icon": "◆", "enabled": false },
         { "id": "bulkbde", "label": "Bulk upload BDEs", "icon": "❖", "enabled": false },
-        { "id": "addterm", "label": "Add a glossary term", "icon": "●", "enabled": false },
+        {
+          "id": "addterm",
+          "label": "Add a glossary term",
+          "icon": "●",
+          "enabled": false
+        },
         { "id": "bulkterm", "label": "Bulk upload terms", "icon": "⁘", "enabled": false }
       ]
     },

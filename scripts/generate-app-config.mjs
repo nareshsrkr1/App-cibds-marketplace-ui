@@ -50,8 +50,7 @@ if (!fs.existsSync(source)) {
 const props = parseProperties(fs.readFileSync(source, 'utf8'));
 
 // Prefer API_DEFAULT_MODE; fall back to legacy API_MODE
-const defaultMode =
-  asMode(props.API_DEFAULT_MODE) ?? asMode(props.API_MODE) ?? 'mock';
+const defaultMode = asMode(props.API_DEFAULT_MODE) ?? asMode(props.API_MODE) ?? 'mock';
 
 const resources = {};
 for (const [propKey, resourceId] of Object.entries(RESOURCE_MODE_KEYS)) {

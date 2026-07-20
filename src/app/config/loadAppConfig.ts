@@ -4,9 +4,7 @@ import { setAppConfig, type AppConfig } from './appConfig';
  * Loads runtime config from a static JSON file (not Vite env).
  * Deployments can replace public/app-config.json without rebuilding the bundle.
  */
-export async function loadAppConfig(
-  url = '/app-config.json',
-): Promise<AppConfig> {
+export async function loadAppConfig(url = '/app-config.json'): Promise<AppConfig> {
   try {
     const response = await fetch(url, { cache: 'no-store' });
     if (!response.ok) {

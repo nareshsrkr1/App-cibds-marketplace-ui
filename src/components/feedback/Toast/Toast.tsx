@@ -14,7 +14,13 @@ export function Toast({ toast, onDismiss }: ToastProps) {
   return (
     <div className={['ui-toast', toneClass[toast.tone]].join(' ')} role="status">
       <span>{toast.message}</span>
-      <Button type="button" variant="ghost" size="sm" aria-label="Dismiss notification" onClick={() => onDismiss(toast.id)}>
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        aria-label="Dismiss notification"
+        onClick={() => onDismiss(toast.id)}
+      >
         Dismiss
       </Button>
     </div>

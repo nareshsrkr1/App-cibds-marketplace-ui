@@ -5,7 +5,6 @@ import { App } from './app/App';
 import { loadAppConfig } from './app/config/loadAppConfig';
 import './theme/fonts';
 import './theme/tokens.css';
-import './theme/landing.css';
 
 async function bootstrap() {
   await loadAppConfig();

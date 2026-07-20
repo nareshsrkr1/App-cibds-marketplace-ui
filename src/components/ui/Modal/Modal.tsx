@@ -27,7 +27,8 @@ export function Modal({ open, title, onClose, children, initialFocusRef }: Modal
         return;
       }
       if (event.key !== 'Tab' || !dialogRef.current) return;
-      const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+      const selector =
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
       const focusable = dialogRef.current.querySelectorAll<HTMLElement>(selector);
       if (focusable.length === 0) return;
       const first = focusable[0];
@@ -67,7 +68,13 @@ export function Modal({ open, title, onClose, children, initialFocusRef }: Modal
       >
         <div className="ui-modal__header">
           <h2 id={titleId}>{title}</h2>
-          <Button type="button" variant="ghost" size="sm" aria-label="Close dialog" onClick={onClose}>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            aria-label="Close dialog"
+            onClick={onClose}
+          >
             Close
           </Button>
         </div>

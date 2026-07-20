@@ -119,25 +119,3 @@ export type ConsolePanelResponse = {
   persona: string;
   panel: ConsolePanel;
 };
-
-/** @deprecated Combined console payload — prefer section types. */
-export type ConsoleSummary = ConsoleHero & {
-  charts?: ConsoleChart[];
-  panels?: ConsolePanel[];
-  actionItems?: Array<{
-    id: string;
-    title: string;
-    subtitle: string;
-    age?: string;
-    tag?: string;
-    tagKind?: 'proposed' | 'unmapped' | 'ok';
-  }>;
-  recentActivity?: Array<{
-    id: string;
-    title: string;
-    detail: string;
-    by?: string;
-    age?: string;
-  }>;
-  summaries?: Array<{ id: string; title: string; body: string }>;
-};

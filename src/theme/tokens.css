@@ -25,12 +25,12 @@
   --surface: var(--white);
 
   /* Typography */
-  --sans: "IBM Plex Sans", -apple-system, sans-serif;
-  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
   /* Isolated face for KPI numerals — do not share with accent italic 400 */
-  --serif-kpi: "Cormorant KPI", Georgia, serif;
-  --display: "Fraunces", Georgia, serif;
-  --mono: "IBM Plex Mono", Menlo, monospace;
+  --serif-kpi: 'Cormorant KPI', Georgia, serif;
+  --display: 'Fraunces', Georgia, serif;
+  --mono: 'IBM Plex Mono', Menlo, monospace;
 
   /* Spacing scale */
   --space-1: 4px;

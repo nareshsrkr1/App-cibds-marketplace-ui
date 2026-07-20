@@ -17,7 +17,12 @@ export function Button({
   children,
   ...rest
 }: ButtonProps) {
-  const classes = ['ui-btn', `ui-btn--${variant}`, size !== 'md' ? `ui-btn--${size}` : '', className]
+  const classes = [
+    'ui-btn',
+    `ui-btn--${variant}`,
+    size !== 'md' ? `ui-btn--${size}` : '',
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
   return (

@@ -1,4 +1,9 @@
-import type { ApiMode, ApiResourceConfig, ApiRuntimeConfig, AppConfig } from '../api/api.types';
+import type {
+  ApiMode,
+  ApiResourceConfig,
+  ApiRuntimeConfig,
+  AppConfig,
+} from '../api/api.types';
 
 export type { AppConfig, ApiRuntimeConfig, ApiResourceConfig };
 
@@ -31,9 +36,7 @@ function asMode(value: unknown): ApiMode | undefined {
   return value === 'mock' || value === 'real' ? value : undefined;
 }
 
-function normalizeResources(
-  raw: unknown,
-): Record<string, ApiResourceConfig> {
+function normalizeResources(raw: unknown): Record<string, ApiResourceConfig> {
   if (!raw || typeof raw !== 'object') return {};
   const out: Record<string, ApiResourceConfig> = {};
   for (const [key, value] of Object.entries(raw as Record<string, unknown>)) {
@@ -60,9 +63,7 @@ export function normalizeAppConfig(input: unknown): AppConfig {
       api: {
         defaultMode: asMode(nested.defaultMode) ?? 'mock',
         baseUrl:
-          typeof nested.baseUrl === 'string'
-            ? nested.baseUrl.replace(/\/$/, '')
-            : '',
+          typeof nested.baseUrl === 'string' ? nested.baseUrl.replace(/\/$/, '') : '',
         resources: normalizeResources(nested.resources),
       },
     };
@@ -73,9 +74,7 @@ export function normalizeAppConfig(input: unknown): AppConfig {
     api: {
       defaultMode: asMode(raw.apiMode) ?? 'mock',
       baseUrl:
-        typeof raw.apiBaseUrl === 'string'
-          ? raw.apiBaseUrl.replace(/\/$/, '')
-          : '',
+        typeof raw.apiBaseUrl === 'string' ? raw.apiBaseUrl.replace(/\/$/, '') : '',
       resources: {},
     },
   };

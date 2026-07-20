@@ -4,6 +4,11 @@
 import { delay, http, HttpResponse } from 'msw';
 import { API_ENDPOINTS } from '../../api';
 import { personalizedGreeting } from '../../features/workspace/greeting';
+import type { WorkspaceNavResponse } from '../../features/workspace/nav.types';
+import type {
+  ConsoleChartsResponse,
+  ConsoleHero,
+} from '../../features/workspace/workspace.types';
 import { getMockResponseDelay, setMockResponseDelay } from '../mockDelay';
 import context from '../session/context.json';
 import adminCharts from './admin/charts.json';
@@ -25,12 +30,7 @@ import producerSubRequests from './producer/subscription-requests.json';
 export type SessionMockScenario = 'success' | 'error' | 'noWorkspace' | 'delayed';
 export type ConsoleMockScenario = 'success' | 'empty' | 'error' | 'delayed';
 export type ConsoleSectionId =
-  | 'nav'
-  | 'hero'
-  | 'charts'
-  | 'subRequests'
-  | 'consumers'
-  | 'governance';
+  'nav' | 'hero' | 'charts' | 'subRequests' | 'consumers' | 'governance';
 
 const ALL_SECTIONS: ConsoleSectionId[] = [
   'nav',
@@ -42,7 +42,7 @@ const ALL_SECTIONS: ConsoleSectionId[] = [
 ];
 
 let sessionScenario: SessionMockScenario = 'success';
-let sectionScenarios: Record<ConsoleSectionId, ConsoleMockScenario> = {
+const sectionScenarios: Record<ConsoleSectionId, ConsoleMockScenario> = {
   nav: 'success',
   hero: 'success',
   charts: 'success',
@@ -119,25 +119,28 @@ function withSessionUser<T extends Record<string, unknown>>(payload: T) {
   };
 }
 
-const NAV_BY_PERSONA: Record<string, typeof producerNav> = {
-  PRODUCER: producerNav,
-  GOVERNANCE: governanceNav,
-  CONSUMER: consumerNav,
-  ADMIN: adminNav,
+// JSON imports are widened to their domain response type — each persona's mock file
+// shapes its own union members (e.g. chart `kind`), which literal `typeof` inference
+// on a single import can't express for the other three.
+const NAV_BY_PERSONA: Record<string, WorkspaceNavResponse> = {
+  PRODUCER: producerNav as WorkspaceNavResponse,
+  GOVERNANCE: governanceNav as WorkspaceNavResponse,
+  CONSUMER: consumerNav as WorkspaceNavResponse,
+  ADMIN: adminNav as WorkspaceNavResponse,
 };
 
-const HERO_BY_PERSONA: Record<string, typeof producerHero> = {
-  PRODUCER: producerHero,
-  GOVERNANCE: governanceHero,
-  CONSUMER: consumerHero,
-  ADMIN: adminHero,
+const HERO_BY_PERSONA: Record<string, ConsoleHero> = {
+  PRODUCER: producerHero as ConsoleHero,
+  GOVERNANCE: governanceHero as ConsoleHero,
+  CONSUMER: consumerHero as ConsoleHero,
+  ADMIN: adminHero as ConsoleHero,
 };
 
-const CHARTS_BY_PERSONA: Record<string, typeof producerCharts> = {
-  PRODUCER: producerCharts,
-  GOVERNANCE: governanceCharts,
-  CONSUMER: consumerCharts,
-  ADMIN: adminCharts,
+const CHARTS_BY_PERSONA: Record<string, ConsoleChartsResponse> = {
+  PRODUCER: producerCharts as ConsoleChartsResponse,
+  GOVERNANCE: governanceCharts as ConsoleChartsResponse,
+  CONSUMER: consumerCharts as ConsoleChartsResponse,
+  ADMIN: adminCharts as ConsoleChartsResponse,
 };
 
 const EMPTY_PANEL = (persona: string, id: string, title: string) => ({

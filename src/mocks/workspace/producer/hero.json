@@ -10,9 +10,24 @@
     { "id": "gaps", "value": 1, "label": "Coverage gaps" }
   ],
   "actions": [
-    { "id": "register", "label": "Register a physical dataset", "variant": "primary", "enabled": false },
-    { "id": "bulkpde", "label": "Bulk upload PDEs", "variant": "secondary", "enabled": false },
+    {
+      "id": "register",
+      "label": "Register a physical dataset",
+      "variant": "primary",
+      "enabled": false
+    },
+    {
+      "id": "bulkpde",
+      "label": "Bulk upload PDEs",
+      "variant": "secondary",
+      "enabled": false
+    },
     { "id": "bind", "label": "Bind columns", "variant": "secondary", "enabled": false },
-    { "id": "workflow", "label": "Track workflow", "variant": "secondary", "enabled": false }
+    {
+      "id": "workflow",
+      "label": "Track workflow",
+      "variant": "secondary",
+      "enabled": false
+    }
   ]
 }

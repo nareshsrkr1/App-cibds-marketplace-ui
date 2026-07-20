@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import { subscribeToasts, dismissToast, type ToastItem } from '../../../services/toastService';
+import {
+  subscribeToasts,
+  dismissToast,
+  type ToastItem,
+} from '../../../services/toastService';
 import { Toast } from './Toast';
 
 export function ToastProvider() {

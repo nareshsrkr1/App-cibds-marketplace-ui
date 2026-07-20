@@ -1,4 +1,8 @@
-import type { LandingMetric, LandingMetricKey, LandingMetricsResponse } from './landing.types';
+import type {
+  LandingMetric,
+  LandingMetricKey,
+  LandingMetricsResponse,
+} from './landing.types';
 
 const KEYS = new Set<LandingMetricKey>([
   'physical-datasets',
@@ -14,11 +18,12 @@ function isMetricKey(value: unknown): value is LandingMetricKey {
 
 export function adaptLandingMetrics(raw: LandingMetricsResponse): LandingMetricsResponse {
   const stats: LandingMetric[] = (raw.stats ?? [])
-    .filter((item): item is LandingMetric =>
-      !!item
-      && isMetricKey(item.key)
-      && typeof item.label === 'string'
-      && (typeof item.value === 'number' || typeof item.value === 'string'),
+    .filter(
+      (item): item is LandingMetric =>
+        !!item &&
+        isMetricKey(item.key) &&
+        typeof item.label === 'string' &&
+        (typeof item.value === 'number' || typeof item.value === 'string'),
     )
     .map((item) => ({
       key: item.key,

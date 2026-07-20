@@ -2,7 +2,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { ToastProvider } from './ToastProvider';
-import { __resetToastsForTests, __toastDurations, toast } from '../../../services/toastService';
+import {
+  __resetToastsForTests,
+  __toastDurations,
+  toast,
+} from '../../../services/toastService';
 
 beforeEach(() => {
   __resetToastsForTests();
@@ -25,7 +29,9 @@ describe('ToastProvider', () => {
     expect(screen.getByText('Dataset saved successfully')).toBeInTheDocument();
     expect(screen.getByText('Unable to load marketplace metrics')).toBeInTheDocument();
 
-    const dismissButtons = screen.getAllByRole('button', { name: /Dismiss notification/i });
+    const dismissButtons = screen.getAllByRole('button', {
+      name: /Dismiss notification/i,
+    });
     fireEvent.click(dismissButtons[0]);
 
     expect(screen.queryByText('Dataset saved successfully')).not.toBeInTheDocument();

@@ -5,7 +5,13 @@
       "id": "governance",
       "label": "Data governance",
       "items": [
-        { "id": "console", "label": "Console", "icon": "◇", "enabled": true, "active": true },
+        {
+          "id": "console",
+          "label": "Console",
+          "icon": "◇",
+          "enabled": true,
+          "active": true
+        },
         { "id": "govqueue", "label": "Endorsement queue", "icon": "◎", "enabled": false }
       ]
     },
@@ -16,7 +22,12 @@
       "items": [
         { "id": "addbde", "label": "Add a BDE", "icon": "◆", "enabled": false },
         { "id": "bulkbde", "label": "Bulk upload BDEs", "icon": "❖", "enabled": false },
-        { "id": "addterm", "label": "Add a glossary term", "icon": "●", "enabled": false },
+        {
+          "id": "addterm",
+          "label": "Add a glossary term",
+          "icon": "●",
+          "enabled": false
+        },
         { "id": "bulkterm", "label": "Bulk upload terms", "icon": "⁘", "enabled": false }
       ]
     },

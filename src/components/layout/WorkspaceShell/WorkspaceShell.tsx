@@ -1,8 +1,11 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { PersonaSelector, type PersonaOption } from '../../persona/PersonaSelector/PersonaSelector';
-import { ConsoleSidebar } from '../../../features/workspace/components/ConsoleSidebar';
-import type { NavGroup } from '../../../features/workspace/nav.types';
+import {
+  PersonaSelector,
+  type PersonaOption,
+} from '../../persona/PersonaSelector/PersonaSelector';
+import { ConsoleSidebar } from './ConsoleSidebar';
+import type { NavGroup } from './nav.types';
 
 export type WorkspaceShellProps = {
   personas: PersonaOption[];
@@ -44,7 +47,11 @@ export function WorkspaceShell({
           activePersonaId={activePersonaId}
           onChange={onPersonaChange}
         />
-        <ConsoleSidebar groups={navGroups} status={navStatus} refreshing={navRefreshing} />
+        <ConsoleSidebar
+          groups={navGroups}
+          status={navStatus}
+          refreshing={navRefreshing}
+        />
         <div className="sb-foot">
           <div className="sb-user">
             <span className="sb-av">{userInitials}</span>

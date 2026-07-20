@@ -1,4 +1,4 @@
-import type { NavGroup } from '../nav.types';
+import type { NavGroup } from './nav.types';
 
 const FUTURE = 'Available in a future release';
 
@@ -18,10 +18,7 @@ export function ConsoleSidebar({
   }
 
   return (
-    <nav
-      className={`sb-nav${refreshing ? ' is-refreshing' : ''}`}
-      aria-label="Workspace"
-    >
+    <nav className={`sb-nav${refreshing ? ' is-refreshing' : ''}`} aria-label="Workspace">
       {groups.map((g) => (
         <div key={g.id} className={`sb-group${g.sub ? ' sub' : ''}`}>
           <div className="sb-gl">{g.label}</div>

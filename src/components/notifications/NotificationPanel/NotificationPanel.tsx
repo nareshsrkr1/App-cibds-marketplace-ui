@@ -78,6 +78,9 @@ export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanel
     document.addEventListener('keydown', onKeyDown);
     return () => {
       document.removeEventListener('keydown', onKeyDown);
+      // Intentionally read `.current` at cleanup time (not captured earlier) so
+      // focus returns to whatever element the ref points to when the panel closes.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       returnFocusRef?.current?.focus();
     };
   }, [onClose, returnFocusRef]);
@@ -102,7 +105,13 @@ export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanel
           <Button type="button" variant="ghost" size="sm" onClick={() => markAllAsRead()}>
             Mark all as read
           </Button>
-          <Button type="button" variant="ghost" size="sm" aria-label="Close notifications" onClick={onClose}>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            aria-label="Close notifications"
+            onClick={onClose}
+          >
             Close
           </Button>
         </div>
@@ -139,12 +148,19 @@ export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanel
           {visible.map((n) => (
             <li
               key={n.id}
-              className={['notif-item', n.read ? '' : 'notif-item--unread'].filter(Boolean).join(' ')}
+              className={['notif-item', n.read ? '' : 'notif-item--unread']
+                .filter(Boolean)
+                .join(' ')}
             >
               <div className="notif-item__top">
                 <Badge tone={toneFor(n.category)}>{n.category}</Badge>
                 {!n.read ? (
-                  <Button type="button" variant="ghost" size="sm" onClick={() => markAsRead(n.id)}>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => markAsRead(n.id)}
+                  >
                     Mark as read
                   </Button>
                 ) : null}
@@ -152,7 +168,9 @@ export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanel
               <strong>{n.title}</strong>
               <p>{n.message}</p>
               <div className="notif-item__meta">
-                <time dateTime={n.timestamp}>{new Date(n.timestamp).toLocaleString()}</time>
+                <time dateTime={n.timestamp}>
+                  {new Date(n.timestamp).toLocaleString()}
+                </time>
               </div>
             </li>
           ))}

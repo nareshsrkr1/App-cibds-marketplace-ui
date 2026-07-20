@@ -5,8 +5,19 @@
       "id": "discover",
       "label": "Discover",
       "items": [
-        { "id": "console", "label": "Console", "icon": "◇", "enabled": true, "active": true },
-        { "id": "browse", "label": "Browse the catalogue", "icon": "◇", "enabled": false },
+        {
+          "id": "console",
+          "label": "Console",
+          "icon": "◇",
+          "enabled": true,
+          "active": true
+        },
+        {
+          "id": "browse",
+          "label": "Browse the catalogue",
+          "icon": "◇",
+          "enabled": false
+        },
         { "id": "subs", "label": "My subscriptions", "icon": "▤", "enabled": false }
       ]
     },

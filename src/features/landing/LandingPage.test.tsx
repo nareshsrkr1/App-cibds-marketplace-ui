@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import { setLandingMockScenario } from '../../mocks/landing/handlers';
 import { setSessionMockScenario } from '../../mocks/workspace/handlers';
+import { SessionProvider } from '../session/SessionProvider';
 import { LandingPage } from './LandingPage';
 
 afterEach(() => {
@@ -14,7 +15,9 @@ afterEach(() => {
 function renderLanding() {
   return render(
     <MemoryRouter>
-      <LandingPage />
+      <SessionProvider>
+        <LandingPage />
+      </SessionProvider>
     </MemoryRouter>,
   );
 }
@@ -25,14 +28,24 @@ describe('LandingPage', () => {
     renderLanding();
     expect(screen.getByText('CIB Data Services')).toBeInTheDocument();
     expect(screen.getAllByText('Data Marketplace').length).toBeGreaterThan(0);
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/Data that moves the/i);
-    expect(screen.getByRole('link', { name: 'Capabilities' })).toHaveAttribute('href', '#pl-cap');
-    expect(screen.getByRole('link', { name: 'How it works' })).toHaveAttribute('href', '#pl-how');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      /Data that moves the/i,
+    );
+    expect(screen.getByRole('link', { name: 'Capabilities' })).toHaveAttribute(
+      'href',
+      '#pl-cap',
+    );
+    expect(screen.getByRole('link', { name: 'How it works' })).toHaveAttribute(
+      'href',
+      '#pl-how',
+    );
     expect(screen.getByRole('link', { name: 'FAQ' })).toHaveAttribute('href', '#pl-faq');
     await waitFor(() => {
       expect(screen.getByText('Physical datasets')).toBeInTheDocument();
     });
-    expect(screen.getByText('Six reasons data moves with confidence.')).toBeInTheDocument();
+    expect(
+      screen.getByText('Six reasons data moves with confidence.'),
+    ).toBeInTheDocument();
     expect(screen.getByText('Frequently asked questions.')).toBeInTheDocument();
   });
 
@@ -77,7 +90,9 @@ describe('LandingPage', () => {
     setLandingMockScenario('empty');
     renderLanding();
     await waitFor(() => {
-      expect(screen.getByText(/No marketplace metrics available yet/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/No marketplace metrics available yet/i),
+      ).toBeInTheDocument();
     });
     expect(screen.queryByText('Physical datasets')).not.toBeInTheDocument();
   });
@@ -86,7 +101,9 @@ describe('LandingPage', () => {
     setLandingMockScenario('error');
     renderLanding();
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent(/Unable to retrieve landing metrics/i);
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        /Unable to retrieve landing metrics/i,
+      );
     });
   });
 

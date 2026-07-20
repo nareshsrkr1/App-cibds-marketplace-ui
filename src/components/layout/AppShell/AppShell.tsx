@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react';
 
-export type AppShellProps = { header?: ReactNode; footer?: ReactNode; children: ReactNode };
+export type AppShellProps = {
+  header?: ReactNode;
+  footer?: ReactNode;
+  children: ReactNode;
+};
 
 export function AppShell({ header, footer, children }: AppShellProps) {
   return (

@@ -1,18 +1,6 @@
-export type NavItem = {
-  id: string;
-  label: string;
-  icon?: string;
-  enabled: boolean;
-  active?: boolean;
-  badge?: string;
-};
+import type { NavGroup } from '../../components/layout/WorkspaceShell/nav.types';
 
-export type NavGroup = {
-  id: string;
-  label: string;
-  sub?: boolean;
-  items: NavItem[];
-};
+export type { NavGroup, NavItem } from '../../components/layout/WorkspaceShell/nav.types';
 
 export type WorkspaceNavResponse = {
   persona: string;

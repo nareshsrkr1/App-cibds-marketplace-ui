@@ -75,7 +75,14 @@ function DonutChart({ realised, gap }: { realised: number; gap: number }) {
   return (
     <div className="bi-donutwrap">
       <svg viewBox="0 0 140 140" className="bi-donut" aria-hidden="true">
-        <circle cx="70" cy="70" r={r} fill="none" stroke="var(--border)" strokeWidth="16" />
+        <circle
+          cx="70"
+          cy="70"
+          r={r}
+          fill="none"
+          stroke="var(--border)"
+          strokeWidth="16"
+        />
         <circle
           cx="70"
           cy="70"
@@ -169,7 +176,13 @@ function GaugeChart({
           strokeDasharray={`${ang} ${c}`}
           transform="rotate(-90 70 70)"
         />
-        <text x="70" y="66" textAnchor="middle" className="bi-dn" style={{ fill: stroke }}>
+        <text
+          x="70"
+          y="66"
+          textAnchor="middle"
+          className="bi-dn"
+          style={{ fill: stroke }}
+        >
           {Math.round(value)}%
         </text>
         <text x="70" y="86" textAnchor="middle" className="bi-dl">
@@ -215,7 +228,15 @@ function TrendChart({
 
   const dots = (arr: number[], color: string) =>
     arr.map((v, i) => (
-      <circle key={`${color}-${i}`} cx={px(i)} cy={py(v)} r={3} fill={color} stroke="#fff" strokeWidth={1.5}>
+      <circle
+        key={`${color}-${i}`}
+        cx={px(i)}
+        cy={py(v)}
+        r={3}
+        fill={color}
+        stroke="#fff"
+        strokeWidth={1.5}
+      >
         <title>{`Week ${i + 1}: ${v}`}</title>
       </circle>
     ));
@@ -267,7 +288,8 @@ function TrendChart({
 function ChartBody({ chart }: { chart: ConsoleChart }) {
   if (chart.kind === 'bars') return <BarsChart data={chart.data} color={chart.color} />;
   if (chart.kind === 'hbars') return <HBarsChart rows={chart.rows} />;
-  if (chart.kind === 'donut') return <DonutChart realised={chart.realised} gap={chart.gap} />;
+  if (chart.kind === 'donut')
+    return <DonutChart realised={chart.realised} gap={chart.gap} />;
   if (chart.kind === 'split') return <SplitChart segments={chart.segments} />;
   if (chart.kind === 'gauge') {
     return (

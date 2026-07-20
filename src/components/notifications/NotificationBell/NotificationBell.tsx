@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { getUnreadCount, subscribeNotifications } from '../../../services/notificationService';
+import {
+  getUnreadCount,
+  subscribeNotifications,
+} from '../../../services/notificationService';
 import { NotificationPanel } from '../NotificationPanel/NotificationPanel';
 
 export type NotificationBellProps = { label?: string };

@@ -7,6 +7,7 @@ import {
   setConsoleSectionScenario,
   setSessionMockScenario,
 } from '../../mocks/workspace/handlers';
+import { SessionProvider } from '../session/SessionProvider';
 import { WorkspacePage } from './WorkspacePage';
 
 afterEach(() => {
@@ -17,7 +18,9 @@ afterEach(() => {
 function renderPage() {
   return render(
     <MemoryRouter>
-      <WorkspacePage />
+      <SessionProvider>
+        <WorkspacePage />
+      </SessionProvider>
     </MemoryRouter>,
   );
 }
@@ -25,8 +28,13 @@ function renderPage() {
 describe('WorkspacePage', () => {
   it('shows all personas enabled with Producer active by default', async () => {
     renderPage();
-    await waitFor(() => expect(screen.getByTestId('workspace-shell')).toBeInTheDocument());
-    expect(screen.getByRole('button', { name: 'Producer' })).toHaveAttribute('aria-pressed', 'true');
+    await waitFor(() =>
+      expect(screen.getByTestId('workspace-shell')).toBeInTheDocument(),
+    );
+    expect(screen.getByRole('button', { name: 'Producer' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
     for (const label of ['Producer', 'Governance', 'Consumer', 'Admin']) {
       expect(screen.getByRole('button', { name: label })).not.toBeDisabled();
     }
@@ -35,14 +43,18 @@ describe('WorkspacePage', () => {
   it('loads hero, tiered charts, consumers, and subscription panels from APIs', async () => {
     renderPage();
     await waitFor(() =>
-      expect(screen.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeInTheDocument(),
+      expect(
+        screen.getByText(/Good (morning|afternoon|evening), Test\./i),
+      ).toBeInTheDocument(),
     );
     expect(
       screen.getByText(/Everything you produce — governed, bound, and accounted for/i),
     ).toBeInTheDocument();
     const consoleRoot = screen.getByTestId('producer-console');
     expect(consoleRoot.querySelector('.sh-kpis')?.textContent).toMatch(/My datasets/);
-    expect(consoleRoot.querySelector('.sh-kpis')?.textContent).toMatch(/Producer contracts held/);
+    expect(consoleRoot.querySelector('.sh-kpis')?.textContent).toMatch(
+      /Producer contracts held/,
+    );
     expect(consoleRoot.querySelector('.sh-actions')).toBeTruthy();
     const actionNames = [
       'Register a physical dataset',
@@ -60,7 +72,9 @@ describe('WorkspacePage', () => {
     await waitFor(() => {
       expect(screen.getByText('My production health')).toBeInTheDocument();
       expect(screen.getByText('Publish SLA adherence')).toBeInTheDocument();
-      expect(document.querySelector('.bi-tier-l')?.textContent).toMatch(/My production health/);
+      expect(document.querySelector('.bi-tier-l')?.textContent).toMatch(
+        /My production health/,
+      );
       expect(
         Array.from(document.querySelectorAll('.bi-tier-l')).some((el) =>
           el.textContent?.includes('My data'),
@@ -81,8 +95,13 @@ describe('WorkspacePage', () => {
         }),
       ).toBeInTheDocument();
     });
-    expect(screen.queryByRole('heading', { level: 3, name: 'Sent to governance' })).toBeNull();
-    expect(screen.getByRole('button', { name: 'Console' })).toHaveAttribute('aria-current', 'page');
+    expect(
+      screen.queryByRole('heading', { level: 3, name: 'Sent to governance' }),
+    ).toBeNull();
+    expect(screen.getByRole('button', { name: 'Console' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
     await waitFor(() => {
       expect(
         screen.getAllByRole('button', { name: 'Register a physical dataset' }).length,
@@ -92,7 +111,9 @@ describe('WorkspacePage', () => {
 
   it('switches left nav when persona changes', async () => {
     renderPage();
-    await waitFor(() => expect(screen.getByTestId('workspace-shell')).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByTestId('workspace-shell')).toBeInTheDocument(),
+    );
     await waitFor(() => {
       expect(
         screen.getAllByRole('button', { name: 'Register a physical dataset' }).length,
@@ -101,9 +122,13 @@ describe('WorkspacePage', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Governance' }));
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: 'Endorsement queue' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Endorsement queue' }),
+      ).toBeInTheDocument();
     });
-    expect(screen.queryAllByRole('button', { name: 'Register a physical dataset' })).toHaveLength(0);
+    expect(
+      screen.queryAllByRole('button', { name: 'Register a physical dataset' }),
+    ).toHaveLength(0);
     await waitFor(() => {
       expect(screen.getByText(/Own the vocabulary/i)).toBeInTheDocument();
     });
@@ -123,10 +148,14 @@ describe('WorkspacePage', () => {
     setConsoleSectionScenario('charts', 'error');
     renderPage();
     await waitFor(() =>
-      expect(screen.getByText(/Good (morning|afternoon|evening), Test\./i)).toBeInTheDocument(),
+      expect(
+        screen.getByText(/Good (morning|afternoon|evening), Test\./i),
+      ).toBeInTheDocument(),
     );
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toHaveTextContent(/Unable to retrieve console charts/i);
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        /Unable to retrieve console charts/i,
+      );
     });
     expect(screen.getByTestId('producer-console')).toBeInTheDocument();
   });

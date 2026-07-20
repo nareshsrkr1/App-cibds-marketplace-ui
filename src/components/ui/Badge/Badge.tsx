@@ -7,10 +7,18 @@ export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
   children: ReactNode;
 };
 
-export function Badge({ tone = 'neutral', className = '', children, ...rest }: BadgeProps) {
+export function Badge({
+  tone = 'neutral',
+  className = '',
+  children,
+  ...rest
+}: BadgeProps) {
   const toneClass = tone === 'neutral' ? '' : `ui-badge--${tone}`;
   return (
-    <span className={['ui-badge', toneClass, className].filter(Boolean).join(' ')} {...rest}>
+    <span
+      className={['ui-badge', toneClass, className].filter(Boolean).join(' ')}
+      {...rest}
+    >
       {children}
     </span>
   );

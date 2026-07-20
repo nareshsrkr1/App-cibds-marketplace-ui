@@ -67,9 +67,13 @@ describe('NotificationBell drawer', () => {
 
     const item = screen.getByText('Welcome to Data Marketplace').closest('li');
     expect(item).not.toBeNull();
-    fireEvent.click(within(item as HTMLElement).getByRole('button', { name: /Mark as read/i }));
+    fireEvent.click(
+      within(item as HTMLElement).getByRole('button', { name: /Mark as read/i }),
+    );
 
-    expect(getUnreadCount()).toBe(__getNotificationSeed().filter((n) => !n.read).length - 1);
+    expect(getUnreadCount()).toBe(
+      __getNotificationSeed().filter((n) => !n.read).length - 1,
+    );
     fireEvent.click(screen.getByRole('tab', { name: 'Unread' }));
     expect(screen.queryByText('Welcome to Data Marketplace')).not.toBeInTheDocument();
   });
@@ -107,7 +111,9 @@ describe('NotificationBell drawer', () => {
     expect(dialog.contains(document.activeElement)).toBe(true);
 
     fireEvent.keyDown(document, { key: 'Escape' });
-    expect(screen.queryByRole('dialog', { name: 'Notifications' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('dialog', { name: 'Notifications' }),
+    ).not.toBeInTheDocument();
     expect(bell).toHaveFocus();
   });
 

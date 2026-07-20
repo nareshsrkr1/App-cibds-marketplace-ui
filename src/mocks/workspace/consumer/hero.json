@@ -10,8 +10,18 @@
     { "id": "expiring", "value": 1, "label": "Expiring soon", "warn": true }
   ],
   "actions": [
-    { "id": "browse", "label": "Browse the catalogue", "variant": "primary", "enabled": false },
-    { "id": "explore", "label": "Explore data", "variant": "secondary", "enabled": false },
+    {
+      "id": "browse",
+      "label": "Browse the catalogue",
+      "variant": "primary",
+      "enabled": false
+    },
+    {
+      "id": "explore",
+      "label": "Explore data",
+      "variant": "secondary",
+      "enabled": false
+    },
     { "id": "requests", "label": "My requests", "variant": "secondary", "enabled": false }
   ]
 }

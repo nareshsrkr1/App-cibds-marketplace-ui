@@ -1,11 +1,7 @@
 import seed from '../mocks/notifications.json';
 
 export type NotificationCategory =
-  | 'Information'
-  | 'Success'
-  | 'Warning'
-  | 'Action required'
-  | 'System notice';
+  'Information' | 'Success' | 'Warning' | 'Action required' | 'System notice';
 
 export type AppNotification = {
   id: string;

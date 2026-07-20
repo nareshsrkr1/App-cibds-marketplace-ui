@@ -1,5 +1,7 @@
 /** Local wall-clock day part for console greetings. */
-export function dayPartLabel(now: Date = new Date()): 'morning' | 'afternoon' | 'evening' {
+export function dayPartLabel(
+  now: Date = new Date(),
+): 'morning' | 'afternoon' | 'evening' {
   const hour = now.getHours();
   if (hour < 12) return 'morning';
   if (hour < 17) return 'afternoon';

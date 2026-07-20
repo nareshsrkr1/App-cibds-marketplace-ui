@@ -9,7 +9,9 @@ describe('Modal', () => {
     function Harness() {
       return (
         <>
-          <button type="button" id="trigger">Open</button>
+          <button type="button" id="trigger">
+            Open
+          </button>
           <Modal open title="Confirm" onClose={onClose}>
             <p>Modal body</p>
           </Modal>

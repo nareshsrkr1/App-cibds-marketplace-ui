@@ -23,7 +23,9 @@ body {
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1, "liga" 1;
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1;
 }
 
 @media (hover: hover) and (-webkit-min-device-pixel-ratio: 2) {
@@ -53,5 +55,8 @@ img {
 
 .mono {
   font-family: var(--mono);
-  font-feature-settings: "tnum" 1, "kern" 1, "liga" 1;
+  font-feature-settings:
+    'tnum' 1,
+    'kern' 1,
+    'liga' 1;
 }
