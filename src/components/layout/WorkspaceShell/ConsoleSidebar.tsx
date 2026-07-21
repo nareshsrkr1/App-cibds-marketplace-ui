@@ -6,12 +6,14 @@ export type ConsoleSidebarProps = {
   groups: NavGroup[];
   status?: 'loading' | 'ready' | 'error';
   refreshing?: boolean;
+  onSelect?: (id: string) => void;
 };
 
 export function ConsoleSidebar({
   groups,
   status = 'ready',
   refreshing = false,
+  onSelect,
 }: ConsoleSidebarProps) {
   if ((status === 'loading' || status === 'error') && groups.length === 0) {
     return <nav className="sb-nav" aria-label="Workspace" />;
@@ -31,6 +33,9 @@ export function ConsoleSidebar({
               title={it.enabled ? it.label : FUTURE}
               aria-label={it.label}
               aria-current={it.active ? 'page' : undefined}
+              onClick={() => {
+                if (it.enabled) onSelect?.(it.id);
+              }}
             >
               {it.icon ? (
                 <span className="sb-ic" aria-hidden="true">

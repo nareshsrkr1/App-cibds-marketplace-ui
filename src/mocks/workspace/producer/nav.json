@@ -18,9 +18,9 @@
           "icon": "■",
           "enabled": false
         },
-        { "id": "bind", "label": "Bind columns", "icon": "⊞", "enabled": false },
-        { "id": "bulkpde", "label": "Bulk upload PDEs", "icon": "▤", "enabled": false },
-        { "id": "workflow", "label": "Workflow", "icon": "◷", "enabled": false }
+        { "id": "bulkpde", "label": "Bulk upload PDEs", "icon": "▤", "enabled": true },
+        { "id": "bind", "label": "Bind columns", "icon": "⊞", "enabled": true },
+        { "id": "workflow", "label": "Workflow", "icon": "◷", "enabled": true }
       ]
     },
     {

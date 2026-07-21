@@ -2,17 +2,24 @@ import type { ConsolePanel } from '../workspace.types';
 
 export type ConsolePanelBlockProps = {
   panel: ConsolePanel;
+  onMore?: () => void;
 };
 
-export function ConsolePanelBlock({ panel }: ConsolePanelBlockProps) {
+export function ConsolePanelBlock({ panel, onMore }: ConsolePanelBlockProps) {
   return (
     <div className="sh-block">
       <div className="sh-bh">
         <h3>{panel.title}</h3>
         {panel.moreLabel ? (
-          <span className="sh-more" title="Available in a future release">
-            {panel.moreLabel}
-          </span>
+          onMore ? (
+            <button type="button" className="sh-more" onClick={onMore}>
+              {panel.moreLabel}
+            </button>
+          ) : (
+            <span className="sh-more" title="Available in a future release">
+              {panel.moreLabel}
+            </span>
+          )
         ) : null}
       </div>
       {panel.items.length === 0 ? (
@@ -42,7 +49,7 @@ export function ConsolePanelBlock({ panel }: ConsolePanelBlockProps) {
                   type="button"
                   className="wf-approve"
                   disabled
-                  title="Available in a future release"
+                  title="Open Workflow to approve"
                 >
                   {item.actionLabel ?? 'Approve'}
                 </button>

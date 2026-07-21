@@ -1,0 +1,19 @@
+{
+  "applications": [
+    {
+      "id": "endur",
+      "name": "Endur",
+      "offerId": "OFF-CIB-1001"
+    },
+    {
+      "id": "catalyst",
+      "name": "Catalyst",
+      "offerId": "OFF-CIB-1002"
+    },
+    {
+      "id": "aladdin",
+      "name": "Aladdin",
+      "offerId": "OFF-CIB-1003"
+    }
+  ]
+}

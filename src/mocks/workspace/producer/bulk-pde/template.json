@@ -1,0 +1,25 @@
+{
+  "columns": [
+    "dataset",
+    "column",
+    "type",
+    "length",
+    "nullable",
+    "pii",
+    "sourceMapping",
+    "validValues",
+    "description"
+  ],
+  "sampleRow": [
+    "Endur FX Forwards",
+    "fx_deal_id",
+    "VARCHAR",
+    "30",
+    "No",
+    "No",
+    "Endur.DEAL.DEAL_ID",
+    "",
+    "Unique FX deal reference"
+  ],
+  "filename": "pde_template.csv"
+}

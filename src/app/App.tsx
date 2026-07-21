@@ -11,10 +11,33 @@ import '../theme/tokens.css';
 import '../theme/globals.css';
 import '../theme/components.css';
 
-// Code-split the heavier workspace console out of the landing bundle.
 const WorkspacePage = lazy(() =>
   import('../features/workspace/WorkspacePage').then((m) => ({
     default: m.WorkspacePage,
+  })),
+);
+
+const WorkspaceConsolePage = lazy(() =>
+  import('../features/workspace/WorkspaceConsolePage').then((m) => ({
+    default: m.WorkspaceConsolePage,
+  })),
+);
+
+const BulkUploadPdesPage = lazy(() =>
+  import('../features/workspace/bulkPde/BulkUploadPdesPage').then((m) => ({
+    default: m.BulkUploadPdesPage,
+  })),
+);
+
+const BindColumnsPage = lazy(() =>
+  import('../features/workspace/bindColumns/BindColumnsPage').then((m) => ({
+    default: m.BindColumnsPage,
+  })),
+);
+
+const WorkflowPage = lazy(() =>
+  import('../features/workspace/workflow/WorkflowPage').then((m) => ({
+    default: m.WorkflowPage,
   })),
 );
 
@@ -81,7 +104,40 @@ export function App() {
                 </Suspense>
               </AppErrorBoundary>
             }
-          />
+          >
+            <Route
+              index
+              element={
+                <Suspense fallback={<RouteFallback />}>
+                  <WorkspaceConsolePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="bulk-upload-pdes"
+              element={
+                <Suspense fallback={<RouteFallback />}>
+                  <BulkUploadPdesPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="bind-columns"
+              element={
+                <Suspense fallback={<RouteFallback />}>
+                  <BindColumnsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="workflow"
+              element={
+                <Suspense fallback={<RouteFallback />}>
+                  <WorkflowPage />
+                </Suspense>
+              }
+            />
+          </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </SessionProvider>

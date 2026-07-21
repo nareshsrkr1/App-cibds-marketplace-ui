@@ -540,10 +540,10 @@
   width: 100%;
   background: none;
   border: none;
-  color: rgba(214, 207, 192, 0.88);
+  color: #f3eee4;
   font-family: var(--sans);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.35;
   padding: 10px 12px 10px 14px;
@@ -560,8 +560,8 @@
   font-size: 12.5px;
 }
 .sb-item:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.055);
-  color: #f4efe4;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fffaf0;
 }
 .sb-item.on {
   background: linear-gradient(90deg, rgba(176, 138, 79, 0.28), rgba(176, 138, 79, 0.1));
@@ -580,8 +580,8 @@
   border-radius: 0 3px 3px 0;
 }
 .sb-ic {
-  color: inherit;
-  opacity: 0.7;
+  color: var(--gold-mid);
+  opacity: 1;
   font-size: 13px;
   width: 16px;
   text-align: center;
@@ -590,13 +590,20 @@
 }
 .sb-item.on .sb-ic {
   opacity: 1;
-  color: var(--gold-mid);
+  color: var(--gold);
 }
 /* Avoid stacking with global button:disabled opacity */
 button.sb-item:disabled,
 .sb-item.is-disabled {
-  opacity: 0.45;
+  opacity: 1;
+  color: rgba(214, 207, 192, 0.42);
+  font-weight: 450;
   cursor: not-allowed;
+}
+button.sb-item:disabled .sb-ic,
+.sb-item.is-disabled .sb-ic {
+  color: rgba(214, 207, 192, 0.38);
+  opacity: 1;
 }
 .sb-it-l {
   flex: 1;
@@ -793,18 +800,22 @@ button.sb-item:disabled,
 .sh-actions .btn-lt {
   background: var(--white);
   color: var(--navy);
-  border: 1px solid var(--border-2, var(--border));
-  font-weight: 500;
+  border: 1.5px solid var(--navy);
+  font-weight: 600;
 }
 .sh-actions .btn-lt:hover:not(:disabled) {
   border-color: var(--gold);
   color: var(--gold-deep);
+  background: #fdfbf6;
 }
 .sh-actions .btn-dk:disabled,
 .sh-actions .btn-lt:disabled {
-  opacity: 0.4;
+  opacity: 0.38;
   cursor: not-allowed;
   transform: none;
+  border-color: var(--border);
+  color: var(--mid);
+  background: var(--white);
   box-shadow: none;
 }
 .sh-charts {
@@ -1091,9 +1102,19 @@ button.sb-item:disabled,
   fill: var(--light);
 }
 .sh-more {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
   font-size: 12px;
   color: var(--gold-deep);
   font-weight: 600;
+  cursor: pointer;
+}
+
+.sh-more:disabled,
+span.sh-more {
   cursor: default;
 }
 .sh-cols {

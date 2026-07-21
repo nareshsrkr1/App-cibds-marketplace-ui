@@ -17,6 +17,7 @@ export type WorkspaceShellProps = {
   navGroups: NavGroup[];
   navStatus?: 'loading' | 'ready' | 'error';
   navRefreshing?: boolean;
+  onNavSelect?: (id: string) => void;
   children: ReactNode;
 };
 
@@ -30,6 +31,7 @@ export function WorkspaceShell({
   navGroups,
   navStatus = 'ready',
   navRefreshing = false,
+  onNavSelect,
   children,
 }: WorkspaceShellProps) {
   return (
@@ -51,6 +53,7 @@ export function WorkspaceShell({
           groups={navGroups}
           status={navStatus}
           refreshing={navRefreshing}
+          onSelect={onNavSelect}
         />
         <div className="sb-foot">
           <div className="sb-user">

@@ -1,0 +1,49 @@
+{
+  "clearedThisWeek": 12,
+  "subscriptionRequests": [
+    {
+      "id": "SUB-REQ-5501",
+      "consumer": "Market Risk · Risk Analytics",
+      "dataset": "Endur P&L and Greeks",
+      "datasetId": "DS-CIB-40121",
+      "status": "Awaiting your approval",
+      "age": "1d"
+    },
+    {
+      "id": "SUB-REQ-5502",
+      "consumer": "Regulatory Reporting",
+      "dataset": "Endur OTC Commodity Trades",
+      "datasetId": "DS-CIB-40118",
+      "status": "Awaiting your approval",
+      "age": "3d"
+    }
+  ],
+  "proposedElements": [
+    {
+      "id": "BDE-PROP-2041",
+      "name": "Cleared Notional",
+      "dataset": "Endur OTC Commodity Trades",
+      "by": "Pranav Shukla",
+      "status": "Pending endorsement",
+      "age": "2d"
+    },
+    {
+      "id": "BDE-PROP-2042",
+      "name": "Give-up Broker Code",
+      "dataset": "Endur Exchange Commodity Trades",
+      "by": "Pranav Shukla",
+      "status": "Pending endorsement",
+      "age": "1d"
+    }
+  ],
+  "unmappedColumns": [
+    {
+      "id": "GAP-8817",
+      "column": "settle_ccy_2",
+      "dataset": "Catalyst Positions",
+      "by": "Pranav Shukla",
+      "status": "Awaiting governance",
+      "age": "4d"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "options": [
+    "Trade Identifier (BDE_D001)",
+    "Parent Trade Identifier (BDE_D002)",
+    "Trade Reference (BDE_D003)",
+    "Trade Status (BDE_D004)",
+    "Notional Amount (BDE_D008)",
+    "Trade Price (BDE_D013)",
+    "Trade Quantity (BDE_D014)",
+    "Instrument Identifier (BDE_D016)",
+    "Counterparty Identifier (BDE_D044)",
+    "Legal Entity Identifier (BDE_D045)",
+    "Trade Date (BDE_D065)",
+    "Settlement Date (BDE_D066)",
+    "Book Identifier (BDE_D070)",
+    "Currency Code (BDE_D080)"
+  ]
+}

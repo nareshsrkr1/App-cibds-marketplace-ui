@@ -20,6 +20,17 @@ const DEFAULT_API: ApiRuntimeConfig = {
     workspaceConsoleSubRequests: { mode: 'mock' },
     workspaceConsoleConsumers: { mode: 'mock' },
     workspaceConsoleGovernance: { mode: 'mock' },
+    bulkPdeApplications: { mode: 'mock' },
+    bulkPdeTemplate: { mode: 'mock' },
+    bulkPdePreview: { mode: 'mock' },
+    bulkPdeRegister: { mode: 'mock' },
+    bindColumnsDatasets: { mode: 'mock' },
+    bindColumnsHarvest: { mode: 'mock' },
+    bindColumnsBdeOptions: { mode: 'mock' },
+    bindColumnsPublish: { mode: 'mock' },
+    workflowBoard: { mode: 'mock' },
+    workflowApprove: { mode: 'mock' },
+    workflowDecline: { mode: 'mock' },
   },
 };
 

@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Spinner } from '../../components/feedback/Spinner/Spinner';
-import { EmptyState } from '../../components/feedback/EmptyState/EmptyState';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorState } from '../../components/feedback/ErrorState/ErrorState';
 import { WorkspaceShell } from '../../components/layout/WorkspaceShell/WorkspaceShell';
+import type { NavGroup } from '../../components/layout/WorkspaceShell/nav.types';
 import type { PersonaOption } from '../../components/persona/PersonaSelector/PersonaSelector';
 import { useSession } from '../session/SessionProvider';
 import { ALL_PERSONAS, type SessionContext } from '../session/session.types';
-import { ProducerConsole } from './components/ProducerConsole';
 import { useConsoleData } from './useConsoleData';
+import { activeNavIdForPath, pathForNavId } from './workspaceRoutes';
 
 function personasFromContext(ctx: SessionContext): PersonaOption[] {
   const available =
@@ -33,7 +32,20 @@ function personasFromContext(ctx: SessionContext): PersonaOption[] {
   });
 }
 
+function withRouteActive(groups: NavGroup[], pathname: string): NavGroup[] {
+  const activeId = activeNavIdForPath(pathname);
+  return groups.map((g) => ({
+    ...g,
+    items: g.items.map((it) => ({
+      ...it,
+      active: it.id === activeId,
+    })),
+  }));
+}
+
 export function WorkspacePage() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     session,
     status: sessionStatus,
@@ -41,10 +53,8 @@ export function WorkspacePage() {
     reload: reloadSession,
   } = useSession();
   const [persona, setPersona] = useState('PRODUCER');
-  /** Reloads only console data (nav/hero/charts/panels) — independent of session. */
   const [consoleReloadToken, setConsoleReloadToken] = useState(0);
 
-  // Seed the active persona from session's default once it becomes available.
   useEffect(() => {
     if (sessionStatus === 'ready' && session?.defaultPersona) {
       setPersona(session.defaultPersona);
@@ -56,6 +66,15 @@ export function WorkspacePage() {
   const handlePersonaChange = (next: string) => {
     if (next === persona) return;
     setPersona(next);
+    // Persona-specific deep screens start with console until those personas get routes.
+    if (location.pathname !== '/workspace') {
+      navigate('/workspace');
+    }
+  };
+
+  const handleNavSelect = (id: string) => {
+    const path = pathForNavId(id);
+    if (path) navigate(path);
   };
 
   const personas = useMemo(
@@ -76,6 +95,11 @@ export function WorkspacePage() {
     session?.personaLabels?.[persona.toUpperCase()] ??
     persona;
 
+  const navGroups = useMemo(
+    () => withRouteActive(data.navGroups, location.pathname),
+    [data.navGroups, location.pathname],
+  );
+
   if (sessionStatus === 'loading') {
     return null;
   }
@@ -95,8 +119,6 @@ export function WorkspacePage() {
     );
   }
 
-  const showInitialSpinner = data.heroStatus === 'loading' && !data.hydrated;
-
   return (
     <WorkspaceShell
       personas={personas}
@@ -105,56 +127,26 @@ export function WorkspacePage() {
       userInitials={session.user.initials}
       userName={session.user.displayName}
       userSubtitle={userSubtitle}
-      navGroups={data.navGroups}
+      navGroups={navGroups}
       navStatus={data.navStatus}
       navRefreshing={data.navRefreshing}
+      onNavSelect={handleNavSelect}
     >
-      {showInitialSpinner && (
-        <div
-          className="workspace-loading workspace-loading--main"
-          role="status"
-          aria-label="Loading"
-        >
-          <Spinner size="lg" label="Loading" />
-        </div>
-      )}
-      {data.heroStatus === 'error' && !data.hero && (
-        <div className="workspace-state workspace-state--main">
-          <ErrorState
-            title="Unable to load console"
-            description={data.heroError ?? 'Console hero is unavailable.'}
-            onRetry={() => setConsoleReloadToken((n) => n + 1)}
-          />
-        </div>
-      )}
-      {data.heroStatus === 'empty' && data.hero && (
-        <div className="workspace-state workspace-state--main">
-          <EmptyState
-            title={data.hero.greeting ?? 'No console data'}
-            description={
-              data.hero.subtitle ?? 'There is nothing to show for this persona yet.'
-            }
-          />
-        </div>
-      )}
-      {data.hero && data.heroStatus === 'ready' ? (
-        <ProducerConsole
-          hero={data.hero}
-          charts={data.charts}
-          chartTiers={data.chartTiers}
-          chartsStatus={data.chartsStatus}
-          chartsError={data.chartsError}
-          primaryPanel={data.primaryPanel}
-          primaryStatus={data.primaryStatus}
-          primaryError={data.primaryError}
-          primaryEmptyTitle={data.primaryTitle}
-          secondaryPanel={data.secondaryPanel}
-          secondaryStatus={data.secondaryStatus}
-          secondaryError={data.secondaryError}
-          secondaryEmptyTitle={data.secondaryTitle}
-          bodyStageClass={data.bodyStageClass}
-        />
-      ) : null}
+      <Outlet
+        context={{
+          persona,
+          data,
+          reloadConsole: () => setConsoleReloadToken((n) => n + 1),
+          onAction: handleNavSelect,
+        }}
+      />
     </WorkspaceShell>
   );
 }
+
+export type WorkspaceOutletContext = {
+  persona: string;
+  data: ReturnType<typeof useConsoleData>;
+  reloadConsole: () => void;
+  onAction: (id: string) => void;
+};

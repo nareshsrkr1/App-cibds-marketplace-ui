@@ -20,14 +20,14 @@
       "id": "bulkpde",
       "label": "Bulk upload PDEs",
       "variant": "secondary",
-      "enabled": false
+      "enabled": true
     },
-    { "id": "bind", "label": "Bind columns", "variant": "secondary", "enabled": false },
+    { "id": "bind", "label": "Bind columns", "variant": "secondary", "enabled": true },
     {
       "id": "workflow",
       "label": "Track workflow",
       "variant": "secondary",
-      "enabled": false
+      "enabled": true
     }
   ]
 }

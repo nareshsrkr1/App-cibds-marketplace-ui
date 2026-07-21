@@ -16,6 +16,17 @@ export type ApiResourceId =
   | 'workspaceConsoleSubRequests'
   | 'workspaceConsoleConsumers'
   | 'workspaceConsoleGovernance'
+  | 'bulkPdeApplications'
+  | 'bulkPdeTemplate'
+  | 'bulkPdePreview'
+  | 'bulkPdeRegister'
+  | 'bindColumnsDatasets'
+  | 'bindColumnsHarvest'
+  | 'bindColumnsBdeOptions'
+  | 'bindColumnsPublish'
+  | 'workflowBoard'
+  | 'workflowApprove'
+  | 'workflowDecline'
   | (string & {});
 
 export type ApiResourceConfig = {

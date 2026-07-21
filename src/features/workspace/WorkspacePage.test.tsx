@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   setConsoleMockScenario,
@@ -8,6 +8,8 @@ import {
   setSessionMockScenario,
 } from '../../mocks/workspace/handlers';
 import { SessionProvider } from '../session/SessionProvider';
+import { BulkUploadPdesPage } from './bulkPde/BulkUploadPdesPage';
+import { WorkspaceConsolePage } from './WorkspaceConsolePage';
 import { WorkspacePage } from './WorkspacePage';
 
 afterEach(() => {
@@ -15,11 +17,16 @@ afterEach(() => {
   setConsoleMockScenario('success');
 });
 
-function renderPage() {
+function renderPage(path = '/workspace') {
   return render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={[path]}>
       <SessionProvider>
-        <WorkspacePage />
+        <Routes>
+          <Route path="/workspace" element={<WorkspacePage />}>
+            <Route index element={<WorkspaceConsolePage />} />
+            <Route path="bulk-upload-pdes" element={<BulkUploadPdesPage />} />
+          </Route>
+        </Routes>
       </SessionProvider>
     </MemoryRouter>,
   );
@@ -56,18 +63,20 @@ describe('WorkspacePage', () => {
       /Producer contracts held/,
     );
     expect(consoleRoot.querySelector('.sh-actions')).toBeTruthy();
-    const actionNames = [
-      'Register a physical dataset',
-      'Bulk upload PDEs',
-      'Bind columns',
-      'Track workflow',
-    ];
-    for (const name of actionNames) {
+    const disabledNames = ['Register a physical dataset'];
+    for (const name of disabledNames) {
       const btn = Array.from(consoleRoot.querySelectorAll('button')).find(
         (el) => el.textContent?.trim() === name,
       );
       expect(btn, name).toBeTruthy();
       expect(btn).toBeDisabled();
+    }
+    for (const name of ['Bulk upload PDEs', 'Bind columns', 'Track workflow']) {
+      const btn = Array.from(consoleRoot.querySelectorAll('button')).find(
+        (el) => el.textContent?.trim() === name,
+      );
+      expect(btn, name).toBeTruthy();
+      expect(btn).not.toBeDisabled();
     }
     await waitFor(() => {
       expect(screen.getByText('My production health')).toBeInTheDocument();

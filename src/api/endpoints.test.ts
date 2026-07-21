@@ -20,6 +20,17 @@ describe('API_ENDPOINTS catalog', () => {
         'workspaceConsoleSubRequests',
         'workspaceConsoleConsumers',
         'workspaceConsoleGovernance',
+        'bulkPdeApplications',
+        'bulkPdeTemplate',
+        'bulkPdePreview',
+        'bulkPdeRegister',
+        'bindColumnsDatasets',
+        'bindColumnsHarvest',
+        'bindColumnsBdeOptions',
+        'bindColumnsPublish',
+        'workflowBoard',
+        'workflowApprove',
+        'workflowDecline',
       ]),
     );
   });

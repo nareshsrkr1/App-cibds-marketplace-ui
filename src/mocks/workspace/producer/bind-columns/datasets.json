@@ -1,0 +1,54 @@
+{
+  "applications": [
+    {
+      "name": "Endur",
+      "appId": "APP-CIB-0007",
+      "offerId": "OFR-CIB-0007",
+      "datasets": [
+        {
+          "dsId": "DS-CIB-40118",
+          "name": "Endur OTC Commodity Trades",
+          "s3Prefix": "endur_otc_trades_sanitized",
+          "classification": "Internal"
+        },
+        {
+          "dsId": "DS-CIB-40119",
+          "name": "Endur Exchange Commodity Trades",
+          "s3Prefix": "endur_exch_trades_sanitized",
+          "classification": "Internal"
+        },
+        {
+          "dsId": "DS-CIB-40120",
+          "name": "Endur Composer Child Trades",
+          "s3Prefix": "endur_composer_child_sanitized",
+          "classification": "Confidential"
+        },
+        {
+          "dsId": "DS-CIB-40121",
+          "name": "Endur P&L and Greeks",
+          "s3Prefix": "endur_pnl_sanitized",
+          "classification": "Internal"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst",
+      "appId": "APP-CIB-0012",
+      "offerId": "OFR-CIB-0012",
+      "datasets": [
+        {
+          "dsId": "DS-CIB-40212",
+          "name": "1CAT Investments Trades",
+          "s3Prefix": "catalyst_trades_sanitized",
+          "classification": "Internal"
+        },
+        {
+          "dsId": "DS-CIB-40213",
+          "name": "Catalyst Positions",
+          "s3Prefix": "catalyst_positions_sanitized",
+          "classification": "Internal"
+        }
+      ]
+    }
+  ]
+}

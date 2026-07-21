@@ -27,6 +27,7 @@ export type ProducerConsoleProps = {
   secondaryEmptyTitle?: string;
   /** Soft enter animation for charts/panels only (hero stays put). */
   bodyStageClass?: string;
+  onAction?: (id: string) => void;
 };
 
 /** Hide section while loading; show error/empty only when settled. */
@@ -58,15 +59,17 @@ function PanelSlot({
   status,
   error,
   emptyTitle,
+  onMore,
 }: {
   panel: ConsolePanel | null;
   status: SectionStatus;
   error?: string | null;
   emptyTitle: string;
+  onMore?: () => void;
 }) {
   if (status === 'loading' || status === 'empty') return null;
   if (status === 'ready' && panel) {
-    return <ConsolePanelBlock panel={panel} />;
+    return <ConsolePanelBlock panel={panel} onMore={onMore} />;
   }
   if (status === 'error') {
     return (
@@ -96,6 +99,7 @@ export function ProducerConsole({
   secondaryError,
   secondaryEmptyTitle = 'Panel',
   bodyStageClass = '',
+  onAction,
 }: ProducerConsoleProps) {
   const actions = hero.actions ?? [];
   const greeting = personalizedGreeting(hero.displayName);
@@ -135,6 +139,9 @@ export function ProducerConsole({
               className={a.variant === 'primary' ? 'btn-dk' : 'btn-lt'}
               disabled={a.enabled === false}
               title={a.enabled === false ? 'Available in a future release' : a.label}
+              onClick={() => {
+                if (a.enabled !== false) onAction?.(a.id);
+              }}
             >
               {a.label}
             </button>
@@ -172,6 +179,11 @@ export function ProducerConsole({
                   status={secondaryStatus}
                   error={secondaryError}
                   emptyTitle={secondaryEmptyTitle}
+                  onMore={
+                    secondaryPanel?.id === 'subreq'
+                      ? () => onAction?.('workflow')
+                      : undefined
+                  }
                 />
               ) : null}
             </div>

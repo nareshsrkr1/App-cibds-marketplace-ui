@@ -1,0 +1,86 @@
+{
+  "Trade Identifier (BDE_D001)": {
+    "def": "The system-of-record identifier assigned to a trade at execution.",
+    "sa": "Trade Identification",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Parent Trade Identifier (BDE_D002)": {
+    "def": "The identifier of the originating trade from which this trade was derived (e.g. allocation, novation).",
+    "sa": "Trade Identification",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Trade Reference (BDE_D003)": {
+    "def": "A free-form or external reference associated with the trade.",
+    "sa": "Trade Identification",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Trade Status (BDE_D004)": {
+    "def": "The current processing or lifecycle state of the trade.",
+    "sa": "Trade Lifecycle & Event",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Notional Amount (BDE_D008)": {
+    "def": "The nominal or face value of a derivative used to calculate contractual payments; not itself exchanged.",
+    "sa": "Trade Economics",
+    "cls": "Confidential",
+    "pii": "No"
+  },
+  "Trade Price (BDE_D013)": {
+    "def": "The execution price of the trade, expressed per the instrument's convention.",
+    "sa": "Trade Economics",
+    "cls": "Confidential",
+    "pii": "No"
+  },
+  "Trade Quantity (BDE_D014)": {
+    "def": "The traded quantity, volume, or number of contracts.",
+    "sa": "Trade Economics",
+    "cls": "Confidential",
+    "pii": "No"
+  },
+  "Instrument Identifier (BDE_D016)": {
+    "def": "A standard market identifier for the traded security (CUSIP, ISIN, ticker).",
+    "sa": "Instrument & Security",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Counterparty Identifier (BDE_D044)": {
+    "def": "The identifier of the counterparty that participates in a financial transaction.",
+    "sa": "Party & Counterparty",
+    "cls": "Confidential",
+    "pii": "No"
+  },
+  "Legal Entity Identifier (BDE_D045)": {
+    "def": "ISO 17442 Legal Entity Identifier of the counterparty or related party.",
+    "sa": "Party & Counterparty",
+    "cls": "Confidential",
+    "pii": "No"
+  },
+  "Trade Date (BDE_D065)": {
+    "def": "The date on which the trade was executed.",
+    "sa": "Date & Time",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Settlement Date (BDE_D066)": {
+    "def": "The date on which the trade settles.",
+    "sa": "Date & Time",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Book Identifier (BDE_D070)": {
+    "def": "The trading book or desk book that owns the position.",
+    "sa": "Book & Organisation",
+    "cls": "Internal",
+    "pii": "No"
+  },
+  "Currency Code (BDE_D080)": {
+    "def": "ISO 4217 currency code for the monetary amount.",
+    "sa": "Trade Economics",
+    "cls": "Internal",
+    "pii": "No"
+  }
+}
