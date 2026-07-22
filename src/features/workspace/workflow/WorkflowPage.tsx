@@ -53,7 +53,7 @@ export function WorkflowPage() {
         <div className="workflow-error">
           <ErrorState
             title="Unable to load workflow"
-            message={error ?? 'Something went wrong.'}
+            description={error ?? 'Something went wrong.'}
             onRetry={() => setReloadToken((n) => n + 1)}
           />
         </div>

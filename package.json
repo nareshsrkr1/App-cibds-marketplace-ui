@@ -9,6 +9,7 @@
     "prebuild": "npm run config:generate",
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "start": "npm run build && vite preview --host localhost --port 4173",
     "preview": "vite preview",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",

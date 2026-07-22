@@ -9,6 +9,10 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    // Production / `npm start`: serve compiled JS only — no .tsx in DevTools.
+    sourcemap: false,
+  },
   test: {
     environment: 'jsdom',
     globals: true,

@@ -351,6 +351,32 @@ export function BindColumnsPage() {
     );
   };
 
+  const handleClearSuggested = () => {
+    const applied = columns.filter(
+      (c) => c.suggestedBde && c.suggest === c.suggestedBde && c.method === 's',
+    );
+    if (applied.length === 0) {
+      toast.info('No suggested bindings to remove.');
+      return;
+    }
+    setColumns((prev) =>
+      prev.map((c) =>
+        c.suggestedBde && c.suggest === c.suggestedBde && c.method === 's'
+          ? {
+              ...c,
+              suggest: '',
+              method: 'n',
+              propose: false,
+              proposed: false,
+            }
+          : c,
+      ),
+    );
+    toast.success(
+      `Removed ${applied.length} suggested binding${applied.length !== 1 ? 's' : ''}.`,
+    );
+  };
+
   const handleColumnMeta = (
     index: number,
     patch: Partial<Pick<BindColumn, 'golden' | 'cde' | 'xform' | 'uom'>>,
@@ -574,6 +600,7 @@ export function BindColumnsPage() {
           onQuery={setQuery}
           onBindChange={handleBindChange}
           onAcceptSuggested={handleAcceptSuggested}
+          onClearSuggested={handleClearSuggested}
           onProposeField={handleProposeField}
           onSubmitPropose={handleSubmitPropose}
           onColumnMeta={handleColumnMeta}

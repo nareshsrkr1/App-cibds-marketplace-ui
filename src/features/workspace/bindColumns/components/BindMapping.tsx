@@ -18,6 +18,7 @@ export type BindMappingProps = {
   onQuery: (q: string) => void;
   onBindChange: (index: number, value: string) => void;
   onAcceptSuggested: () => void;
+  onClearSuggested: () => void;
   onProposeField: (index: number, field: 'proposeName' | 'proposeDef', value: string) => void;
   onSubmitPropose: (index: number) => void;
   onColumnMeta: (
@@ -69,6 +70,7 @@ export function BindMapping({
   onQuery,
   onBindChange,
   onAcceptSuggested,
+  onClearSuggested,
   onProposeField,
   onSubmitPropose,
   onColumnMeta,
@@ -77,7 +79,14 @@ export function BindMapping({
   const q = query.toLowerCase();
 
   const match = (c: BindColumn) => {
-    if (q && !c.col.toLowerCase().includes(q)) return false;
+    // Search runs over the full column list (then the filter chips), not just the current page.
+    if (q) {
+      const hay = [c.col, c.suggest, c.suggestedBde, c.type]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
     if (filter === 'unbound') return !c.suggest;
     if (filter === 'suggested')
       return Boolean(c.suggestedBde) || (c.method === 's' && Boolean(c.suggest));
@@ -104,6 +113,9 @@ export function BindMapping({
   const total = columns.length;
   const pendingSuggested = columns.filter(
     (c) => c.suggestedBde && c.suggest !== c.suggestedBde,
+  ).length;
+  const appliedSuggested = columns.filter(
+    (c) => c.suggestedBde && c.suggest === c.suggestedBde && c.method === 's',
   ).length;
   const needsMapping = columns.filter((c) => !c.suggest && !c.suggestedBde).length;
   const ready = columns.filter((c) => c.suggest && !c.proposed).length;
@@ -174,23 +186,34 @@ export function BindMapping({
             <input
               className="bx-search"
               value={query}
-              placeholder="Search columns…"
+              placeholder="Search columns or BDEs…"
               onChange={(e) => onQuery(e.target.value)}
-              aria-label="Search columns"
+              aria-label="Search columns or business elements"
             />
-            <button
-              type="button"
-              className="bx-primary"
-              onClick={onAcceptSuggested}
-              disabled={pendingSuggested === 0}
-              title={
-                pendingSuggested === 0
-                  ? 'No pending suggestions to apply'
-                  : `Apply ${pendingSuggested} suggested binding(s)`
-              }
-            >
-              Accept all suggested
-            </button>
+            {pendingSuggested > 0 || appliedSuggested === 0 ? (
+              <button
+                type="button"
+                className="bx-primary"
+                onClick={onAcceptSuggested}
+                disabled={pendingSuggested === 0}
+                title={
+                  pendingSuggested === 0
+                    ? 'No pending suggestions to apply'
+                    : `Apply ${pendingSuggested} suggested binding(s)`
+                }
+              >
+                Accept all suggested
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="bx-secondary"
+                onClick={onClearSuggested}
+                title={`Remove ${appliedSuggested} suggested binding(s)`}
+              >
+                Remove all suggested
+              </button>
+            )}
           </div>
         </div>
 
@@ -295,7 +318,9 @@ export function BindMapping({
 
                       {detail ? (
                         <tr className="bx-detail-row">
-                          <td colSpan={4}>
+                          <td className="bx-col-pde" aria-hidden="true" />
+                          <td className="bx-col-type" aria-hidden="true" />
+                          <td colSpan={2} className="bx-col-bde bx-col-bde--wide">
                             <div
                               className={`bx-detail${status === 'manual' ? ' bx-detail--manual' : ''}`}
                             >
@@ -385,7 +410,9 @@ export function BindMapping({
 
                       {c.propose ? (
                         <tr className="bx-detail-row">
-                          <td colSpan={4}>
+                          <td className="bx-col-pde" aria-hidden="true" />
+                          <td className="bx-col-type" aria-hidden="true" />
+                          <td colSpan={2} className="bx-col-bde bx-col-bde--wide">
                             <div className="bx-propose">
                               <div className="bx-propose-title">
                                 Propose a new BDE for <span className="mono">{c.col}</span>

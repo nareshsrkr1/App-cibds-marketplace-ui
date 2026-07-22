@@ -93,6 +93,16 @@ describe('Bind columns', () => {
     expect(screen.getByText(/system-of-record identifier/i)).toBeInTheDocument();
     expect(screen.getByText(/of \d+/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Next/i })).toBeEnabled();
+
+    const remove = screen.getByRole('button', { name: /Remove all suggested/i });
+    expect(remove).toBeEnabled();
+    fireEvent.click(remove);
+    await waitFor(() =>
+      expect(screen.getByText(/Removed \d+ suggested binding/i)).toBeInTheDocument(),
+    );
+    expect(
+      screen.getByRole('button', { name: /Accept all suggested/i }),
+    ).toBeEnabled();
   });
 
   it('walks Other source → upload CSV → Bind', async () => {
