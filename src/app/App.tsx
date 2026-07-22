@@ -41,6 +41,12 @@ const WorkflowPage = lazy(() =>
   })),
 );
 
+const RegisterPhysicalDatasetPage = lazy(() =>
+  import('../features/producer/ProducerPage').then((m) => ({
+    default: m.ProducerPage,
+  })),
+);
+
 function RouteFallback() {
   return (
     <div
@@ -126,6 +132,14 @@ export function App() {
               element={
                 <Suspense fallback={<RouteFallback />}>
                   <BindColumnsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="register-physical-dataset"
+              element={
+                <Suspense fallback={<RouteFallback />}>
+                  <RegisterPhysicalDatasetPage />
                 </Suspense>
               }
             />
