@@ -1,0 +1,361 @@
+/* Register Physical Dataset wizard — tokens aligned to CIBD_Updated.html */
+.rg-modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 35, 56, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+  padding: 24px;
+}
+
+.rg-modal {
+  background: var(--white, #fff);
+  border-radius: 8px;
+  width: min(920px, 100%);
+  max-height: min(90vh, 900px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 18px 44px -18px rgba(15, 35, 56, 0.28);
+  border: 1px solid var(--border, #e4e2dc);
+}
+
+.rg-modal .mhead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px 12px;
+  border-bottom: 1px solid var(--border, #e4e2dc);
+}
+
+.rg-modal .mhead .eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-deep, #8a6a34);
+  font-weight: 600;
+}
+
+.rg-modal .mhead h3 {
+  margin: 4px 0 0;
+  font-family: var(--display, Georgia, serif);
+  font-weight: 500;
+  color: var(--navy, #0f2338);
+  font-size: 22px;
+}
+
+.rg-modal .x {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--mid, #565b61);
+}
+
+.rg-modal .reg-body {
+  padding: 8px 22px 18px;
+  overflow: auto;
+  flex: 1;
+}
+
+.rg-modal .mfoot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-top: 1px solid var(--border, #e4e2dc);
+  background: #fcfbfa;
+}
+
+.rg-modal .spacer {
+  flex: 1;
+}
+
+.rg-stepper {
+  display: flex;
+  gap: 0;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--border, #e4e2dc);
+  padding-bottom: 2px;
+  overflow-x: auto;
+}
+
+.rg-step {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px 12px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  opacity: 0.55;
+  transition: 0.15s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.rg-step.active {
+  opacity: 1;
+  border-bottom-color: var(--gold, #b08a4f);
+}
+
+.rg-step.done {
+  opacity: 0.85;
+}
+
+.rg-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--border-2, #d8d5cd);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mid, #565b61);
+}
+
+.rg-step.active .rg-dot {
+  background: var(--navy, #0f2338);
+  color: #fff;
+  border-color: var(--navy, #0f2338);
+}
+
+.rg-step.done .rg-dot {
+  background: var(--green, #2b6748);
+  color: #fff;
+  border-color: var(--green, #2b6748);
+}
+
+.rg-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--mid, #565b61);
+}
+
+.rg-step.active .rg-lbl {
+  color: var(--navy, #0f2338);
+}
+
+.rg-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-deep, #8a6a34);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.rg-h {
+  font-family: var(--display, Georgia, serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--navy, #0f2338);
+  margin: 0 0 6px;
+}
+
+.rg-sub {
+  color: var(--mid, #565b61);
+  margin: 0 0 18px;
+  font-size: 14px;
+}
+
+.rg-fld {
+  margin-bottom: 14px;
+}
+
+.rg-fld label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink, #141414);
+}
+
+.rg-fld .req {
+  color: var(--gold-deep, #8a6a34);
+}
+
+.rg-fld input,
+.rg-fld select,
+.rg-fld textarea {
+  width: 100%;
+  border: 1px solid var(--border-2, #d8d5cd);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font: inherit;
+  background: #fff;
+  color: var(--ink, #141414);
+}
+
+.rg-hint {
+  font-size: 12px;
+  color: var(--light, #9aa0a6);
+  margin-top: 4px;
+}
+
+.rg-inherit {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--mid, #565b61);
+  background: var(--gold-lt, #f7f1e6);
+  border: 1px solid var(--gold-mid, #d9c297);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.rg-ucblock {
+  margin-top: 8px;
+}
+
+.rg-multi {
+  font-weight: 400;
+  color: var(--light, #9aa0a6);
+  font-size: 11px;
+}
+
+.rg-ucchips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rg-uc {
+  border: 1px solid var(--border-2, #d8d5cd);
+  background: #fff;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--mid, #565b61);
+}
+
+.rg-uc.on {
+  background: var(--navy, #0f2338);
+  border-color: var(--navy, #0f2338);
+  color: #fff;
+}
+
+.rg-review {
+  border: 1px solid var(--border, #e4e2dc);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rg-rvrow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border, #e4e2dc);
+  font-size: 13px;
+}
+
+.rg-rvrow:last-child {
+  border-bottom: none;
+}
+
+.rg-rvk {
+  color: var(--light, #9aa0a6);
+  font-weight: 600;
+}
+
+.rg-rvv {
+  color: var(--ink, #141414);
+}
+
+.rg-minted {
+  text-align: center;
+  padding: 28px 12px 12px;
+}
+
+.rgm-h {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--green, #2b6748);
+  margin-bottom: 18px;
+}
+
+.rgm-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.rgm-id {
+  border: 1px solid var(--border, #e4e2dc);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 140px;
+  background: #fff;
+}
+
+.rgm-id.hi {
+  border-color: var(--gold, #b08a4f);
+  background: var(--gold-lt, #f7f1e6);
+}
+
+.rgm-l {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--light, #9aa0a6);
+  margin-bottom: 4px;
+}
+
+.rgm-arr {
+  color: var(--gold-deep, #8a6a34);
+  font-size: 18px;
+}
+
+.rgm-foot {
+  font-size: 13px;
+  color: var(--mid, #565b61);
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+.rg-modal .btn {
+  border-radius: 8px;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rg-modal .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.rg-modal .btn-s {
+  background: #fff;
+  border: 1px solid var(--border-2, #d8d5cd);
+  color: var(--navy, #0f2338);
+}
+
+.rg-modal .btn-p {
+  background: var(--navy, #0f2338);
+  border: 1px solid var(--navy, #0f2338);
+  color: #fff;
+}
+
+.mono {
+  font-family: var(--mono, ui-monospace, Menlo, monospace);
+  font-size: 12px;
+}
+
+.producer-page {
+  min-height: 40vh;
+}
