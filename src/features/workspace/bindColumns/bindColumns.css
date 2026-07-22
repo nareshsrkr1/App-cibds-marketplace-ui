@@ -407,6 +407,12 @@
   line-height: 1.5;
 }
 
+.ob-download {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
 .ds-idbar {
   display: flex;
   align-items: center;

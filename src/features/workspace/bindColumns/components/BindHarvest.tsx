@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, type DragEvent } from 'react';
 import type { BindColumn, BindResolvedDataset, BindSrcType } from '../bindColumns.types';
 
 /** Rows shown per page of the harvest table (view only — full list stays in memory). */
@@ -9,7 +9,8 @@ export type BindHarvestProps = {
   srcType: BindSrcType;
   columns: BindColumn[];
   harvestBusy: boolean;
-  onLoadSample: () => void;
+  onDownloadSample: () => void;
+  onFileSelected: (file: File) => void;
 };
 
 export function BindHarvest({
@@ -17,7 +18,8 @@ export function BindHarvest({
   srcType,
   columns,
   harvestBusy,
-  onLoadSample,
+  onDownloadSample,
+  onFileSelected,
 }: BindHarvestProps) {
   const [page, setPage] = useState(1);
   const s3Path = `s3://${resolved.s3Prefix}/`;
@@ -37,39 +39,96 @@ export function BindHarvest({
     if (page > pageCount) setPage(pageCount);
   }, [page, pageCount]);
 
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [dragOver, setDragOver] = useState(false);
+  const canUpload = !harvestBusy;
+
+  const openPicker = () => {
+    if (!canUpload) return;
+    fileRef.current?.click();
+  };
+
+  const takeFile = (file: File | undefined | null) => {
+    if (!file || !canUpload) return;
+    onFileSelected(file);
+  };
+
+  const onDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragOver(false);
+    if (!canUpload) return;
+    takeFile(e.dataTransfer.files?.[0]);
+  };
+
   if (srcType === 'other' && columns.length === 0) {
     return (
       <div className="sh-block">
         <div className="ob-note">
-          <b>Auto-harvest isn&apos;t available for this source.</b> Load column metadata so we
-          can bind the columns. This dataset is already registered as{' '}
+          <b>Auto-harvest isn&apos;t available for this source.</b> Upload a column metadata
+          CSV so we can bind the columns. This dataset is already registered as{' '}
           <span className="mono">{resolved.dsId}</span>.
         </div>
-        <button
-          type="button"
-          className="bulk-drop"
-          onClick={onLoadSample}
-          disabled={harvestBusy}
+
+        <div className="ob-download">
+          <button type="button" className="btn-lt" onClick={onDownloadSample}>
+            ⤓ Download sample data (CSV)
+          </button>
+        </div>
+
+        <input
+          ref={fileRef}
+          type="file"
+          accept=".csv,text/csv"
+          className="bulk-file-input"
+          data-testid="bind-harvest-file-input"
+          onChange={(e) => {
+            takeFile(e.target.files?.[0]);
+            e.target.value = '';
+          }}
+        />
+
+        <div
+          role="button"
+          tabIndex={canUpload ? 0 : -1}
+          className={`bulk-drop${canUpload ? '' : ' is-disabled'}${harvestBusy ? ' is-loading' : ''}${dragOver ? ' is-dragover' : ''}`}
+          onClick={openPicker}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openPicker();
+            }
+          }}
+          onDragEnter={(e) => {
+            e.preventDefault();
+            if (canUpload) setDragOver(true);
+          }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            if (canUpload) setDragOver(true);
+          }}
+          onDragLeave={(e) => {
+            e.preventDefault();
+            setDragOver(false);
+          }}
+          onDrop={onDrop}
+          aria-disabled={!canUpload}
           aria-busy={harvestBusy}
-          aria-label="Load sample column metadata"
+          aria-label="Drop a column metadata CSV here, or click to browse"
         >
           <div className="bd-ic" aria-hidden="true">
             ⇪
           </div>
-          <div className="bd-t">Load sample column metadata</div>
+          <div className="bd-t">Drop a column metadata CSV here, or click to browse</div>
           <div className="bd-s">
             column · type · length · nullable · valid values · source mapping · origination ·
             PII
           </div>
           {harvestBusy ? (
-            <div className="bulk-drop-spinner" role="status">
-              Loading…
+            <div className="bulk-drop-spinner" role="status" aria-label="Reading file">
+              Reading CSV…
             </div>
           ) : null}
-        </button>
-        <p className="bulk-sample-link">
-          Demo data only — real CSV upload for bind harvest ships with the backend.
-        </p>
+        </div>
       </div>
     );
   }
@@ -80,7 +139,7 @@ export function BindHarvest({
       <div className="ok-banner" role="status">
         {srcType === 's3'
           ? `✓ Harvested ${columns.length} columns from ${s3Path} — type, length, source mapping, origination and null % captured.`
-          : `✓ Loaded ${columns.length} columns from sample metadata — validated for binding.`}
+          : `✓ Loaded ${columns.length} columns from uploaded metadata — validated for binding.`}
       </div>
       <div className="ds-idbar">
         <span className="ds-idlbl">Producer Contract</span>

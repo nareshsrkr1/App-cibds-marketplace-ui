@@ -10,7 +10,8 @@ import {
   harvestBindColumns,
   publishBindColumns,
 } from './bindColumns.api';
-import { BIND_SAMPLE_COLUMNS, cloneBindColumns } from './bindColumns.sample';
+import { buildBindColumnsCsv, parseBindColumnsCsv } from './bindColumns.parseCsv';
+import { BIND_SAMPLE_COLUMNS } from './bindColumns.sample';
 import type {
   BindApplicationGroup,
   BindColumn,
@@ -30,6 +31,15 @@ import { BindStepper } from './components/BindStepper';
 import { BindSuccess } from './components/BindSuccess';
 import './bindColumns.css';
 import '../bulkPde/bulkPde.css';
+
+function readFileAsText(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result ?? ''));
+    reader.onerror = () => reject(reader.error ?? new Error('Unable to read that file.'));
+    reader.readAsText(file);
+  });
+}
 
 function resolveDataset(
   applications: BindApplicationGroup[],
@@ -229,9 +239,34 @@ export function BindColumnsPage() {
     }
   };
 
-  const loadSampleColumns = () => {
-    setColumns(cloneBindColumns(BIND_SAMPLE_COLUMNS));
-    setStep('harvest');
+  const handleDownloadSample = () => {
+    const csv = buildBindColumnsCsv(BIND_SAMPLE_COLUMNS);
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'bind_columns_sample.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Sample CSV downloaded.');
+  };
+
+  const handleOtherFileSelected = async (file: File) => {
+    setHarvestBusy(true);
+    try {
+      const text = await readFileAsText(file);
+      const parsed = parseBindColumnsCsv(text);
+      if (parsed.length === 0) {
+        toast.error('No columns found in that file. Check the CSV headers.');
+        return;
+      }
+      setColumns(parsed);
+      toast.success(`Loaded ${parsed.length} column${parsed.length !== 1 ? 's' : ''} from ${file.name}.`);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Unable to read that file.');
+    } finally {
+      setHarvestBusy(false);
+    }
   };
 
   const handleSourceNext = () => {
@@ -524,7 +559,8 @@ export function BindColumnsPage() {
           srcType={srcType}
           columns={columns}
           harvestBusy={harvestBusy}
-          onLoadSample={loadSampleColumns}
+          onDownloadSample={handleDownloadSample}
+          onFileSelected={handleOtherFileSelected}
         />
       ) : null}
 

@@ -1,7 +1,7 @@
 /** @vitest-environment jsdom */
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ToastProvider } from '../../../components/feedback/Toast/ToastProvider';
 import {
   setConsoleMockScenario,
@@ -93,6 +93,68 @@ describe('Bind columns', () => {
     expect(screen.getByText(/system-of-record identifier/i)).toBeInTheDocument();
     expect(screen.getByText(/of \d+/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Next/i })).toBeEnabled();
+  });
+
+  it('walks Other source → upload CSV → Bind', async () => {
+    renderWorkspace('/workspace/bind-columns?datasetId=DS-CIB-40118');
+    await waitFor(() =>
+      expect(screen.getByLabelText(/Which dataset are you binding/i)).toHaveValue(
+        'DS-CIB-40118',
+      ),
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Other source — manual columns/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Continue/i }));
+
+    await waitFor(() =>
+      expect(screen.getByText(/Auto-harvest isn't available/i)).toBeInTheDocument(),
+    );
+
+    const csv = ['column,type,length,nullable,pii', 'acct_id,VARCHAR,20,No,No'].join('\n');
+    const file = new File([csv], 'columns.csv', { type: 'text/csv' });
+    const input = screen.getByTestId('bind-harvest-file-input');
+    fireEvent.change(input, { target: { files: [file] } });
+
+    await waitFor(() =>
+      expect(screen.getByText('acct_id')).toBeInTheDocument(),
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Continue/i }));
+    await waitFor(() =>
+      expect(screen.getByText('Ready to publish')).toBeInTheDocument(),
+    );
+  });
+
+  it('downloads a sample CSV for Other source', async () => {
+    renderWorkspace('/workspace/bind-columns?datasetId=DS-CIB-40118');
+    await waitFor(() =>
+      expect(screen.getByLabelText(/Which dataset are you binding/i)).toHaveValue(
+        'DS-CIB-40118',
+      ),
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Other source — manual columns/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Continue/i }));
+
+    await waitFor(() =>
+      expect(
+        screen.getByRole('button', { name: /Download sample data/i }),
+      ).toBeInTheDocument(),
+    );
+
+    const createObjectURL = vi.fn(() => 'blob:mock');
+    const revokeObjectURL = vi.fn();
+    Object.assign(URL, { createObjectURL, revokeObjectURL });
+    const clickSpy = vi
+      .spyOn(HTMLAnchorElement.prototype, 'click')
+      .mockImplementation(() => {});
+
+    fireEvent.click(screen.getByRole('button', { name: /Download sample data/i }));
+
+    expect(createObjectURL).toHaveBeenCalledTimes(1);
+    expect(clickSpy).toHaveBeenCalledTimes(1);
+
+    clickSpy.mockRestore();
   });
 
   it('opens from left nav', async () => {
