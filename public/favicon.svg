@@ -4,43 +4,27 @@
       <stop offset="0%" stop-color="#1b3a5b"/>
       <stop offset="100%" stop-color="#0b1c2e"/>
     </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#b8924a"/>
-      <stop offset="100%" stop-color="#e0c48a"/>
+    <linearGradient id="cellBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6ea3d6"/>
+      <stop offset="100%" stop-color="#3f74ab"/>
     </linearGradient>
   </defs>
 
   <!-- Dark navy tile -->
   <rect width="32" height="32" rx="8" fill="url(#tile)"/>
 
-  <!--
-    Data service mark:
-    left = producer dataset cylinder
-    center = service hub
-    right = consumer node
-    gold flow path = marketplace exchange
-  -->
+  <!-- Data grid mark: 3x3 grid of cells in blue, gold accent cell for the marketplace -->
+  <g>
+    <rect x="6.4" y="6.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)"/>
+    <rect x="13.4" y="6.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)" opacity="0.85"/>
+    <rect x="20.4" y="6.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)" opacity="0.65"/>
 
-  <!-- Producer dataset (stacked discs) -->
-  <ellipse cx="9" cy="10.2" rx="4.2" ry="1.7" fill="#4a80b4"/>
-  <path d="M4.8 10.2v4.4c0 .95 1.88 1.7 4.2 1.7s4.2-.75 4.2-1.7v-4.4" fill="#4a80b4" opacity="0.75"/>
-  <ellipse cx="9" cy="14.6" rx="4.2" ry="1.7" fill="#4a80b4" opacity="0.9"/>
-  <path d="M4.8 14.6v4.2c0 .95 1.88 1.7 4.2 1.7s4.2-.75 4.2-1.7v-4.2" fill="#4a80b4" opacity="0.55"/>
-  <ellipse cx="9" cy="18.8" rx="4.2" ry="1.7" fill="#4a80b4"/>
+    <rect x="6.4" y="13.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)" opacity="0.85"/>
+    <rect x="13.4" y="13.4" width="6" height="6" rx="1.3" fill="#e0c48a"/>
+    <rect x="20.4" y="13.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)" opacity="0.85"/>
 
-  <!-- Gold exchange path -->
-  <path
-    d="M13.4 14.5h3.2c1.1 0 1.8.7 1.8 1.7v2.1c0 1 .7 1.7 1.8 1.7H23"
-    fill="none"
-    stroke="url(#gold)"
-    stroke-width="1.6"
-    stroke-linecap="round"
-  />
-  <circle cx="16.2" cy="14.5" r="1.55" fill="#e0c48a"/>
-  <circle cx="20.2" cy="19.9" r="1.35" fill="#b8924a"/>
-
-  <!-- Consumer / service endpoint -->
-  <rect x="22.2" y="11.2" width="5.2" height="5.2" rx="1.4" fill="#4a80b4"/>
-  <rect x="23.4" y="12.4" width="2.8" height="1.1" rx="0.4" fill="#e0c48a"/>
-  <rect x="23.4" y="14.2" width="2" height="1.1" rx="0.4" fill="#0f2338" opacity="0.55"/>
+    <rect x="6.4" y="20.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)" opacity="0.65"/>
+    <rect x="13.4" y="20.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)" opacity="0.85"/>
+    <rect x="20.4" y="20.4" width="6" height="6" rx="1.3" fill="url(#cellBlue)"/>
+  </g>
 </svg>
