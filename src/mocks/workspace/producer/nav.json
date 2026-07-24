@@ -39,8 +39,8 @@
       "sub": true,
       "items": [
         { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": true },
-        { "id": "log", "label": "Logical model", "icon": "◇", "enabled": false },
-        { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": false }
+        { "id": "log", "label": "Logical model", "icon": "◇", "enabled": true },
+        { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": true }
       ]
     },
     {
@@ -48,7 +48,7 @@
       "label": "Intelligence",
       "items": [
         { "id": "search", "label": "Explore catalogue", "icon": "◐", "enabled": false },
-        { "id": "lineage", "label": "Lineage explorer", "icon": "◫", "enabled": false },
+        { "id": "lineage", "label": "Lineage explorer", "icon": "◫", "enabled": true },
         { "id": "gaps", "label": "Coverage & gaps", "icon": "◐", "enabled": false }
       ]
     }

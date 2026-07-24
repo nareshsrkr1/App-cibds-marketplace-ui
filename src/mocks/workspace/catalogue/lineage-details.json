@@ -1,0 +1,3452 @@
+{
+  "entries": [
+    {
+      "key": "Trade Identifier",
+      "term": "Trade Identifier",
+      "bdeId": "BDE_D001",
+      "subjectArea": "Trade Lifecycle",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The system-of-record identifier assigned to a trade at execution.",
+      "logicalDatasetName": "Trade Identifiers",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tradeid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "deal_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            },
+            {
+              "name": "tran_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            },
+            {
+              "name": "ext_trade_id",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "deal_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            },
+            {
+              "name": "tran_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            },
+            {
+              "name": "ext_trade_id",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "deal_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            },
+            {
+              "name": "tran_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            },
+            {
+              "name": "ext_trade_id",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tradeid",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Parent Trade Identifier",
+      "term": "Parent Trade Identifier",
+      "bdeId": "BDE_D002",
+      "subjectArea": "Trade Lifecycle",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The identifier of the originating trade from which this trade was derived (e.g. allocation, novation).",
+      "logicalDatasetName": "Trade Identifiers",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "parenttradeid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trade Reference",
+      "term": "Trade Reference",
+      "bdeId": "BDE_D003",
+      "subjectArea": "Trade Lifecycle",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "A free-form or external reference associated with the trade.",
+      "logicalDatasetName": "Trade Identifiers",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "reference",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "dct_srgt_key",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "reference",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "dct_srgt_key",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "reference",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "dct_srgt_key",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trade Status",
+      "term": "Trade Status",
+      "bdeId": "BDE_D004",
+      "subjectArea": "Trade Lifecycle",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The current processing or lifecycle state of the trade.",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tradestatus",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "wells_status",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tran_status",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tran_status",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trade Version Number",
+      "term": "Trade Version Number",
+      "bdeId": "BDE_D005",
+      "subjectArea": "Trade Lifecycle",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sequential version of the trade record, incremented on amendment.",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tradeversionid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "version_number",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "version_number",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "version_number",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trade Event Type",
+      "term": "Trade Event Type",
+      "bdeId": "BDE_D006",
+      "subjectArea": "Trade Lifecycle",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The lifecycle event that produced this record — new, amend, cancel, novation.",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "recordtype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ops_event",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "novation_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ops_event",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Current Record Indicator",
+      "term": "Current Record Indicator",
+      "bdeId": "BDE_D007",
+      "subjectArea": "Trade Lifecycle",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Flag identifying the current/latest version of a trade among its versions.",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "current_flag",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Notional Amount",
+      "term": "Notional Amount",
+      "bdeId": "BDE_D008",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The nominal or face value of a derivative used to calculate contractual payments; not itself exchanged.",
+      "logicalDatasetName": "Trade Economics",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tradednotionalamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "deal_notional",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "notional_option",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "deal_notional",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tradednotionalamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "non_adjustedcurrentnotionalamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Coupon Rate",
+      "term": "Coupon Rate",
+      "bdeId": "BDE_D009",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The stated annual interest rate paid on a fixed-income security.",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "coupon",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Yield",
+      "term": "Yield",
+      "bdeId": "BDE_D010",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The effective rate of return on a fixed-income security given its price.",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "yield",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "bondequivalentyield",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Accrued Interest",
+      "term": "Accrued Interest",
+      "bdeId": "BDE_D011",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Interest earned on a fixed-income position since the last coupon payment date but not yet paid.",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "accruedinterest",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Principal Amount",
+      "term": "Principal Amount",
+      "bdeId": "BDE_D012",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The principal cash amount of a fixed-income trade.",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "principal",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "originalface",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trade Price",
+      "term": "Trade Price",
+      "bdeId": "BDE_D013",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The execution price of the trade, expressed per the instrument's convention.",
+      "logicalDatasetName": "Trade Economics",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "price",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "price",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "future_contract_price",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "price",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "future_contract_price",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trade Quantity",
+      "term": "Trade Quantity",
+      "bdeId": "BDE_D014",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The traded quantity, volume, or number of contracts.",
+      "logicalDatasetName": "Trade Economics",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "position",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "position",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "future_contract_quantity",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "position",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "future_contract_quantity",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "totalvolume",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Commodity Option Premium",
+      "term": "Commodity Option Premium",
+      "bdeId": "BDE_D015",
+      "subjectArea": "Trade Valuation & Economics",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The premium paid or received on a commodity option.",
+      "logicalDatasetName": "Option Economics",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "commodity_trade_option",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "strike_date_option",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "commodity_trade_option",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Instrument Identifier",
+      "term": "Instrument Identifier",
+      "bdeId": "BDE_D016",
+      "subjectArea": "Instrument & Product Reference",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "A standard market identifier for the traded security (CUSIP, ISIN, ticker).",
+      "logicalDatasetName": "Security Master",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "cusip",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "isin",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "cusip",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "isin",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ticker",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "ins_code",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "ins_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ticker",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "ins_code",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "ins_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ticker",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ins_num",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Instrument Type",
+      "term": "Instrument Type",
+      "bdeId": "BDE_D017",
+      "subjectArea": "Instrument & Product Reference",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The classification of the instrument's structural form.",
+      "logicalDatasetName": "Security Master",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "securitytype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ins_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "toolset",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ins_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "toolset",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ins_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "sub_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "toolset",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Option Exercise Type",
+      "term": "Option Exercise Type",
+      "bdeId": "BDE_D018",
+      "subjectArea": "Instrument & Product Reference",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Whether the option is a put or a call.",
+      "logicalDatasetName": "Security Master",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "put_call",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "put_call",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Product Type",
+      "term": "Product Type",
+      "bdeId": "BDE_D019",
+      "subjectArea": "Instrument & Product Reference",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The product classification carried on the trade as sourced from the SOR (e.g. TREAS, CommoditySwap).",
+      "logicalDatasetName": "Product Taxonomy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "producttype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "producttype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_type",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "producttype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Product Sub-Type",
+      "term": "Product Sub-Type",
+      "bdeId": "BDE_D020",
+      "subjectArea": "Instrument & Product Reference",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The finer product classification beneath product type (e.g. TBOND, EFP).",
+      "logicalDatasetName": "Product Taxonomy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "productsubtype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "superproducttype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_subtype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_subtype_desc",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_subtype_desc",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "productsubtype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Product Family",
+      "term": "Product Family",
+      "bdeId": "BDE_D021",
+      "subjectArea": "Instrument & Product Reference",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The top-level product grouping (e.g. Commodity, Fixed Income).",
+      "logicalDatasetName": "Product Taxonomy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "productdescription",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_family",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_family",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "product_desc",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Net Present Value",
+      "term": "Net Present Value",
+      "bdeId": "BDE_D022",
+      "subjectArea": "Valuation & P&L",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The present value of a trade's expected future cash flows in USD.",
+      "logicalDatasetName": "Mark-to-Market Valuation",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "npv_usd",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "cash_usd",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Profit and Loss Explained",
+      "term": "Profit and Loss Explained",
+      "bdeId": "BDE_D023",
+      "subjectArea": "Valuation & P&L",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The decomposition of P&L change attributed to identifiable market and trade factors.",
+      "logicalDatasetName": "Profit & Loss",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "pnlexplained",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "pnlvariance",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "wachpnl",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Realised Profit and Loss",
+      "term": "Realised Profit and Loss",
+      "bdeId": "BDE_D024",
+      "subjectArea": "Valuation & P&L",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "P&L locked in from closed or settled positions.",
+      "logicalDatasetName": "Profit & Loss",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "prevrealizedprofitloss",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "tdyrealizedprofitloss",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Unrealised Profit and Loss",
+      "term": "Unrealised Profit and Loss",
+      "bdeId": "BDE_D025",
+      "subjectArea": "Valuation & P&L",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Mark-to-market P&L on open positions not yet settled.",
+      "logicalDatasetName": "Profit & Loss",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "prevunrealizedprofitloss",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Closing Price",
+      "term": "Closing Price",
+      "bdeId": "BDE_D026",
+      "subjectArea": "Valuation & P&L",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The official closing or mark price used for valuation.",
+      "logicalDatasetName": "Mark-to-Market Valuation",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "prevofficialclosingprice",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "bookprice",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "mvalue",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Option Delta",
+      "term": "Option Delta",
+      "bdeId": "BDE_D027",
+      "subjectArea": "Market Risk Sensitivities",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sensitivity of a position's value to a unit change in the underlying price.",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "optiondelta",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "deltaimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Gamma",
+      "term": "Gamma",
+      "bdeId": "BDE_D028",
+      "subjectArea": "Market Risk Sensitivities",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The rate of change of delta with respect to the underlying price.",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "gamma",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "gammaimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Vega",
+      "term": "Vega",
+      "bdeId": "BDE_D029",
+      "subjectArea": "Market Risk Sensitivities",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sensitivity of value to a change in implied volatility.",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "vega",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "vegaimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "volgaimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Theta",
+      "term": "Theta",
+      "bdeId": "BDE_D030",
+      "subjectArea": "Market Risk Sensitivities",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sensitivity of value to the passage of time (time decay).",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "thetaimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Rho",
+      "term": "Rho",
+      "bdeId": "BDE_D031",
+      "subjectArea": "Market Risk Sensitivities",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sensitivity of value to a change in interest rates.",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "rhoimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Higher-Order Sensitivity",
+      "term": "Higher-Order Sensitivity",
+      "bdeId": "BDE_D032",
+      "subjectArea": "Market Risk Sensitivities",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Higher-order risk sensitivities such as skew, speed, and cross-correlation effects.",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "skewimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "speedimpactamount",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "commoditycrosscorrattrb",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Counterparty Credit Spread Sensitivity",
+      "term": "Counterparty Credit Spread Sensitivity",
+      "bdeId": "BDE_D033",
+      "subjectArea": "Counterparty Credit Risk",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sensitivity of value to a one-basis-point move in the counterparty's credit spread (CS01).",
+      "logicalDatasetName": "Credit Spread Sensitivities",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "cptyspread01",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "impactofcptyspread01",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Own Credit Spread Sensitivity",
+      "term": "Own Credit Spread Sensitivity",
+      "bdeId": "BDE_D034",
+      "subjectArea": "Counterparty Credit Risk",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sensitivity of value to a one-basis-point move in Wells Fargo's own credit spread.",
+      "logicalDatasetName": "Credit Spread Sensitivities",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "wfspread01",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Recovery Rate",
+      "term": "Recovery Rate",
+      "bdeId": "BDE_D035",
+      "subjectArea": "Counterparty Credit Risk",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The assumed recovery rate on default for counterparty or own credit.",
+      "logicalDatasetName": "Credit Spread Sensitivities",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "cptyrecoveryrate01",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "wfrecoveryrate01",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Credit Valuation Adjustment",
+      "term": "Credit Valuation Adjustment",
+      "bdeId": "BDE_D036",
+      "subjectArea": "Counterparty Credit Risk",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The adjustment to derivative value reflecting counterparty credit risk.",
+      "logicalDatasetName": "Valuation Adjustments (XVA)",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "cvamarketing",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "grossmarketing",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Initial Margin",
+      "term": "Initial Margin",
+      "bdeId": "BDE_D037",
+      "subjectArea": "Counterparty Credit Risk",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Margin posted to cover potential future exposure on a trade.",
+      "logicalDatasetName": "Margin & Collateral",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "im_payer",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "im_percentage",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "im_currency",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Collateral Agreement Reference",
+      "term": "Collateral Agreement Reference",
+      "bdeId": "BDE_D038",
+      "subjectArea": "Counterparty Credit Risk",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Reference to the CSA or collateral agreement governing margining.",
+      "logicalDatasetName": "Margin & Collateral",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "csa_tag_indicator",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Traded Position",
+      "term": "Traded Position",
+      "bdeId": "BDE_D039",
+      "subjectArea": "Position & Inventory",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The position quantity on a traded basis as of the business date.",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tdytradedposition",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "prevtradedposition",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Settled Position",
+      "term": "Settled Position",
+      "bdeId": "BDE_D040",
+      "subjectArea": "Position & Inventory",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The position quantity on a settled basis as of the business date.",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tdysettleposition",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "prevsettleposition",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Position Cost",
+      "term": "Position Cost",
+      "bdeId": "BDE_D041",
+      "subjectArea": "Position & Inventory",
+      "subDomain": "Trading Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The cost basis of a held position.",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tdytradedcost",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "prevtradedcost",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Position Identifier",
+      "term": "Position Identifier",
+      "bdeId": "BDE_D042",
+      "subjectArea": "Position & Inventory",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The identifier of a position or inventory holding.",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "positionid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "inventoryid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "sequencenumber",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Inventory Name",
+      "term": "Inventory Name",
+      "bdeId": "BDE_D043",
+      "subjectArea": "Position & Inventory",
+      "subDomain": "Trading Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The name of the inventory book holding the position.",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "inventoryname",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "notionaltype",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Counterparty Identifier",
+      "term": "Counterparty Identifier",
+      "bdeId": "BDE_D044",
+      "subjectArea": "Counterparty & Legal Entity",
+      "subDomain": "CIB Reference Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The identifier of the counterparty that participates in a financial transaction.",
+      "logicalDatasetName": "Counterparty & Customer",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "counterparty",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "counterpartyid",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "counter_party",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "counter_party",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Customer Identifier",
+      "term": "Customer Identifier",
+      "bdeId": "BDE_D045",
+      "subjectArea": "Counterparty & Legal Entity",
+      "subDomain": "CIB Reference Data",
+      "classification": "PII",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The identifier of the customer associated with the trade.",
+      "logicalDatasetName": "Counterparty & Customer",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "customerid",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "orignalcustomerid",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Customer Name",
+      "term": "Customer Name",
+      "bdeId": "BDE_D046",
+      "subjectArea": "Counterparty & Legal Entity",
+      "subDomain": "CIB Reference Data",
+      "classification": "PII",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The name of the customer associated with the trade.",
+      "logicalDatasetName": "Counterparty & Customer",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "customername",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "originalcustomername",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Legal Entity",
+      "term": "Legal Entity",
+      "bdeId": "BDE_D047",
+      "subjectArea": "Counterparty & Legal Entity",
+      "subDomain": "CIB Reference Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The legal entity of Wells Fargo or the counterparty booking the trade.",
+      "logicalDatasetName": "Legal Entity",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "legalentity",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "legal_entity",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "legal_entity",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "ext_legal_entity",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "int_legal_entity",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Desk",
+      "term": "Desk",
+      "bdeId": "BDE_D048",
+      "subjectArea": "Trading Organisation",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The trading desk that owns the trade or position.",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "deskname",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "deskid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "deskname",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "deskid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Portfolio",
+      "term": "Portfolio",
+      "bdeId": "BDE_D049",
+      "subjectArea": "Trading Organisation",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The portfolio or book to which the trade is assigned.",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "portfolio",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "portfolio",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "portfolio",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Business Unit",
+      "term": "Business Unit",
+      "bdeId": "BDE_D050",
+      "subjectArea": "Trading Organisation",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The organisational business unit responsible for the trade.",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "business_unit",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "int_business_unit",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "ext_business_unit",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trader",
+      "term": "Trader",
+      "bdeId": "BDE_D051",
+      "subjectArea": "Trading Organisation",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The trader who executed or owns the trade.",
+      "logicalDatasetName": "Trader Attribution",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "traderid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "tradername",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trader",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trader",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trader",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trader",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "traderid",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Region",
+      "term": "Region",
+      "bdeId": "BDE_D052",
+      "subjectArea": "Trading Organisation",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The geographic region of the book or desk.",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "region",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Sales Credit Amount",
+      "term": "Sales Credit Amount",
+      "bdeId": "BDE_D053",
+      "subjectArea": "Sales Coverage & Revenue",
+      "subDomain": "Markets Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The sales credit attributed to a trade for revenue allocation.",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "salescredit",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "sales_credit",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Sales Markup",
+      "term": "Sales Markup",
+      "bdeId": "BDE_D054",
+      "subjectArea": "Sales Coverage & Revenue",
+      "subDomain": "Markets Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The markup applied on a trade contributing to sales revenue.",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": []
+    },
+    {
+      "key": "Marketing Fee",
+      "term": "Marketing Fee",
+      "bdeId": "BDE_D055",
+      "subjectArea": "Sales Coverage & Revenue",
+      "subDomain": "Markets Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The marketing fee or marketer compensation associated with the trade.",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "marketing_fee",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            },
+            {
+              "name": "marketer",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "marketer",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "marketer",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Commission",
+      "term": "Commission",
+      "bdeId": "BDE_D056",
+      "subjectArea": "Sales Coverage & Revenue",
+      "subDomain": "Markets Data",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Commission charged or paid on the trade.",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "commissions",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Settlement Currency",
+      "term": "Settlement Currency",
+      "bdeId": "BDE_D057",
+      "subjectArea": "Settlement & Clearing",
+      "subDomain": "Markets Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The currency in which the trade settles.",
+      "logicalDatasetName": "Settlement Instructions",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "settlecurrencycode",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Clearing Broker",
+      "term": "Clearing Broker",
+      "bdeId": "BDE_D058",
+      "subjectArea": "Settlement & Clearing",
+      "subDomain": "Markets Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The broker through which the trade is cleared.",
+      "logicalDatasetName": "Brokerage & Clearing",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "clearing_broker_code",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "otc_clearing_broker",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Executing Broker",
+      "term": "Executing Broker",
+      "bdeId": "BDE_D059",
+      "subjectArea": "Settlement & Clearing",
+      "subDomain": "Markets Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The broker through which the trade was executed.",
+      "logicalDatasetName": "Brokerage & Clearing",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "broker",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "executing_broker_code",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            },
+            {
+              "name": "broker",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "broker",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Clearing Account",
+      "term": "Clearing Account",
+      "bdeId": "BDE_D060",
+      "subjectArea": "Settlement & Clearing",
+      "subDomain": "Markets Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The GMI or clearing account identifier.",
+      "logicalDatasetName": "Settlement Instructions",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "gmi_account_id",
+              "type": "ARRAY",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "gmiaccountid",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "TRACE Control Number",
+      "term": "TRACE Control Number",
+      "bdeId": "BDE_D061",
+      "subjectArea": "Regulatory Reporting",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The FINRA TRACE control number assigned on regulatory trade reporting.",
+      "logicalDatasetName": "Transaction Reporting",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tracecontrolnumber",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "MSRB Code",
+      "term": "MSRB Code",
+      "bdeId": "BDE_D062",
+      "subjectArea": "Regulatory Reporting",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The MSRB classification applied for municipal securities reporting.",
+      "logicalDatasetName": "Transaction Reporting",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "msrbcode",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Regulatory Trade Identifier",
+      "term": "Regulatory Trade Identifier",
+      "bdeId": "BDE_D063",
+      "subjectArea": "Regulatory Reporting",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Identifiers assigned by regulatory or venue reporting systems (WINFITS, venue, MIC).",
+      "logicalDatasetName": "Transaction Reporting",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "winfitstradenumber",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Hedge Indicator",
+      "term": "Hedge Indicator",
+      "bdeId": "BDE_D064",
+      "subjectArea": "Regulatory Reporting",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Flags identifying bona-fide hedge or DSOM status for regulatory purposes.",
+      "logicalDatasetName": "Hedge Designation",
+      "datasets": [
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "is_bonafide_hedge",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "is_dsomtrade",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Trade Date",
+      "term": "Trade Date",
+      "bdeId": "BDE_D065",
+      "subjectArea": "Dates & Events",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The date on which the trade was executed.",
+      "logicalDatasetName": "Trade & Settlement Dates",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tradedate",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trade_date",
+              "type": "DATE",
+              "nullable": true
+            },
+            {
+              "name": "trade_date_time",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trade_date",
+              "type": "DATE",
+              "nullable": true
+            },
+            {
+              "name": "trade_date_time",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trade_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tradedate",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Settlement Date",
+      "term": "Settlement Date",
+      "bdeId": "BDE_D066",
+      "subjectArea": "Dates & Events",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The date on which the trade settles.",
+      "logicalDatasetName": "Trade & Settlement Dates",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "settlementdate",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "settle_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "settle_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Maturity Date",
+      "term": "Maturity Date",
+      "bdeId": "BDE_D067",
+      "subjectArea": "Dates & Events",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The date on which the instrument matures or expires.",
+      "logicalDatasetName": "Trade & Settlement Dates",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "maturitydate",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "maturity_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "maturity_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "maturity_date",
+              "type": "DECIMAL(30,0)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "expirationdate",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Business Date",
+      "term": "Business Date",
+      "bdeId": "BDE_D068",
+      "subjectArea": "Dates & Events",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The processing business date of the record.",
+      "logicalDatasetName": "Processing Timestamps",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "businessdate",
+              "type": "DATE",
+              "nullable": true
+            },
+            {
+              "name": "tardis_business_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tardis_business_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_business_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_business_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_business_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_business_date",
+              "type": "DATE",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Execution Timestamp",
+      "term": "Execution Timestamp",
+      "bdeId": "BDE_D069",
+      "subjectArea": "Dates & Events",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The precise time the trade was executed or booked.",
+      "logicalDatasetName": "Processing Timestamps",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "heldsince",
+              "type": "DECIMAL(30,12)",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "time_stamp_gmt",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "time_stamp_gmt",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "trade_execution_time",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "bookingdate",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Source File Name",
+      "term": "Source File Name",
+      "bdeId": "BDE_D070",
+      "subjectArea": "Data Lineage & Provenance",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The name of the source file from which the record was ingested by 1MBDA.",
+      "logicalDatasetName": "Source Provenance",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "source_file_name",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "source_file_name",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_file_name",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_file_name",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_file_name",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_file_name",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Source System Identifier",
+      "term": "Source System Identifier",
+      "bdeId": "BDE_D071",
+      "subjectArea": "Data Lineage & Provenance",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The identifier of the originating source system (SOR).",
+      "logicalDatasetName": "Source Provenance",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "source_system_id",
+              "type": "INTEGER",
+              "nullable": true
+            },
+            {
+              "name": "sourcesystemofrecord",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "sor",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "source_system_id",
+              "type": "INTEGER",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_system_id",
+              "type": "INTEGER",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_system_id",
+              "type": "INTEGER",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_system_id",
+              "type": "INTEGER",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_system_id",
+              "type": "INTEGER",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Source Dataset Identifier",
+      "term": "Source Dataset Identifier",
+      "bdeId": "BDE_D072",
+      "subjectArea": "Data Lineage & Provenance",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The identifier of the source dataset within the SOR.",
+      "logicalDatasetName": "Source Provenance",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "source_dataset_id",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "source_dataset_id",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_dataset_id",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_dataset_id",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_dataset_id",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "source_dataset_id",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Ingestion Timestamp",
+      "term": "Ingestion Timestamp",
+      "bdeId": "BDE_D073",
+      "subjectArea": "Data Lineage & Provenance",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "The time at which 1MBDA ingested the record.",
+      "logicalDatasetName": "Ingestion & Integrity",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tardis_ingest_dttm",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "tardis_ingest_dttm",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_ingest_dttm",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_ingest_dttm",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_ingest_dttm",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "tardis_ingest_dttm",
+              "type": "BIGINT",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "Record Hash",
+      "term": "Record Hash",
+      "bdeId": "BDE_D074",
+      "subjectArea": "Data Lineage & Provenance",
+      "subDomain": "CIB Reference Data",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "definition": "Hash values used for change detection and record integrity.",
+      "logicalDatasetName": "Ingestion & Integrity",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "hash_rec_raw_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_san_nk",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_rec_san_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columns": [
+            {
+              "name": "hash_rec_raw_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_san_nk",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_rec_san_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "hash_rec_raw_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_san_nk",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_rec_san_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "hash_rec_raw_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_san_nk",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_rec_san_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "hash_rec_raw_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_san_nk",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_rec_san_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columns": [
+            {
+              "name": "hash_rec_raw_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_san_nk",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            },
+            {
+              "name": "hash_rec_san_data",
+              "type": "CHARACTER VARYING",
+              "nullable": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

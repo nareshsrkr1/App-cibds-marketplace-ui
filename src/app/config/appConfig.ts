@@ -32,6 +32,11 @@ const DEFAULT_API: ApiRuntimeConfig = {
     workflowApprove: { mode: 'mock' },
     workflowDecline: { mode: 'mock' },
     datasets: { mode: 'mock' },
+    catalogueLogicalModel: { mode: 'mock' },
+    catalogueBusinessElements: { mode: 'mock' },
+    catalogueGlossaryTerms: { mode: 'mock' },
+    catalogueLineage: { mode: 'mock' },
+    catalogueLineageDetails: { mode: 'mock' },
   },
 };
 

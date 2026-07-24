@@ -1,8 +1,15 @@
 import { Fragment, useState } from 'react';
+import { Pagination } from '../../../../components/ui/Pagination/Pagination';
+import { usePagination } from '../../../../components/ui/Pagination/usePagination';
 import type { PhysicalDataset } from '../physicalDatasets.types';
+
+const PAGE_SIZE = 10;
 
 export type PhysicalDatasetsTableProps = {
   datasets: PhysicalDataset[];
+  /** Identifies "a different result set" — pass the combined filter/search
+   * state so changing a filter jumps back to page 1. */
+  resetKey?: unknown;
 };
 
 function sorClass(sor: PhysicalDataset['sor']): string {
@@ -20,8 +27,9 @@ function classificationClass(classification: PhysicalDataset['classification']):
   }
 }
 
-export function PhysicalDatasetsTable({ datasets }: PhysicalDatasetsTableProps) {
+export function PhysicalDatasetsTable({ datasets, resetKey }: PhysicalDatasetsTableProps) {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const { page, setPage, pageCount, pageItems } = usePagination(datasets, PAGE_SIZE, resetKey);
 
   const toggle = (dsId: string) => {
     setExpanded((prev) => {
@@ -33,6 +41,8 @@ export function PhysicalDatasetsTable({ datasets }: PhysicalDatasetsTableProps) 
   };
 
   return (
+    <>
+    <div className="ui-scroll-box pdc-table-scroll">
     <table className="pdc-table">
       <thead>
         <tr>
@@ -48,7 +58,7 @@ export function PhysicalDatasetsTable({ datasets }: PhysicalDatasetsTableProps) 
         </tr>
       </thead>
       <tbody>
-        {datasets.map((ds) => {
+        {pageItems.map((ds) => {
           const isOpen = expanded.has(ds.dsId);
           return (
             <Fragment key={ds.dsId}>
@@ -128,5 +138,8 @@ export function PhysicalDatasetsTable({ datasets }: PhysicalDatasetsTableProps) 
         })}
       </tbody>
     </table>
+    </div>
+    <Pagination page={page} pageCount={pageCount} onPageChange={setPage} label="Physical datasets pages" />
+    </>
   );
 }

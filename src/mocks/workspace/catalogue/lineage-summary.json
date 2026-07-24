@@ -1,0 +1,1658 @@
+{
+  "entries": [
+    {
+      "key": "Trade Identifier",
+      "term": "Trade Identifier",
+      "bdeName": "Trade Identifier",
+      "bdeId": "BDE_D001",
+      "logicalDatasetName": "Trade Identifiers",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 11
+    },
+    {
+      "key": "Parent Trade Identifier",
+      "term": "Parent Trade Identifier",
+      "bdeName": "Parent Trade Identifier",
+      "bdeId": "BDE_D002",
+      "logicalDatasetName": "Trade Identifiers",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Trade Reference",
+      "term": "Trade Reference",
+      "bdeName": "Trade Reference",
+      "bdeId": "BDE_D003",
+      "logicalDatasetName": "Trade Identifiers",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Trade Status",
+      "term": "Trade Status",
+      "bdeName": "Trade Status",
+      "bdeId": "BDE_D004",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Trade Version Number",
+      "term": "Trade Version Number",
+      "bdeName": "Trade Version Number",
+      "bdeId": "BDE_D005",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Trade Event Type",
+      "term": "Trade Event Type",
+      "bdeName": "Trade Event Type",
+      "bdeId": "BDE_D006",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Current Record Indicator",
+      "term": "Current Record Indicator",
+      "bdeName": "Current Record Indicator",
+      "bdeId": "BDE_D007",
+      "logicalDatasetName": "Trade Events & Status",
+      "datasets": [
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Notional Amount",
+      "term": "Notional Amount",
+      "bdeName": "Notional Amount",
+      "bdeId": "BDE_D008",
+      "logicalDatasetName": "Trade Economics",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Coupon Rate",
+      "term": "Coupon Rate",
+      "bdeName": "Coupon Rate",
+      "bdeId": "BDE_D009",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Yield",
+      "term": "Yield",
+      "bdeName": "Yield",
+      "bdeId": "BDE_D010",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Accrued Interest",
+      "term": "Accrued Interest",
+      "bdeName": "Accrued Interest",
+      "bdeId": "BDE_D011",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Principal Amount",
+      "term": "Principal Amount",
+      "bdeName": "Principal Amount",
+      "bdeId": "BDE_D012",
+      "logicalDatasetName": "Interest & Coupon Terms",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Trade Price",
+      "term": "Trade Price",
+      "bdeName": "Trade Price",
+      "bdeId": "BDE_D013",
+      "logicalDatasetName": "Trade Economics",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 5
+    },
+    {
+      "key": "Trade Quantity",
+      "term": "Trade Quantity",
+      "bdeName": "Trade Quantity",
+      "bdeId": "BDE_D014",
+      "logicalDatasetName": "Trade Economics",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Commodity Option Premium",
+      "term": "Commodity Option Premium",
+      "bdeName": "Commodity Option Premium",
+      "bdeId": "BDE_D015",
+      "logicalDatasetName": "Option Economics",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Instrument Identifier",
+      "term": "Instrument Identifier",
+      "bdeName": "Instrument Identifier",
+      "bdeId": "BDE_D016",
+      "logicalDatasetName": "Security Master",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 12
+    },
+    {
+      "key": "Instrument Type",
+      "term": "Instrument Type",
+      "bdeName": "Instrument Type",
+      "bdeId": "BDE_D017",
+      "logicalDatasetName": "Security Master",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        }
+      ],
+      "columnCount": 8
+    },
+    {
+      "key": "Option Exercise Type",
+      "term": "Option Exercise Type",
+      "bdeName": "Option Exercise Type",
+      "bdeId": "BDE_D018",
+      "logicalDatasetName": "Security Master",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Product Type",
+      "term": "Product Type",
+      "bdeName": "Product Type",
+      "bdeId": "BDE_D019",
+      "logicalDatasetName": "Product Taxonomy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Product Sub-Type",
+      "term": "Product Sub-Type",
+      "bdeName": "Product Sub-Type",
+      "bdeId": "BDE_D020",
+      "logicalDatasetName": "Product Taxonomy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Product Family",
+      "term": "Product Family",
+      "bdeName": "Product Family",
+      "bdeId": "BDE_D021",
+      "logicalDatasetName": "Product Taxonomy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Net Present Value",
+      "term": "Net Present Value",
+      "bdeName": "Net Present Value",
+      "bdeId": "BDE_D022",
+      "logicalDatasetName": "Mark-to-Market Valuation",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Profit and Loss Explained",
+      "term": "Profit and Loss Explained",
+      "bdeName": "Profit and Loss Explained",
+      "bdeId": "BDE_D023",
+      "logicalDatasetName": "Profit & Loss",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 3
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Realised Profit and Loss",
+      "term": "Realised Profit and Loss",
+      "bdeName": "Realised Profit and Loss",
+      "bdeId": "BDE_D024",
+      "logicalDatasetName": "Profit & Loss",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Unrealised Profit and Loss",
+      "term": "Unrealised Profit and Loss",
+      "bdeName": "Unrealised Profit and Loss",
+      "bdeId": "BDE_D025",
+      "logicalDatasetName": "Profit & Loss",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Closing Price",
+      "term": "Closing Price",
+      "bdeName": "Closing Price",
+      "bdeId": "BDE_D026",
+      "logicalDatasetName": "Mark-to-Market Valuation",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Option Delta",
+      "term": "Option Delta",
+      "bdeName": "Option Delta",
+      "bdeId": "BDE_D027",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Gamma",
+      "term": "Gamma",
+      "bdeName": "Gamma",
+      "bdeId": "BDE_D028",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Vega",
+      "term": "Vega",
+      "bdeName": "Vega",
+      "bdeId": "BDE_D029",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 3
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Theta",
+      "term": "Theta",
+      "bdeName": "Theta",
+      "bdeId": "BDE_D030",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Rho",
+      "term": "Rho",
+      "bdeName": "Rho",
+      "bdeId": "BDE_D031",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Higher-Order Sensitivity",
+      "term": "Higher-Order Sensitivity",
+      "bdeName": "Higher-Order Sensitivity",
+      "bdeId": "BDE_D032",
+      "logicalDatasetName": "Option Greeks",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 3
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Counterparty Credit Spread Sensitivity",
+      "term": "Counterparty Credit Spread Sensitivity",
+      "bdeName": "Counterparty Credit Spread Sensitivity",
+      "bdeId": "BDE_D033",
+      "logicalDatasetName": "Credit Spread Sensitivities",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Own Credit Spread Sensitivity",
+      "term": "Own Credit Spread Sensitivity",
+      "bdeName": "Own Credit Spread Sensitivity",
+      "bdeId": "BDE_D034",
+      "logicalDatasetName": "Credit Spread Sensitivities",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Recovery Rate",
+      "term": "Recovery Rate",
+      "bdeName": "Recovery Rate",
+      "bdeId": "BDE_D035",
+      "logicalDatasetName": "Credit Spread Sensitivities",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Credit Valuation Adjustment",
+      "term": "Credit Valuation Adjustment",
+      "bdeName": "Credit Valuation Adjustment",
+      "bdeId": "BDE_D036",
+      "logicalDatasetName": "Valuation Adjustments (XVA)",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Initial Margin",
+      "term": "Initial Margin",
+      "bdeName": "Initial Margin",
+      "bdeId": "BDE_D037",
+      "logicalDatasetName": "Margin & Collateral",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Collateral Agreement Reference",
+      "term": "Collateral Agreement Reference",
+      "bdeName": "Collateral Agreement Reference",
+      "bdeId": "BDE_D038",
+      "logicalDatasetName": "Margin & Collateral",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Traded Position",
+      "term": "Traded Position",
+      "bdeName": "Traded Position",
+      "bdeId": "BDE_D039",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Settled Position",
+      "term": "Settled Position",
+      "bdeName": "Settled Position",
+      "bdeId": "BDE_D040",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Position Cost",
+      "term": "Position Cost",
+      "bdeName": "Position Cost",
+      "bdeId": "BDE_D041",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Position Identifier",
+      "term": "Position Identifier",
+      "bdeName": "Position Identifier",
+      "bdeId": "BDE_D042",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 3
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Inventory Name",
+      "term": "Inventory Name",
+      "bdeName": "Inventory Name",
+      "bdeId": "BDE_D043",
+      "logicalDatasetName": "Position Keeping",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Counterparty Identifier",
+      "term": "Counterparty Identifier",
+      "bdeName": "Counterparty Identifier",
+      "bdeId": "BDE_D044",
+      "logicalDatasetName": "Counterparty & Customer",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Customer Identifier",
+      "term": "Customer Identifier",
+      "bdeName": "Customer Identifier",
+      "bdeId": "BDE_D045",
+      "logicalDatasetName": "Counterparty & Customer",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Customer Name",
+      "term": "Customer Name",
+      "bdeName": "Customer Name",
+      "bdeId": "BDE_D046",
+      "logicalDatasetName": "Counterparty & Customer",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Legal Entity",
+      "term": "Legal Entity",
+      "bdeName": "Legal Entity",
+      "bdeId": "BDE_D047",
+      "logicalDatasetName": "Legal Entity",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 5
+    },
+    {
+      "key": "Desk",
+      "term": "Desk",
+      "bdeName": "Desk",
+      "bdeId": "BDE_D048",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Portfolio",
+      "term": "Portfolio",
+      "bdeName": "Portfolio",
+      "bdeId": "BDE_D049",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Business Unit",
+      "term": "Business Unit",
+      "bdeName": "Business Unit",
+      "bdeId": "BDE_D050",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Trader",
+      "term": "Trader",
+      "bdeName": "Trader",
+      "bdeId": "BDE_D051",
+      "logicalDatasetName": "Trader Attribution",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 7
+    },
+    {
+      "key": "Region",
+      "term": "Region",
+      "bdeName": "Region",
+      "bdeId": "BDE_D052",
+      "logicalDatasetName": "Book & Desk Hierarchy",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Sales Credit Amount",
+      "term": "Sales Credit Amount",
+      "bdeName": "Sales Credit Amount",
+      "bdeId": "BDE_D053",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Sales Markup",
+      "term": "Sales Markup",
+      "bdeName": "Sales Markup",
+      "bdeId": "BDE_D054",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": [],
+      "columnCount": 0
+    },
+    {
+      "key": "Marketing Fee",
+      "term": "Marketing Fee",
+      "bdeName": "Marketing Fee",
+      "bdeId": "BDE_D055",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Commission",
+      "term": "Commission",
+      "bdeName": "Commission",
+      "bdeId": "BDE_D056",
+      "logicalDatasetName": "Sales Credit & Compensation",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Settlement Currency",
+      "term": "Settlement Currency",
+      "bdeName": "Settlement Currency",
+      "bdeId": "BDE_D057",
+      "logicalDatasetName": "Settlement Instructions",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Clearing Broker",
+      "term": "Clearing Broker",
+      "bdeName": "Clearing Broker",
+      "bdeId": "BDE_D058",
+      "logicalDatasetName": "Brokerage & Clearing",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Executing Broker",
+      "term": "Executing Broker",
+      "bdeName": "Executing Broker",
+      "bdeId": "BDE_D059",
+      "logicalDatasetName": "Brokerage & Clearing",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 4
+    },
+    {
+      "key": "Clearing Account",
+      "term": "Clearing Account",
+      "bdeName": "Clearing Account",
+      "bdeId": "BDE_D060",
+      "logicalDatasetName": "Settlement Instructions",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "TRACE Control Number",
+      "term": "TRACE Control Number",
+      "bdeName": "TRACE Control Number",
+      "bdeId": "BDE_D061",
+      "logicalDatasetName": "Transaction Reporting",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "MSRB Code",
+      "term": "MSRB Code",
+      "bdeName": "MSRB Code",
+      "bdeId": "BDE_D062",
+      "logicalDatasetName": "Transaction Reporting",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Regulatory Trade Identifier",
+      "term": "Regulatory Trade Identifier",
+      "bdeName": "Regulatory Trade Identifier",
+      "bdeId": "BDE_D063",
+      "logicalDatasetName": "Transaction Reporting",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 1
+    },
+    {
+      "key": "Hedge Indicator",
+      "term": "Hedge Indicator",
+      "bdeName": "Hedge Indicator",
+      "bdeId": "BDE_D064",
+      "logicalDatasetName": "Hedge Designation",
+      "datasets": [
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 2
+    },
+    {
+      "key": "Trade Date",
+      "term": "Trade Date",
+      "bdeName": "Trade Date",
+      "bdeId": "BDE_D065",
+      "logicalDatasetName": "Trade & Settlement Dates",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 7
+    },
+    {
+      "key": "Settlement Date",
+      "term": "Settlement Date",
+      "bdeName": "Settlement Date",
+      "bdeId": "BDE_D066",
+      "logicalDatasetName": "Trade & Settlement Dates",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 3
+    },
+    {
+      "key": "Maturity Date",
+      "term": "Maturity Date",
+      "bdeName": "Maturity Date",
+      "bdeId": "BDE_D067",
+      "logicalDatasetName": "Trade & Settlement Dates",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 5
+    },
+    {
+      "key": "Business Date",
+      "term": "Business Date",
+      "bdeName": "Business Date",
+      "bdeId": "BDE_D068",
+      "logicalDatasetName": "Processing Timestamps",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 7
+    },
+    {
+      "key": "Execution Timestamp",
+      "term": "Execution Timestamp",
+      "bdeName": "Execution Timestamp",
+      "bdeId": "BDE_D069",
+      "logicalDatasetName": "Processing Timestamps",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 5
+    },
+    {
+      "key": "Source File Name",
+      "term": "Source File Name",
+      "bdeName": "Source File Name",
+      "bdeId": "BDE_D070",
+      "logicalDatasetName": "Source Provenance",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Source System Identifier",
+      "term": "Source System Identifier",
+      "bdeName": "Source System Identifier",
+      "bdeId": "BDE_D071",
+      "logicalDatasetName": "Source Provenance",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 8
+    },
+    {
+      "key": "Source Dataset Identifier",
+      "term": "Source Dataset Identifier",
+      "bdeName": "Source Dataset Identifier",
+      "bdeId": "BDE_D072",
+      "logicalDatasetName": "Source Provenance",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Ingestion Timestamp",
+      "term": "Ingestion Timestamp",
+      "bdeName": "Ingestion Timestamp",
+      "bdeId": "BDE_D073",
+      "logicalDatasetName": "Ingestion & Integrity",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 1
+        }
+      ],
+      "columnCount": 6
+    },
+    {
+      "key": "Record Hash",
+      "term": "Record Hash",
+      "bdeName": "Record Hash",
+      "bdeId": "BDE_D074",
+      "logicalDatasetName": "Ingestion & Integrity",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 3
+        }
+      ],
+      "columnCount": 18
+    }
+  ]
+}

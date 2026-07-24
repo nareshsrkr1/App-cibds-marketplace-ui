@@ -178,14 +178,22 @@
 }
 
 /* ---- table ---- */
-.pdc-table {
-  width: calc(100% - 88px);
+.pdc-table-scroll {
   margin: 0 44px;
+  max-height: 620px;
+  border-radius: var(--radius-lg);
+}
+.pdc-table {
+  width: 100%;
   border-collapse: collapse;
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+}
+.pdc-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .pdc-table th {
   text-align: left;
@@ -308,8 +316,11 @@
 }
 
 /* ---- grid view ---- */
-.pdc-cardgrid {
+.pdc-grid-scroll {
   margin: 0 44px;
+  max-height: 620px;
+}
+.pdc-cardgrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
@@ -354,13 +365,10 @@
 @media (max-width: 900px) {
   .pdc-tabs,
   .pdc-toolbar,
-  .pdc-cardgrid {
+  .pdc-grid-scroll,
+  .pdc-table-scroll {
     margin-left: 20px;
     margin-right: 20px;
-  }
-  .pdc-table {
-    width: calc(100% - 40px);
-    margin: 0 20px;
   }
   .pdc-dgrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

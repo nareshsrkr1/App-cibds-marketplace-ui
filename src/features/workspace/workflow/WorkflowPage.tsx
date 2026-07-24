@@ -2,9 +2,14 @@ import { useEffect, useState } from 'react';
 import { ConsoleHeader } from '../components/ConsoleHeader';
 import { ErrorState } from '../../../components/feedback/ErrorState/ErrorState';
 import { Spinner } from '../../../components/feedback/Spinner/Spinner';
+import { Pagination } from '../../../components/ui/Pagination/Pagination';
+import { usePagination } from '../../../components/ui/Pagination/usePagination';
 import { fetchWorkflowBoard } from './workflow.api';
 import type { WorkflowBoardResponse } from './workflow.types';
 import './workflow.css';
+
+const PAGE_SIZE = 10;
+const EMPTY: never[] = [];
 
 export function WorkflowPage() {
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -37,6 +42,10 @@ export function WorkflowPage() {
     return () => ac.abort();
   }, [reloadToken]);
 
+  const pendingReqsPaged = usePagination(board?.subscriptionRequests ?? EMPTY, PAGE_SIZE);
+  const proposedPaged = usePagination(board?.proposedElements ?? EMPTY, PAGE_SIZE);
+  const unmappedPaged = usePagination(board?.unmappedColumns ?? EMPTY, PAGE_SIZE);
+
   if (status === 'loading') {
     return (
       <div className="workflow-page" data-testid="workflow-page">
@@ -61,8 +70,7 @@ export function WorkflowPage() {
     );
   }
 
-  const pendingReqs = board.subscriptionRequests;
-  const awaitingCount = pendingReqs.length;
+  const awaitingCount = board.subscriptionRequests.length;
   const proposed = board.proposedElements;
   const unmapped = board.unmappedColumns;
 
@@ -121,41 +129,51 @@ export function WorkflowPage() {
           {awaitingCount === 0 ? (
             <div className="wf-empty">Nothing awaiting your approval.</div>
           ) : (
-            pendingReqs.map((r) => (
-              <div key={r.id} className="wf-card act">
-                <div className="wf-card-l">
-                  <div className="wf-card-t">{r.consumer}</div>
-                  <div className="wf-card-meta">
-                    <span className="wf-chip">{r.dataset}</span>
-                    <span className="mono wf-idchip">{r.datasetId}</span>
+            <>
+              <div className="ui-scroll-box wf-sec-scroll">
+                {pendingReqsPaged.pageItems.map((r) => (
+                  <div key={r.id} className="wf-card act">
+                    <div className="wf-card-l">
+                      <div className="wf-card-t">{r.consumer}</div>
+                      <div className="wf-card-meta">
+                        <span className="wf-chip">{r.dataset}</span>
+                        <span className="mono wf-idchip">{r.datasetId}</span>
+                      </div>
+                      <div className="wf-card-req">
+                        Requests access to your dataset ·{' '}
+                        <span className="wf-age-in">{r.age} ago</span>
+                      </div>
+                    </div>
+                    <div className="wf-card-r">
+                      <div className="wf-card-acts">
+                        <button
+                          type="button"
+                          className="wf-btn"
+                          disabled
+                          title="Available in a future release"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          type="button"
+                          className="wf-decline"
+                          disabled
+                          title="Available in a future release"
+                        >
+                          Decline
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="wf-card-req">
-                    Requests access to your dataset ·{' '}
-                    <span className="wf-age-in">{r.age} ago</span>
-                  </div>
-                </div>
-                <div className="wf-card-r">
-                  <div className="wf-card-acts">
-                    <button
-                      type="button"
-                      className="wf-btn"
-                      disabled
-                      title="Available in a future release"
-                    >
-                      Approve
-                    </button>
-                    <button
-                      type="button"
-                      className="wf-decline"
-                      disabled
-                      title="Available in a future release"
-                    >
-                      Decline
-                    </button>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))
+              <Pagination
+                page={pendingReqsPaged.page}
+                pageCount={pendingReqsPaged.pageCount}
+                onPageChange={pendingReqsPaged.setPage}
+                label="Awaiting your approval pages"
+              />
+            </>
           )}
         </section>
 
@@ -172,30 +190,40 @@ export function WorkflowPage() {
           {proposed.length === 0 ? (
             <div className="wf-empty">No proposals in flight.</div>
           ) : (
-            proposed.map((p) => (
-              <div key={p.id} className="wf-card">
-                <div className="wf-card-l">
-                  <div className="wf-card-t">
-                    {p.name} <span className="mono wf-idchip">{p.id}</span>
+            <>
+              <div className="ui-scroll-box wf-sec-scroll">
+                {proposedPaged.pageItems.map((p) => (
+                  <div key={p.id} className="wf-card">
+                    <div className="wf-card-l">
+                      <div className="wf-card-t">
+                        {p.name} <span className="mono wf-idchip">{p.id}</span>
+                      </div>
+                      <div className="wf-card-meta">
+                        <span className="wf-chip">{p.dataset}</span>
+                        <span className="wf-by">by {p.by}</span>
+                      </div>
+                      <div className="wf-track" aria-label="Proposal track">
+                        <span className="wf-tk done">Proposed</span>
+                        <span className="wf-tl" aria-hidden="true" />
+                        <span className="wf-tk active">In review</span>
+                        <span className="wf-tl" aria-hidden="true" />
+                        <span className="wf-tk">Endorsed</span>
+                      </div>
+                    </div>
+                    <div className="wf-card-r">
+                      <span className="wf-status gov">{p.status}</span>
+                      <span className="wf-age-in">{p.age} ago</span>
+                    </div>
                   </div>
-                  <div className="wf-card-meta">
-                    <span className="wf-chip">{p.dataset}</span>
-                    <span className="wf-by">by {p.by}</span>
-                  </div>
-                  <div className="wf-track" aria-label="Proposal track">
-                    <span className="wf-tk done">Proposed</span>
-                    <span className="wf-tl" aria-hidden="true" />
-                    <span className="wf-tk active">In review</span>
-                    <span className="wf-tl" aria-hidden="true" />
-                    <span className="wf-tk">Endorsed</span>
-                  </div>
-                </div>
-                <div className="wf-card-r">
-                  <span className="wf-status gov">{p.status}</span>
-                  <span className="wf-age-in">{p.age} ago</span>
-                </div>
+                ))}
               </div>
-            ))
+              <Pagination
+                page={proposedPaged.page}
+                pageCount={proposedPaged.pageCount}
+                onPageChange={proposedPaged.setPage}
+                label="With governance pages"
+              />
+            </>
           )}
         </section>
 
@@ -212,27 +240,37 @@ export function WorkflowPage() {
           {unmapped.length === 0 ? (
             <div className="wf-empty">All columns mapped.</div>
           ) : (
-            unmapped.map((u) => (
-              <div key={u.id} className="wf-card">
-                <div className="wf-card-l">
-                  <div className="wf-card-t">
-                    <span className="mono">{u.column}</span>{' '}
-                    <span className="mono wf-idchip">{u.id}</span>
+            <>
+              <div className="ui-scroll-box wf-sec-scroll">
+                {unmappedPaged.pageItems.map((u) => (
+                  <div key={u.id} className="wf-card">
+                    <div className="wf-card-l">
+                      <div className="wf-card-t">
+                        <span className="mono">{u.column}</span>{' '}
+                        <span className="mono wf-idchip">{u.id}</span>
+                      </div>
+                      <div className="wf-card-meta">
+                        <span className="wf-chip">{u.dataset}</span>
+                        <span className="wf-by">by {u.by}</span>
+                      </div>
+                      <div className="wf-card-req">
+                        No business element bound — routed to governance for a decision
+                      </div>
+                    </div>
+                    <div className="wf-card-r">
+                      <span className="wf-status gap">{u.status}</span>
+                      <span className="wf-age-in">{u.age} ago</span>
+                    </div>
                   </div>
-                  <div className="wf-card-meta">
-                    <span className="wf-chip">{u.dataset}</span>
-                    <span className="wf-by">by {u.by}</span>
-                  </div>
-                  <div className="wf-card-req">
-                    No business element bound — routed to governance for a decision
-                  </div>
-                </div>
-                <div className="wf-card-r">
-                  <span className="wf-status gap">{u.status}</span>
-                  <span className="wf-age-in">{u.age} ago</span>
-                </div>
+                ))}
               </div>
-            ))
+              <Pagination
+                page={unmappedPaged.page}
+                pageCount={unmappedPaged.pageCount}
+                onPageChange={unmappedPaged.setPage}
+                label="Needs mapping pages"
+              />
+            </>
           )}
         </section>
       </div>

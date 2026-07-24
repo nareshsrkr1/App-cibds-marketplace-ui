@@ -8,9 +8,11 @@ export type ModalProps = {
   onClose: () => void;
   children: ReactNode;
   initialFocusRef?: RefObject<HTMLElement | null>;
+  /** `wide` for content that needs real horizontal room (diagrams, multi-column layouts). */
+  size?: 'default' | 'wide';
 };
 
-export function Modal({ open, title, onClose, children, initialFocusRef }: ModalProps) {
+export function Modal({ open, title, onClose, children, initialFocusRef, size = 'default' }: ModalProps) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -26,7 +28,7 @@ export function Modal({ open, title, onClose, children, initialFocusRef }: Modal
       }}
     >
       <div
-        className="ui-modal"
+        className={`ui-modal${size === 'wide' ? ' ui-modal--wide' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

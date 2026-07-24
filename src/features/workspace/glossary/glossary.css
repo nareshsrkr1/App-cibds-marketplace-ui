@@ -1,0 +1,103 @@
+/* Glossary Terms tab — adapted from the HTML SoT's "Glossary Terms" catalogue tab.
+   Flat table, one row per term (.gls-row), expand to a definition + BDE rollup. */
+
+.gls {
+  padding: 0 0 48px;
+}
+
+.gls-table {
+  margin: 0 44px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.gls-head {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 2fr) 70px minmax(0, 1fr) 70px 90px 110px;
+  gap: 12px;
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--color-border);
+}
+.gls-head .num {
+  text-align: right;
+}
+.gls-row {
+  border-bottom: 1px solid var(--color-border);
+}
+.gls-row:last-child {
+  border-bottom: none;
+}
+.gls-row-h {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 2fr) 70px minmax(0, 1fr) 70px 90px 110px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.gls-row-h:hover {
+  background: var(--gold-lt);
+}
+.gls-row.is-open > .gls-row-h {
+  background: var(--gold-lt);
+}
+.gls-row-title {
+  min-width: 0;
+}
+.gls-row-title strong {
+  display: block;
+  font-size: 14px;
+  color: var(--color-brand);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gls-row-title .sub {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gls-area {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.gls-row-h .num {
+  font-family: var(--mono);
+  font-size: 13px;
+  text-align: right;
+  color: var(--color-text-secondary);
+}
+.gls-detail {
+  padding: 4px 20px 20px 52px;
+  background: var(--surface-page);
+}
+.gls-dgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 24px;
+  margin-bottom: 16px;
+}
+.ln-wrap {
+  margin-bottom: 12px;
+}
+.bde-line {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  padding: 4px 0;
+}
+.ln-btnwrap {
+  margin-top: 6px;
+}

@@ -1,0 +1,463 @@
+{
+  "subjectAreas": [
+    {
+      "id": "trade-lifecycle",
+      "label": "Trade Lifecycle",
+      "domain": "CIB",
+      "subDomain": "Trading Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 7,
+      "realisedCount": 31,
+      "status": "Endorsed"
+    },
+    {
+      "id": "trade-valuation-economics",
+      "label": "Trade Valuation & Economics",
+      "domain": "CIB",
+      "subDomain": "Trading Data",
+      "logicalDatasetCount": 3,
+      "bdeCount": 8,
+      "realisedCount": 26,
+      "status": "Endorsed"
+    },
+    {
+      "id": "instrument-product-reference",
+      "label": "Instrument & Product Reference",
+      "domain": "CIB",
+      "subDomain": "CIB Reference Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 6,
+      "realisedCount": 38,
+      "status": "Endorsed"
+    },
+    {
+      "id": "valuation-p-l",
+      "label": "Valuation & P&L",
+      "domain": "CIB",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 5,
+      "realisedCount": 11,
+      "status": "Endorsed"
+    },
+    {
+      "id": "market-risk-sensitivities",
+      "label": "Market Risk Sensitivities",
+      "domain": "CIB",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "logicalDatasetCount": 1,
+      "bdeCount": 6,
+      "realisedCount": 12,
+      "status": "Endorsed"
+    },
+    {
+      "id": "counterparty-credit-risk",
+      "label": "Counterparty Credit Risk",
+      "domain": "CIB",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "logicalDatasetCount": 3,
+      "bdeCount": 6,
+      "realisedCount": 11,
+      "status": "Endorsed"
+    },
+    {
+      "id": "position-inventory",
+      "label": "Position & Inventory",
+      "domain": "CIB",
+      "subDomain": "Trading Data",
+      "logicalDatasetCount": 1,
+      "bdeCount": 5,
+      "realisedCount": 11,
+      "status": "Endorsed"
+    },
+    {
+      "id": "counterparty-legal-entity",
+      "label": "Counterparty & Legal Entity",
+      "domain": "CIB",
+      "subDomain": "CIB Reference Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 4,
+      "realisedCount": 13,
+      "status": "Endorsed"
+    },
+    {
+      "id": "trading-organisation",
+      "label": "Trading Organisation",
+      "domain": "CIB",
+      "subDomain": "CIB Reference Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 5,
+      "realisedCount": 18,
+      "status": "Endorsed"
+    },
+    {
+      "id": "sales-coverage-revenue",
+      "label": "Sales Coverage & Revenue",
+      "domain": "CIB",
+      "subDomain": "Markets Data",
+      "logicalDatasetCount": 1,
+      "bdeCount": 4,
+      "realisedCount": 7,
+      "status": "Endorsed"
+    },
+    {
+      "id": "settlement-clearing",
+      "label": "Settlement & Clearing",
+      "domain": "CIB",
+      "subDomain": "Markets Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 4,
+      "realisedCount": 9,
+      "status": "Endorsed"
+    },
+    {
+      "id": "regulatory-reporting",
+      "label": "Regulatory Reporting",
+      "domain": "CIB",
+      "subDomain": "Business Management and Frontline Risk Management Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 4,
+      "realisedCount": 5,
+      "status": "Endorsed"
+    },
+    {
+      "id": "dates-events",
+      "label": "Dates & Events",
+      "domain": "CIB",
+      "subDomain": "CIB Reference Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 5,
+      "realisedCount": 27,
+      "status": "Endorsed"
+    },
+    {
+      "id": "data-lineage-provenance",
+      "label": "Data Lineage & Provenance",
+      "domain": "CIB",
+      "subDomain": "CIB Reference Data",
+      "logicalDatasetCount": 2,
+      "bdeCount": 5,
+      "realisedCount": 44,
+      "status": "Endorsed"
+    }
+  ],
+  "logicalDatasets": [
+    {
+      "id": "trade-identifiers",
+      "name": "Trade Identifiers",
+      "subjectAreaId": "trade-lifecycle",
+      "bdeNames": [
+        "Trade Identifier",
+        "Parent Trade Identifier",
+        "Trade Reference"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 18
+    },
+    {
+      "id": "trade-events-status",
+      "name": "Trade Events & Status",
+      "subjectAreaId": "trade-lifecycle",
+      "bdeNames": [
+        "Trade Status",
+        "Trade Version Number",
+        "Trade Event Type",
+        "Current Record Indicator"
+      ],
+      "bdeCount": 4,
+      "pdeCount": 13
+    },
+    {
+      "id": "trade-economics",
+      "name": "Trade Economics",
+      "subjectAreaId": "trade-valuation-economics",
+      "bdeNames": [
+        "Notional Amount",
+        "Trade Price",
+        "Trade Quantity"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 17
+    },
+    {
+      "id": "interest-coupon-terms",
+      "name": "Interest & Coupon Terms",
+      "subjectAreaId": "trade-valuation-economics",
+      "bdeNames": [
+        "Coupon Rate",
+        "Yield",
+        "Accrued Interest",
+        "Principal Amount"
+      ],
+      "bdeCount": 4,
+      "pdeCount": 6
+    },
+    {
+      "id": "option-economics",
+      "name": "Option Economics",
+      "subjectAreaId": "trade-valuation-economics",
+      "bdeNames": [
+        "Commodity Option Premium"
+      ],
+      "bdeCount": 1,
+      "pdeCount": 3
+    },
+    {
+      "id": "security-master",
+      "name": "Security Master",
+      "subjectAreaId": "instrument-product-reference",
+      "bdeNames": [
+        "Instrument Identifier",
+        "Instrument Type",
+        "Option Exercise Type"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 22
+    },
+    {
+      "id": "product-taxonomy",
+      "name": "Product Taxonomy",
+      "subjectAreaId": "instrument-product-reference",
+      "bdeNames": [
+        "Product Type",
+        "Product Sub-Type",
+        "Product Family"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 16
+    },
+    {
+      "id": "mark-to-market-valuation",
+      "name": "Mark-to-Market Valuation",
+      "subjectAreaId": "valuation-p-l",
+      "bdeNames": [
+        "Net Present Value",
+        "Closing Price"
+      ],
+      "bdeCount": 2,
+      "pdeCount": 5
+    },
+    {
+      "id": "profit-loss",
+      "name": "Profit & Loss",
+      "subjectAreaId": "valuation-p-l",
+      "bdeNames": [
+        "Profit and Loss Explained",
+        "Realised Profit and Loss",
+        "Unrealised Profit and Loss"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 6
+    },
+    {
+      "id": "option-greeks",
+      "name": "Option Greeks",
+      "subjectAreaId": "market-risk-sensitivities",
+      "bdeNames": [
+        "Option Delta",
+        "Gamma",
+        "Vega",
+        "Theta",
+        "Rho",
+        "Higher-Order Sensitivity"
+      ],
+      "bdeCount": 6,
+      "pdeCount": 12
+    },
+    {
+      "id": "credit-spread-sensitivities",
+      "name": "Credit Spread Sensitivities",
+      "subjectAreaId": "counterparty-credit-risk",
+      "bdeNames": [
+        "Counterparty Credit Spread Sensitivity",
+        "Own Credit Spread Sensitivity",
+        "Recovery Rate"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 5
+    },
+    {
+      "id": "valuation-adjustments-xva",
+      "name": "Valuation Adjustments (XVA)",
+      "subjectAreaId": "counterparty-credit-risk",
+      "bdeNames": [
+        "Credit Valuation Adjustment"
+      ],
+      "bdeCount": 1,
+      "pdeCount": 2
+    },
+    {
+      "id": "margin-collateral",
+      "name": "Margin & Collateral",
+      "subjectAreaId": "counterparty-credit-risk",
+      "bdeNames": [
+        "Initial Margin",
+        "Collateral Agreement Reference"
+      ],
+      "bdeCount": 2,
+      "pdeCount": 4
+    },
+    {
+      "id": "position-keeping",
+      "name": "Position Keeping",
+      "subjectAreaId": "position-inventory",
+      "bdeNames": [
+        "Traded Position",
+        "Settled Position",
+        "Position Cost",
+        "Position Identifier",
+        "Inventory Name"
+      ],
+      "bdeCount": 5,
+      "pdeCount": 11
+    },
+    {
+      "id": "counterparty-customer",
+      "name": "Counterparty & Customer",
+      "subjectAreaId": "counterparty-legal-entity",
+      "bdeNames": [
+        "Counterparty Identifier",
+        "Customer Identifier",
+        "Customer Name"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 8
+    },
+    {
+      "id": "legal-entity",
+      "name": "Legal Entity",
+      "subjectAreaId": "counterparty-legal-entity",
+      "bdeNames": [
+        "Legal Entity"
+      ],
+      "bdeCount": 1,
+      "pdeCount": 5
+    },
+    {
+      "id": "book-desk-hierarchy",
+      "name": "Book & Desk Hierarchy",
+      "subjectAreaId": "trading-organisation",
+      "bdeNames": [
+        "Desk",
+        "Portfolio",
+        "Business Unit",
+        "Region"
+      ],
+      "bdeCount": 4,
+      "pdeCount": 11
+    },
+    {
+      "id": "trader-attribution",
+      "name": "Trader Attribution",
+      "subjectAreaId": "trading-organisation",
+      "bdeNames": [
+        "Trader"
+      ],
+      "bdeCount": 1,
+      "pdeCount": 7
+    },
+    {
+      "id": "sales-credit-compensation",
+      "name": "Sales Credit & Compensation",
+      "subjectAreaId": "sales-coverage-revenue",
+      "bdeNames": [
+        "Sales Credit Amount",
+        "Sales Markup",
+        "Marketing Fee",
+        "Commission"
+      ],
+      "bdeCount": 4,
+      "pdeCount": 7
+    },
+    {
+      "id": "settlement-instructions",
+      "name": "Settlement Instructions",
+      "subjectAreaId": "settlement-clearing",
+      "bdeNames": [
+        "Settlement Currency",
+        "Clearing Account"
+      ],
+      "bdeCount": 2,
+      "pdeCount": 3
+    },
+    {
+      "id": "brokerage-clearing",
+      "name": "Brokerage & Clearing",
+      "subjectAreaId": "settlement-clearing",
+      "bdeNames": [
+        "Clearing Broker",
+        "Executing Broker"
+      ],
+      "bdeCount": 2,
+      "pdeCount": 6
+    },
+    {
+      "id": "transaction-reporting",
+      "name": "Transaction Reporting",
+      "subjectAreaId": "regulatory-reporting",
+      "bdeNames": [
+        "TRACE Control Number",
+        "MSRB Code",
+        "Regulatory Trade Identifier"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 3
+    },
+    {
+      "id": "hedge-designation",
+      "name": "Hedge Designation",
+      "subjectAreaId": "regulatory-reporting",
+      "bdeNames": [
+        "Hedge Indicator"
+      ],
+      "bdeCount": 1,
+      "pdeCount": 2
+    },
+    {
+      "id": "trade-settlement-dates",
+      "name": "Trade & Settlement Dates",
+      "subjectAreaId": "dates-events",
+      "bdeNames": [
+        "Trade Date",
+        "Settlement Date",
+        "Maturity Date"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 15
+    },
+    {
+      "id": "processing-timestamps",
+      "name": "Processing Timestamps",
+      "subjectAreaId": "dates-events",
+      "bdeNames": [
+        "Business Date",
+        "Execution Timestamp"
+      ],
+      "bdeCount": 2,
+      "pdeCount": 12
+    },
+    {
+      "id": "source-provenance",
+      "name": "Source Provenance",
+      "subjectAreaId": "data-lineage-provenance",
+      "bdeNames": [
+        "Source File Name",
+        "Source System Identifier",
+        "Source Dataset Identifier"
+      ],
+      "bdeCount": 3,
+      "pdeCount": 20
+    },
+    {
+      "id": "ingestion-integrity",
+      "name": "Ingestion & Integrity",
+      "subjectAreaId": "data-lineage-provenance",
+      "bdeNames": [
+        "Ingestion Timestamp",
+        "Record Hash"
+      ],
+      "bdeCount": 2,
+      "pdeCount": 24
+    }
+  ]
+}

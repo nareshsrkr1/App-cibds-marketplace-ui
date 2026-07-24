@@ -31,7 +31,11 @@ const RESOURCE_MODE_KEYS = {
   WORKFLOW_DECLINE_MODE: 'workflowDecline',
   NOTIFICATIONS_MODE: 'notifications',
   DATASETS_MODE: 'datasets',
-  BUSINESS_TERMS_MODE: 'businessTerms',
+  CATALOGUE_LOGICAL_MODEL_MODE: 'catalogueLogicalModel',
+  CATALOGUE_BUSINESS_ELEMENTS_MODE: 'catalogueBusinessElements',
+  CATALOGUE_GLOSSARY_TERMS_MODE: 'catalogueGlossaryTerms',
+  CATALOGUE_LINEAGE_MODE: 'catalogueLineage',
+  CATALOGUE_LINEAGE_DETAILS_MODE: 'catalogueLineageDetails',
   GOVERNANCE_MODE: 'governance',
   SEARCH_MODE: 'search',
 };

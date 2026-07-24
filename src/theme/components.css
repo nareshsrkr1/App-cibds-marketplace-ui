@@ -149,6 +149,11 @@
   padding: var(--space-6);
   outline: none;
   animation: ui-modal-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.ui-modal--wide {
+  width: min(1080px, 96vw);
 }
 @keyframes ui-modal-in {
   from {
@@ -871,7 +876,6 @@ button.sb-item:disabled .sb-ic,
   margin: 12px 0 0;
   line-height: 1.6;
   max-width: 640px;
-  white-space: nowrap;
 }
 .sh-kpis {
   display: flex;
@@ -1320,6 +1324,9 @@ span.sh-more {
   font-size: 13px;
   color: var(--mid);
 }
+.sh-block-scroll {
+  max-height: 600px;
+}
 .wf-row {
   display: flex;
   align-items: center;
@@ -1581,4 +1588,237 @@ span.sh-more {
   .ui-state {
     animation: none !important;
   }
+}
+
+/* ===== Contained scroll region — a list/grid scrolls itself, not the page ===== */
+.ui-scroll-box {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(184, 146, 74, 0.5) transparent;
+}
+.ui-scroll-box::-webkit-scrollbar {
+  width: 6px;
+}
+.ui-scroll-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ui-scroll-box::-webkit-scrollbar-thumb {
+  background: rgba(184, 146, 74, 0.5);
+  border-radius: 999px;
+}
+.ui-scroll-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 146, 74, 0.8);
+}
+
+/* ===== Pagination bar ===== */
+.ui-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  flex-wrap: wrap;
+}
+.ui-pagination__nav {
+  appearance: none;
+  border: 1px solid var(--color-border);
+  background: var(--surface-elevated);
+  color: var(--color-text-secondary);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.ui-pagination__nav:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--color-text-primary);
+}
+.ui-pagination__nav:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+.ui-pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.ui-pagination__page {
+  appearance: none;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--color-text-secondary);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  min-width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.ui-pagination__page:hover:not(.is-active) {
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+.ui-pagination__page.is-active {
+  background: var(--color-brand);
+  color: var(--white);
+}
+.ui-pagination__ellipsis {
+  color: var(--color-text-muted);
+  padding: 0 2px;
+  font-size: 12.5px;
+}
+
+/* ===== Catalogue tab toolbar (shared by Logical Model / Glossary Terms — Physical
+   Datasets keeps its own .pdc-toolbar unchanged) ===== */
+.cat-toolbar {
+  margin: 0 44px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.cat-search {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 12px;
+  height: var(--control-height);
+  color: var(--color-text-muted);
+}
+.cat-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--color-text-primary);
+  background: none;
+  height: 100%;
+}
+.cat-facets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cat-facets select {
+  height: var(--control-height-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--surface-elevated);
+  color: var(--color-text-primary);
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 0 10px;
+}
+.cat-rescount {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.cat-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+}
+
+/* ===== Catalogue shared bits: accordion caret, SOR badges, small buttons, show-more,
+   key/value detail grid — shared by Logical Model, Glossary Terms, Lineage ===== */
+.cat-caret {
+  display: inline-block;
+  color: var(--color-text-muted);
+  transition: transform 0.12s ease;
+}
+.cat-caret.is-open {
+  transform: rotate(90deg);
+}
+.cat-sor {
+  display: inline-flex;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.cat-sor-endur {
+  background: color-mix(in srgb, var(--blue) 14%, var(--white));
+  color: var(--blue);
+}
+.cat-sor-catalyst {
+  background: var(--gold-lt);
+  color: var(--gold-deep);
+}
+.cat-btn {
+  appearance: none;
+  border: 1px solid var(--color-border);
+  background: var(--surface-elevated);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-weight: 600;
+}
+.cat-btn-xs {
+  font-size: 11px;
+  padding: 3px 9px;
+}
+.cat-btn-s {
+  font-size: 12.5px;
+  padding: 6px 12px;
+}
+.cat-btn:hover {
+  border-color: var(--gold);
+  color: var(--color-brand);
+}
+.cat-btn:disabled {
+  cursor: not-allowed;
+  opacity: var(--disabled-opacity);
+}
+.cat-show-more {
+  appearance: none;
+  border: none;
+  background: none;
+  color: var(--gold-deep);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.cat-show-more:hover {
+  text-decoration: underline;
+}
+.cat-deffull {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+}
+.cat-nest-title {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-brand);
+  margin-bottom: 8px;
+}
+.cat-dk {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+.cat-dv {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  font-weight: 500;
 }

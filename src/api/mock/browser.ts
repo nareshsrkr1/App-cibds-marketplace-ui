@@ -1,8 +1,9 @@
 import { setupWorker } from 'msw/browser';
+import { catalogueHandlers } from './handlers/catalogue.handlers';
 import { landingHandlers } from './handlers/landing.handlers';
 import { workspaceHandlers } from './handlers/workspace.handlers';
 
-export const worker = setupWorker(...landingHandlers, ...workspaceHandlers);
+export const worker = setupWorker(...landingHandlers, ...workspaceHandlers, ...catalogueHandlers);
 
 let startPromise: Promise<void> | null = null;
 

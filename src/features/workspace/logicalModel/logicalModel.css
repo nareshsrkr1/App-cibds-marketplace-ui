@@ -1,0 +1,321 @@
+/* Logical Model tab — adapted from the HTML SoT's "Logical Model" catalogue tab.
+   3-level accordion: subject area (.lgm-row) > logical dataset (.nest-ld) > BDE (.nest-bde). */
+
+.lgm {
+  padding: 0 0 48px;
+}
+
+/* ---- level 0 table ---- */
+.lgm-table {
+  margin: 0 44px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.lgm-head {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 90px 70px 90px 110px;
+  gap: 12px;
+  padding: 10px 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--color-border);
+}
+.lgm-head .num {
+  text-align: right;
+}
+.lgm-row {
+  border-bottom: 1px solid var(--color-border);
+}
+.lgm-row:last-child {
+  border-bottom: none;
+}
+.lgm-row-h {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 90px 70px 90px 110px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.lgm-row-h:hover {
+  background: var(--gold-lt);
+}
+.lgm-row.is-open > .lgm-row-h {
+  background: var(--gold-lt);
+}
+.lgm-row-title {
+  min-width: 0;
+}
+.lgm-row-title strong {
+  display: block;
+  font-size: 14px;
+  color: var(--color-brand);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lgm-row-title .sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lgm-row-h .num {
+  font-family: var(--mono);
+  font-size: 13px;
+  text-align: right;
+  color: var(--color-text-secondary);
+}
+.lgm-detail {
+  padding: 4px 20px 20px 52px;
+  background: var(--surface-page);
+}
+.lgm-dgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 24px;
+  margin-bottom: 16px;
+}
+
+/* ---- level 1: logical dataset accordion ---- */
+.nest-ld {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-elevated);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.nest-ld-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.nest-ld-h:hover {
+  background: var(--gold-lt);
+}
+.nl-name {
+  flex: 1;
+  font-size: 13.5px;
+}
+.nl-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+}
+.nest-ld-body {
+  padding: 4px 14px 12px 30px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ---- level 2: BDE row ---- */
+.nest-bde {
+  border-left: 2px solid var(--color-border);
+  padding-left: 12px;
+  margin: 8px 0;
+}
+.nest-bde-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.nb-name {
+  flex: 1;
+  font-size: 13px;
+}
+.nb-id {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+.nb-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+.nb-info {
+  appearance: none;
+  border: 1px solid var(--color-border);
+  background: var(--surface-elevated);
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  color: var(--gold-deep);
+  font-size: 12px;
+}
+.nb-info:hover {
+  border-color: var(--gold);
+}
+.nest-bde-body {
+  padding: 8px 0 4px;
+}
+.ln-datasets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ln-ds {
+  background: var(--surface-page);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+.ln-ds-h {
+  font-size: 12.5px;
+  color: var(--color-text-primary);
+}
+.ln-cols {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ln-col {
+  font-size: 11px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+}
+.ln-btnwrap {
+  margin-top: 10px;
+}
+
+/* Shared caret / sor badges / buttons / show-more / dk-dv key-value pattern live in
+   theme/components.css under a `.cat-*` prefix — glossary.css needs them too and
+   shouldn't depend on this file having loaded first. */
+
+/* ---- BDE detail modal ---- */
+.bde-modal {
+  max-width: 720px;
+}
+.bde-modal__eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.bde-modal__tags {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+  flex-wrap: wrap;
+}
+.bde-modal__breadcrumb {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+.bde-modal__def {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+}
+.bde-modal__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.bde-modal__card {
+  background: var(--surface-page);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+.bde-modal__card--wide {
+  grid-column: 1 / -1;
+}
+.bde-modal__card h3 {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-brand);
+  margin-bottom: 10px;
+}
+.bde-modal__card dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 0;
+}
+.bde-modal__card dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.bde-modal__card dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-primary);
+}
+.bde-modal__iso {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.bde-modal__iso-k {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+.bde-modal__iso-v {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-brand);
+}
+.bde-modal__realise-summary {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+}
+.bde-modal__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bde-modal__chip {
+  font-size: 12px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.bde-modal__related-chip {
+  appearance: none;
+  cursor: pointer;
+  font-size: 12px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: var(--sans);
+}
+.bde-modal__related-chip:hover {
+  border-color: var(--gold);
+  color: var(--color-brand);
+}
+.bde-modal__trace {
+  margin-top: 10px;
+}

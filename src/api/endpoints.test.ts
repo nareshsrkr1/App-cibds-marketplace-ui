@@ -32,15 +32,18 @@ describe('API_ENDPOINTS catalog', () => {
         'workflowApprove',
         'workflowDecline',
         'datasets',
+        'catalogueLogicalModel',
+        'catalogueBusinessElements',
+        'catalogueGlossaryTerms',
+        'catalogueLineage',
+        'catalogueLineageDetails',
       ]),
     );
   });
 
-  it('reserves planned catalogue endpoints without wiring them', () => {
+  it('reserves planned endpoints without wiring them', () => {
     const planned = listPlannedEndpoints().map((e) => e.id);
-    expect(planned).toEqual(
-      expect.arrayContaining(['notifications', 'businessTerms', 'governance', 'search']),
-    );
+    expect(planned).toEqual(expect.arrayContaining(['notifications', 'governance', 'search']));
     expect(API_ENDPOINTS.notifications.wired).toBe(false);
   });
 

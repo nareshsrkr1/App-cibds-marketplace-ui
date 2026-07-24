@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { SessionProvider } from '../features/session/SessionProvider';
 import { AppErrorBoundary } from './AppErrorBoundary';
+import { FeatureRoute } from './FeatureRoute';
 import { Spinner } from '../components/feedback/Spinner/Spinner';
 import { ToastProvider } from '../components/feedback/Toast/ToastProvider';
 import { logger } from '../services/logger';
@@ -55,6 +56,12 @@ const RegisterPhysicalDatasetPage = lazy(() =>
 const PhysicalDatasetsPage = lazy(() =>
   import('../features/workspace/physicalDatasets/PhysicalDatasetsPage').then((m) => ({
     default: m.PhysicalDatasetsPage,
+  })),
+);
+
+const LineageExplorerPage = lazy(() =>
+  import('../features/workspace/lineage/LineageExplorerPage').then((m) => ({
+    default: m.LineageExplorerPage,
   })),
 );
 
@@ -135,41 +142,65 @@ export function App() {
             <Route
               path="bulk-upload-pdes"
               element={
-                <Suspense fallback={<RouteFallback />}>
-                  <BulkUploadPdesPage />
-                </Suspense>
+                <FeatureRoute flag="bulkpde">
+                  <Suspense fallback={<RouteFallback />}>
+                    <BulkUploadPdesPage />
+                  </Suspense>
+                </FeatureRoute>
               }
             />
             <Route
               path="bind-columns"
               element={
-                <Suspense fallback={<RouteFallback />}>
-                  <BindColumnsPage />
-                </Suspense>
+                <FeatureRoute flag="bind">
+                  <Suspense fallback={<RouteFallback />}>
+                    <BindColumnsPage />
+                  </Suspense>
+                </FeatureRoute>
               }
             />
             <Route
               path="register-physical-dataset"
               element={
-                <Suspense fallback={<RouteFallback />}>
-                  <RegisterPhysicalDatasetPage />
-                </Suspense>
+                <FeatureRoute flag="register">
+                  <Suspense fallback={<RouteFallback />}>
+                    <RegisterPhysicalDatasetPage />
+                  </Suspense>
+                </FeatureRoute>
               }
             />
             <Route
               path="workflow"
               element={
-                <Suspense fallback={<RouteFallback />}>
-                  <WorkflowPage />
-                </Suspense>
+                <FeatureRoute flag="workflow">
+                  <Suspense fallback={<RouteFallback />}>
+                    <WorkflowPage />
+                  </Suspense>
+                </FeatureRoute>
+              }
+            />
+            {/* Logical Model / Glossary Terms are tabs inside PhysicalDatasetsPage, not
+                separate pages — the optional `:tab` param is one Route match, so
+                switching tabs (in-page, or via a left-nav deep link) never remounts
+                the page or loses each tab's already-fetched data. */}
+            <Route
+              path="physical-datasets/:tab?"
+              element={
+                <FeatureRoute flag="phys">
+                  <Suspense fallback={<RouteFallback />}>
+                    <PhysicalDatasetsPage />
+                  </Suspense>
+                </FeatureRoute>
               }
             />
             <Route
-              path="physical-datasets"
+              path="lineage-explorer"
               element={
-                <Suspense fallback={<RouteFallback />}>
-                  <PhysicalDatasetsPage />
-                </Suspense>
+                <FeatureRoute flag="lineage">
+                  <Suspense fallback={<RouteFallback />}>
+                    <LineageExplorerPage />
+                  </Suspense>
+                </FeatureRoute>
               }
             />
           </Route>

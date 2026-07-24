@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+import { resolveFeatureEnabled } from '../../app/config/featureFlags';
 import type { NavGroup, NavItem, WorkspaceNavResponse } from './nav.types';
 import type {
   ConsoleAction,
@@ -29,7 +31,7 @@ function adaptNavItem(raw: unknown): NavItem | null {
     id: r.id,
     label: r.label,
     icon: typeof r.icon === 'string' ? r.icon : undefined,
-    enabled: Boolean(r.enabled),
+    enabled: resolveFeatureEnabled(r.id, Boolean(r.enabled)),
     active: typeof r.active === 'boolean' ? r.active : undefined,
     badge: typeof r.badge === 'string' ? r.badge : undefined,
   };
@@ -77,11 +79,12 @@ function adaptAction(raw: unknown): ConsoleAction | null {
   const r = raw as Record<string, unknown>;
   if (typeof r.id !== 'string' || typeof r.label !== 'string') return null;
   const variant = r.variant === 'primary' || r.variant === 'secondary' ? r.variant : 'secondary';
+  const rawEnabled = typeof r.enabled === 'boolean' ? r.enabled : true;
   return {
     id: r.id,
     label: r.label,
     variant,
-    enabled: typeof r.enabled === 'boolean' ? r.enabled : undefined,
+    enabled: resolveFeatureEnabled(r.id, rawEnabled),
   };
 }
 
@@ -148,11 +151,23 @@ export function adaptConsoleCharts(raw: ConsoleChartsResponse): ConsoleChartsRes
   };
 }
 
+/** Only the inline emphasis/mono-chip markup the panel item template actually uses. */
+const SUBTITLE_HTML_ALLOWED_TAGS = ['b', 'strong', 'em', 'span'];
+const SUBTITLE_HTML_ALLOWED_ATTR = ['class'];
+
 function adaptPanelItem(raw: unknown): ConsolePanelItem | null {
   if (!raw || typeof raw !== 'object') return null;
   const r = raw as Record<string, unknown>;
   if (typeof r.id !== 'string' || typeof r.title !== 'string') return null;
-  return r as unknown as ConsolePanelItem;
+  const item = r as unknown as ConsolePanelItem;
+  if (typeof item.subtitleHtml !== 'string') return item;
+  return {
+    ...item,
+    subtitleHtml: DOMPurify.sanitize(item.subtitleHtml, {
+      ALLOWED_TAGS: SUBTITLE_HTML_ALLOWED_TAGS,
+      ALLOWED_ATTR: SUBTITLE_HTML_ALLOWED_ATTR,
+    }),
+  };
 }
 
 function adaptPanel(raw: unknown): ConsolePanel {

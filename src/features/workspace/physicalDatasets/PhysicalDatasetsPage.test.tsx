@@ -26,7 +26,7 @@ function renderWorkspace(path = '/workspace') {
         <Routes>
           <Route path="/workspace" element={<WorkspacePage />}>
             <Route index element={<WorkspaceConsolePage />} />
-            <Route path="physical-datasets" element={<PhysicalDatasetsPage />} />
+            <Route path="physical-datasets/:tab?" element={<PhysicalDatasetsPage />} />
           </Route>
         </Routes>
         <ToastProvider />
@@ -68,10 +68,10 @@ describe('Physical datasets catalogue', () => {
     expect(within(page).getByText('6 shown')).toBeInTheDocument();
   });
 
-  it('Logical Model and Glossary Terms tabs are visible but disabled', async () => {
+  it('Logical Model and Glossary Terms tabs are visible and enabled', async () => {
     const page = await openLoadedPage();
-    expect(within(page).getByRole('tab', { name: 'Logical Model' })).toBeDisabled();
-    expect(within(page).getByRole('tab', { name: 'Glossary Terms' })).toBeDisabled();
+    expect(within(page).getByRole('tab', { name: 'Logical Model' })).toBeEnabled();
+    expect(within(page).getByRole('tab', { name: 'Glossary Terms' })).toBeEnabled();
   });
 
   it('search narrows results to matching datasets', async () => {
@@ -106,6 +106,26 @@ describe('Physical datasets catalogue', () => {
 
     await waitFor(() => expect(within(page).getByText('1 shown')).toBeInTheDocument());
     expect(within(page).getByText('Endur Composer Child Trades')).toBeInTheDocument();
+  });
+
+  it('pagination controls stay hidden while all datasets fit on one page', async () => {
+    const page = await openLoadedPage();
+    expect(page.querySelector('.ui-pagination')).not.toBeInTheDocument();
+  });
+
+  it('switching tabs and back keeps a tab mounted (hidden) instead of re-fetching', async () => {
+    const page = await openLoadedPage();
+
+    fireEvent.click(within(page).getByRole('tab', { name: 'Logical Model' }));
+    await within(page).findByText('14 subject areas');
+
+    fireEvent.click(within(page).getByRole('tab', { name: 'Physical Datasets' }));
+    // Still showing real content immediately — not a fresh loading spinner.
+    expect(within(page).getByText('1CAT Investments Trades')).toBeInTheDocument();
+
+    fireEvent.click(within(page).getByRole('tab', { name: 'Logical Model' }));
+    // Same instance, no reload spinner on revisit.
+    expect(within(page).getByText('14 subject areas')).toBeInTheDocument();
   });
 
   it('list/grid toggle switches views', async () => {

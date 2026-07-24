@@ -10,8 +10,8 @@
     { "id": "sla", "value": "96%", "label": "Delivery SLA" }
   ],
   "actions": [
-    { "id": "registry", "label": "Registry", "variant": "primary", "enabled": false },
-    { "id": "audit", "label": "Audit log", "variant": "secondary", "enabled": false },
+    { "id": "adminreg", "label": "Registry", "variant": "primary", "enabled": false },
+    { "id": "adminaudit", "label": "Audit log", "variant": "secondary", "enabled": false },
     {
       "id": "govqueue",
       "label": "Endorsement queue",

@@ -7,6 +7,13 @@ export const WORKSPACE_ROUTES = {
   /** Nav "Workflow" and hero "Track workflow" share this route. */
   workflow: '/workspace/workflow',
   phys: '/workspace/physical-datasets',
+  /** Logical Model / Glossary Terms are tabs INSIDE the Physical Datasets page, not
+   * separate pages — but each still gets its own bookmarkable sub-path so the left
+   * nav's "Logical model" / "Glossary terms" items can navigate straight to that tab
+   * instead of only landing on "Physical Datasets" every time. */
+  log: '/workspace/physical-datasets/logical-model',
+  bt: '/workspace/physical-datasets/glossary-terms',
+  lineage: '/workspace/lineage-explorer',
 } as const;
 
 export type WorkspaceNavId = keyof typeof WORKSPACE_ROUTES;
@@ -24,6 +31,10 @@ export function activeNavIdForPath(pathname: string): string {
   if (pathname.startsWith(WORKSPACE_ROUTES.bind)) return 'bind';
   if (pathname.startsWith(WORKSPACE_ROUTES.bulkpde)) return 'bulkpde';
   if (pathname.startsWith(WORKSPACE_ROUTES.register)) return 'register';
+  // Check the catalogue sub-paths before the shorter "phys" prefix they extend.
+  if (pathname.startsWith(WORKSPACE_ROUTES.log)) return 'log';
+  if (pathname.startsWith(WORKSPACE_ROUTES.bt)) return 'bt';
   if (pathname.startsWith(WORKSPACE_ROUTES.phys)) return 'phys';
+  if (pathname.startsWith(WORKSPACE_ROUTES.lineage)) return 'lineage';
   return 'console';
 }

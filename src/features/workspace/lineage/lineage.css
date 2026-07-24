@@ -1,0 +1,261 @@
+/* Lineage — shared Sankey-diagram modal + standalone Lineage Explorer screen.
+   Adapted from the HTML SoT's "Refined lineage" modal and "Lineage explorer" screen. */
+
+.lin-modal {
+  width: 100%;
+}
+.lin-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+.lin-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+.lin-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.lin-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.lin-swatch--root {
+  background: var(--color-brand);
+}
+.lin-swatch--bde {
+  background: var(--gold-deep);
+}
+.lin-swatch--dataset {
+  background: var(--blue);
+}
+.lin-swatch--columns {
+  background: var(--green);
+}
+.lin-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+.lin-svg {
+  display: block;
+  flex: 0 1 auto;
+  /* Flex items default to min-width:auto, which blocks shrinking below the SVG's
+     intrinsic (attribute) width no matter what flex-shrink says — override it so a
+     narrow window actually shrinks the diagram instead of clipping/overflowing it. */
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  max-height: 560px;
+  overflow: visible;
+}
+.lin-ribbon {
+  stroke-opacity: 0.32;
+  stroke-linecap: round;
+}
+.lin-node {
+  cursor: pointer;
+}
+.lin-node rect {
+  stroke: transparent;
+  stroke-width: 2;
+  transition: stroke 0.12s ease, filter 0.12s ease;
+}
+.lin-node:hover rect {
+  filter: brightness(1.08);
+}
+.lin-node:focus-visible rect {
+  outline: none;
+  stroke: var(--gold);
+}
+.lin-node.is-selected rect {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.lin-node-caption {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  fill: rgba(255, 255, 255, 0.72);
+  pointer-events: none;
+}
+.lin-node-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--white);
+  pointer-events: none;
+}
+.lin-node-sublabel {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: rgba(255, 255, 255, 0.78);
+  pointer-events: none;
+}
+
+/* ---- detail side panel ---- */
+.lin-detail {
+  flex: 0 0 280px;
+  max-width: 280px;
+  background: var(--surface-page);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  position: sticky;
+  top: 0;
+  max-height: 560px;
+  overflow-y: auto;
+}
+.lin-detail--empty {
+  color: var(--color-text-muted);
+}
+.lin-detail h3 {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-brand);
+  margin-bottom: 2px;
+}
+.lin-detail__rows {
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lin-detail__rows dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+}
+.lin-detail__rows dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-primary);
+}
+.lin-detail__cols {
+  margin-top: 14px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 10px;
+}
+.lin-detail__col {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  padding: 3px 0;
+}
+
+@media (max-width: 720px) {
+  .lin-layout {
+    flex-wrap: wrap;
+  }
+  .lin-detail {
+    flex-basis: 100%;
+    max-width: 100%;
+    position: static;
+    max-height: none;
+  }
+}
+
+/* ---- Lineage Explorer screen ---- */
+.lx-page {
+  padding: 0 0 48px;
+}
+.lx-search {
+  margin-bottom: 16px;
+}
+.lx-search label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+.lx-search select {
+  width: 100%;
+  max-width: 480px;
+  height: var(--control-height);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--surface-elevated);
+  color: var(--color-text-primary);
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 0 12px;
+}
+.lx-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+.lx-picks-h {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-brand);
+  margin-bottom: 10px;
+}
+.lx-picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.lx-pick {
+  appearance: none;
+  text-align: left;
+  cursor: pointer;
+  background: var(--surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: var(--sans);
+}
+.lx-pick:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-sm);
+}
+.lx-pick-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-brand);
+  display: block;
+}
+.lx-pick-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  display: block;
+  margin-top: 4px;
+}
+.lx-pick-cde {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold-deep);
+  background: var(--gold-lt);
+  border-radius: 999px;
+  padding: 1px 6px;
+}

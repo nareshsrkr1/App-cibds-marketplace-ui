@@ -8,6 +8,8 @@ import {
 import { EmptyState } from '../../feedback/EmptyState/EmptyState';
 import { Badge } from '../../ui/Badge/Badge';
 import { Button } from '../../ui/Button/Button';
+import { Pagination } from '../../ui/Pagination/Pagination';
+import { usePagination } from '../../ui/Pagination/usePagination';
 
 export type NotificationPanelProps = {
   onClose: () => void;
@@ -16,9 +18,8 @@ export type NotificationPanelProps = {
 
 type Tab = 'unread' | 'all';
 
-/** Items beyond this many are hidden behind a local "Show more" reveal — forward cover for
- * real notification volumes; today's seed data never hits this. */
-const PAGE_SIZE = 20;
+/** Forward cover for real notification volumes; today's seed data never hits this. */
+const PAGE_SIZE = 10;
 
 const FOCUSABLE =
   'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -41,7 +42,6 @@ function toneFor(category: AppNotification['category']) {
 export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanelProps) {
   const [items, setItems] = useState<AppNotification[]>([]);
   const [tab, setTab] = useState<Tab>('unread');
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const panelRef = useRef<HTMLElement>(null);
 
   useEffect(() => subscribeNotifications(setItems), []);
@@ -94,9 +94,11 @@ export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanel
     () => (tab === 'unread' ? items.filter((n) => !n.read) : items),
     [items, tab],
   );
-  useEffect(() => setVisibleCount(PAGE_SIZE), [tab]);
-  const visible = filtered.slice(0, visibleCount);
-  const remaining = filtered.length - visible.length;
+  const { page, setPage, pageCount, pageItems: visible } = usePagination(
+    filtered,
+    PAGE_SIZE,
+    tab,
+  );
 
   return (
     <aside
@@ -152,7 +154,8 @@ export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanel
           description="You are all caught up."
         />
       ) : (
-        <ul className="notif-list">
+        <>
+          <ul className="notif-list ui-scroll-box">
           {visible.map((n) => (
             <li
               key={n.id}
@@ -182,18 +185,14 @@ export function NotificationPanel({ onClose, returnFocusRef }: NotificationPanel
               </div>
             </li>
           ))}
-          {remaining > 0 ? (
-            <li className="notif-list__more">
-              <button
-                type="button"
-                className="sh-show-more"
-                onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
-              >
-                Show {Math.min(remaining, PAGE_SIZE)} more
-              </button>
-            </li>
-          ) : null}
-        </ul>
+          </ul>
+          <Pagination
+            page={page}
+            pageCount={pageCount}
+            onPageChange={setPage}
+            label="Notifications pages"
+          />
+        </>
       )}
     </aside>
   );

@@ -1,0 +1,966 @@
+{
+  "terms": [
+    {
+      "id": "BDE_D001",
+      "name": "Trade Identifier",
+      "definition": "The system-of-record identifier assigned to a trade at execution.",
+      "subjectAreaId": "trade-lifecycle",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 11,
+      "bdeIds": [
+        "BDE_D001"
+      ]
+    },
+    {
+      "id": "BDE_D002",
+      "name": "Parent Trade Identifier",
+      "definition": "The identifier of the originating trade from which this trade was derived (e.g. allocation, novation).",
+      "subjectAreaId": "trade-lifecycle",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D002"
+      ]
+    },
+    {
+      "id": "BDE_D003",
+      "name": "Trade Reference",
+      "definition": "A free-form or external reference associated with the trade.",
+      "subjectAreaId": "trade-lifecycle",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D003"
+      ]
+    },
+    {
+      "id": "BDE_D004",
+      "name": "Trade Status",
+      "definition": "The current processing or lifecycle state of the trade.",
+      "subjectAreaId": "trade-lifecycle",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D004"
+      ]
+    },
+    {
+      "id": "BDE_D005",
+      "name": "Trade Version Number",
+      "definition": "The sequential version of the trade record, incremented on amendment.",
+      "subjectAreaId": "trade-lifecycle",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D005"
+      ]
+    },
+    {
+      "id": "BDE_D006",
+      "name": "Trade Event Type",
+      "definition": "The lifecycle event that produced this record \\u2014 new, amend, cancel, novation.",
+      "subjectAreaId": "trade-lifecycle",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D006"
+      ]
+    },
+    {
+      "id": "BDE_D007",
+      "name": "Current Record Indicator",
+      "definition": "Flag identifying the current/latest version of a trade among its versions.",
+      "subjectAreaId": "trade-lifecycle",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D007"
+      ]
+    },
+    {
+      "id": "BDE_D008",
+      "name": "Notional Amount",
+      "definition": "The nominal or face value of a derivative used to calculate contractual payments; not itself exchanged.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D008"
+      ]
+    },
+    {
+      "id": "BDE_D009",
+      "name": "Coupon Rate",
+      "definition": "The stated annual interest rate paid on a fixed-income security.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D009"
+      ]
+    },
+    {
+      "id": "BDE_D010",
+      "name": "Yield",
+      "definition": "The effective rate of return on a fixed-income security given its price.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D010"
+      ]
+    },
+    {
+      "id": "BDE_D011",
+      "name": "Accrued Interest",
+      "definition": "Interest earned on a fixed-income position since the last coupon payment date but not yet paid.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D011"
+      ]
+    },
+    {
+      "id": "BDE_D012",
+      "name": "Principal Amount",
+      "definition": "The principal cash amount of a fixed-income trade.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D012"
+      ]
+    },
+    {
+      "id": "BDE_D013",
+      "name": "Trade Price",
+      "definition": "The execution price of the trade, expressed per the instrument's convention.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 5,
+      "bdeIds": [
+        "BDE_D013"
+      ]
+    },
+    {
+      "id": "BDE_D014",
+      "name": "Trade Quantity",
+      "definition": "The traded quantity, volume, or number of contracts.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D014"
+      ]
+    },
+    {
+      "id": "BDE_D015",
+      "name": "Commodity Option Premium",
+      "definition": "The premium paid or received on a commodity option.",
+      "subjectAreaId": "trade-valuation-economics",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D015"
+      ]
+    },
+    {
+      "id": "BDE_D016",
+      "name": "Instrument Identifier",
+      "definition": "A standard market identifier for the traded security (CUSIP, ISIN, ticker).",
+      "subjectAreaId": "instrument-product-reference",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 12,
+      "bdeIds": [
+        "BDE_D016"
+      ]
+    },
+    {
+      "id": "BDE_D017",
+      "name": "Instrument Type",
+      "definition": "The classification of the instrument's structural form.",
+      "subjectAreaId": "instrument-product-reference",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 8,
+      "bdeIds": [
+        "BDE_D017"
+      ]
+    },
+    {
+      "id": "BDE_D018",
+      "name": "Option Exercise Type",
+      "definition": "Whether the option is a put or a call.",
+      "subjectAreaId": "instrument-product-reference",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D018"
+      ]
+    },
+    {
+      "id": "BDE_D019",
+      "name": "Product Type",
+      "definition": "The product classification carried on the trade as sourced from the SOR (e.g. TREAS, CommoditySwap).",
+      "subjectAreaId": "instrument-product-reference",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D019"
+      ]
+    },
+    {
+      "id": "BDE_D020",
+      "name": "Product Sub-Type",
+      "definition": "The finer product classification beneath product type (e.g. TBOND, EFP).",
+      "subjectAreaId": "instrument-product-reference",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D020"
+      ]
+    },
+    {
+      "id": "BDE_D021",
+      "name": "Product Family",
+      "definition": "The top-level product grouping (e.g. Commodity, Fixed Income).",
+      "subjectAreaId": "instrument-product-reference",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D021"
+      ]
+    },
+    {
+      "id": "BDE_D022",
+      "name": "Net Present Value",
+      "definition": "The present value of a trade's expected future cash flows in USD.",
+      "subjectAreaId": "valuation-p-l",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D022"
+      ]
+    },
+    {
+      "id": "BDE_D023",
+      "name": "Profit and Loss Explained",
+      "definition": "The decomposition of P&L change attributed to identifiable market and trade factors.",
+      "subjectAreaId": "valuation-p-l",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D023"
+      ]
+    },
+    {
+      "id": "BDE_D024",
+      "name": "Realised Profit and Loss",
+      "definition": "P&L locked in from closed or settled positions.",
+      "subjectAreaId": "valuation-p-l",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D024"
+      ]
+    },
+    {
+      "id": "BDE_D025",
+      "name": "Unrealised Profit and Loss",
+      "definition": "Mark-to-market P&L on open positions not yet settled.",
+      "subjectAreaId": "valuation-p-l",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D025"
+      ]
+    },
+    {
+      "id": "BDE_D026",
+      "name": "Closing Price",
+      "definition": "The official closing or mark price used for valuation.",
+      "subjectAreaId": "valuation-p-l",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D026"
+      ]
+    },
+    {
+      "id": "BDE_D027",
+      "name": "Option Delta",
+      "definition": "The sensitivity of a position's value to a unit change in the underlying price.",
+      "subjectAreaId": "market-risk-sensitivities",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D027"
+      ]
+    },
+    {
+      "id": "BDE_D028",
+      "name": "Gamma",
+      "definition": "The rate of change of delta with respect to the underlying price.",
+      "subjectAreaId": "market-risk-sensitivities",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D028"
+      ]
+    },
+    {
+      "id": "BDE_D029",
+      "name": "Vega",
+      "definition": "The sensitivity of value to a change in implied volatility.",
+      "subjectAreaId": "market-risk-sensitivities",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D029"
+      ]
+    },
+    {
+      "id": "BDE_D030",
+      "name": "Theta",
+      "definition": "The sensitivity of value to the passage of time (time decay).",
+      "subjectAreaId": "market-risk-sensitivities",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D030"
+      ]
+    },
+    {
+      "id": "BDE_D031",
+      "name": "Rho",
+      "definition": "The sensitivity of value to a change in interest rates.",
+      "subjectAreaId": "market-risk-sensitivities",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D031"
+      ]
+    },
+    {
+      "id": "BDE_D032",
+      "name": "Higher-Order Sensitivity",
+      "definition": "Higher-order risk sensitivities such as skew, speed, and cross-correlation effects.",
+      "subjectAreaId": "market-risk-sensitivities",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D032"
+      ]
+    },
+    {
+      "id": "BDE_D033",
+      "name": "Counterparty Credit Spread Sensitivity",
+      "definition": "The sensitivity of value to a one-basis-point move in the counterparty's credit spread (CS01).",
+      "subjectAreaId": "counterparty-credit-risk",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D033"
+      ]
+    },
+    {
+      "id": "BDE_D034",
+      "name": "Own Credit Spread Sensitivity",
+      "definition": "The sensitivity of value to a one-basis-point move in Wells Fargo's own credit spread.",
+      "subjectAreaId": "counterparty-credit-risk",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D034"
+      ]
+    },
+    {
+      "id": "BDE_D035",
+      "name": "Recovery Rate",
+      "definition": "The assumed recovery rate on default for counterparty or own credit.",
+      "subjectAreaId": "counterparty-credit-risk",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D035"
+      ]
+    },
+    {
+      "id": "BDE_D036",
+      "name": "Credit Valuation Adjustment",
+      "definition": "The adjustment to derivative value reflecting counterparty credit risk.",
+      "subjectAreaId": "counterparty-credit-risk",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D036"
+      ]
+    },
+    {
+      "id": "BDE_D037",
+      "name": "Initial Margin",
+      "definition": "Margin posted to cover potential future exposure on a trade.",
+      "subjectAreaId": "counterparty-credit-risk",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D037"
+      ]
+    },
+    {
+      "id": "BDE_D038",
+      "name": "Collateral Agreement Reference",
+      "definition": "Reference to the CSA or collateral agreement governing margining.",
+      "subjectAreaId": "counterparty-credit-risk",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D038"
+      ]
+    },
+    {
+      "id": "BDE_D039",
+      "name": "Traded Position",
+      "definition": "The position quantity on a traded basis as of the business date.",
+      "subjectAreaId": "position-inventory",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D039"
+      ]
+    },
+    {
+      "id": "BDE_D040",
+      "name": "Settled Position",
+      "definition": "The position quantity on a settled basis as of the business date.",
+      "subjectAreaId": "position-inventory",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D040"
+      ]
+    },
+    {
+      "id": "BDE_D041",
+      "name": "Position Cost",
+      "definition": "The cost basis of a held position.",
+      "subjectAreaId": "position-inventory",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D041"
+      ]
+    },
+    {
+      "id": "BDE_D042",
+      "name": "Position Identifier",
+      "definition": "The identifier of a position or inventory holding.",
+      "subjectAreaId": "position-inventory",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D042"
+      ]
+    },
+    {
+      "id": "BDE_D043",
+      "name": "Inventory Name",
+      "definition": "The name of the inventory book holding the position.",
+      "subjectAreaId": "position-inventory",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D043"
+      ]
+    },
+    {
+      "id": "BDE_D044",
+      "name": "Counterparty Identifier",
+      "definition": "The identifier of the counterparty that participates in a financial transaction.",
+      "subjectAreaId": "counterparty-legal-entity",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D044"
+      ]
+    },
+    {
+      "id": "BDE_D045",
+      "name": "Customer Identifier",
+      "definition": "The identifier of the customer associated with the trade.",
+      "subjectAreaId": "counterparty-legal-entity",
+      "classification": "PII",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D045"
+      ]
+    },
+    {
+      "id": "BDE_D046",
+      "name": "Customer Name",
+      "definition": "The name of the customer associated with the trade.",
+      "subjectAreaId": "counterparty-legal-entity",
+      "classification": "PII",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D046"
+      ]
+    },
+    {
+      "id": "BDE_D047",
+      "name": "Legal Entity",
+      "definition": "The legal entity of Wells Fargo or the counterparty booking the trade.",
+      "subjectAreaId": "counterparty-legal-entity",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 5,
+      "bdeIds": [
+        "BDE_D047"
+      ]
+    },
+    {
+      "id": "BDE_D048",
+      "name": "Desk",
+      "definition": "The trading desk that owns the trade or position.",
+      "subjectAreaId": "trading-organisation",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D048"
+      ]
+    },
+    {
+      "id": "BDE_D049",
+      "name": "Portfolio",
+      "definition": "The portfolio or book to which the trade is assigned.",
+      "subjectAreaId": "trading-organisation",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D049"
+      ]
+    },
+    {
+      "id": "BDE_D050",
+      "name": "Business Unit",
+      "definition": "The organisational business unit responsible for the trade.",
+      "subjectAreaId": "trading-organisation",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D050"
+      ]
+    },
+    {
+      "id": "BDE_D051",
+      "name": "Trader",
+      "definition": "The trader who executed or owns the trade.",
+      "subjectAreaId": "trading-organisation",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 7,
+      "bdeIds": [
+        "BDE_D051"
+      ]
+    },
+    {
+      "id": "BDE_D052",
+      "name": "Region",
+      "definition": "The geographic region of the book or desk.",
+      "subjectAreaId": "trading-organisation",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D052"
+      ]
+    },
+    {
+      "id": "BDE_D053",
+      "name": "Sales Credit Amount",
+      "definition": "The sales credit attributed to a trade for revenue allocation.",
+      "subjectAreaId": "sales-coverage-revenue",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D053"
+      ]
+    },
+    {
+      "id": "BDE_D054",
+      "name": "Sales Markup",
+      "definition": "The markup applied on a trade contributing to sales revenue.",
+      "subjectAreaId": "sales-coverage-revenue",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 0,
+      "bdeIds": [
+        "BDE_D054"
+      ]
+    },
+    {
+      "id": "BDE_D055",
+      "name": "Marketing Fee",
+      "definition": "The marketing fee or marketer compensation associated with the trade.",
+      "subjectAreaId": "sales-coverage-revenue",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D055"
+      ]
+    },
+    {
+      "id": "BDE_D056",
+      "name": "Commission",
+      "definition": "Commission charged or paid on the trade.",
+      "subjectAreaId": "sales-coverage-revenue",
+      "classification": "Confidential",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D056"
+      ]
+    },
+    {
+      "id": "BDE_D057",
+      "name": "Settlement Currency",
+      "definition": "The currency in which the trade settles.",
+      "subjectAreaId": "settlement-clearing",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D057"
+      ]
+    },
+    {
+      "id": "BDE_D058",
+      "name": "Clearing Broker",
+      "definition": "The broker through which the trade is cleared.",
+      "subjectAreaId": "settlement-clearing",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D058"
+      ]
+    },
+    {
+      "id": "BDE_D059",
+      "name": "Executing Broker",
+      "definition": "The broker through which the trade was executed.",
+      "subjectAreaId": "settlement-clearing",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 4,
+      "bdeIds": [
+        "BDE_D059"
+      ]
+    },
+    {
+      "id": "BDE_D060",
+      "name": "Clearing Account",
+      "definition": "The GMI or clearing account identifier.",
+      "subjectAreaId": "settlement-clearing",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D060"
+      ]
+    },
+    {
+      "id": "BDE_D061",
+      "name": "TRACE Control Number",
+      "definition": "The FINRA TRACE control number assigned on regulatory trade reporting.",
+      "subjectAreaId": "regulatory-reporting",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D061"
+      ]
+    },
+    {
+      "id": "BDE_D062",
+      "name": "MSRB Code",
+      "definition": "The MSRB classification applied for municipal securities reporting.",
+      "subjectAreaId": "regulatory-reporting",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D062"
+      ]
+    },
+    {
+      "id": "BDE_D063",
+      "name": "Regulatory Trade Identifier",
+      "definition": "Identifiers assigned by regulatory or venue reporting systems (WINFITS, venue, MIC).",
+      "subjectAreaId": "regulatory-reporting",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 1,
+      "bdeIds": [
+        "BDE_D063"
+      ]
+    },
+    {
+      "id": "BDE_D064",
+      "name": "Hedge Indicator",
+      "definition": "Flags identifying bona-fide hedge or DSOM status for regulatory purposes.",
+      "subjectAreaId": "regulatory-reporting",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 2,
+      "bdeIds": [
+        "BDE_D064"
+      ]
+    },
+    {
+      "id": "BDE_D065",
+      "name": "Trade Date",
+      "definition": "The date on which the trade was executed.",
+      "subjectAreaId": "dates-events",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 7,
+      "bdeIds": [
+        "BDE_D065"
+      ]
+    },
+    {
+      "id": "BDE_D066",
+      "name": "Settlement Date",
+      "definition": "The date on which the trade settles.",
+      "subjectAreaId": "dates-events",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 3,
+      "bdeIds": [
+        "BDE_D066"
+      ]
+    },
+    {
+      "id": "BDE_D067",
+      "name": "Maturity Date",
+      "definition": "The date on which the instrument matures or expires.",
+      "subjectAreaId": "dates-events",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 5,
+      "bdeIds": [
+        "BDE_D067"
+      ]
+    },
+    {
+      "id": "BDE_D068",
+      "name": "Business Date",
+      "definition": "The processing business date of the record.",
+      "subjectAreaId": "dates-events",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 7,
+      "bdeIds": [
+        "BDE_D068"
+      ]
+    },
+    {
+      "id": "BDE_D069",
+      "name": "Execution Timestamp",
+      "definition": "The precise time the trade was executed or booked.",
+      "subjectAreaId": "dates-events",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 5,
+      "bdeIds": [
+        "BDE_D069"
+      ]
+    },
+    {
+      "id": "BDE_D070",
+      "name": "Source File Name",
+      "definition": "The name of the source file from which the record was ingested by 1MBDA.",
+      "subjectAreaId": "data-lineage-provenance",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D070"
+      ]
+    },
+    {
+      "id": "BDE_D071",
+      "name": "Source System Identifier",
+      "definition": "The identifier of the originating source system (SOR).",
+      "subjectAreaId": "data-lineage-provenance",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 8,
+      "bdeIds": [
+        "BDE_D071"
+      ]
+    },
+    {
+      "id": "BDE_D072",
+      "name": "Source Dataset Identifier",
+      "definition": "The identifier of the source dataset within the SOR.",
+      "subjectAreaId": "data-lineage-provenance",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D072"
+      ]
+    },
+    {
+      "id": "BDE_D073",
+      "name": "Ingestion Timestamp",
+      "definition": "The time at which 1MBDA ingested the record.",
+      "subjectAreaId": "data-lineage-provenance",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 6,
+      "bdeIds": [
+        "BDE_D073"
+      ]
+    },
+    {
+      "id": "BDE_D074",
+      "name": "Record Hash",
+      "definition": "Hash values used for change detection and record integrity.",
+      "subjectAreaId": "data-lineage-provenance",
+      "classification": "Internal",
+      "pii": false,
+      "status": "Endorsed",
+      "pdeCount": 18,
+      "bdeIds": [
+        "BDE_D074"
+      ]
+    }
+  ]
+}

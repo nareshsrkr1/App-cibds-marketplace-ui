@@ -1,164 +1,56 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { isFeatureEnabled } from '../../../app/config/featureFlags';
 import { ConsoleHeader } from '../components/ConsoleHeader';
-import { EmptyState } from '../../../components/feedback/EmptyState/EmptyState';
-import { ErrorState } from '../../../components/feedback/ErrorState/ErrorState';
-import { Spinner } from '../../../components/feedback/Spinner/Spinner';
-import { toast } from '../../../services/toastService';
-import { fetchPhysicalDatasets } from './physicalDatasets.api';
-import {
-  CLASSIFICATION_FILTER_OPTIONS,
-  SOR_FILTER_OPTIONS,
-  SORT_OPTIONS,
-  type PhysicalDataset,
-  type PhysicalDatasetSortKey,
-  type PhysicalDatasetViewMode,
-} from './physicalDatasets.types';
-import { PhysicalDatasetsGrid } from './components/PhysicalDatasetsGrid';
-import { PhysicalDatasetsTable } from './components/PhysicalDatasetsTable';
+import { CatalogueModalsProvider } from '../lineage/CatalogueModalsProvider';
+import { GlossaryTermsTab } from '../glossary/components/GlossaryTermsTab';
+import { LogicalModelTab } from '../logicalModel/components/LogicalModelTab';
+import { WORKSPACE_ROUTES } from '../workspaceRoutes';
+import { PhysicalDatasetsTab } from './components/PhysicalDatasetsTab';
 import './physicalDatasets.css';
 
 const FUTURE = 'Available in a future release';
 
-function toCsv(rows: PhysicalDataset[]): string {
-  const header = [
-    'Dataset',
-    'Dataset ID',
-    'Source file',
-    'System of record',
-    'Owner',
-    'Hosting app',
-    'Classification',
-    'Status',
-    'Columns',
-    'Bound %',
-    'Tier',
-  ];
-  const lines = rows.map((r) =>
-    [
-      r.name,
-      r.dsId,
-      r.sourceFile,
-      r.sor,
-      r.owner,
-      r.hostingApp,
-      r.classification,
-      r.status,
-      String(r.columnCount),
-      String(r.boundPercent),
-      r.tier,
-    ]
-      .map((v) => `"${v.replace(/"/g, '""')}"`)
-      .join(','),
-  );
-  return [header.join(','), ...lines].join('\n');
+type CatalogueTab = 'phys' | 'log' | 'bt';
+
+const TABS: Array<{ id: CatalogueTab; label: string }> = [
+  { id: 'phys', label: 'Physical Datasets' },
+  { id: 'log', label: 'Logical Model' },
+  { id: 'bt', label: 'Glossary Terms' },
+];
+
+/** Matches the route's optional `:tab` param (from `physical-datasets/:tab?` in
+ * App.tsx) to which tab that is — the left nav's "Logical model"/"Glossary terms"
+ * deep-link to these same sub-paths, so a direct nav click or a bookmarked/shared
+ * URL lands on the right tab instead of always opening on Physical Datasets. */
+function tabForParam(tab: string | undefined): CatalogueTab {
+  if (tab === 'logical-model') return 'log';
+  if (tab === 'glossary-terms') return 'bt';
+  return 'phys';
 }
 
 export function PhysicalDatasetsPage() {
-  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
-  const [error, setError] = useState<string | null>(null);
-  const [datasets, setDatasets] = useState<PhysicalDataset[]>([]);
-  const [reloadToken, setReloadToken] = useState(0);
+  const params = useParams<{ tab?: string }>();
+  const navigate = useNavigate();
+  const initialTab = tabForParam(params.tab);
 
-  const [query, setQuery] = useState('');
-  const [sor, setSor] = useState<(typeof SOR_FILTER_OPTIONS)[number]>('All SOR');
-  const [classification, setClassification] =
-    useState<(typeof CLASSIFICATION_FILTER_OPTIONS)[number]>('All classification');
-  const [sortKey, setSortKey] = useState<PhysicalDatasetSortKey>('name');
-  const [gapsOnly, setGapsOnly] = useState(false);
-  const [viewMode, setViewMode] = useState<PhysicalDatasetViewMode>('list');
+  const [activeTab, setActiveTab] = useState<CatalogueTab>(initialTab);
+  // Tabs stay mounted (hidden, not unmounted) once visited, so their own fetch only
+  // runs on first activation and switching back doesn't re-fetch.
+  const [visitedTabs, setVisitedTabs] = useState<Set<CatalogueTab>>(() => new Set([initialTab]));
 
+  // A left-nav click (or browser back/forward) changes the `:tab` param without
+  // unmounting this page (single Route match) — sync activeTab to match.
   useEffect(() => {
-    const ac = new AbortController();
-    setStatus('loading');
-    setError(null);
-    void fetchPhysicalDatasets({ signal: ac.signal })
-      .then((res) => {
-        if (ac.signal.aborted) return;
-        if (!res.ok) {
-          setStatus('error');
-          setError(res.error);
-          return;
-        }
-        setDatasets(res.data.datasets);
-        setStatus('ready');
-      })
-      .catch((err: unknown) => {
-        if (err instanceof DOMException && err.name === 'AbortError') return;
-        setStatus('error');
-        setError(err instanceof Error ? err.message : 'Unable to load the dataset catalogue.');
-      });
-    return () => ac.abort();
-  }, [reloadToken]);
+    const tab = tabForParam(params.tab);
+    setActiveTab(tab);
+    setVisitedTabs((prev) => (prev.has(tab) ? prev : new Set(prev).add(tab)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.tab]);
 
-  const visible = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    let rows = datasets.filter((d) => {
-      if (gapsOnly && !d.hasGap) return false;
-      if (sor !== 'All SOR' && d.sor !== sor) return false;
-      if (classification !== 'All classification' && d.classification !== classification) {
-        return false;
-      }
-      if (!q) return true;
-      const haystack =
-        `${d.name} ${d.sourceFile} ${d.owner} ${d.hostingApp} ${d.sor} ${d.classification}`.toLowerCase();
-      return haystack.includes(q);
-    });
-
-    rows = [...rows].sort((a, b) => {
-      if (sortKey === 'columns') return b.columnCount - a.columnCount;
-      if (sortKey === 'bound') return b.boundPercent - a.boundPercent;
-      return a.name.localeCompare(b.name);
-    });
-
-    return rows;
-  }, [datasets, query, sor, classification, gapsOnly, sortKey]);
-
-  const gapCount = useMemo(() => datasets.filter((d) => d.hasGap).length, [datasets]);
-
-  const handleExportCsv = () => {
-    const csv = toCsv(visible);
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'physical_datasets.csv';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Physical datasets exported to CSV.');
-  };
-
-  if (status === 'loading') {
-    return (
-      <div className="pdc" data-testid="physical-datasets">
-        <ConsoleHeader
-          eyebrow="CIB Data Marketplace"
-          greeting="Discover the firm's data."
-          subtitle="Three connected layers — the physical datasets harvested from source systems, the logical model that organises them, and the business glossary that names them."
-        />
-        <div className="pdc-loading" role="status" aria-label="Loading">
-          <Spinner size="lg" label="Loading datasets" />
-        </div>
-      </div>
-    );
-  }
-
-  if (status === 'error') {
-    return (
-      <div className="pdc" data-testid="physical-datasets">
-        <ConsoleHeader
-          eyebrow="CIB Data Marketplace"
-          greeting="Discover the firm's data."
-          subtitle="Three connected layers — the physical datasets harvested from source systems, the logical model that organises them, and the business glossary that names them."
-        />
-        <div className="workspace-state workspace-state--main">
-          <ErrorState
-            title="Unable to load the catalogue"
-            description={error ?? 'Physical datasets are unavailable.'}
-            onRetry={() => setReloadToken((n) => n + 1)}
-          />
-        </div>
-      </div>
-    );
+  function selectTab(tab: CatalogueTab) {
+    if (!isFeatureEnabled(tab)) return;
+    navigate(WORKSPACE_ROUTES[tab], { replace: true });
   }
 
   return (
@@ -170,121 +62,45 @@ export function PhysicalDatasetsPage() {
       />
 
       <div className="pdc-tabs" role="tablist" aria-label="Catalogue">
-        <button type="button" className="pdc-tab is-active" role="tab" aria-selected="true">
-          Physical Datasets <span className="pdc-cnt">{datasets.length}</span>
-        </button>
-        <button
-          type="button"
-          className="pdc-tab is-disabled"
-          role="tab"
-          aria-selected="false"
-          disabled
-          title={FUTURE}
-        >
-          Logical Model
-        </button>
-        <button
-          type="button"
-          className="pdc-tab is-disabled"
-          role="tab"
-          aria-selected="false"
-          disabled
-          title={FUTURE}
-        >
-          Glossary Terms
-        </button>
+        {TABS.map((tab) => {
+          const enabled = isFeatureEnabled(tab.id);
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              className={`pdc-tab${activeTab === tab.id ? ' is-active' : ''}${enabled ? '' : ' is-disabled'}`}
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              disabled={!enabled}
+              title={enabled ? undefined : FUTURE}
+              onClick={() => selectTab(tab.id)}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
 
-      <div className="pdc-toolbar">
-        <div className="pdc-toolbar-top">
-          <div className="pdc-search">
-            <span aria-hidden="true">⌕</span>
-            <input
-              aria-label="Search physical datasets"
-              placeholder="Search this section…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
+      {/* Each tab fetches its own data lazily on first activation — switching tabs never
+          triggers all three tabs' network requests at once — and stays mounted (hidden,
+          not unmounted) once visited so switching back doesn't re-fetch. */}
+      <CatalogueModalsProvider>
+        {visitedTabs.has('phys') ? (
+          <div hidden={activeTab !== 'phys'}>
+            <PhysicalDatasetsTab />
           </div>
-          <div className="pdc-facets">
-            <select
-              aria-label="Filter by source system"
-              value={sor}
-              onChange={(e) => setSor(e.target.value as (typeof SOR_FILTER_OPTIONS)[number])}
-            >
-              {SOR_FILTER_OPTIONS.map((o) => (
-                <option key={o}>{o}</option>
-              ))}
-            </select>
-            <select
-              aria-label="Filter by classification"
-              value={classification}
-              onChange={(e) =>
-                setClassification(e.target.value as (typeof CLASSIFICATION_FILTER_OPTIONS)[number])
-              }
-            >
-              {CLASSIFICATION_FILTER_OPTIONS.map((o) => (
-                <option key={o}>{o}</option>
-              ))}
-            </select>
-            <select
-              aria-label="Sort"
-              value={sortKey}
-              onChange={(e) => setSortKey(e.target.value as PhysicalDatasetSortKey)}
-            >
-              {SORT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
+        ) : null}
+        {visitedTabs.has('log') ? (
+          <div hidden={activeTab !== 'log'}>
+            <LogicalModelTab />
           </div>
-        </div>
-        <div className="pdc-toolbar-btns">
-          <button
-            type="button"
-            className={`pdc-fbtn${gapsOnly ? ' is-on' : ''}`}
-            onClick={() => setGapsOnly((v) => !v)}
-          >
-            Coverage gaps <span className="pdc-fbtn-cnt">{gapCount}</span>
-          </button>
-          <button type="button" className="pdc-fbtn" onClick={handleExportCsv}>
-            Export CSV
-          </button>
-          <div className="pdc-viewtoggle">
-            <button
-              type="button"
-              className={`pdc-vt-btn${viewMode === 'list' ? ' is-on' : ''}`}
-              onClick={() => setViewMode('list')}
-              title="List view"
-              aria-label="List view"
-            >
-              ☰
-            </button>
-            <button
-              type="button"
-              className={`pdc-vt-btn${viewMode === 'grid' ? ' is-on' : ''}`}
-              onClick={() => setViewMode('grid')}
-              title="Grid view"
-              aria-label="Grid view"
-            >
-              ▦
-            </button>
+        ) : null}
+        {visitedTabs.has('bt') ? (
+          <div hidden={activeTab !== 'bt'}>
+            <GlossaryTermsTab />
           </div>
-          <div className="pdc-rescount">{visible.length} shown</div>
-        </div>
-      </div>
-
-      {visible.length === 0 ? (
-        <EmptyState
-          title="No datasets match"
-          description="Try a different search term or clear the filters."
-        />
-      ) : viewMode === 'grid' ? (
-        <PhysicalDatasetsGrid datasets={visible} />
-      ) : (
-        <PhysicalDatasetsTable datasets={visible} />
-      )}
+        ) : null}
+      </CatalogueModalsProvider>
     </div>
   );
 }

@@ -81,6 +81,10 @@
   margin-bottom: 26px;
 }
 
+.wf-sec-scroll {
+  max-height: 520px;
+}
+
 .wf-sech {
   display: flex;
   align-items: baseline;

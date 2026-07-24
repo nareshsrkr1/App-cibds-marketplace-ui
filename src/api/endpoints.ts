@@ -169,6 +169,41 @@ export const API_ENDPOINTS = {
     wired: true,
     summary: 'Physical dataset catalogue (Catalogue → Physical datasets)',
   },
+  catalogueLogicalModel: {
+    id: 'catalogueLogicalModel',
+    method: 'GET',
+    path: '/api/v1/catalogue/logical-model',
+    wired: true,
+    summary: 'Subject areas → logical datasets → business data elements (Catalogue → Logical model)',
+  },
+  catalogueBusinessElements: {
+    id: 'catalogueBusinessElements',
+    method: 'GET',
+    path: '/api/v1/catalogue/business-elements',
+    wired: true,
+    summary: 'Full business data element records — inline display, BDE detail modal, rollups',
+  },
+  catalogueGlossaryTerms: {
+    id: 'catalogueGlossaryTerms',
+    method: 'GET',
+    path: '/api/v1/catalogue/glossary-terms',
+    wired: true,
+    summary: 'Business glossary terms (Catalogue → Glossary terms)',
+  },
+  catalogueLineage: {
+    id: 'catalogueLineage',
+    method: 'GET',
+    path: '/api/v1/catalogue/lineage',
+    wired: true,
+    summary: 'Lineage Sankey-diagram summaries (term → BDE → dataset → column)',
+  },
+  catalogueLineageDetails: {
+    id: 'catalogueLineageDetails',
+    method: 'GET',
+    path: '/api/v1/catalogue/lineage-details',
+    wired: true,
+    summary: 'Per-column lineage detail, fetched lazily once a diagram node is clicked',
+  },
 
   /* —— Planned (not wired in UI yet) —— */
   notifications: {
@@ -177,13 +212,6 @@ export const API_ENDPOINTS = {
     path: '/api/v1/notifications',
     wired: false,
     summary: 'In-app notification feed',
-  },
-  businessTerms: {
-    id: 'businessTerms',
-    method: 'GET',
-    path: '/api/v1/business-terms',
-    wired: false,
-    summary: 'Business term glossary',
   },
   governance: {
     id: 'governance',
