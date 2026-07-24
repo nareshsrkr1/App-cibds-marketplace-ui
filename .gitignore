@@ -41,6 +41,10 @@ Desktop.ini
 # Vite
 .vite/
 
+# Generated at dev/build time by scripts/generate-app-config.mjs (predev/prebuild
+# hooks) from config/env-local.properties — not source, regenerates on every run.
+public/app-config.json
+
 # Cursor / agent local
 .cursor/mcp.json
 
