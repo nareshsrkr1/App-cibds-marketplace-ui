@@ -5,7 +5,7 @@ import {
   type PersonaOption,
 } from '../../persona/PersonaSelector/PersonaSelector';
 import { ConsoleSidebar } from './ConsoleSidebar';
-import type { NavGroup } from './nav.types';
+import type { NavGroup } from '../../../features/workspace/nav.types';
 
 export type WorkspaceShellProps = {
   personas: PersonaOption[];

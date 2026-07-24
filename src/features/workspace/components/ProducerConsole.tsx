@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { personalizedGreeting } from '../greeting';
 import type {
   ConsoleChart,
@@ -84,7 +85,7 @@ function PanelSlot({
   return null;
 }
 
-export function ProducerConsole({
+export const ProducerConsole = memo(function ProducerConsole({
   hero,
   charts,
   chartTiers,
@@ -192,4 +193,4 @@ export function ProducerConsole({
       ) : null}
     </div>
   );
-}
+});

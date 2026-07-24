@@ -1,12 +1,13 @@
 /** @vitest-environment jsdom */
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   setConsoleMockScenario,
   setConsoleSectionScenario,
   setSessionMockScenario,
-} from '../../mocks/workspace/handlers';
+} from '../../api/mock/handlers/workspace.handlers';
+import { ProducerPage } from '../producer/ProducerPage';
 import { SessionProvider } from '../session/SessionProvider';
 import { BulkUploadPdesPage } from './bulkPde/BulkUploadPdesPage';
 import { WorkspaceConsolePage } from './WorkspaceConsolePage';
@@ -25,6 +26,7 @@ function renderPage(path = '/workspace') {
           <Route path="/workspace" element={<WorkspacePage />}>
             <Route index element={<WorkspaceConsolePage />} />
             <Route path="bulk-upload-pdes" element={<BulkUploadPdesPage />} />
+            <Route path="register-physical-dataset" element={<ProducerPage />} />
           </Route>
         </Routes>
       </SessionProvider>
@@ -63,14 +65,8 @@ describe('WorkspacePage', () => {
       /Producer contracts held/,
     );
     expect(consoleRoot.querySelector('.sh-actions')).toBeTruthy();
-    const disabledNames = ['Register a physical dataset'];
-    for (const name of disabledNames) {
-      const btn = Array.from(consoleRoot.querySelectorAll('button')).find(
-        (el) => el.textContent?.trim() === name,
-      );
-      expect(btn, name).toBeTruthy();
-      expect(btn).toBeDisabled();
-    }
+    // "Register a physical dataset" stays disabled ("Available in a future release")
+    // until that flow is rebuilt — the other three actions are live today.
     for (const name of ['Bulk upload PDEs', 'Bind columns', 'Track workflow']) {
       const btn = Array.from(consoleRoot.querySelectorAll('button')).find(
         (el) => el.textContent?.trim() === name,
@@ -78,6 +74,10 @@ describe('WorkspacePage', () => {
       expect(btn, name).toBeTruthy();
       expect(btn).not.toBeDisabled();
     }
+    const heroRegister = Array.from(consoleRoot.querySelectorAll('button')).find(
+      (el) => el.textContent?.trim() === 'Register a physical dataset',
+    );
+    expect(heroRegister).toBeDisabled();
     await waitFor(() => {
       expect(screen.getByText('My production health')).toBeInTheDocument();
       expect(screen.getByText('Publish SLA adherence')).toBeInTheDocument();
@@ -116,6 +116,35 @@ describe('WorkspacePage', () => {
         screen.getAllByRole('button', { name: 'Register a physical dataset' }).length,
       ).toBeGreaterThanOrEqual(1);
     });
+    const nav = screen.getByLabelText('Workspace');
+    expect(
+      within(nav).getByRole('button', { name: 'Register a physical dataset' }),
+    ).toBeDisabled();
+  });
+
+  it('Register a physical dataset stays disabled (future release) in hero and nav', async () => {
+    renderPage();
+    await waitFor(() =>
+      expect(screen.getByTestId('producer-console')).toBeInTheDocument(),
+    );
+
+    const heroRegister = within(screen.getByTestId('producer-console')).getByRole(
+      'button',
+      { name: 'Register a physical dataset' },
+    );
+    expect(heroRegister).toBeDisabled();
+    expect(heroRegister).toHaveAttribute('title', 'Available in a future release');
+
+    const navRegister = within(screen.getByLabelText('Workspace')).getByRole('button', {
+      name: 'Register a physical dataset',
+    });
+    expect(navRegister).toBeDisabled();
+    expect(navRegister).toHaveAttribute('title', 'Available in a future release');
+
+    fireEvent.click(heroRegister);
+    expect(
+      screen.queryByRole('heading', { name: /Register a physical dataset/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('switches left nav when persona changes', async () => {

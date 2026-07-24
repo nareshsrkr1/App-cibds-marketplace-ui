@@ -162,6 +162,13 @@ export const API_ENDPOINTS = {
     wired: true,
     summary: 'Decline a subscription request',
   },
+  datasets: {
+    id: 'datasets',
+    method: 'GET',
+    path: '/api/v1/datasets',
+    wired: true,
+    summary: 'Physical dataset catalogue (Catalogue → Physical datasets)',
+  },
 
   /* —— Planned (not wired in UI yet) —— */
   notifications: {
@@ -170,13 +177,6 @@ export const API_ENDPOINTS = {
     path: '/api/v1/notifications',
     wired: false,
     summary: 'In-app notification feed',
-  },
-  datasets: {
-    id: 'datasets',
-    method: 'GET',
-    path: '/api/v1/datasets',
-    wired: false,
-    summary: 'Dataset catalogue list',
   },
   businessTerms: {
     id: 'businessTerms',

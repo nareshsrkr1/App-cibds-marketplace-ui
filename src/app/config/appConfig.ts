@@ -31,6 +31,7 @@ const DEFAULT_API: ApiRuntimeConfig = {
     workflowBoard: { mode: 'mock' },
     workflowApprove: { mode: 'mock' },
     workflowDecline: { mode: 'mock' },
+    datasets: { mode: 'mock' },
   },
 };
 

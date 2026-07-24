@@ -62,6 +62,9 @@
       },
       "workflowDecline": {
         "mode": "mock"
+      },
+      "datasets": {
+        "mode": "mock"
       }
     }
   }

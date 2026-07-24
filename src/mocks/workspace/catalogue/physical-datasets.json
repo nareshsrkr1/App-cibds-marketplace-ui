@@ -1,0 +1,88 @@
+{
+  "datasets": [
+    {
+      "dsId": "DS-CIB-40212",
+      "name": "1CAT Investments Trades",
+      "sourceFile": "catalyst_trades_sanitized.dat",
+      "sor": "Catalyst",
+      "owner": "Investments Operations",
+      "hostingApp": "Catalyst",
+      "classification": "Internal",
+      "status": "Published",
+      "columnCount": 58,
+      "boundPercent": 78,
+      "tier": "BCBS 239 · Tier 1",
+      "hasGap": false
+    },
+    {
+      "dsId": "DS-CIB-40213",
+      "name": "Catalyst Positions",
+      "sourceFile": "catalyst_positions_sanitized.dat",
+      "sor": "Catalyst",
+      "owner": "Investments Operations",
+      "hostingApp": "Catalyst",
+      "classification": "Internal",
+      "status": "Published",
+      "columnCount": 46,
+      "boundPercent": 78,
+      "tier": "BCBS 239 · Tier 1",
+      "hasGap": false
+    },
+    {
+      "dsId": "DS-CIB-40118",
+      "name": "Endur OTC Commodity Trades",
+      "sourceFile": "endur_otc_trades_sanitized.dat",
+      "sor": "Endur",
+      "owner": "Commodities Mid-Office",
+      "hostingApp": "Endur",
+      "classification": "Internal",
+      "status": "Published",
+      "columnCount": 57,
+      "boundPercent": 78,
+      "tier": "BCBS 239 · Tier 1",
+      "hasGap": false
+    },
+    {
+      "dsId": "DS-CIB-40119",
+      "name": "Endur Exchange Commodity Trades",
+      "sourceFile": "endur_exch_trades_sanitized.dat",
+      "sor": "Endur",
+      "owner": "Commodities Mid-Office",
+      "hostingApp": "Endur",
+      "classification": "Internal",
+      "status": "Published",
+      "columnCount": 52,
+      "boundPercent": 78,
+      "tier": "BCBS 239 · Tier 1",
+      "hasGap": false
+    },
+    {
+      "dsId": "DS-CIB-40120",
+      "name": "Endur Composer Child Trades",
+      "sourceFile": "endur_composer_child_sanitized.dat",
+      "sor": "Endur",
+      "owner": "Commodities Mid-Office",
+      "hostingApp": "Endur",
+      "classification": "Confidential",
+      "status": "Published",
+      "columnCount": 56,
+      "boundPercent": 78,
+      "tier": "BCBS 239 · Tier 1",
+      "hasGap": true
+    },
+    {
+      "dsId": "DS-CIB-40121",
+      "name": "Endur P&L and Greeks",
+      "sourceFile": "endur_pnl_sanitized.dat",
+      "sor": "Endur",
+      "owner": "Commodities Mid-Office",
+      "hostingApp": "Endur",
+      "classification": "Internal",
+      "status": "Published",
+      "columnCount": 53,
+      "boundPercent": 78,
+      "tier": "BCBS 239 · Tier 1",
+      "hasGap": false
+    }
+  ]
+}

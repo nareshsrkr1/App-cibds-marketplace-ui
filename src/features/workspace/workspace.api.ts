@@ -2,6 +2,12 @@ import { API_ENDPOINTS, withPersonaQuery } from '../../api';
 import { httpGet } from '../../app/api/httpClient';
 import type { ApiResult } from '../../app/api/api.types';
 import type { WorkspaceNavResponse } from './nav.types';
+import {
+  adaptConsoleCharts,
+  adaptConsoleHero,
+  adaptConsolePanel,
+  adaptWorkspaceNav,
+} from './workspace.adapter';
 import type {
   ConsoleChartsResponse,
   ConsoleHero,
@@ -32,70 +38,88 @@ export async function fetchWorkspaceNav(
   persona: string,
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<WorkspaceNavResponse>> {
-  return httpGet<WorkspaceNavResponse>(withPersonaQuery(WORKSPACE_NAV_PATH, persona), {
-    signal: options?.signal,
-    resource: WORKSPACE_NAV_RESOURCE,
-  });
+  const result = await httpGet<WorkspaceNavResponse>(
+    withPersonaQuery(WORKSPACE_NAV_PATH, persona),
+    {
+      signal: options?.signal,
+      resource: WORKSPACE_NAV_RESOURCE,
+    },
+  );
+  if (!result.ok) return result;
+  return { ok: true, data: adaptWorkspaceNav(result.data) };
 }
 
 export async function fetchConsoleHero(
   persona: string,
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsoleHero>> {
-  return httpGet<ConsoleHero>(withPersonaQuery(WORKSPACE_CONSOLE_HERO_PATH, persona), {
-    signal: options?.signal,
-    resource: WORKSPACE_CONSOLE_HERO_RESOURCE,
-  });
+  const result = await httpGet<ConsoleHero>(
+    withPersonaQuery(WORKSPACE_CONSOLE_HERO_PATH, persona),
+    {
+      signal: options?.signal,
+      resource: WORKSPACE_CONSOLE_HERO_RESOURCE,
+    },
+  );
+  if (!result.ok) return result;
+  return { ok: true, data: adaptConsoleHero(result.data) };
 }
 
 export async function fetchConsoleCharts(
   persona: string,
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsoleChartsResponse>> {
-  return httpGet<ConsoleChartsResponse>(
+  const result = await httpGet<ConsoleChartsResponse>(
     withPersonaQuery(WORKSPACE_CONSOLE_CHARTS_PATH, persona),
     {
       signal: options?.signal,
       resource: WORKSPACE_CONSOLE_CHARTS_RESOURCE,
     },
   );
+  if (!result.ok) return result;
+  return { ok: true, data: adaptConsoleCharts(result.data) };
 }
 
 export async function fetchConsoleSubscriptionRequests(
   persona: string,
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsolePanelResponse>> {
-  return httpGet<ConsolePanelResponse>(
+  const result = await httpGet<ConsolePanelResponse>(
     withPersonaQuery(WORKSPACE_CONSOLE_SUB_REQUESTS_PATH, persona),
     {
       signal: options?.signal,
       resource: WORKSPACE_CONSOLE_SUB_REQUESTS_RESOURCE,
     },
   );
+  if (!result.ok) return result;
+  return { ok: true, data: adaptConsolePanel(result.data) };
 }
 
 export async function fetchConsoleConsumers(
   persona: string,
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsolePanelResponse>> {
-  return httpGet<ConsolePanelResponse>(
+  const result = await httpGet<ConsolePanelResponse>(
     withPersonaQuery(WORKSPACE_CONSOLE_CONSUMERS_PATH, persona),
     {
       signal: options?.signal,
       resource: WORKSPACE_CONSOLE_CONSUMERS_RESOURCE,
     },
   );
+  if (!result.ok) return result;
+  return { ok: true, data: adaptConsolePanel(result.data) };
 }
 
 export async function fetchConsoleGovernance(
   persona: string,
   options?: { signal?: AbortSignal },
 ): Promise<ApiResult<ConsolePanelResponse>> {
-  return httpGet<ConsolePanelResponse>(
+  const result = await httpGet<ConsolePanelResponse>(
     withPersonaQuery(WORKSPACE_CONSOLE_GOVERNANCE_PATH, persona),
     {
       signal: options?.signal,
       resource: WORKSPACE_CONSOLE_GOVERNANCE_RESOURCE,
     },
   );
+  if (!result.ok) return result;
+  return { ok: true, data: adaptConsolePanel(result.data) };
 }

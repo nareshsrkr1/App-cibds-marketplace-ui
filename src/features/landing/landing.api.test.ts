@@ -4,7 +4,7 @@ import { resetAppConfig, setAppConfig } from '../../app/config/appConfig';
 import {
   setLandingMockDelay,
   setLandingMockScenario,
-} from '../../mocks/landing/handlers';
+} from '../../api/mock/handlers/landing.handlers';
 import { fetchLandingMetrics, LANDING_METRICS_RESOURCE } from './landing.api';
 
 afterEach(() => {

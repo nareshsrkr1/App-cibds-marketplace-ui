@@ -31,6 +31,7 @@ describe('API_ENDPOINTS catalog', () => {
         'workflowBoard',
         'workflowApprove',
         'workflowDecline',
+        'datasets',
       ]),
     );
   });
@@ -38,15 +39,9 @@ describe('API_ENDPOINTS catalog', () => {
   it('reserves planned catalogue endpoints without wiring them', () => {
     const planned = listPlannedEndpoints().map((e) => e.id);
     expect(planned).toEqual(
-      expect.arrayContaining([
-        'notifications',
-        'datasets',
-        'businessTerms',
-        'governance',
-        'search',
-      ]),
+      expect.arrayContaining(['notifications', 'businessTerms', 'governance', 'search']),
     );
-    expect(API_ENDPOINTS.datasets.wired).toBe(false);
+    expect(API_ENDPOINTS.notifications.wired).toBe(false);
   });
 
   it('builds persona query consistently', () => {

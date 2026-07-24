@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ErrorState } from '../../components/feedback/ErrorState/ErrorState';
 import { WorkspaceShell } from '../../components/layout/WorkspaceShell/WorkspaceShell';
-import type { NavGroup } from '../../components/layout/WorkspaceShell/nav.types';
+import type { NavGroup } from './nav.types';
 import type { PersonaOption } from '../../components/persona/PersonaSelector/PersonaSelector';
 import { useSession } from '../session/SessionProvider';
 import { ALL_PERSONAS, type SessionContext } from '../session/session.types';
@@ -63,19 +63,25 @@ export function WorkspacePage() {
 
   const data = useConsoleData(persona, sessionStatus === 'ready', consoleReloadToken);
 
-  const handlePersonaChange = (next: string) => {
-    if (next === persona) return;
-    setPersona(next);
-    // Persona-specific deep screens start with console until those personas get routes.
-    if (location.pathname !== '/workspace') {
-      navigate('/workspace');
-    }
-  };
+  const handlePersonaChange = useCallback(
+    (next: string) => {
+      if (next === persona) return;
+      setPersona(next);
+      // Persona-specific deep screens start with console until those personas get routes.
+      if (location.pathname !== '/workspace') {
+        navigate('/workspace');
+      }
+    },
+    [persona, location.pathname, navigate],
+  );
 
-  const handleNavSelect = (id: string) => {
-    const path = pathForNavId(id);
-    if (path) navigate(path);
-  };
+  const handleNavSelect = useCallback(
+    (id: string) => {
+      const path = pathForNavId(id);
+      if (path) navigate(path);
+    },
+    [navigate],
+  );
 
   const personas = useMemo(
     () =>

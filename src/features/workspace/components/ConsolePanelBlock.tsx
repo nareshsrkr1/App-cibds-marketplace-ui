@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { ConsolePanel } from '../workspace.types';
 
 export type ConsolePanelBlockProps = {
@@ -5,7 +6,17 @@ export type ConsolePanelBlockProps = {
   onMore?: () => void;
 };
 
+/** Items beyond this many are hidden behind a local "Show more" reveal — forward cover for
+ * real data volumes; today's mock panels (2-3 items) never hit this. */
+const PAGE_SIZE = 6;
+
 export function ConsolePanelBlock({ panel, onMore }: ConsolePanelBlockProps) {
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  useEffect(() => setVisibleCount(PAGE_SIZE), [panel.id]);
+
+  const visibleItems = panel.items.slice(0, visibleCount);
+  const remaining = panel.items.length - visibleItems.length;
+
   return (
     <div className="sh-block">
       <div className="sh-bh">
@@ -25,7 +36,7 @@ export function ConsolePanelBlock({ panel, onMore }: ConsolePanelBlockProps) {
       {panel.items.length === 0 ? (
         <p className="sh-empty">Nothing here yet.</p>
       ) : (
-        panel.items.map((item) => (
+        visibleItems.map((item) => (
           <div className="wf-row" key={item.id}>
             <div className="wf-main">
               <div className="wf-t">{item.title}</div>
@@ -58,6 +69,15 @@ export function ConsolePanelBlock({ panel, onMore }: ConsolePanelBlockProps) {
           </div>
         ))
       )}
+      {remaining > 0 ? (
+        <button
+          type="button"
+          className="sh-show-more"
+          onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
+        >
+          Show {Math.min(remaining, PAGE_SIZE)} more
+        </button>
+      ) : null}
     </div>
   );
 }

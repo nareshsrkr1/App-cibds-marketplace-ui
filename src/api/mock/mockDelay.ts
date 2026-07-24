@@ -3,7 +3,7 @@
  * Keep at 0 for normal local use. Set temporarily (e.g. 2000) only when
  * you want to demo the workspace loading spinner.
  *
- * Location: src/mocks/mockDelay.ts
+ * Location: src/api/mock/mockDelay.ts
  */
 export const MOCK_RESPONSE_DELAY_MS = 0;
 

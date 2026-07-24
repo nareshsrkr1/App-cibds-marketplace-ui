@@ -1,0 +1,34 @@
+# Auto-written by UiForgeMax on first index — keeps graphify off dependency
+# trees, build output, and caches for ANY stack. Edit freely; UiForgeMax
+# never overwrites this file once it exists.
+node_modules/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+coverage/
+.nyc_output/
+.turbo/
+.cache/
+.parcel-cache/
+.vite/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.tox/
+target/
+bin/
+obj/
+vendor/
+.git/
+.svn/
+.hg/
+graphify-out/
+*.log
+.DS_Store

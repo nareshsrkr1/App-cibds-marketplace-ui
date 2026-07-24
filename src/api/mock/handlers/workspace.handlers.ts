@@ -1,38 +1,39 @@
 /**
- * Mock latency controlled by src/mocks/mockDelay.ts (default 0).
+ * Mock latency controlled by src/api/mock/mockDelay.ts (default 0).
  */
 import { delay, http, HttpResponse } from 'msw';
-import { API_ENDPOINTS } from '../../api';
-import { personalizedGreeting } from '../../features/workspace/greeting';
-import type { WorkspaceNavResponse } from '../../features/workspace/nav.types';
+import { API_ENDPOINTS } from '../../endpoints';
+import { personalizedGreeting } from '../../../features/workspace/greeting';
+import type { WorkspaceNavResponse } from '../../../features/workspace/nav.types';
 import type {
   ConsoleChartsResponse,
   ConsoleHero,
-} from '../../features/workspace/workspace.types';
+} from '../../../features/workspace/workspace.types';
 import { getMockResponseDelay, setMockResponseDelay } from '../mockDelay';
-import context from '../session/context.json';
-import adminCharts from './admin/charts.json';
-import adminHero from './admin/hero.json';
-import adminNav from './admin/nav.json';
-import consumerCharts from './consumer/charts.json';
-import consumerHero from './consumer/hero.json';
-import consumerNav from './consumer/nav.json';
-import governanceCharts from './governance/charts.json';
-import governanceHero from './governance/hero.json';
-import governanceNav from './governance/nav.json';
-import governanceQueue from './governance/queue.json';
-import producerCharts from './producer/charts.json';
-import producerConsumers from './producer/consumers.json';
-import producerHero from './producer/hero.json';
-import producerNav from './producer/nav.json';
-import producerSubRequests from './producer/subscription-requests.json';
-import bulkPdeApplications from './producer/bulk-pde/applications.json';
-import bulkPdePreview from './producer/bulk-pde/preview.json';
-import bulkPdeTemplate from './producer/bulk-pde/template.json';
-import bindColumnsDatasets from './producer/bind-columns/datasets.json';
-import bindColumnsHarvest from './producer/bind-columns/harvest.json';
-import bindColumnsBdeOptions from './producer/bind-columns/bde-options.json';
-import workflowBoardSeed from './producer/workflow/board.json';
+import context from '../../../mocks/session/context.json';
+import adminCharts from '../../../mocks/workspace/admin/charts.json';
+import adminHero from '../../../mocks/workspace/admin/hero.json';
+import adminNav from '../../../mocks/workspace/admin/nav.json';
+import consumerCharts from '../../../mocks/workspace/consumer/charts.json';
+import consumerHero from '../../../mocks/workspace/consumer/hero.json';
+import consumerNav from '../../../mocks/workspace/consumer/nav.json';
+import governanceCharts from '../../../mocks/workspace/governance/charts.json';
+import governanceHero from '../../../mocks/workspace/governance/hero.json';
+import governanceNav from '../../../mocks/workspace/governance/nav.json';
+import governanceQueue from '../../../mocks/workspace/governance/queue.json';
+import producerCharts from '../../../mocks/workspace/producer/charts.json';
+import producerConsumers from '../../../mocks/workspace/producer/consumers.json';
+import producerHero from '../../../mocks/workspace/producer/hero.json';
+import producerNav from '../../../mocks/workspace/producer/nav.json';
+import producerSubRequests from '../../../mocks/workspace/producer/subscription-requests.json';
+import bulkPdeApplications from '../../../mocks/workspace/producer/bulk-pde/applications.json';
+import bulkPdePreview from '../../../mocks/workspace/producer/bulk-pde/preview.json';
+import bulkPdeTemplate from '../../../mocks/workspace/producer/bulk-pde/template.json';
+import bindColumnsDatasets from '../../../mocks/workspace/producer/bind-columns/datasets.json';
+import bindColumnsHarvest from '../../../mocks/workspace/producer/bind-columns/harvest.json';
+import bindColumnsBdeOptions from '../../../mocks/workspace/producer/bind-columns/bde-options.json';
+import workflowBoardSeed from '../../../mocks/workspace/producer/workflow/board.json';
+import physicalDatasets from '../../../mocks/workspace/catalogue/physical-datasets.json';
 
 export type SessionMockScenario = 'success' | 'error' | 'noWorkspace' | 'delayed';
 export type ConsoleMockScenario = 'success' | 'empty' | 'error' | 'delayed';
@@ -101,6 +102,7 @@ export const BIND_COLUMNS_PUBLISH_URL = API_ENDPOINTS.bindColumnsPublish.path;
 export const WORKFLOW_BOARD_URL = API_ENDPOINTS.workflowBoard.path;
 export const WORKFLOW_APPROVE_URL = API_ENDPOINTS.workflowApprove.path;
 export const WORKFLOW_DECLINE_URL = API_ENDPOINTS.workflowDecline.path;
+export const DATASETS_URL = API_ENDPOINTS.datasets.path;
 
 function personaFrom(request: Request): string {
   return (new URL(request.url).searchParams.get('persona') ?? 'PRODUCER').toUpperCase();
@@ -459,5 +461,10 @@ export const workspaceHandlers = [
       );
     }
     return HttpResponse.json({ requestId, status: 'Declined' });
+  }),
+
+  http.get(`*${DATASETS_URL}`, async () => {
+    await applyLatency();
+    return HttpResponse.json(physicalDatasets);
   }),
 ];

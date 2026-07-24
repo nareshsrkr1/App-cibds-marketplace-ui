@@ -1,11 +1,11 @@
 /**
- * Mock latency controlled by src/mocks/mockDelay.ts (default 0).
+ * Mock latency controlled by src/api/mock/mockDelay.ts (default 0).
  */
 import { delay, http, HttpResponse } from 'msw';
-import { API_ENDPOINTS } from '../../api';
+import { API_ENDPOINTS } from '../../endpoints';
 import { getMockResponseDelay } from '../mockDelay';
-import content from './content.json';
-import metrics from './metrics.json';
+import content from '../../../mocks/landing/content.json';
+import metrics from '../../../mocks/landing/metrics.json';
 
 export type LandingMockScenario = 'success' | 'empty' | 'error' | 'delayed';
 

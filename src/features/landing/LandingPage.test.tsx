@@ -2,8 +2,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
-import { setLandingMockScenario } from '../../mocks/landing/handlers';
-import { setSessionMockScenario } from '../../mocks/workspace/handlers';
+import { setLandingMockScenario } from '../../api/mock/handlers/landing.handlers';
+import { setSessionMockScenario } from '../../api/mock/handlers/workspace.handlers';
 import { SessionProvider } from '../session/SessionProvider';
 import { LandingPage } from './LandingPage';
 

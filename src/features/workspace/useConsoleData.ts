@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { startTransition, useEffect, useRef, useState } from 'react';
 import type { SectionStatus } from './components/ProducerConsole';
 import type { NavGroup } from './nav.types';
 import {
@@ -144,18 +144,20 @@ export function useConsoleData(
 
     void fetchConsoleCharts(persona).then((res) => {
       if (cancelled) return;
-      if (!res.ok) {
-        setChartsStatus('error');
-        setChartsError(res.error);
-        setCharts([]);
-        setChartTiers([]);
+      startTransition(() => {
+        if (!res.ok) {
+          setChartsStatus('error');
+          setChartsError(res.error);
+          setCharts([]);
+          setChartTiers([]);
+          if (hydratedRef.current) setBodyStageClass('is-enter');
+          return;
+        }
+        setCharts(res.data.charts ?? []);
+        setChartTiers(res.data.tiers ?? []);
+        setChartsStatus((res.data.charts?.length ?? 0) > 0 ? 'ready' : 'empty');
         if (hydratedRef.current) setBodyStageClass('is-enter');
-        return;
-      }
-      setCharts(res.data.charts ?? []);
-      setChartTiers(res.data.tiers ?? []);
-      setChartsStatus((res.data.charts?.length ?? 0) > 0 ? 'ready' : 'empty');
-      if (hydratedRef.current) setBodyStageClass('is-enter');
+      });
     });
 
     if (p === 'PRODUCER') {
@@ -163,23 +165,27 @@ export function useConsoleData(
       setSecondaryTitle('Subscription requests · awaiting your approval');
       void fetchConsoleConsumers(persona).then((res) => {
         if (cancelled) return;
-        if (!res.ok) {
-          setPrimaryStatus('error');
-          setPrimaryError(res.error);
-          return;
-        }
-        setPrimaryPanel(res.data.panel);
-        setPrimaryStatus(panelReady(res.data.panel));
+        startTransition(() => {
+          if (!res.ok) {
+            setPrimaryStatus('error');
+            setPrimaryError(res.error);
+            return;
+          }
+          setPrimaryPanel(res.data.panel);
+          setPrimaryStatus(panelReady(res.data.panel));
+        });
       });
       void fetchConsoleSubscriptionRequests(persona).then((res) => {
         if (cancelled) return;
-        if (!res.ok) {
-          setSecondaryStatus('error');
-          setSecondaryError(res.error);
-          return;
-        }
-        setSecondaryPanel(res.data.panel);
-        setSecondaryStatus(panelReady(res.data.panel));
+        startTransition(() => {
+          if (!res.ok) {
+            setSecondaryStatus('error');
+            setSecondaryError(res.error);
+            return;
+          }
+          setSecondaryPanel(res.data.panel);
+          setSecondaryStatus(panelReady(res.data.panel));
+        });
       });
     } else if (p === 'GOVERNANCE') {
       setPrimaryTitle('Endorsement queue');
@@ -187,13 +193,15 @@ export function useConsoleData(
       setSecondaryPanel(null);
       void fetchConsoleGovernance(persona).then((res) => {
         if (cancelled) return;
-        if (!res.ok) {
-          setPrimaryStatus('error');
-          setPrimaryError(res.error);
-          return;
-        }
-        setPrimaryPanel(res.data.panel);
-        setPrimaryStatus(panelReady(res.data.panel));
+        startTransition(() => {
+          if (!res.ok) {
+            setPrimaryStatus('error');
+            setPrimaryError(res.error);
+            return;
+          }
+          setPrimaryPanel(res.data.panel);
+          setPrimaryStatus(panelReady(res.data.panel));
+        });
       });
     } else {
       setPrimaryPanel(null);

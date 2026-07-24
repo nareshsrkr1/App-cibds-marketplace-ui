@@ -38,7 +38,7 @@
       "label": "Catalogue",
       "sub": true,
       "items": [
-        { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": false },
+        { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": true },
         { "id": "log", "label": "Logical model", "icon": "◇", "enabled": false },
         { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": false }
       ]

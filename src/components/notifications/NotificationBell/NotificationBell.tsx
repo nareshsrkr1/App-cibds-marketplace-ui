@@ -47,7 +47,7 @@ export function NotificationBell({ label = 'Notifications' }: NotificationBellPr
       >
         <BellIcon />
         {unread > 0 ? (
-          <span className="notif-bell__count" aria-hidden="true">
+          <span className="notif-bell__count" aria-hidden="true" key={unread}>
             {unread}
           </span>
         ) : null}

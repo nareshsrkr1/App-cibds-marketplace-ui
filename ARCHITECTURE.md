@@ -56,10 +56,13 @@ Catalogue and other deep views are reserved for later; many nav items and action
 │                     └───────┬───────────┬───────────┘       │
 │                             │           │                     │
 │              mock mode      │           │  real mode          │
-│                     ┌───────▼───┐   ┌───▼──────────┐         │
-│                     │ MSW mocks │   │ API_BASE_URL │         │
-│                     │ src/mocks │   │ (backend)    │         │
-│                     └───────────┘   └──────────────┘         │
+│                     ┌───────▼───────┐ ┌─▼────────────┐       │
+│                     │ MSW mocks     │ │ API_BASE_URL │       │
+│                     │ src/api/mock  │ │ (backend)    │       │
+│                     │  (handlers)   │ └──────────────┘       │
+│                     │ src/mocks     │                        │
+│                     │  (JSON only)  │                        │
+│                     └───────────────┘                        │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -81,9 +84,16 @@ App-cibds-marketplace-ui/
 ├── scripts/
 │   └── generate-app-config.mjs       # Builds public/app-config.json from env properties
 ├── src/
-│   ├── api/                          # API CONTRACT catalog (permanent)
-│   │   ├── endpoints.ts              # Paths, resource ids, wired vs planned
-│   │   └── index.ts
+│   ├── api/
+│   │   ├── endpoints.ts              # PERMANENT: paths, resource ids, wired vs planned
+│   │   ├── index.ts                  # PERMANENT: contract barrel
+│   │   └── mock/                     # TEMPORARY: MSW wiring (handlers, browser/server, scenarios)
+│   │       ├── mockDelay.ts
+│   │       ├── browser.ts            # Browser worker, started from App.tsx
+│   │       ├── server.ts             # Node server for Vitest
+│   │       └── handlers/
+│   │           ├── landing.handlers.ts
+│   │           └── workspace.handlers.ts
 │   ├── app/                          # App shell, config, HTTP
 │   │   ├── App.tsx                   # Routes + starts MSW when needed
 │   │   ├── api/                      # httpClient, apiConfig, types
@@ -93,9 +103,12 @@ App-cibds-marketplace-ui/
 │   │   ├── landing/
 │   │   ├── session/
 │   │   └── workspace/
-│   ├── mocks/                        # TEMPORARY: MSW handlers + JSON (until backends exist)
+│   │       ├── nav.types.ts          # Canonical NavItem/NavGroup/WorkspaceNavResponse
+│   │       └── components/charts/    # One component per chart kind (Bars, Donut, Trend, …)
+│   ├── mocks/                        # TEMPORARY: JSON fixtures only (no code) until backends exist
 │   │   ├── session/context.json
-│   │   ├── landing/{metrics,content,handlers}.…
+│   │   ├── notifications.json
+│   │   ├── landing/{metrics,content}.json
 │   │   └── workspace/{producer,governance,consumer,admin}/…
 │   ├── services/                     # Cross-cutting helpers (toast, notifications seed)
 │   ├── theme/                        # Design tokens, fonts, global/component CSS
@@ -109,11 +122,16 @@ App-cibds-marketplace-ui/
 
 | Keep forever              | Temporary (until all APIs are real + tests don’t need MSW) |
 | ------------------------- | ---------------------------------------------------------- |
-| `src/api/`                | `src/mocks/`                                               |
-| `src/features/*/*.api.ts` | `public/mockServiceWorker.js`                              |
-| `src/app/api/*`           | MSW-only test helpers (`setLandingMockScenario`, etc.)     |
-| `src/theme/`              |                                                            |
-| UI components & pages     |                                                            |
+| `src/api/endpoints.ts`    | `src/api/mock/` (MSW handlers, browser/server, scenarios)   |
+| `src/api/index.ts`        | `src/mocks/` (JSON fixtures only)                           |
+| `src/features/*/*.api.ts` | `public/mockServiceWorker.js`                               |
+| `src/app/api/*`           | MSW-only test helpers (`setLandingMockScenario`, etc.)      |
+| `src/theme/`              |                                                              |
+| UI components & pages     |                                                              |
+
+`src/mocks/` holds **JSON fixtures only** — no handlers, no scenario logic. All MSW
+wiring code lives in `src/api/mock/`, so the two can be deleted independently as backends
+land (see §13).
 
 ---
 
@@ -248,7 +266,7 @@ Page / component
   → httpGet(path, { resource })  (src/app/api/httpClient.ts)
   → getApiMode(resource)         (src/app/api/apiConfig.ts + app-config.json)
   → fetch(url)
-       ├─ mode=mock → MSW handler in src/mocks/**/handlers.ts → JSON fixture
+       ├─ mode=mock → MSW handler in src/api/mock/handlers/*.ts → JSON fixture in src/mocks/
        └─ mode=real → API_BASE_URL + path → backend
   → ApiResult<T>                 ({ ok, data } | { ok:false, error })
   → page setState → UI section
@@ -260,9 +278,9 @@ On mount, three calls run (session + metrics + content):
 
 | Step | Called from   | Feature API             | Resource id      | HTTP path                                 | Mock handler / fixture                                               |
 | ---- | ------------- | ----------------------- | ---------------- | ----------------------------------------- | -------------------------------------------------------------------- |
-| 1    | `LandingPage` | `fetchSessionContext()` | `sessionContext` | `GET /api/v1/session/context`             | `src/mocks/workspace/handlers.ts` + `src/mocks/session/context.json` |
-| 2    | `LandingPage` | `fetchLandingMetrics()` | `landingMetrics` | `GET /api/v1/marketplace/landing/metrics` | `src/mocks/landing/handlers.ts` + `src/mocks/landing/metrics.json`   |
-| 3    | `LandingPage` | `fetchLandingContent()` | `landingContent` | `GET /api/v1/marketplace/landing/content` | `src/mocks/landing/handlers.ts` + `src/mocks/landing/content.json`   |
+| 1    | `LandingPage` | `fetchSessionContext()` | `sessionContext` | `GET /api/v1/session/context`             | `src/api/mock/handlers/workspace.handlers.ts` + `src/mocks/session/context.json` |
+| 2    | `LandingPage` | `fetchLandingMetrics()` | `landingMetrics` | `GET /api/v1/marketplace/landing/metrics` | `src/api/mock/handlers/landing.handlers.ts` + `src/mocks/landing/metrics.json`   |
+| 3    | `LandingPage` | `fetchLandingContent()` | `landingContent` | `GET /api/v1/marketplace/landing/content` | `src/api/mock/handlers/landing.handlers.ts` + `src/mocks/landing/content.json`   |
 
 **UI use**
 
@@ -322,7 +340,7 @@ User clicks Governance / Consumer / Admin / Producer
 | Endorsement queue            | same                                    | `fetchConsoleGovernance`           | `workspaceConsoleGovernance`  | `/api/v1/workspace/console/governance?persona=`            | `governance/queue.json`                                            |
 | Sidebar footer subtitle      | `WorkspaceShell`                        | from session (not a separate API)  | `sessionContext`              | `/api/v1/session/context`                                  | `personaProfiles[PERSONA].subtitle` (e.g. Producer → `Test Owner`) |
 
-Handlers live in **`src/mocks/workspace/handlers.ts`**. They read `?persona=`, pick the matching persona JSON, and apply optional latency from `src/mocks/mockDelay.ts`.
+Handlers live in **`src/api/mock/handlers/workspace.handlers.ts`**. They read `?persona=`, pick the matching persona JSON, and apply optional latency from `src/api/mock/mockDelay.ts`.
 
 #### E. Client-only (not from API)
 
@@ -367,29 +385,33 @@ Browser                WorkspacePage           Feature APIs              MSW / B
 | Shell / sidebar / footer          | `src/components/layout/WorkspaceShell/WorkspaceShell.tsx`         |
 | Session mock                      | `src/mocks/session/context.json`                                  |
 | Workspace mocks                   | `src/mocks/workspace/{producer,governance,consumer,admin}/`       |
-| MSW workspace routes              | `src/mocks/workspace/handlers.ts`                                 |
-| MSW landing routes                | `src/mocks/landing/handlers.ts`                                   |
-| Mock latency toggle               | `src/mocks/mockDelay.ts`                                          |
+| MSW workspace routes              | `src/api/mock/handlers/workspace.handlers.ts`                     |
+| MSW landing routes                | `src/api/mock/handlers/landing.handlers.ts`                       |
+| Mock latency toggle               | `src/api/mock/mockDelay.ts`                                       |
+| Chart components (per kind)       | `src/features/workspace/components/charts/`                      |
+| Nav domain types                  | `src/features/workspace/nav.types.ts`                             |
 | Env → app-config                  | `scripts/generate-app-config.mjs` + `config/env-local.properties` |
 
 ---
 
-## 9. Mocks (`src/mocks`) — what they are
+## 9. Mocks (`src/mocks` + `src/api/mock`) — what they are
 
-Mocks use **MSW** to intercept the same paths as the real API.
+Mocks use **MSW** to intercept the same paths as the real API. Data and wiring live in
+two separate places on purpose, so one can be deleted without touching the other:
 
-| Piece                      | Role                                                           |
-| -------------------------- | -------------------------------------------------------------- |
-| `mocks/*/handlers.ts`      | Request → JSON response (and error/empty scenarios for tests)  |
-| `mocks/**/*.json`          | Fixture payloads                                               |
-| `mocks/landing/browser.ts` | Browser worker: registers all handlers, started from `App.tsx` |
-| `mocks/landing/server.ts`  | Node server for Vitest                                         |
-| `test/setup.ts`            | Starts MSW for unit tests                                      |
+| Piece                                 | Role                                                            |
+| -------------------------------------- | --------------------------------------------------------------- |
+| `mocks/**/*.json`                     | Fixture payloads — **JSON only**, no code                       |
+| `api/mock/handlers/*.handlers.ts`     | Request → JSON response (and error/empty scenarios for tests)   |
+| `api/mock/browser.ts`                 | Browser worker: registers all handlers, started from `App.tsx`  |
+| `api/mock/server.ts`                  | Node server for Vitest                                           |
+| `api/mock/mockDelay.ts`               | Shared artificial-latency toggle                                 |
+| `test/setup.ts`                        | Starts MSW for unit tests                                       |
 
 Handlers import paths from `src/api/endpoints.ts` so mock URLs stay aligned with the catalog.
 
 **You do not delete mocks every time one API goes real.**  
-Delete the whole `mocks` folder only when:
+Delete `src/mocks/` and `src/api/mock/` only when:
 
 - every production resource is `real`, and
 - tests no longer rely on MSW.
@@ -400,11 +422,12 @@ Persona fixtures are segregated:
 
 ```text
 src/mocks/workspace/
-├── handlers.ts
 ├── producer/   { nav, hero, charts, consumers, subscription-requests }.json
 ├── governance/ { nav, hero, charts, queue }.json
 ├── consumer/   { nav, hero, charts }.json
 └── admin/      { nav, hero, charts }.json
+
+src/api/mock/handlers/workspace.handlers.ts   # reads all of the above by ?persona=
 ```
 
 ---
@@ -507,7 +530,7 @@ Shared building blocks under `src/components/`: Button, Badge, Card, Modal, Aler
 | Unit / component | Vitest + Testing Library | `npm test`         |
 | E2E              | Playwright               | `npm run test:e2e` |
 
-Vitest uses the MSW **node** server (`src/mocks/landing/server.ts`) via `src/test/setup.ts`.  
+Vitest uses the MSW **node** server (`src/api/mock/server.ts`) via `src/test/setup.ts`.  
 Browser MSW is skipped when `import.meta.env.MODE === 'test'`.
 
 Mock scenarios for tests (examples):
@@ -529,6 +552,16 @@ npm run dev
 
 Open the URL Vite prints (usually `http://localhost:5173`).
 
+Terminal output is intentionally minimal (just the ready message + URLs). The browser's
+own DevTools console still shows two dev-only lines, neither from app code — both
+verified to only appear in `npm run dev`, never in a production build:
+- Vite's HMR client (`[vite] connecting...`, `[vite] connected.`) logs at `console.debug`
+  ("Verbose") level — uncheck "Verbose" in the console's log-level filter to hide it.
+- React's "Download the React DevTools" nag is a plain `console.info` from `react-dom`,
+  emitted the moment `react-dom/client` is loaded (before any app code runs), so it can't
+  be suppressed from `src/main.tsx` without risking the real DevTools browser extension.
+  Exclude it instead via the console filter box: `-"Download the React"`.
+
 ### Switch one API to real
 
 1. Ensure backend implements the path in `src/api/endpoints.ts`.
@@ -540,7 +573,7 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 
 1. Add entry to `src/api/endpoints.ts` (`wired: true` when you hook UI).
 2. Add `fetchX` in the right `features/*/….api.ts`.
-3. Add MSW handler + JSON under `src/mocks` while backend is missing.
+3. Add JSON fixture under `src/mocks/` + a handler case in `src/api/mock/handlers/*.handlers.ts` while backend is missing.
 4. Register resource mode in `scripts/generate-app-config.mjs` + env example.
 5. Call the fetch from a page/component.
 
@@ -549,12 +582,12 @@ Open the URL Vite prints (usually `http://localhost:5173`).
 One-time cleanup (not required for each resource flip):
 
 1. Set all resources to `real` in production config.
-2. Delete `src/mocks/`.
+2. Delete `src/mocks/` and `src/api/mock/`.
 3. Remove MSW start from `App.tsx`.
 4. Rework `src/test/setup.ts` and tests that use mock scenario helpers.
 5. Optionally remove the `msw` dependency and `public/mockServiceWorker.js`.
 
-Keep `src/api/` and feature `*.api.ts` — those are the real client.
+Keep `src/api/endpoints.ts`, `src/api/index.ts`, and feature `*.api.ts` — those are the real client.
 
 ---
 

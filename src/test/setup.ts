@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom/vitest';
 import { afterAll, afterEach, beforeAll } from 'vitest';
 import { resetAppConfig } from '../app/config/appConfig';
-import { setLandingMockScenario } from '../mocks/landing/handlers';
-import { setMockResponseDelay } from '../mocks/mockDelay';
+import { setLandingMockScenario } from '../api/mock/handlers/landing.handlers';
+import { setMockResponseDelay } from '../api/mock/mockDelay';
 import {
   setConsoleMockScenario,
   setSessionMockScenario,
-} from '../mocks/workspace/handlers';
-import { server } from '../mocks/landing/server';
+} from '../api/mock/handlers/workspace.handlers';
+import { server } from '../api/mock/server';
 
 beforeAll(() => {
   resetAppConfig();

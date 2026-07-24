@@ -1,6 +1,6 @@
 import { setupWorker } from 'msw/browser';
-import { landingHandlers } from './handlers';
-import { workspaceHandlers } from '../workspace/handlers';
+import { landingHandlers } from './handlers/landing.handlers';
+import { workspaceHandlers } from './handlers/workspace.handlers';
 
 export const worker = setupWorker(...landingHandlers, ...workspaceHandlers);
 

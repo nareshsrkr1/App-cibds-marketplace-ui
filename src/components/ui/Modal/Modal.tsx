@@ -1,5 +1,6 @@
-import { useEffect, useId, useRef, type ReactNode, type RefObject } from 'react';
+import { useId, useRef, type ReactNode, type RefObject } from 'react';
 import { Button } from '../Button/Button';
+import { useModalA11y } from './useModalA11y';
 
 export type ModalProps = {
   open: boolean;
@@ -12,42 +13,8 @@ export type ModalProps = {
 export function Modal({ open, title, onClose, children, initialFocusRef }: ModalProps) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
-  const previouslyFocused = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (!open) return;
-    previouslyFocused.current = document.activeElement as HTMLElement | null;
-    const focusTarget = initialFocusRef?.current ?? dialogRef.current;
-    focusTarget?.focus();
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        onClose();
-        return;
-      }
-      if (event.key !== 'Tab' || !dialogRef.current) return;
-      const selector =
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(selector);
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      previouslyFocused.current?.focus();
-    };
-  }, [open, onClose, initialFocusRef]);
+  useModalA11y(open, dialogRef, onClose, initialFocusRef);
 
   if (!open) return null;
 

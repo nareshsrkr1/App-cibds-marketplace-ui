@@ -47,6 +47,11 @@ export function subscribeToasts(listener: Listener) {
   };
 }
 
+/** Public read of the auto-dismiss duration for a tone (used to drive the toast's countdown bar). */
+export function getToastDuration(tone: ToastTone): number {
+  return DEFAULT_MS[tone];
+}
+
 export const toast = {
   success: (message: string) => push('success', message),
   info: (message: string) => push('info', message),

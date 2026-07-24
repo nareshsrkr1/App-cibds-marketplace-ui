@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { LandingPage } from '../features/landing/LandingPage';
 import { SessionProvider } from '../features/session/SessionProvider';
 import { AppErrorBoundary } from './AppErrorBoundary';
 import { Spinner } from '../components/feedback/Spinner/Spinner';
@@ -10,6 +9,12 @@ import { shouldStartMsw } from './api/apiConfig';
 import '../theme/tokens.css';
 import '../theme/globals.css';
 import '../theme/components.css';
+
+const LandingPage = lazy(() =>
+  import('../features/landing/LandingPage').then((m) => ({
+    default: m.LandingPage,
+  })),
+);
 
 const WorkspacePage = lazy(() =>
   import('../features/workspace/WorkspacePage').then((m) => ({
@@ -47,6 +52,12 @@ const RegisterPhysicalDatasetPage = lazy(() =>
   })),
 );
 
+const PhysicalDatasetsPage = lazy(() =>
+  import('../features/workspace/physicalDatasets/PhysicalDatasetsPage').then((m) => ({
+    default: m.PhysicalDatasetsPage,
+  })),
+);
+
 function RouteFallback() {
   return (
     <div
@@ -70,7 +81,7 @@ export function App() {
       setReady(true);
       return;
     }
-    void import('../mocks/landing/browser')
+    void import('../api/mock/browser')
       .then(({ startMockWorker }) => startMockWorker())
       .then(() => {
         if (!cancelled) setReady(true);
@@ -97,7 +108,9 @@ export function App() {
             path="/"
             element={
               <AppErrorBoundary>
-                <LandingPage />
+                <Suspense fallback={<RouteFallback />}>
+                  <LandingPage />
+                </Suspense>
               </AppErrorBoundary>
             }
           />
@@ -148,6 +161,14 @@ export function App() {
               element={
                 <Suspense fallback={<RouteFallback />}>
                   <WorkflowPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="physical-datasets"
+              element={
+                <Suspense fallback={<RouteFallback />}>
+                  <PhysicalDatasetsPage />
                 </Suspense>
               }
             />

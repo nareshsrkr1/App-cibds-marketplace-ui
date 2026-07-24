@@ -1,7 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
 import { EmptyState } from '../../components/feedback/EmptyState/EmptyState';
 import { ErrorState } from '../../components/feedback/ErrorState/ErrorState';
-import { Spinner } from '../../components/feedback/Spinner/Spinner';
+import { ConsoleSkeleton } from './components/ConsoleSkeleton';
 import { ProducerConsole } from './components/ProducerConsole';
 import type { WorkspaceOutletContext } from './WorkspacePage';
 
@@ -13,12 +13,8 @@ export function WorkspaceConsolePage() {
   return (
     <>
       {showInitialSpinner && (
-        <div
-          className="workspace-loading workspace-loading--main"
-          role="status"
-          aria-label="Loading"
-        >
-          <Spinner size="lg" label="Loading" />
+        <div role="status" aria-label="Loading">
+          <ConsoleSkeleton />
         </div>
       )}
       {data.heroStatus === 'error' && !data.hero && (

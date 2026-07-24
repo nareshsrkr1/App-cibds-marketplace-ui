@@ -6,7 +6,7 @@ import { ToastProvider } from '../../../components/feedback/Toast/ToastProvider'
 import {
   setConsoleMockScenario,
   setSessionMockScenario,
-} from '../../../mocks/workspace/handlers';
+} from '../../../api/mock/handlers/workspace.handlers';
 import { SessionProvider } from '../../session/SessionProvider';
 import { __resetToastsForTests } from '../../../services/toastService';
 import { WorkspaceConsolePage } from '../WorkspaceConsolePage';

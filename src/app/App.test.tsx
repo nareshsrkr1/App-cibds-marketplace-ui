@@ -2,11 +2,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
-import { setLandingMockScenario } from '../mocks/landing/handlers';
+import { setLandingMockScenario } from '../api/mock/handlers/landing.handlers';
 import {
   setConsoleMockScenario,
   setSessionMockScenario,
-} from '../mocks/workspace/handlers';
+} from '../api/mock/handlers/workspace.handlers';
 import { App } from './App';
 
 afterEach(() => {
