@@ -8,6 +8,28 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  /* Soft navy on light surfaces — same thin/shade approach as left gold */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 35, 56, 0.28) transparent;
+}
+
+/* Chromium / Safari / Edge — soft navy */
+html::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb {
+  background: rgba(15, 35, 56, 0.28);
+  border-radius: 999px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 35, 56, 0.55);
+}
+html::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 /*

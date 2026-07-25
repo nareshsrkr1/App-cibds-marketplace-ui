@@ -610,7 +610,8 @@
 }
 .appshell.show {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: var(--bg);
 }
 .sb {
@@ -748,26 +749,30 @@
   min-height: 0;
   overflow-y: auto;
   padding: 8px 12px 0;
+  /* Left nav: hairline gold — barely reads as a scrollbar */
   scrollbar-width: thin;
-  scrollbar-color: rgba(184, 146, 74, 0.6) transparent;
+  scrollbar-color: rgba(184, 146, 74, 0.35) transparent;
 }
 .sb-nav::-webkit-scrollbar {
-  width: 4px;
+  width: 1px;
 }
 .sb-nav::-webkit-scrollbar-track {
   background: transparent;
 }
 .sb-nav::-webkit-scrollbar-thumb {
-  background: rgba(184, 146, 74, 0.6);
+  background: rgba(184, 146, 74, 0.35);
   border-radius: 999px;
 }
 .sb-nav::-webkit-scrollbar-thumb:hover {
-  background: rgba(184, 146, 74, 0.9);
+  background: rgba(184, 146, 74, 0.7);
+}
+.sb-nav::-webkit-scrollbar-corner {
+  background: transparent;
 }
 .sb-nav-fade {
   position: absolute;
   left: 0;
-  right: 6px;
+  right: 1px;
   height: 28px;
   pointer-events: none;
   z-index: 1;
@@ -921,8 +926,29 @@ button.sb-item:disabled .sb-ic,
 .sh-main {
   flex: 1;
   min-width: 0;
+  min-height: 0;
   padding: 0;
   color: var(--ink);
+  overflow-y: auto;
+  /* Right / main (white): soft navy for contrast — same thin/shade approach as left */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(15, 35, 56, 0.28) transparent;
+}
+.sh-main::-webkit-scrollbar {
+  width: 3px;
+}
+.sh-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sh-main::-webkit-scrollbar-thumb {
+  background: rgba(15, 35, 56, 0.28);
+  border-radius: 999px;
+}
+.sh-main::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 35, 56, 0.55);
+}
+.sh-main::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 /* Persona switch — animate charts/panels only; wishes/hero stay put */
@@ -1722,21 +1748,22 @@ span.sh-more {
 /* ===== Contained scroll region — a list/grid scrolls itself, not the page ===== */
 .ui-scroll-box {
   overflow-y: auto;
+  /* Dropdowns / panels on white: soft navy, same approach as left hairline */
   scrollbar-width: thin;
-  scrollbar-color: rgba(184, 146, 74, 0.5) transparent;
+  scrollbar-color: rgba(15, 35, 56, 0.28) transparent;
 }
 .ui-scroll-box::-webkit-scrollbar {
-  width: 6px;
+  width: 2px;
 }
 .ui-scroll-box::-webkit-scrollbar-track {
   background: transparent;
 }
 .ui-scroll-box::-webkit-scrollbar-thumb {
-  background: rgba(184, 146, 74, 0.5);
+  background: rgba(15, 35, 56, 0.28);
   border-radius: 999px;
 }
 .ui-scroll-box::-webkit-scrollbar-thumb:hover {
-  background: rgba(184, 146, 74, 0.8);
+  background: rgba(15, 35, 56, 0.55);
 }
 
 /* ===== Pagination bar ===== */
