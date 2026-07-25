@@ -10,9 +10,19 @@ export type ModalProps = {
   initialFocusRef?: RefObject<HTMLElement | null>;
   /** `wide` for content that needs real horizontal room (diagrams, multi-column layouts). */
   size?: 'default' | 'wide';
+  /** `navy` gives the header the app's navy/gold identity instead of the plain default. */
+  headerTheme?: 'default' | 'navy';
 };
 
-export function Modal({ open, title, onClose, children, initialFocusRef, size = 'default' }: ModalProps) {
+export function Modal({
+  open,
+  title,
+  onClose,
+  children,
+  initialFocusRef,
+  size = 'default',
+  headerTheme = 'default',
+}: ModalProps) {
   const titleId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +45,7 @@ export function Modal({ open, title, onClose, children, initialFocusRef, size = 
         ref={dialogRef}
         tabIndex={-1}
       >
-        <div className="ui-modal__header">
+        <div className={`ui-modal__header${headerTheme === 'navy' ? ' ui-modal__header--navy' : ''}`}>
           <h2 id={titleId}>{title}</h2>
           <Button
             type="button"
@@ -47,7 +57,7 @@ export function Modal({ open, title, onClose, children, initialFocusRef, size = 
             Close
           </Button>
         </div>
-        <div>{children}</div>
+        <div className="ui-modal__body">{children}</div>
       </div>
     </div>
   );

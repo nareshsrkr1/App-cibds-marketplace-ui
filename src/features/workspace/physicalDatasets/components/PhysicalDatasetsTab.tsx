@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../../../components/ui/Button/Button';
 import { EmptyState } from '../../../../components/feedback/EmptyState/EmptyState';
 import { ErrorState } from '../../../../components/feedback/ErrorState/ErrorState';
 import { Spinner } from '../../../../components/feedback/Spinner/Spinner';
 import { toast } from '../../../../services/toastService';
 import { fetchPhysicalDatasets } from '../physicalDatasets.api';
+import { WORKSPACE_ROUTES } from '../../workspaceRoutes';
 import {
   CLASSIFICATION_FILTER_OPTIONS,
   SOR_FILTER_OPTIONS,
@@ -50,6 +53,7 @@ function toCsv(rows: PhysicalDataset[]): string {
 }
 
 export function PhysicalDatasetsTab() {
+  const navigate = useNavigate();
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [error, setError] = useState<string | null>(null);
   const [datasets, setDatasets] = useState<PhysicalDataset[]>([]);
@@ -203,6 +207,11 @@ export function PhysicalDatasetsTab() {
           <button type="button" className="pdc-fbtn" onClick={handleExportCsv}>
             Export CSV
           </button>
+          <div className="pdc-sec-actions">
+            <Button variant="primary" size="sm" onClick={() => navigate(WORKSPACE_ROUTES.bind)}>
+              Bind columns
+            </Button>
+          </div>
           <div className="pdc-viewtoggle">
             <button
               type="button"

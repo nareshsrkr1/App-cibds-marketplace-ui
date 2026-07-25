@@ -35,7 +35,7 @@ function renderPage(path = '/workspace') {
 }
 
 describe('WorkspacePage', () => {
-  it('shows all personas enabled with Producer active by default', async () => {
+  it('shows Producer enabled and other personas disabled by default', async () => {
     renderPage();
     await waitFor(() =>
       expect(screen.getByTestId('workspace-shell')).toBeInTheDocument(),
@@ -44,8 +44,9 @@ describe('WorkspacePage', () => {
       'aria-pressed',
       'true',
     );
-    for (const label of ['Producer', 'Governance', 'Consumer', 'Admin']) {
-      expect(screen.getByRole('button', { name: label })).not.toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Producer' })).not.toBeDisabled();
+    for (const label of ['Governance', 'Consumer', 'Admin']) {
+      expect(screen.getByRole('button', { name: label })).toBeDisabled();
     }
   });
 
@@ -65,15 +66,19 @@ describe('WorkspacePage', () => {
       /Producer contracts held/,
     );
     expect(consoleRoot.querySelector('.sh-actions')).toBeTruthy();
-    // "Register a physical dataset" stays disabled ("Available in a future release")
-    // until that flow is rebuilt — the other three actions are live today.
-    for (const name of ['Bulk upload PDEs', 'Bind columns', 'Track workflow']) {
+    // "Register a physical dataset" and "Track workflow" stay disabled for this
+    // phased rollout — Bulk upload / Bind columns are live today.
+    for (const name of ['Bulk upload PDEs', 'Bind columns']) {
       const btn = Array.from(consoleRoot.querySelectorAll('button')).find(
         (el) => el.textContent?.trim() === name,
       );
       expect(btn, name).toBeTruthy();
       expect(btn).not.toBeDisabled();
     }
+    const heroWorkflow = Array.from(consoleRoot.querySelectorAll('button')).find(
+      (el) => el.textContent?.trim() === 'Track workflow',
+    );
+    expect(heroWorkflow).toBeDisabled();
     const heroRegister = Array.from(consoleRoot.querySelectorAll('button')).find(
       (el) => el.textContent?.trim() === 'Register a physical dataset',
     );
@@ -113,12 +118,12 @@ describe('WorkspacePage', () => {
     );
     await waitFor(() => {
       expect(
-        screen.getAllByRole('button', { name: 'Register a physical dataset' }).length,
+        screen.getAllByRole('button', { name: 'Register a Physical Dataset' }).length,
       ).toBeGreaterThanOrEqual(1);
     });
     const nav = screen.getByLabelText('Workspace');
     expect(
-      within(nav).getByRole('button', { name: 'Register a physical dataset' }),
+      within(nav).getByRole('button', { name: 'Register a Physical Dataset' }),
     ).toBeDisabled();
   });
 
@@ -136,7 +141,7 @@ describe('WorkspacePage', () => {
     expect(heroRegister).toHaveAttribute('title', 'Available in a future release');
 
     const navRegister = within(screen.getByLabelText('Workspace')).getByRole('button', {
-      name: 'Register a physical dataset',
+      name: 'Register a Physical Dataset',
     });
     expect(navRegister).toBeDisabled();
     expect(navRegister).toHaveAttribute('title', 'Available in a future release');
@@ -147,29 +152,26 @@ describe('WorkspacePage', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('switches left nav when persona changes', async () => {
+  it('keeps Producer nav when other personas are disabled', async () => {
     renderPage();
     await waitFor(() =>
       expect(screen.getByTestId('workspace-shell')).toBeInTheDocument(),
     );
     await waitFor(() => {
       expect(
-        screen.getAllByRole('button', { name: 'Register a physical dataset' }).length,
+        screen.getAllByRole('button', { name: 'Register a Physical Dataset' }).length,
       ).toBeGreaterThanOrEqual(1);
     });
 
-    fireEvent.click(screen.getByRole('button', { name: 'Governance' }));
-    await waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: 'Endorsement queue' }),
-      ).toBeInTheDocument();
-    });
+    const governance = screen.getByRole('button', { name: 'Governance' });
+    expect(governance).toBeDisabled();
+    fireEvent.click(governance);
     expect(
-      screen.queryAllByRole('button', { name: 'Register a physical dataset' }),
-    ).toHaveLength(0);
-    await waitFor(() => {
-      expect(screen.getByText(/Own the vocabulary/i)).toBeInTheDocument();
-    });
+      within(screen.getByLabelText('Workspace')).getByRole('button', {
+        name: 'Register a Physical Dataset',
+      }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/Own the vocabulary/i)).not.toBeInTheDocument();
   });
 
   it('shows console error state when hero API fails', async () => {

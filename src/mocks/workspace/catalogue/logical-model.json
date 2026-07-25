@@ -458,6 +458,45 @@
       ],
       "bdeCount": 2,
       "pdeCount": 24
+    },
+    {
+      "id": "huge-data-aggregate",
+      "name": "Huge Data Aggregate",
+      "subjectAreaId": "trade-lifecycle",
+      "bdeNames": [
+        "Huge Data Element 01",
+        "Huge Data Element 02",
+        "Huge Data Element 03",
+        "Huge Data Element 04",
+        "Huge Data Element 05",
+        "Huge Data Element 06",
+        "Huge Data Element 07",
+        "Huge Data Element 08",
+        "Huge Data Element 09",
+        "Huge Data Element 10",
+        "Huge Data Element 11",
+        "Huge Data Element 12",
+        "Huge Data Element 13",
+        "Huge Data Element 14",
+        "Huge Data Element 15",
+        "Huge Data Element 16",
+        "Huge Data Element 17",
+        "Huge Data Element 18",
+        "Huge Data Element 19",
+        "Huge Data Element 20",
+        "Huge Data Element 21",
+        "Huge Data Element 22",
+        "Huge Data Element 23",
+        "Huge Data Element 24",
+        "Huge Data Element 25",
+        "Huge Data Element 26",
+        "Huge Data Element 27",
+        "Huge Data Element 28",
+        "Huge Data Element 29",
+        "Huge Data Element 30"
+      ],
+      "bdeCount": 30,
+      "pdeCount": 165
     }
   ]
 }

@@ -46,7 +46,14 @@ export function GlossaryTermRow({ term, subjectAreaLabel, elements }: GlossaryTe
         </span>
         <span className="num">{term.pdeCount}</span>
         <span className="sub">{term.pii ? 'PII' : 'No PII'}</span>
-        <Badge tone={term.status === 'Endorsed' ? 'success' : 'neutral'}>{term.status}</Badge>
+        <span className="cat-badge-group">
+          <Badge tone={term.status === 'Endorsed' ? 'success' : 'neutral'}>{term.status}</Badge>
+          {term.pdeCount === 0 ? (
+            <Badge tone="danger" title="Coverage gap">
+              gap
+            </Badge>
+          ) : null}
+        </span>
       </div>
       {expanded ? (
         <div className="gls-detail">

@@ -76,9 +76,66 @@ describe('Glossary Terms tab', () => {
     await screen.findByText('Intelligence · Lineage');
   });
 
-  it('Bulk upload and New term are inert future-release affordances', async () => {
+  it('New term submits a proposed term that appears in the list', async () => {
     const page = await openGlossaryTab();
-    expect(within(page).getByRole('button', { name: 'Bulk upload' })).toBeDisabled();
-    expect(within(page).getByRole('button', { name: 'New term' })).toBeDisabled();
+    fireEvent.click(within(page).getByRole('button', { name: 'New term' }));
+
+    const dialog = await screen.findByRole('dialog');
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Submit' }));
+    expect(within(dialog).getAllByText('Required.').length).toBeGreaterThan(0);
+
+    fireEvent.change(within(dialog).getByLabelText(/Term name/), {
+      target: { value: 'Gross Exposure' },
+    });
+    fireEvent.change(within(dialog).getByLabelText(/Proposed definition/), {
+      target: { value: 'Total exposure to a counterparty across all positions.' },
+    });
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Submit' }));
+
+    await within(dialog).findByText('Submitted as Proposed');
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Done' }));
+
+    await waitFor(() => expect(within(page).getByText('75 terms')).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText('Search glossary terms'), {
+      target: { value: 'Gross Exposure' },
+    });
+    await waitFor(() => expect(within(page).getByText('1 terms')).toBeInTheDocument());
+    expect(within(page).getByText('Gross Exposure')).toBeInTheDocument();
+  });
+
+  it('Bulk upload parses a CSV, validates rows, and applies the valid ones', async () => {
+    const page = await openGlossaryTab();
+    fireEvent.click(within(page).getByRole('button', { name: 'Bulk upload' }));
+
+    const dialog = await screen.findByRole('dialog');
+    expect(within(dialog).getByText('Upload')).toBeInTheDocument();
+    expect(within(dialog).getByText('Validate')).toBeInTheDocument();
+    expect(within(dialog).getByText('Apply')).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: /Download sample CSV/ })).toBeInTheDocument();
+
+    const csv = [
+      'Term,Subject area,Definition,Classification,PII',
+      'Gross Exposure,Market Risk Sensitivities,Total exposure to a counterparty.,Confidential,No',
+      ',Market Risk Sensitivities,Missing a term name.,Internal,No',
+    ].join('\n');
+    const file = new File([csv], 'terms.csv', { type: 'text/csv' });
+    fireEvent.change(within(dialog).getByTestId('bulk-terms-file-input'), {
+      target: { files: [file] },
+    });
+
+    await within(dialog).findByText('Gross Exposure');
+    expect(within(dialog).getByText('⚠ Missing term name')).toBeInTheDocument();
+    expect(within(dialog).getByRole('button', { name: /Apply 1 valid term/ })).toBeEnabled();
+
+    fireEvent.click(within(dialog).getByRole('button', { name: /Apply 1 valid term/ }));
+    await within(dialog).findByText('1 record applied');
+    fireEvent.click(within(dialog).getByRole('button', { name: 'Done' }));
+
+    await waitFor(() => expect(within(page).getByText('75 terms')).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText('Search glossary terms'), {
+      target: { value: 'Gross Exposure' },
+    });
+    await waitFor(() => expect(within(page).getByText('1 terms')).toBeInTheDocument());
+    expect(within(page).getByText('Gross Exposure')).toBeInTheDocument();
   });
 });

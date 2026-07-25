@@ -137,8 +137,20 @@ function LineageExplorerBody() {
               {cdeByName(s.bdeName) ? <span className="lx-pick-cde">CDE</span> : null}
             </span>
             <span className="lx-pick-meta">
-              {s.datasets.length} dataset{s.datasets.length === 1 ? '' : 's'} · {s.columnCount} col
-              {s.columnCount === 1 ? '' : 's'}
+              <span>
+                {s.datasets.length} dataset{s.datasets.length === 1 ? '' : 's'}
+              </span>
+              <span className="lx-pick-dot">·</span>
+              <span>
+                {s.columnCount} PDE{s.columnCount === 1 ? '' : 's'}
+              </span>
+            </span>
+            <span className="lx-pick-flow" aria-hidden="true">
+              <span>Source</span>
+              <span className="lx-pick-arr">→</span>
+              <span>Element</span>
+              <span className="lx-pick-arr">→</span>
+              <span>Column</span>
             </span>
           </button>
         ))}

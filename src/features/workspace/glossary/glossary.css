@@ -101,3 +101,356 @@
 .ln-btnwrap {
   margin-top: 6px;
 }
+
+/* ---- New term modal ---- */
+.gls-nt-note {
+  background: var(--surface-page);
+  border: 1px solid var(--gold-mid);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+.gls-nt-note-h {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.gls-nt-note ol {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.gls-nt-sla {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.gls-fld {
+  margin-bottom: 14px;
+}
+.gls-fld label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+.gls-req {
+  color: var(--status-danger);
+}
+.gls-fld input,
+.gls-fld select,
+.gls-fld textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-elevated);
+  color: var(--color-text-primary);
+  font-family: var(--sans);
+  font-size: 13.5px;
+  padding: 8px 10px;
+}
+.gls-fld textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.gls-fld.is-err input,
+.gls-fld.is-err textarea {
+  border-color: var(--status-danger);
+}
+.gls-fld-err {
+  font-size: 11.5px;
+  color: var(--status-danger);
+  margin-top: 4px;
+}
+.gls-fld-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.gls-fld-row--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.gls-opt {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+.gls-fld-hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 0 0 16px;
+}
+.gls-nt-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  /* The HTML SoT keeps its modal footer (Cancel/Submit) pinned outside the scrolling
+     body — only the middle content scrolls, so the buttons are always reachable. Our
+     shared Modal scrolls header+body+footer as one region instead, so on a short/narrow
+     screen with this many fields the buttons could scroll out of view — bleed to the
+     modal's edges and stick to the bottom of that shared scroll area to get the same
+     "always reachable" behaviour without changing the shared Modal component. */
+  position: sticky;
+  bottom: calc(var(--space-6) * -1);
+  margin: 20px calc(var(--space-6) * -1) calc(var(--space-6) * -1);
+  padding: 14px var(--space-6);
+  background: var(--surface-elevated);
+  border-top: 1px solid var(--color-border);
+}
+.gls-nt-success {
+  text-align: center;
+  padding: 24px 8px 8px;
+}
+.gls-nt-success-icon {
+  font-size: 40px;
+  color: var(--status-success);
+  margin-bottom: 8px;
+}
+.gls-nt-success h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0 0 10px;
+  color: var(--color-brand);
+}
+.gls-nt-success p {
+  color: var(--color-text-secondary);
+  max-width: 52ch;
+  margin: 0 auto 18px;
+  font-size: 13.5px;
+}
+
+/* ---- Bulk upload terms modal ---- */
+.gls-bulk-stepper {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  padding: 0 11px;
+}
+.gls-bulk-step {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+}
+/* A connector spanning exactly dot-center to dot-center, regardless of how wide either
+   label is — avoids the uneven segment lengths a per-label dash would produce. */
+.gls-bulk-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: calc(50% + 15px);
+  right: calc(-50% + 15px);
+  height: 1px;
+  background: var(--color-border);
+  z-index: 0;
+}
+.gls-bulk-step.is-done:not(:last-child)::after {
+  background: var(--status-success);
+}
+.gls-bulk-step-dot {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text-muted);
+  background: var(--surface-elevated);
+}
+.gls-bulk-step-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+.gls-bulk-step.is-active .gls-bulk-step-dot {
+  border-color: var(--gold-deep);
+  background: var(--gold-deep);
+  color: var(--white);
+}
+.gls-bulk-step.is-active .gls-bulk-step-lbl {
+  color: var(--color-brand);
+}
+.gls-bulk-step.is-done .gls-bulk-step-dot {
+  border-color: var(--status-success);
+  background: var(--status-success-bg);
+  color: var(--status-success);
+}
+.gls-bulk-step.is-done .gls-bulk-step-lbl {
+  color: var(--color-text-secondary);
+}
+.gls-bulk-intro {
+  color: var(--color-text-secondary);
+  font-size: 13.5px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.gls-bulk-drop-hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.gls-bulk-hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 10px 0 0;
+}
+.gls-bulk-samplelink-wrap {
+  margin: 6px 0 0;
+  text-align: center;
+}
+.gls-bulk-samplelink {
+  appearance: none;
+  border: none;
+  background: none;
+  color: var(--gold-deep);
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+.gls-bulk-samplelink:hover {
+  text-decoration: underline;
+}
+.gls-bulk-file-input {
+  display: none;
+}
+.gls-bulk-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 13.5px;
+  cursor: pointer;
+}
+.gls-bulk-drop:hover,
+.gls-bulk-drop.is-dragover {
+  border-color: var(--gold);
+  background: var(--gold-lt);
+}
+.gls-bulk-drop-status {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.gls-bulk-summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.gls-bulk-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.gls-bulk-stat-n {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+.gls-bulk-stat.is-ok .gls-bulk-stat-n {
+  color: var(--status-success);
+}
+.gls-bulk-stat.is-bad .gls-bulk-stat-n {
+  color: var(--status-danger);
+}
+.gls-bulk-table {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-height: 320px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+.gls-bulk-table-head,
+.gls-bulk-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 1.2fr 1fr;
+  gap: 10px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+}
+.gls-bulk-table-head {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--color-border);
+}
+.gls-bulk-row {
+  border-bottom: 1px solid var(--color-border);
+}
+.gls-bulk-row:last-child {
+  border-bottom: none;
+}
+.gls-bulk-row.is-bad {
+  background: var(--status-danger-bg);
+}
+.gls-bulk-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  /* Same reasoning as .gls-nt-actions — keep Back/Apply reachable on a short screen
+     instead of letting them scroll out of view along with the rest of the body. */
+  position: sticky;
+  bottom: calc(var(--space-6) * -1);
+  margin: 16px calc(var(--space-6) * -1) calc(var(--space-6) * -1);
+  padding: 14px var(--space-6);
+  background: var(--surface-elevated);
+  border-top: 1px solid var(--color-border);
+}
+.gls-bulk-success {
+  text-align: center;
+  padding: 24px 8px 8px;
+}
+.gls-bulk-success-icon {
+  font-size: 40px;
+  color: var(--status-success);
+  margin-bottom: 8px;
+}
+.gls-bulk-success h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0 0 10px;
+  color: var(--color-brand);
+}
+.gls-bulk-success p {
+  color: var(--color-text-secondary);
+  font-size: 13.5px;
+  margin: 0 0 18px;
+}

@@ -14,23 +14,23 @@
         },
         {
           "id": "register",
-          "label": "Register a physical dataset",
+          "label": "Register a Physical Dataset",
           "icon": "■",
           "enabled": false
         },
-        { "id": "bulkpde", "label": "Bulk upload PDEs", "icon": "▤", "enabled": true },
-        { "id": "bind", "label": "Bind columns", "icon": "⊞", "enabled": true },
-        { "id": "workflow", "label": "Workflow", "icon": "◷", "enabled": true }
+        { "id": "bulkpde", "label": "Bulk Upload PDEs", "icon": "▤", "enabled": true },
+        { "id": "bind", "label": "Bind Columns", "icon": "⊞", "enabled": true },
+        { "id": "workflow", "label": "Workflow", "icon": "◷", "enabled": false }
       ]
     },
     {
       "id": "mydata",
-      "label": "My data",
+      "label": "My Data",
       "sub": true,
       "items": [
-        { "id": "mydatasets", "label": "My datasets", "icon": "▣", "enabled": false },
-        { "id": "mybindings", "label": "My bindings", "icon": "⊞", "enabled": false },
-        { "id": "proposed", "label": "Proposed elements", "icon": "◇", "enabled": false }
+        { "id": "mydatasets", "label": "My Datasets", "icon": "▣", "enabled": false },
+        { "id": "mybindings", "label": "My Bindings", "icon": "⊞", "enabled": false },
+        { "id": "proposed", "label": "Proposed Elements", "icon": "◇", "enabled": false }
       ]
     },
     {
@@ -38,18 +38,18 @@
       "label": "Catalogue",
       "sub": true,
       "items": [
-        { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": true },
-        { "id": "log", "label": "Logical model", "icon": "◇", "enabled": true },
-        { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": true }
+        { "id": "phys", "label": "Physical Datasets", "icon": "▣", "enabled": true },
+        { "id": "log", "label": "Logical Model", "icon": "◇", "enabled": true },
+        { "id": "bt", "label": "Glossary Terms", "icon": "○", "enabled": true }
       ]
     },
     {
       "id": "intelligence",
       "label": "Intelligence",
       "items": [
-        { "id": "search", "label": "Explore catalogue", "icon": "◐", "enabled": false },
-        { "id": "lineage", "label": "Lineage explorer", "icon": "◫", "enabled": true },
-        { "id": "gaps", "label": "Coverage & gaps", "icon": "◐", "enabled": false }
+        { "id": "search", "label": "Explore Catalogue", "icon": "◐", "enabled": false },
+        { "id": "lineage", "label": "Lineage Explorer", "icon": "◫", "enabled": false },
+        { "id": "gaps", "label": "Coverage & Gaps", "icon": "◐", "enabled": false }
       ]
     }
   ]

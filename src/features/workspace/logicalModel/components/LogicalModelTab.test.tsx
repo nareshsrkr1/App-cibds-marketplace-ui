@@ -28,8 +28,16 @@ async function openLogicalModelTab() {
   renderCatalogue();
   await screen.findByText('1CAT Investments Trades');
   fireEvent.click(screen.getByRole('tab', { name: 'Logical Model' }));
-  await screen.findByText('Counterparty & Legal Entity');
-  return screen.getByTestId('physical-datasets');
+  const page = screen.getByTestId('physical-datasets');
+  await within(page).findByText('14 subject areas');
+  return page;
+}
+
+/** Scoped to the row-rendering area only — excludes the toolbar's subject-area filter
+ * <select>, whose <option> text (subject area names) would otherwise collide with the
+ * matching row's own text and make plain getByText ambiguous. */
+function lgmTable(page: HTMLElement) {
+  return within(page.querySelector('.lgm-table') as HTMLElement);
 }
 
 describe('Logical Model tab', () => {
@@ -46,7 +54,7 @@ describe('Logical Model tab', () => {
     });
     await waitFor(() => expect(within(page).getByText('1 subject areas')).toBeInTheDocument());
     expect(page.querySelector('.ui-pagination')).not.toBeInTheDocument();
-    expect(within(page).getByText('Trade Lifecycle')).toBeInTheDocument();
+    expect(lgmTable(page).getByText('Trade Lifecycle')).toBeInTheDocument();
   });
 
   it('expands subject area → logical dataset → BDE, preserving the search filter', async () => {
@@ -56,7 +64,7 @@ describe('Logical Model tab', () => {
     });
     await waitFor(() => expect(within(page).getByText('1 subject areas')).toBeInTheDocument());
 
-    fireEvent.click(within(page).getByText('Trade Lifecycle'));
+    fireEvent.click(lgmTable(page).getByText('Trade Lifecycle'));
     await within(page).findByText('Trade Identifiers');
     expect(within(page).getByText('Trade Events & Status')).toBeInTheDocument();
 
@@ -74,7 +82,7 @@ describe('Logical Model tab', () => {
       target: { value: 'Trade Lifecycle' },
     });
     await waitFor(() => expect(within(page).getByText('1 subject areas')).toBeInTheDocument());
-    fireEvent.click(within(page).getByText('Trade Lifecycle'));
+    fireEvent.click(lgmTable(page).getByText('Trade Lifecycle'));
     await within(page).findByText('Trade Identifiers');
     fireEvent.click(within(page).getByText('Trade Identifiers'));
     await within(page).findByText('Trade Identifier');
@@ -95,7 +103,7 @@ describe('Logical Model tab', () => {
       target: { value: 'Trade Lifecycle' },
     });
     await waitFor(() => expect(within(page).getByText('1 subject areas')).toBeInTheDocument());
-    fireEvent.click(within(page).getByText('Trade Lifecycle'));
+    fireEvent.click(lgmTable(page).getByText('Trade Lifecycle'));
     await within(page).findByText('Trade Identifiers');
     fireEvent.click(within(page).getByText('Trade Identifiers'));
     await within(page).findByText('Trade Identifier');

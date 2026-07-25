@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from './apiConfig';
+import { getApiBaseUrl, getApiMode } from './apiConfig';
 import { getAuthToken } from './authToken';
 import type { ApiResourceId, ApiResult } from './api.types';
 
@@ -130,6 +130,29 @@ function withCallerSignal<T>(
   });
 }
 
+/**
+ * A GET that 404s while the resource is in mock mode and the page has no
+ * active Service Worker controller almost certainly bypassed MSW rather than
+ * being a real "not found" — the mock worker went idle (browsers terminate
+ * idle Service Workers) and hadn't re-activated yet. Re-register it and
+ * retry this GET once before surfacing an error. GET-only and mock-only by
+ * design: never applied to mutations or real-backend calls.
+ */
+async function recoverFromStaleMockWorker<T>(
+  result: ApiResult<T>,
+  url: string,
+  resource?: ApiResourceId,
+): Promise<ApiResult<T>> {
+  if (result.ok || result.status !== 404) return result;
+  if (getApiMode(resource) !== 'mock') return result;
+  if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return result;
+  if (navigator.serviceWorker.controller) return result;
+
+  const { ensureMockWorkerActive } = await import('../../api/mock/browser');
+  await ensureMockWorkerActive().catch(() => {});
+  return execute<T>(url, 'GET');
+}
+
 export async function httpGet<T>(
   path: string,
   options?: HttpGetOptions,
@@ -138,7 +161,9 @@ export async function httpGet<T>(
 
   let shared = inflightGets.get(url) as Promise<ApiResult<T>> | undefined;
   if (!shared) {
-    shared = execute<T>(url, 'GET');
+    shared = execute<T>(url, 'GET').then((result) =>
+      recoverFromStaleMockWorker(result, url, options?.resource),
+    );
     inflightGets.set(url, shared as Promise<ApiResult<unknown>>);
     void shared.finally(() => {
       if (inflightGets.get(url) === shared) {

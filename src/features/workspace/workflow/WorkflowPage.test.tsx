@@ -36,52 +36,28 @@ function renderWorkspace(path = '/workspace') {
 }
 
 describe('Producer workflow', () => {
-  it('opens from hero Track workflow and left-nav Workflow (same route)', async () => {
+  it('keeps hero Track workflow and left-nav Workflow disabled in this rollout', async () => {
     renderWorkspace('/workspace');
     await waitFor(() =>
       expect(screen.getByTestId('producer-console')).toBeInTheDocument(),
     );
 
-    fireEvent.click(
-      within(screen.getByTestId('producer-console')).getByRole('button', {
-        name: 'Track workflow',
-      }),
+    const heroWorkflow = within(screen.getByTestId('producer-console')).getByRole(
+      'button',
+      { name: 'Track workflow' },
     );
-    await waitFor(() =>
-      expect(screen.getByTestId('workflow-page')).toBeInTheDocument(),
-    );
-    const page = screen.getByTestId('workflow-page');
-    expect(within(page).getByRole('heading', { level: 1 })).toHaveTextContent(
-      /Your in-flight work/i,
-    );
-    expect(within(page).getByLabelText('Workflow pipeline')).toBeInTheDocument();
-    expect(within(page).getByText('Awaiting your approval')).toBeInTheDocument();
-    expect(within(page).getByText('Cleared Notional')).toBeInTheDocument();
-    expect(within(page).getByText('settle_ccy_2')).toBeInTheDocument();
-  });
-
-  it('opens from left nav Workflow', async () => {
-    renderWorkspace('/workspace');
-    await waitFor(() =>
-      expect(screen.getByTestId('workspace-shell')).toBeInTheDocument(),
-    );
+    expect(heroWorkflow).toBeDisabled();
 
     await waitFor(() => {
       const nav = screen.getByLabelText('Workspace');
-      expect(within(nav).getByRole('button', { name: 'Workflow' })).toBeEnabled();
+      expect(within(nav).getByRole('button', { name: 'Workflow' })).toBeDisabled();
     });
 
-    fireEvent.click(
-      within(screen.getByLabelText('Workspace')).getByRole('button', {
-        name: 'Workflow',
-      }),
-    );
-    await waitFor(() =>
-      expect(screen.getByTestId('workflow-page')).toBeInTheDocument(),
-    );
+    fireEvent.click(heroWorkflow);
+    expect(screen.queryByTestId('workflow-page')).not.toBeInTheDocument();
   });
 
-  it('shows subscription requests with Approve and Decline disabled for now', async () => {
+  it('still renders the board when mounted directly (component coverage)', async () => {
     renderWorkspace('/workspace/workflow');
     await waitFor(() =>
       expect(screen.getByText('Market Risk · Risk Analytics')).toBeInTheDocument(),

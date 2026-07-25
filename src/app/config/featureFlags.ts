@@ -18,9 +18,9 @@ export const FEATURE_FLAGS: Record<string, boolean> = {
   register: false,
   bulkpde: true,
   bind: true,
-  workflow: true,
+  workflow: false,
   phys: true,
-  lineage: true,
+  lineage: false,
 
   // Catalogue tabs — not separately routed (they live inside the "phys" route as
   // tabs), gated inline in PhysicalDatasetsPage instead of via FeatureRoute

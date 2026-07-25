@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Badge } from '../../../../components/ui/Badge/Badge';
 import { useCatalogueModals } from '../../lineage/useCatalogueModals';
 import type { CatalogueBdeDetail } from '../logicalModel.types';
 
@@ -33,6 +34,11 @@ export function BdeRow({ bde }: BdeRowProps) {
         <span className="nb-meta">
           {bde.pdeCount} PDEs · <span className="sub">{bde.pii ? 'PII' : 'No PII'}</span>
         </span>
+        {bde.pdeCount === 0 ? (
+          <Badge tone="danger" title="Coverage gap">
+            gap
+          </Badge>
+        ) : null}
         <button
           type="button"
           className="nb-info"

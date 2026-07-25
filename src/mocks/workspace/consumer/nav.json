@@ -14,11 +14,11 @@
         },
         {
           "id": "browse",
-          "label": "Browse the catalogue",
+          "label": "Browse the Catalogue",
           "icon": "◇",
           "enabled": false
         },
-        { "id": "subs", "label": "My subscriptions", "icon": "▤", "enabled": false }
+        { "id": "subs", "label": "My Subscriptions", "icon": "▤", "enabled": false }
       ]
     },
     {
@@ -26,17 +26,17 @@
       "label": "Catalogue",
       "sub": true,
       "items": [
-        { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": true },
-        { "id": "log", "label": "Logical model", "icon": "◇", "enabled": true },
-        { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": true }
+        { "id": "phys", "label": "Physical Datasets", "icon": "▣", "enabled": true },
+        { "id": "log", "label": "Logical Model", "icon": "◇", "enabled": true },
+        { "id": "bt", "label": "Glossary Terms", "icon": "○", "enabled": true }
       ]
     },
     {
       "id": "intelligence",
       "label": "Intelligence",
       "items": [
-        { "id": "search", "label": "Explore catalogue", "icon": "◐", "enabled": false },
-        { "id": "lineage", "label": "Lineage explorer", "icon": "◫", "enabled": true }
+        { "id": "search", "label": "Explore Catalogue", "icon": "◐", "enabled": false },
+        { "id": "lineage", "label": "Lineage Explorer", "icon": "◫", "enabled": false }
       ]
     }
   ]

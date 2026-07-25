@@ -8,7 +8,7 @@
   "entitlements": ["WORKSPACE_VIEW"],
   "defaultPersona": "PRODUCER",
   "availablePersonas": ["PRODUCER", "GOVERNANCE", "CONSUMER", "ADMIN"],
-  "enabledPersonas": ["PRODUCER", "GOVERNANCE", "CONSUMER", "ADMIN"],
+  "enabledPersonas": ["PRODUCER"],
   "personaLabels": {
     "PRODUCER": "Producer",
     "GOVERNANCE": "Governance",

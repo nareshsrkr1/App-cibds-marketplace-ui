@@ -3,7 +3,7 @@
   "groups": [
     {
       "id": "governance",
-      "label": "Data governance",
+      "label": "Data Governance",
       "items": [
         {
           "id": "console",
@@ -12,7 +12,7 @@
           "enabled": true,
           "active": true
         },
-        { "id": "govqueue", "label": "Endorsement queue", "icon": "◎", "enabled": false }
+        { "id": "govqueue", "label": "Endorsement Queue", "icon": "◎", "enabled": false }
       ]
     },
     {
@@ -21,14 +21,14 @@
       "sub": true,
       "items": [
         { "id": "addbde", "label": "Add a BDE", "icon": "◆", "enabled": false },
-        { "id": "bulkbde", "label": "Bulk upload BDEs", "icon": "❖", "enabled": false },
+        { "id": "bulkbde", "label": "Bulk Upload BDEs", "icon": "❖", "enabled": false },
         {
           "id": "addterm",
-          "label": "Add a glossary term",
+          "label": "Add a Glossary Term",
           "icon": "●",
           "enabled": false
         },
-        { "id": "bulkterm", "label": "Bulk upload terms", "icon": "⁘", "enabled": false }
+        { "id": "bulkterm", "label": "Bulk Upload Terms", "icon": "⁘", "enabled": false }
       ]
     },
     {
@@ -36,18 +36,18 @@
       "label": "Catalogue",
       "sub": true,
       "items": [
-        { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": true },
-        { "id": "log", "label": "Logical model", "icon": "◇", "enabled": true },
-        { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": true }
+        { "id": "phys", "label": "Physical Datasets", "icon": "▣", "enabled": true },
+        { "id": "log", "label": "Logical Model", "icon": "◇", "enabled": true },
+        { "id": "bt", "label": "Glossary Terms", "icon": "○", "enabled": true }
       ]
     },
     {
       "id": "intelligence",
       "label": "Intelligence",
       "items": [
-        { "id": "search", "label": "Explore catalogue", "icon": "◐", "enabled": false },
-        { "id": "lineage", "label": "Lineage explorer", "icon": "◫", "enabled": true },
-        { "id": "gaps", "label": "Coverage & gaps", "icon": "◐", "enabled": false }
+        { "id": "search", "label": "Explore Catalogue", "icon": "◐", "enabled": false },
+        { "id": "lineage", "label": "Lineage Explorer", "icon": "◫", "enabled": false },
+        { "id": "gaps", "label": "Coverage & Gaps", "icon": "◐", "enabled": false }
       ]
     }
   ]

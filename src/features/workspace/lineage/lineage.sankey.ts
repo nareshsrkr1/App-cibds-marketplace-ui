@@ -51,11 +51,18 @@ export function buildSankeyData(
   return buildFromBdeList(summary.term, [summary]);
 }
 
+/**
+ * `summaries` can list more than one BDE (an `LD::` aggregate view). When two BDEs realize
+ * the *same* physical dataset, the dataset/column nodes are shared — one box with two
+ * incoming links — rather than duplicated per BDE, which is what made multi-BDE diagrams
+ * balloon into tall, repetitive-looking stacks of near-identical rows.
+ */
 function buildFromBdeList(rootLabel: string, summaries: LineageSummary[]): SankeyData {
   const nodes: SankeyNode[] = [
     { id: 'root', label: rootLabel, kind: 'root', weight: sumColumns(summaries) },
   ];
   const links: SankeyLink[] = [];
+  const datasetNodes = new Map<string, SankeyNode>();
 
   for (const summary of summaries) {
     const bdeNodeId = `bde:${summary.key}`;
@@ -69,24 +76,27 @@ function buildFromBdeList(rootLabel: string, summaries: LineageSummary[]): Sanke
     links.push({ sourceId: 'root', targetId: bdeNodeId, weight: summary.columnCount });
 
     for (const ds of summary.datasets) {
-      const dsNodeId = `ds:${summary.key}:${ds.datasetName}`;
-      const colNodeId = `col:${summary.key}:${ds.datasetName}`;
-      nodes.push({
-        id: dsNodeId,
-        label: ds.datasetName,
-        kind: 'dataset',
-        weight: ds.columnCount,
-        sor: ds.sor,
-      });
-      nodes.push({
-        id: colNodeId,
-        label: `${ds.columnCount} column${ds.columnCount === 1 ? '' : 's'}`,
-        kind: 'columns',
-        weight: ds.columnCount,
-      });
+      const dsNodeId = `ds:${ds.datasetName}`;
+      let dsNode = datasetNodes.get(ds.datasetName);
+      if (!dsNode) {
+        dsNode = { id: dsNodeId, label: ds.datasetName, kind: 'dataset', weight: 0, sor: ds.sor };
+        datasetNodes.set(ds.datasetName, dsNode);
+        nodes.push(dsNode);
+      }
+      dsNode.weight += ds.columnCount;
       links.push({ sourceId: bdeNodeId, targetId: dsNodeId, weight: ds.columnCount });
-      links.push({ sourceId: dsNodeId, targetId: colNodeId, weight: ds.columnCount });
     }
+  }
+
+  for (const dsNode of datasetNodes.values()) {
+    const colNodeId = `col:${dsNode.label}`;
+    nodes.push({
+      id: colNodeId,
+      label: `${dsNode.weight} column${dsNode.weight === 1 ? '' : 's'}`,
+      kind: 'columns',
+      weight: dsNode.weight,
+    });
+    links.push({ sourceId: dsNode.id, targetId: colNodeId, weight: dsNode.weight });
   }
 
   return { rootLabel, nodes, links };

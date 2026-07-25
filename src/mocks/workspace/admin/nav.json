@@ -17,17 +17,17 @@
     },
     {
       "id": "register",
-      "label": "Register data",
+      "label": "Register Data",
       "sub": true,
       "items": [
         {
           "id": "register",
-          "label": "Register a physical dataset",
+          "label": "Register a Physical Dataset",
           "icon": "■",
           "enabled": false
         },
-        { "id": "bulkpde", "label": "Bulk upload PDEs", "icon": "▤", "enabled": false },
-        { "id": "bind", "label": "Bind columns", "icon": "⊞", "enabled": false }
+        { "id": "bulkpde", "label": "Bulk Upload PDEs", "icon": "▤", "enabled": false },
+        { "id": "bind", "label": "Bind Columns", "icon": "⊞", "enabled": false }
       ]
     },
     {
@@ -36,21 +36,21 @@
       "sub": true,
       "items": [
         { "id": "addbde", "label": "Add a BDE", "icon": "◆", "enabled": false },
-        { "id": "bulkbde", "label": "Bulk upload BDEs", "icon": "❖", "enabled": false },
+        { "id": "bulkbde", "label": "Bulk Upload BDEs", "icon": "❖", "enabled": false },
         {
           "id": "addterm",
-          "label": "Add a glossary term",
+          "label": "Add a Glossary Term",
           "icon": "●",
           "enabled": false
         },
-        { "id": "bulkterm", "label": "Bulk upload terms", "icon": "⁘", "enabled": false }
+        { "id": "bulkterm", "label": "Bulk Upload Terms", "icon": "⁘", "enabled": false }
       ]
     },
     {
       "id": "governance",
       "label": "Governance",
       "items": [
-        { "id": "govqueue", "label": "Endorsement queue", "icon": "◎", "enabled": false }
+        { "id": "govqueue", "label": "Endorsement Queue", "icon": "◎", "enabled": false }
       ]
     },
     {
@@ -58,18 +58,18 @@
       "label": "Catalogue",
       "sub": true,
       "items": [
-        { "id": "phys", "label": "Physical datasets", "icon": "▣", "enabled": true },
-        { "id": "log", "label": "Logical model", "icon": "◇", "enabled": true },
-        { "id": "bt", "label": "Glossary terms", "icon": "○", "enabled": true }
+        { "id": "phys", "label": "Physical Datasets", "icon": "▣", "enabled": true },
+        { "id": "log", "label": "Logical Model", "icon": "◇", "enabled": true },
+        { "id": "bt", "label": "Glossary Terms", "icon": "○", "enabled": true }
       ]
     },
     {
       "id": "intelligence",
       "label": "Intelligence",
       "items": [
-        { "id": "search", "label": "Explore catalogue", "icon": "◐", "enabled": false },
-        { "id": "lineage", "label": "Lineage explorer", "icon": "◫", "enabled": true },
-        { "id": "gaps", "label": "Coverage & gaps", "icon": "◐", "enabled": false }
+        { "id": "search", "label": "Explore Catalogue", "icon": "◐", "enabled": false },
+        { "id": "lineage", "label": "Lineage Explorer", "icon": "◫", "enabled": false },
+        { "id": "gaps", "label": "Coverage & Gaps", "icon": "◐", "enabled": false }
       ]
     },
     {
@@ -77,7 +77,7 @@
       "label": "Admin",
       "items": [
         { "id": "adminreg", "label": "Registry", "icon": "▤", "enabled": false },
-        { "id": "adminaudit", "label": "Audit log", "icon": "≡", "enabled": false }
+        { "id": "adminaudit", "label": "Audit Log", "icon": "≡", "enabled": false }
       ]
     }
   ]

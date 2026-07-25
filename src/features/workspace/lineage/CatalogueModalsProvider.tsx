@@ -48,7 +48,13 @@ export function CatalogueModalsProvider({ children }: CatalogueModalsProviderPro
         elements={elements}
         onClose={() => setOpenBdeId(null)}
         onSelectBde={(bdeId) => setOpenBdeId(bdeId)}
-        onTraceLineage={(bdeName) => setOpenLineageKey(bdeName)}
+        onTraceLineage={(bdeName) => {
+          // Match the intended flow: tracing lineage replaces the BDE detail
+          // modal rather than stacking a second overlay (and a second focus
+          // trap) on top of it.
+          setOpenBdeId(null);
+          setOpenLineageKey(bdeName);
+        }}
       />
       <LineageModal
         open={openLineageKey !== null}

@@ -47,6 +47,89 @@
   min-height: var(--control-height-lg);
   padding: 0 var(--space-6);
 }
+
+/* Shared marketplace buttons — used across landing + workspace (must live in the
+   always-loaded theme sheet; do not keep these only in landing.css or workspace
+   screens lose styles when the landing chunk was never loaded). */
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: 0.15s;
+}
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--gold-mid);
+  color: var(--gold-deep);
+}
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--gold-mid);
+  outline-offset: 2px;
+}
+.btn-ghost:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-dk {
+  background: var(--navy);
+  color: #fff;
+  border: 1px solid var(--navy);
+  border-radius: 9px;
+  padding: 12px 22px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.16s;
+}
+.btn-dk:hover:not(:disabled) {
+  background: var(--navy-2);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+.btn-dk:focus-visible {
+  outline: 2px solid var(--gold-mid);
+  outline-offset: 2px;
+}
+.btn-dk:disabled {
+  background: #9aa6b5;
+  border-color: #9aa6b5;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-lt {
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 12px 22px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.16s;
+}
+.btn-lt:hover:not(:disabled) {
+  border-color: var(--gold-mid);
+  color: var(--gold-deep);
+}
+.btn-lt:focus-visible {
+  outline: 2px solid var(--gold-mid);
+  outline-offset: 2px;
+}
+.btn-lt:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-lg {
+  padding: 14px 26px;
+  font-size: 14.5px;
+}
+
 .ui-badge {
   display: inline-flex;
   align-items: center;
@@ -133,7 +216,14 @@
 }
 .ui-modal-backdrop {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /* Every current Modal consumer renders inside the workspace shell (sidebar +
+     main content) — offset past the sidebar so the backdrop/dialog stay within
+     the main content area instead of covering the nav with a clear boundary
+     between them. Revisit if a modal is ever needed outside that shell. */
+  left: var(--sidebar-width);
   background: rgba(15, 35, 56, 0.45);
   display: grid;
   place-items: center;
@@ -146,23 +236,38 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   border: var(--border-width) solid var(--color-border);
-  padding: var(--space-6);
   outline: none;
   animation: ui-modal-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
   max-height: 88vh;
   overflow-y: auto;
 }
-.ui-modal--wide {
-  width: min(1080px, 96vw);
+/* Padding lives here, not on .ui-modal itself — a `position: sticky` header (below)
+   sitting directly against .ui-modal's own edge doesn't need any bleed/negative-margin
+   trick to reach the modal's corners, sidestepping a real, confirmed browser quirk: a
+   sticky element's negative top margin is not honoured the way a static element's is,
+   leaving a gap between the modal's top edge and the header no matter how the margin is
+   tuned. Header and body are siblings; only the body carries this padding. */
+.ui-modal__body {
+  padding: var(--space-6);
 }
+.ui-modal--wide {
+  width: min(1200px, calc(96vw - var(--sidebar-width)));
+}
+/* Deliberately no `transform` here (no scale/translate) — a transformed element becomes
+   the containing block for any `position: sticky`/`fixed` descendant per spec, and this
+   animation runs on `.ui-modal` itself, which contains the sticky header used by several
+   modals (Lineage, New term, Bulk upload). With a transform, the sticky header briefly
+   miscalculates its stuck offset for the ~220ms the animation runs, letting body content
+   render on top of/under the header for a frame. Fading in via opacity + margin-top
+   keeps the same soft "settle into place" motion without that class of bug. */
 @keyframes ui-modal-in {
   from {
     opacity: 0;
-    transform: scale(0.96) translateY(6px);
+    margin-top: 6px;
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    margin-top: 0;
   }
 }
 .ui-modal__header {
@@ -170,7 +275,31 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  /* .ui-modal itself scrolls (overflow-y:auto) once content is taller than the
+     viewport allows — keep the title + Close reachable no matter how far down
+     a tall diagram/table scrolls, instead of losing them off the top. */
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--surface-elevated);
+}
+/* Themed header — used by modals that want the app's navy/gold identity
+   instead of the plain default (e.g. Lineage's diagram modal). */
+.ui-modal__header--navy {
+  background: linear-gradient(175deg, #122942 0%, #0f2338 60%, #0c1d30 100%);
+  color: var(--white);
+}
+.ui-modal__header--navy h2 {
+  color: var(--white);
+}
+.ui-modal__header--navy .ui-btn--ghost {
+  color: var(--gold-mid);
+}
+.ui-modal__header--navy .ui-btn--ghost:hover {
+  color: var(--white);
 }
 .ui-toast-region {
   position: fixed;
@@ -485,7 +614,7 @@
   background: var(--bg);
 }
 .sb {
-  width: 264px;
+  width: var(--sidebar-width);
   flex-shrink: 0;
   background: linear-gradient(175deg, #122942 0%, #0f2338 38%, #0c1d30 72%, #091624 100%);
   color: #e8e3d8;
@@ -1724,6 +1853,42 @@ span.sh-more {
   font-size: 12px;
   color: var(--color-text-muted);
 }
+/* Toggle-style toolbar button (e.g. "Coverage gaps") — shared by Logical Model and
+   Glossary Terms, matching Physical Datasets' own .pdc-fbtn look. */
+.cat-fbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--control-height-sm);
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--surface-elevated);
+  color: var(--color-text-secondary);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cat-fbtn:hover {
+  border-color: var(--gold);
+  color: var(--color-brand);
+}
+.cat-fbtn.is-on {
+  background: var(--status-danger-bg);
+  border-color: var(--status-danger);
+  color: var(--status-danger);
+}
+.cat-fbtn-cnt {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+}
+.cat-fbtn.is-on .cat-fbtn-cnt {
+  background: rgba(255, 255, 255, 0.6);
+}
 .cat-loading {
   display: flex;
   align-items: center;
@@ -1747,6 +1912,15 @@ span.sh-more {
   border-radius: 999px;
   font-size: 11px;
   font-weight: 600;
+}
+/* Groups a status Badge + gap Badge into one fixed-grid column without needing an extra
+   grid track — used by Glossary Terms' row (a coverage-gap term still needs its own
+   status shown alongside the "gap" flag). */
+.cat-badge-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 .cat-sor-endur {
   background: color-mix(in srgb, var(--blue) 14%, var(--white));

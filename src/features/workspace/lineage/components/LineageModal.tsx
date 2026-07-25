@@ -18,9 +18,11 @@ export type LineageModalProps = {
 function parseNodeId(id: string): { kind: string; key?: string; datasetName?: string } {
   const parts = id.split(':');
   if (parts[0] === 'bde') return { kind: 'bde', key: parts.slice(1).join(':') };
+  // Dataset/column nodes are shared across every BDE that realizes them (see
+  // buildFromBdeList in lineage.sankey.ts) — the id carries only the dataset name, not a
+  // single owning BDE key.
   if (parts[0] === 'ds' || parts[0] === 'col') {
-    const [, key, datasetName] = parts;
-    return { kind: parts[0], key, datasetName };
+    return { kind: parts[0], datasetName: parts.slice(1).join(':') };
   }
   return { kind: 'root' };
 }
@@ -29,6 +31,7 @@ function buildDetailView(
   node: SankeyNode,
   lineageKey: string,
   details: LineageDetail[],
+  sankeyData: SankeyData,
 ): DetailView | null {
   const parsed = parseNodeId(node.id);
 
@@ -75,15 +78,27 @@ function buildDetailView(
     };
   }
 
-  // 'ds' or 'col' — both resolve to the same dataset's detail
-  const detail = details.find((d) => d.key === parsed.key);
-  const dataset = detail?.datasets.find((d) => d.datasetName === parsed.datasetName);
-  if (!dataset) return null;
+  // 'ds' or 'col' — the node may be shared by more than one BDE in this view (an LD::
+  // aggregate lineage), so resolve to the union of every realization across them.
+  const bdeKeys = sankeyData.nodes
+    .filter((n) => n.kind === 'bde')
+    .map((n) => n.id.slice('bde:'.length));
+  const columnsByName = new Map<string, LineageDetail['datasets'][number]['columns'][number]>();
+  let sor = '';
+  for (const key of bdeKeys) {
+    const detail = details.find((d) => d.key === key);
+    const dataset = detail?.datasets.find((d) => d.datasetName === parsed.datasetName);
+    if (!dataset) continue;
+    sor = dataset.sor;
+    for (const col of dataset.columns) columnsByName.set(col.name, col);
+  }
+  if (columnsByName.size === 0) return null;
+  const columns = [...columnsByName.values()];
   return {
-    title: dataset.datasetName,
-    subtitle: `Source system: ${dataset.sor}`,
-    rows: [{ label: 'Columns realising this element', value: String(dataset.columns.length) }],
-    columns: dataset.columns,
+    title: parsed.datasetName ?? '',
+    subtitle: `Source system: ${sor}`,
+    rows: [{ label: 'Columns realising this element', value: String(columns.length) }],
+    columns,
   };
 }
 
@@ -107,8 +122,10 @@ export function LineageModal({ open, lineageKey, onClose }: LineageModalProps) {
       if (modelResult.ok) setLogicalDatasets(modelResult.data.logicalDatasets);
     });
     return () => ac.abort();
+    // Reset on lineageKey too — a future trigger could switch traces without
+    // the modal fully closing/reopening in between (open would stay true).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, lineageKey]);
 
   const sankeyData: SankeyData | null = useMemo(() => {
     if (!open || !lineageKey || !summaries) return null;
@@ -126,12 +143,14 @@ export function LineageModal({ open, lineageKey, onClose }: LineageModalProps) {
 
   const selectedNode = sankeyData?.nodes.find((n) => n.id === selectedNodeId) ?? null;
   const detailView =
-    selectedNode && details && lineageKey ? buildDetailView(selectedNode, lineageKey, details) : null;
+    selectedNode && details && lineageKey && sankeyData
+      ? buildDetailView(selectedNode, lineageKey, details, sankeyData)
+      : null;
 
   const title = sankeyData?.rootLabel ?? 'Lineage';
 
   return (
-    <Modal open={open} onClose={onClose} title={title} size="wide">
+    <Modal open={open} onClose={onClose} title={title} size="wide" headerTheme="navy">
       <div className="lin-modal">
         <div className="lin-eyebrow">Intelligence · Lineage</div>
         {!sankeyData ? (
@@ -155,11 +174,13 @@ export function LineageModal({ open, lineageKey, onClose }: LineageModalProps) {
               </span>
             </div>
             <div className="lin-layout">
-              <SankeyDiagram
-                data={sankeyData}
-                selectedNodeId={selectedNodeId}
-                onSelectNode={handleSelectNode}
-              />
+              <div className="lin-diagram-scroll ui-scroll-box">
+                <SankeyDiagram
+                  data={sankeyData}
+                  selectedNodeId={selectedNodeId}
+                  onSelectNode={handleSelectNode}
+                />
+              </div>
               <LineageDetailPanel view={detailView} />
             </div>
           </div>

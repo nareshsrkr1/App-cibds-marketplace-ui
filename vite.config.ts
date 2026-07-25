@@ -12,6 +12,11 @@ export default defineConfig({
   build: {
     // Production / `npm start`: serve compiled JS only — no .tsx in DevTools.
     sourcemap: false,
+    // Default is 500kB; browser-*.js (the MSW mock worker, mock-mode only —
+    // never loaded once a resource flips to a real backend) sits at ~493kB and
+    // would trip the warning as the app keeps growing. This only silences the
+    // warning — it doesn't change what gets shipped or how chunks are split.
+    chunkSizeWarningLimit: 1000,
   },
   test: {
     environment: 'jsdom',

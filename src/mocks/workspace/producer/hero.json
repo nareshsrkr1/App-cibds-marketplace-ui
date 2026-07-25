@@ -27,7 +27,7 @@
       "id": "workflow",
       "label": "Track workflow",
       "variant": "secondary",
-      "enabled": true
+      "enabled": false
     }
   ]
 }

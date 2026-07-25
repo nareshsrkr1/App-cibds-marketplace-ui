@@ -147,6 +147,9 @@
 .pdc-fbtn.is-on .pdc-fbtn-cnt {
   background: rgba(255, 255, 255, 0.6);
 }
+.pdc-sec-actions {
+  display: inline-flex;
+}
 .pdc-viewtoggle {
   display: inline-flex;
   border: 1px solid var(--border);

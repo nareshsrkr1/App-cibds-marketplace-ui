@@ -175,11 +175,11 @@ describe('Bind columns', () => {
 
     await waitFor(() => {
       const nav = screen.getByLabelText('Workspace');
-      expect(within(nav).getByRole('button', { name: 'Bind columns' })).toBeEnabled();
+      expect(within(nav).getByRole('button', { name: 'Bind Columns' })).toBeEnabled();
     });
 
     const nav = screen.getByLabelText('Workspace');
-    fireEvent.click(within(nav).getByRole('button', { name: 'Bind columns' }));
+    fireEvent.click(within(nav).getByRole('button', { name: 'Bind Columns' }));
 
     await waitFor(() =>
       expect(screen.getByTestId('bind-columns')).toBeInTheDocument(),

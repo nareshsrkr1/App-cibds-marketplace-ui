@@ -1653,6 +1653,1131 @@
         }
       ],
       "columnCount": 18
+    },
+    {
+      "key": "Huge Data Element 01",
+      "term": "Huge Data Element 01",
+      "bdeName": "Huge Data Element 01",
+      "bdeId": "BDE_HUGE001",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 16
+    },
+    {
+      "key": "Huge Data Element 02",
+      "term": "Huge Data Element 02",
+      "bdeName": "Huge Data Element 02",
+      "bdeId": "BDE_HUGE002",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 21
+    },
+    {
+      "key": "Huge Data Element 03",
+      "term": "Huge Data Element 03",
+      "bdeName": "Huge Data Element 03",
+      "bdeId": "BDE_HUGE003",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 25
+    },
+    {
+      "key": "Huge Data Element 04",
+      "term": "Huge Data Element 04",
+      "bdeName": "Huge Data Element 04",
+      "bdeId": "BDE_HUGE004",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 18
+    },
+    {
+      "key": "Huge Data Element 05",
+      "term": "Huge Data Element 05",
+      "bdeName": "Huge Data Element 05",
+      "bdeId": "BDE_HUGE005",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 20
+    },
+    {
+      "key": "Huge Data Element 06",
+      "term": "Huge Data Element 06",
+      "bdeName": "Huge Data Element 06",
+      "bdeId": "BDE_HUGE006",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 21
+    },
+    {
+      "key": "Huge Data Element 07",
+      "term": "Huge Data Element 07",
+      "bdeName": "Huge Data Element 07",
+      "bdeId": "BDE_HUGE007",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 27
+    },
+    {
+      "key": "Huge Data Element 08",
+      "term": "Huge Data Element 08",
+      "bdeName": "Huge Data Element 08",
+      "bdeId": "BDE_HUGE008",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 14
+    },
+    {
+      "key": "Huge Data Element 09",
+      "term": "Huge Data Element 09",
+      "bdeName": "Huge Data Element 09",
+      "bdeId": "BDE_HUGE009",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 18
+    },
+    {
+      "key": "Huge Data Element 10",
+      "term": "Huge Data Element 10",
+      "bdeName": "Huge Data Element 10",
+      "bdeId": "BDE_HUGE010",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 21
+    },
+    {
+      "key": "Huge Data Element 11",
+      "term": "Huge Data Element 11",
+      "bdeName": "Huge Data Element 11",
+      "bdeId": "BDE_HUGE011",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 23
+    },
+    {
+      "key": "Huge Data Element 12",
+      "term": "Huge Data Element 12",
+      "bdeName": "Huge Data Element 12",
+      "bdeId": "BDE_HUGE012",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 10
+    },
+    {
+      "key": "Huge Data Element 13",
+      "term": "Huge Data Element 13",
+      "bdeName": "Huge Data Element 13",
+      "bdeId": "BDE_HUGE013",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 16
+    },
+    {
+      "key": "Huge Data Element 14",
+      "term": "Huge Data Element 14",
+      "bdeName": "Huge Data Element 14",
+      "bdeId": "BDE_HUGE014",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 21
+    },
+    {
+      "key": "Huge Data Element 15",
+      "term": "Huge Data Element 15",
+      "bdeName": "Huge Data Element 15",
+      "bdeId": "BDE_HUGE015",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 25
+    },
+    {
+      "key": "Huge Data Element 16",
+      "term": "Huge Data Element 16",
+      "bdeName": "Huge Data Element 16",
+      "bdeId": "BDE_HUGE016",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 18
+    },
+    {
+      "key": "Huge Data Element 17",
+      "term": "Huge Data Element 17",
+      "bdeName": "Huge Data Element 17",
+      "bdeId": "BDE_HUGE017",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 20
+    },
+    {
+      "key": "Huge Data Element 18",
+      "term": "Huge Data Element 18",
+      "bdeName": "Huge Data Element 18",
+      "bdeId": "BDE_HUGE018",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 21
+    },
+    {
+      "key": "Huge Data Element 19",
+      "term": "Huge Data Element 19",
+      "bdeName": "Huge Data Element 19",
+      "bdeId": "BDE_HUGE019",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 27
+    },
+    {
+      "key": "Huge Data Element 20",
+      "term": "Huge Data Element 20",
+      "bdeName": "Huge Data Element 20",
+      "bdeId": "BDE_HUGE020",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 14
+    },
+    {
+      "key": "Huge Data Element 21",
+      "term": "Huge Data Element 21",
+      "bdeName": "Huge Data Element 21",
+      "bdeId": "BDE_HUGE021",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 18
+    },
+    {
+      "key": "Huge Data Element 22",
+      "term": "Huge Data Element 22",
+      "bdeName": "Huge Data Element 22",
+      "bdeId": "BDE_HUGE022",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 21
+    },
+    {
+      "key": "Huge Data Element 23",
+      "term": "Huge Data Element 23",
+      "bdeName": "Huge Data Element 23",
+      "bdeId": "BDE_HUGE023",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 2
+        }
+      ],
+      "columnCount": 23
+    },
+    {
+      "key": "Huge Data Element 24",
+      "term": "Huge Data Element 24",
+      "bdeName": "Huge Data Element 24",
+      "bdeId": "BDE_HUGE024",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 10
+    },
+    {
+      "key": "Huge Data Element 25",
+      "term": "Huge Data Element 25",
+      "bdeName": "Huge Data Element 25",
+      "bdeId": "BDE_HUGE025",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 16
+    },
+    {
+      "key": "Huge Data Element 26",
+      "term": "Huge Data Element 26",
+      "bdeName": "Huge Data Element 26",
+      "bdeId": "BDE_HUGE026",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 21
+    },
+    {
+      "key": "Huge Data Element 27",
+      "term": "Huge Data Element 27",
+      "bdeName": "Huge Data Element 27",
+      "bdeId": "BDE_HUGE027",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 6
+        },
+        {
+          "datasetName": "Endur OTC Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Endur Cashflow Ledger",
+          "sor": "Endur",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Static Reference Data",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Endur Exchange Commodity Trades",
+          "sor": "Endur",
+          "columnCount": 4
+        }
+      ],
+      "columnCount": 25
+    },
+    {
+      "key": "Huge Data Element 28",
+      "term": "Huge Data Element 28",
+      "bdeName": "Huge Data Element 28",
+      "bdeId": "BDE_HUGE028",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 18
+    },
+    {
+      "key": "Huge Data Element 29",
+      "term": "Huge Data Element 29",
+      "bdeName": "Huge Data Element 29",
+      "bdeId": "BDE_HUGE029",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 20
+    },
+    {
+      "key": "Huge Data Element 30",
+      "term": "Huge Data Element 30",
+      "bdeName": "Huge Data Element 30",
+      "bdeId": "BDE_HUGE030",
+      "logicalDatasetName": "Huge Data Aggregate",
+      "datasets": [
+        {
+          "datasetName": "1CAT Investments Trades",
+          "sor": "Catalyst",
+          "columnCount": 1
+        },
+        {
+          "datasetName": "Catalyst Margin Calls",
+          "sor": "Catalyst",
+          "columnCount": 2
+        },
+        {
+          "datasetName": "Endur Composer Child Trades",
+          "sor": "Endur",
+          "columnCount": 3
+        },
+        {
+          "datasetName": "Catalyst Positions",
+          "sor": "Catalyst",
+          "columnCount": 4
+        },
+        {
+          "datasetName": "Catalyst Collateral Moves",
+          "sor": "Catalyst",
+          "columnCount": 5
+        },
+        {
+          "datasetName": "Endur P&L and Greeks",
+          "sor": "Endur",
+          "columnCount": 6
+        }
+      ],
+      "columnCount": 21
     }
   ]
 }

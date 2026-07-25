@@ -86,11 +86,11 @@ describe('Bulk upload PDEs', () => {
 
     await waitFor(() => {
       const nav = screen.getByLabelText('Workspace');
-      expect(within(nav).getByRole('button', { name: 'Bulk upload PDEs' })).toBeEnabled();
+      expect(within(nav).getByRole('button', { name: 'Bulk Upload PDEs' })).toBeEnabled();
     });
 
     const nav = screen.getByLabelText('Workspace');
-    fireEvent.click(within(nav).getByRole('button', { name: 'Bulk upload PDEs' }));
+    fireEvent.click(within(nav).getByRole('button', { name: 'Bulk Upload PDEs' }));
 
     await waitFor(() =>
       expect(screen.getByTestId('bulk-upload-pdes')).toBeInTheDocument(),

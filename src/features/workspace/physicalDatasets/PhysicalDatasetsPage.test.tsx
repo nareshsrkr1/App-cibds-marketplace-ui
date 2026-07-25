@@ -48,13 +48,13 @@ describe('Physical datasets catalogue', () => {
     await waitFor(() => {
       const nav = screen.getByLabelText('Workspace');
       expect(
-        within(nav).getByRole('button', { name: 'Physical datasets' }),
+        within(nav).getByRole('button', { name: 'Physical Datasets' }),
       ).toBeEnabled();
     });
 
     fireEvent.click(
       within(screen.getByLabelText('Workspace')).getByRole('button', {
-        name: 'Physical datasets',
+        name: 'Physical Datasets',
       }),
     );
 

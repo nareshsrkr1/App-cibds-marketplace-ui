@@ -24,3 +24,17 @@ export async function startMockWorker() {
 
   return startPromise;
 }
+
+/**
+ * Re-registers the mock worker if the page has lost its Service Worker
+ * controller — browsers terminate idle Service Workers (~30s of inactivity)
+ * to save resources, and a fetch made before it re-activates bypasses MSW
+ * entirely, hitting the static preview/dev server as a bare 404. No-op if
+ * the worker is already controlling the page.
+ */
+export async function ensureMockWorkerActive(): Promise<void> {
+  if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return;
+  if (navigator.serviceWorker.controller) return;
+  startPromise = null; // force a fresh start() even though we started successfully before
+  await startMockWorker();
+}

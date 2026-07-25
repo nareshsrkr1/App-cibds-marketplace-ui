@@ -55,6 +55,7 @@
   --control-height: 40px;
   --control-height-sm: 32px;
   --control-height-lg: 48px;
+  --sidebar-width: 264px;
 
   /* Breakpoints (reference values) */
   --bp-md: 820px;

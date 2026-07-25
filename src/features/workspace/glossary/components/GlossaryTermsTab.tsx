@@ -4,6 +4,7 @@ import { ErrorState } from '../../../../components/feedback/ErrorState/ErrorStat
 import { Spinner } from '../../../../components/feedback/Spinner/Spinner';
 import { Pagination } from '../../../../components/ui/Pagination/Pagination';
 import { usePagination } from '../../../../components/ui/Pagination/usePagination';
+import { toast } from '../../../../services/toastService';
 import { fetchBusinessElements, fetchLogicalModel } from '../../logicalModel/logicalModel.api';
 import type { CatalogueBdeDetail, SubjectArea } from '../../logicalModel/logicalModel.types';
 import { fetchGlossaryTerms } from '../glossary.api';
@@ -15,9 +16,10 @@ import {
   type GlossaryStatusFilter,
   type GlossaryTerm,
 } from '../glossary.types';
+import { BulkUploadTermsModal } from './BulkUploadTermsModal';
 import { GlossaryTermRow } from './GlossaryTermRow';
+import { NewTermModal } from './NewTermModal';
 
-const FUTURE = 'Available in a future release';
 const PAGE_SIZE = 10;
 
 export function GlossaryTermsTab() {
@@ -32,6 +34,9 @@ export function GlossaryTermsTab() {
   const [subjectAreaId, setSubjectAreaId] = useState('All');
   const [statusFilter, setStatusFilter] = useState<GlossaryStatusFilter>('All status');
   const [sortKey, setSortKey] = useState<GlossarySortKey>('name');
+  const [gapsOnly, setGapsOnly] = useState(false);
+  const [newTermOpen, setNewTermOpen] = useState(false);
+  const [bulkUploadOpen, setBulkUploadOpen] = useState(false);
 
   useEffect(() => {
     const ac = new AbortController();
@@ -77,9 +82,12 @@ export function GlossaryTermsTab() {
     return (id: string) => byId.get(id) ?? id;
   }, [subjectAreas]);
 
+  const gapCount = useMemo(() => terms.filter((t) => t.pdeCount === 0).length, [terms]);
+
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     let rows = terms.filter((t) => {
+      if (gapsOnly && t.pdeCount !== 0) return false;
       if (subjectAreaId !== 'All' && t.subjectAreaId !== subjectAreaId) return false;
       if (statusFilter !== 'All status' && t.status !== statusFilter) return false;
       if (!q) return true;
@@ -91,10 +99,38 @@ export function GlossaryTermsTab() {
       return a.name.localeCompare(b.name);
     });
     return rows;
-  }, [terms, query, subjectAreaId, statusFilter, sortKey]);
+  }, [terms, query, subjectAreaId, statusFilter, sortKey, gapsOnly]);
 
-  const filterKey = `${query}|${subjectAreaId}|${statusFilter}|${sortKey}`;
+  const filterKey = `${query}|${subjectAreaId}|${statusFilter}|${sortKey}|${gapsOnly}`;
   const { page, setPage, pageCount, pageItems } = usePagination(visible, PAGE_SIZE, filterKey);
+
+  function handleTermCreated(term: GlossaryTerm) {
+    setTerms((prev) => [term, ...prev]);
+  }
+
+  function handleTermsApplied(newTerms: GlossaryTerm[]) {
+    if (newTerms.length === 0) return;
+    setTerms((prev) => [...newTerms, ...prev]);
+    toast.success(`${newTerms.length} glossary term${newTerms.length === 1 ? '' : 's'} added.`);
+  }
+
+  function handleExportCsv() {
+    const header = ['Term', 'Subject area', 'BDEs', 'PDEs', 'PII', 'Status'];
+    const lines = visible.map((t) =>
+      [t.name, subjectAreaLabel(t.subjectAreaId), String(t.bdeIds.length), String(t.pdeCount), t.pii ? 'Yes' : 'No', t.status]
+        .map((v) => `"${v.replace(/"/g, '""')}"`)
+        .join(','),
+    );
+    const csv = [header.join(','), ...lines].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'glossary_terms.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Glossary terms exported to CSV.');
+  }
 
   if (status === 'loading') {
     return (
@@ -162,10 +198,20 @@ export function GlossaryTermsTab() {
             ))}
           </select>
         </div>
-        <button type="button" className="cat-btn cat-btn-s" disabled title={FUTURE}>
+        <button
+          type="button"
+          className={`cat-fbtn${gapsOnly ? ' is-on' : ''}`}
+          onClick={() => setGapsOnly((v) => !v)}
+        >
+          Coverage gaps <span className="cat-fbtn-cnt">{gapCount}</span>
+        </button>
+        <button type="button" className="cat-btn cat-btn-s" onClick={handleExportCsv}>
+          Export CSV
+        </button>
+        <button type="button" className="cat-btn cat-btn-s" onClick={() => setBulkUploadOpen(true)}>
           Bulk upload
         </button>
-        <button type="button" className="cat-btn cat-btn-s" disabled title={FUTURE}>
+        <button type="button" className="cat-btn cat-btn-s" onClick={() => setNewTermOpen(true)}>
           New term
         </button>
         <div className="cat-rescount">{visible.length} terms</div>
@@ -202,6 +248,19 @@ export function GlossaryTermsTab() {
           />
         </>
       )}
+
+      <NewTermModal
+        open={newTermOpen}
+        subjectAreas={subjectAreas}
+        onClose={() => setNewTermOpen(false)}
+        onCreated={handleTermCreated}
+      />
+      <BulkUploadTermsModal
+        open={bulkUploadOpen}
+        subjectAreas={subjectAreas}
+        onClose={() => setBulkUploadOpen(false)}
+        onApplied={handleTermsApplied}
+      />
     </div>
   );
 }

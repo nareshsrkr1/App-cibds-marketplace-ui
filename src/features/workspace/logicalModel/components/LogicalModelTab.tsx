@@ -4,6 +4,7 @@ import { ErrorState } from '../../../../components/feedback/ErrorState/ErrorStat
 import { Spinner } from '../../../../components/feedback/Spinner/Spinner';
 import { Pagination } from '../../../../components/ui/Pagination/Pagination';
 import { usePagination } from '../../../../components/ui/Pagination/usePagination';
+import { toast } from '../../../../services/toastService';
 import '../logicalModel.css';
 import { fetchBusinessElements, fetchLogicalModel } from '../logicalModel.api';
 import {
@@ -26,7 +27,9 @@ export function LogicalModelTab() {
   const [reloadToken, setReloadToken] = useState(0);
 
   const [query, setQuery] = useState('');
+  const [subjectAreaId, setSubjectAreaId] = useState('All');
   const [sortKey, setSortKey] = useState<SubjectAreaSortKey>('name');
+  const [gapsOnly, setGapsOnly] = useState(false);
 
   useEffect(() => {
     const ac = new AbortController();
@@ -61,9 +64,20 @@ export function LogicalModelTab() {
     return () => ac.abort();
   }, [reloadToken]);
 
+  // A "coverage gap" is a BDE realised in zero physical columns yet — matches the HTML
+  // SoT's one gap example (Sales Markup, 0 PDEs), just surfaced at the subject-area level
+  // since that's what this tab's rows are (a subject area "has a gap" if any of its BDEs do).
+  const gapAreaIds = useMemo(
+    () => new Set(elements.filter((e) => e.pdeCount === 0).map((e) => e.subjectAreaId)),
+    [elements],
+  );
+  const gapCount = useMemo(() => elements.filter((e) => e.pdeCount === 0).length, [elements]);
+
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     let rows = subjectAreas.filter((a) => {
+      if (gapsOnly && !gapAreaIds.has(a.id)) return false;
+      if (subjectAreaId !== 'All' && a.id !== subjectAreaId) return false;
       if (!q) return true;
       return `${a.label} ${a.domain} ${a.subDomain}`.toLowerCase().includes(q);
     });
@@ -73,10 +87,28 @@ export function LogicalModelTab() {
       return a.label.localeCompare(b.label);
     });
     return rows;
-  }, [subjectAreas, query, sortKey]);
+  }, [subjectAreas, query, subjectAreaId, sortKey, gapsOnly, gapAreaIds]);
 
-  const filterKey = `${query}|${sortKey}`;
+  const filterKey = `${query}|${subjectAreaId}|${sortKey}|${gapsOnly}`;
   const { page, setPage, pageCount, pageItems } = usePagination(visible, PAGE_SIZE, filterKey);
+
+  function handleExportCsv() {
+    const header = ['Subject area', 'Domain', 'Sub-domain', 'Logical datasets', 'BDEs', 'Realised', 'Status'];
+    const lines = visible.map((a) =>
+      [a.label, a.domain, a.subDomain, String(a.logicalDatasetCount), String(a.bdeCount), String(a.realisedCount), a.status]
+        .map((v) => `"${v.replace(/"/g, '""')}"`)
+        .join(','),
+    );
+    const csv = [header.join(','), ...lines].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'logical_model.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Logical model exported to CSV.');
+  }
 
   if (status === 'loading') {
     return (
@@ -112,6 +144,18 @@ export function LogicalModelTab() {
         </div>
         <div className="cat-facets">
           <select
+            aria-label="Filter by subject area"
+            value={subjectAreaId}
+            onChange={(e) => setSubjectAreaId(e.target.value)}
+          >
+            <option value="All">All subject areas</option>
+            {subjectAreas.map((a) => (
+              <option key={a.id} value={a.id}>
+                {a.label}
+              </option>
+            ))}
+          </select>
+          <select
             aria-label="Sort"
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value as SubjectAreaSortKey)}
@@ -123,6 +167,16 @@ export function LogicalModelTab() {
             ))}
           </select>
         </div>
+        <button
+          type="button"
+          className={`cat-fbtn${gapsOnly ? ' is-on' : ''}`}
+          onClick={() => setGapsOnly((v) => !v)}
+        >
+          Coverage gaps <span className="cat-fbtn-cnt">{gapCount}</span>
+        </button>
+        <button type="button" className="cat-btn cat-btn-s" onClick={handleExportCsv}>
+          Export CSV
+        </button>
         <div className="cat-rescount">{visible.length} subject areas</div>
       </div>
 

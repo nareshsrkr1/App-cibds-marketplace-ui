@@ -3,13 +3,21 @@
 
 .lin-modal {
   width: 100%;
+  /* The Modal header carries the navy band (headerTheme="navy") — this pulls the
+     body out flush with it (cancelling .ui-modal's own padding) and gives it a
+     soft gold-tinted canvas instead of reading as a plain white sheet. */
+  margin: 0 calc(var(--space-6) * -1) calc(var(--space-6) * -1);
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  background: var(--surface-page);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 .lin-eyebrow {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--gold-deep);
+  font-weight: 600;
   margin-bottom: 10px;
 }
 .lin-legend {
@@ -46,20 +54,30 @@
 .lin-layout {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  /* Center, not flex-start: the detail panel has a min-height floor (below) that's often
+     taller than a short/simple diagram, and top-aligning left the diagram pinned at the
+     top of that extra space with a slab of dead whitespace beneath it. */
+  align-items: center;
   gap: 20px;
+}
+/* Contains the diagram's own scroll instead of letting a tall one (many BDEs sharing a
+   logical dataset) push the whole modal past the viewport — the header and detail panel
+   stay fully visible and usable while only this box scrolls. Uses the app's standard
+   `.ui-scroll-box` themed scrollbar (see components.css). */
+.lin-diagram-scroll {
+  max-height: 460px;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
 }
 .lin-svg {
   display: block;
-  flex: 0 1 auto;
   /* Flex items default to min-width:auto, which blocks shrinking below the SVG's
      intrinsic (attribute) width no matter what flex-shrink says — override it so a
      narrow window actually shrinks the diagram instead of clipping/overflowing it. */
   min-width: 0;
   max-width: 100%;
   height: auto;
-  max-height: 560px;
-  overflow: visible;
 }
 .lin-ribbon {
   stroke-opacity: 0.32;
@@ -111,8 +129,11 @@
 .lin-detail {
   flex: 0 0 280px;
   max-width: 280px;
-  background: var(--surface-page);
-  border: 1px solid var(--color-border);
+  /* A stable floor stops the panel's own height jumping (and re-centering the
+     whole modal) the moment lazy-loaded node detail replaces the placeholder. */
+  min-height: 260px;
+  background: var(--surface-elevated);
+  border: 1px solid var(--gold-mid);
   border-radius: var(--radius-md);
   padding: 14px 16px;
   position: sticky;
@@ -166,6 +187,10 @@
   .lin-layout {
     flex-wrap: wrap;
   }
+  .lin-diagram-scroll {
+    max-height: 320px;
+    flex-basis: 100%;
+  }
   .lin-detail {
     flex-basis: 100%;
     max-width: 100%;
@@ -211,51 +236,90 @@
   color: var(--color-text-secondary);
 }
 .lx-picks-h {
-  font-family: var(--display);
-  font-size: 13px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
   font-weight: 600;
-  color: var(--color-brand);
-  margin-bottom: 10px;
+  margin-bottom: 13px;
 }
 .lx-picks {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+@media (max-width: 1100px) {
+  .lx-picks {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .lx-picks {
+    grid-template-columns: 1fr;
+  }
 }
 .lx-pick {
   appearance: none;
   text-align: left;
   cursor: pointer;
-  background: var(--surface-elevated);
+  background: linear-gradient(135deg, #fff, #faf9f6);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
+  border-radius: 12px;
+  padding: 16px;
   font-family: var(--sans);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  border-left: 3px solid var(--navy);
 }
 .lx-pick:hover {
-  border-color: var(--gold);
-  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-left-color: var(--gold);
 }
 .lx-pick-name {
-  font-size: 14px;
+  font-family: var(--display);
+  font-size: 16px;
   font-weight: 600;
-  color: var(--color-brand);
-  display: block;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
 }
 .lx-pick-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+}
+.lx-pick-dot {
+  color: var(--gold-mid);
+}
+.lx-pick-flow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--color-text-muted);
-  display: block;
-  margin-top: 4px;
+  padding-top: 11px;
+  border-top: 1px solid #f0eee9;
+}
+.lx-pick-arr {
+  color: var(--gold);
 }
 .lx-pick-cde {
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 10px;
+  font-family: var(--mono);
+  font-size: 8px;
   font-weight: 700;
-  color: var(--gold-deep);
-  background: var(--gold-lt);
-  border-radius: 999px;
-  padding: 1px 6px;
+  background: var(--navy);
+  color: var(--gold-mid);
+  padding: 2px 6px;
+  border-radius: 9px;
+  letter-spacing: 0.04em;
 }
