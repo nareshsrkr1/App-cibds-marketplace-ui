@@ -1,11 +1,16 @@
-import type { ReactNode } from 'react';
+import { createContext, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  PersonaSelector,
-  type PersonaOption,
-} from '../../persona/PersonaSelector/PersonaSelector';
+import type { PersonaOption } from '../../persona/PersonaSelector/PersonaSelector';
 import { ConsoleSidebar } from './ConsoleSidebar';
+import { WorkspaceTopbar } from './WorkspaceTopbar';
 import type { NavGroup } from '../../../features/workspace/nav.types';
+
+/**
+ * DOM node inside the topbar that a page's ConsoleHeader can portal its
+ * eyebrow/subtitle into, so the page title sits inline with the user chip
+ * instead of in its own hero block. Null until the topbar has mounted.
+ */
+export const WorkspaceHeaderSlotContext = createContext<HTMLDivElement | null>(null);
 
 export type WorkspaceShellProps = {
   personas: PersonaOption[];
@@ -34,6 +39,7 @@ export function WorkspaceShell({
   onNavSelect,
   children,
 }: WorkspaceShellProps) {
+  const [titleSlot, setTitleSlot] = useState<HTMLDivElement | null>(null);
   return (
     <div className="appshell show" data-testid="workspace-shell">
       <aside className="sb" aria-label="Workspace sidebar">
@@ -44,32 +50,27 @@ export function WorkspaceShell({
             <div className="sb-bs">Data Marketplace</div>
           </div>
         </Link>
-        <PersonaSelector
-          personas={personas}
-          activePersonaId={activePersonaId}
-          onChange={onPersonaChange}
-        />
         <ConsoleSidebar
           groups={navGroups}
           status={navStatus}
           refreshing={navRefreshing}
           onSelect={onNavSelect}
         />
-        <div className="sb-foot">
-          <div className="sb-user">
-            <span className="sb-av">{userInitials}</span>
-            <div>
-              <div className="sb-un">{userName}</div>
-              {userSubtitle ? (
-                <div key={userSubtitle} className="sb-ur sb-ur--fade">
-                  {userSubtitle}
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
       </aside>
-      <div className="sh-main">{children}</div>
+      <div className="sh-col">
+        <WorkspaceTopbar
+          personas={personas}
+          activePersonaId={activePersonaId}
+          onPersonaChange={onPersonaChange}
+          userInitials={userInitials}
+          userName={userName}
+          userSubtitle={userSubtitle}
+          titleSlotRef={setTitleSlot}
+        />
+        <WorkspaceHeaderSlotContext.Provider value={titleSlot}>
+          <div className="sh-main">{children}</div>
+        </WorkspaceHeaderSlotContext.Provider>
+      </div>
     </div>
   );
 }

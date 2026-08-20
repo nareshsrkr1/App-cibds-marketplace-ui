@@ -1,5 +1,5 @@
 /** @vitest-environment jsdom */
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, describe, expect, it } from 'vitest';
 import { setLandingMockScenario } from '../api/mock/handlers/landing.handlers';
@@ -43,12 +43,11 @@ describe('App routes', () => {
       expect(screen.getByTestId('workspace-shell')).toBeInTheDocument(),
     );
     await waitFor(() =>
-      expect(
-        screen.getByText(/Good (morning|afternoon|evening), Test\./i),
-      ).toBeInTheDocument(),
+      expect(screen.getByTestId('producer-console')).toBeInTheDocument(),
     );
-    expect(screen.getByRole('button', { name: 'Producer' })).toHaveAttribute(
-      'aria-pressed',
+    fireEvent.click(screen.getByRole('button', { name: /test user/i }));
+    expect(screen.getByRole('menuitemradio', { name: 'Producer' })).toHaveAttribute(
+      'aria-checked',
       'true',
     );
   });

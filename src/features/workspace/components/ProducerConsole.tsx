@@ -1,5 +1,4 @@
-import { memo } from 'react';
-import { personalizedGreeting } from '../greeting';
+import { memo, useState } from 'react';
 import type {
   ConsoleChart,
   ConsoleChartTier,
@@ -85,6 +84,8 @@ function PanelSlot({
   return null;
 }
 
+type ConsoleTab = 'overview' | 'analytics';
+
 export const ProducerConsole = memo(function ProducerConsole({
   hero,
   charts,
@@ -102,25 +103,18 @@ export const ProducerConsole = memo(function ProducerConsole({
   bodyStageClass = '',
   onAction,
 }: ProducerConsoleProps) {
+  const [tab, setTab] = useState<ConsoleTab>('overview');
   const actions = hero.actions ?? [];
-  const greeting = personalizedGreeting(hero.displayName);
   const showPrimary = primaryStatus === 'ready' || primaryStatus === 'error';
   const showSecondary = secondaryStatus === 'ready' || secondaryStatus === 'error';
   const showPanels = showPrimary || showSecondary;
-  const showBody =
-    chartsStatus === 'ready' ||
-    chartsStatus === 'error' ||
-    chartsStatus === 'empty' ||
-    showPanels;
+  const showCharts =
+    chartsStatus === 'ready' || chartsStatus === 'error' || chartsStatus === 'empty';
 
   return (
     <div className="producer-console" data-testid="producer-console">
-      {/* Static shell — greeting / KPIs / actions stay visible across persona switches */}
-      <ConsoleHeader
-        eyebrow={hero.eyebrow}
-        greeting={greeting}
-        subtitle={hero.subtitle}
-      />
+      {/* Static shell — KPIs / actions stay visible across persona switches */}
+      <ConsoleHeader eyebrow={hero.eyebrow} subtitle={hero.subtitle} />
 
       <div className="sh-kpis" aria-label="Console KPIs">
         {hero.kpis.map((k) => (
@@ -150,21 +144,30 @@ export const ProducerConsole = memo(function ProducerConsole({
         </div>
       ) : null}
 
-      {showBody ? (
-        <div className={`console-body-stage ${bodyStageClass}`.trim()}>
-          {chartsStatus === 'ready' ? (
-            <ConsoleCharts charts={charts} tiers={chartTiers} />
-          ) : chartsStatus === 'error' || chartsStatus === 'empty' ? (
-            <div className="sh-charts">
-              <SectionMessage
-                status={chartsStatus}
-                error={chartsError}
-                emptyLabel="No statistics to show yet."
-              />
-            </div>
-          ) : null}
+      <div className="sh-tabs" role="tablist" aria-label="Producer console views">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === 'overview'}
+          className={`sh-tab${tab === 'overview' ? ' is-active' : ''}`}
+          onClick={() => setTab('overview')}
+        >
+          Overview
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === 'analytics'}
+          className={`sh-tab${tab === 'analytics' ? ' is-active' : ''}`}
+          onClick={() => setTab('analytics')}
+        >
+          Analytics
+        </button>
+      </div>
 
-          {showPanels ? (
+      {tab === 'overview' ? (
+        showPanels ? (
+          <div className={`console-body-stage ${bodyStageClass}`.trim()}>
             <div className="sh-cols">
               {showPrimary ? (
                 <PanelSlot
@@ -188,7 +191,21 @@ export const ProducerConsole = memo(function ProducerConsole({
                 />
               ) : null}
             </div>
-          ) : null}
+          </div>
+        ) : null
+      ) : showCharts ? (
+        <div className={`console-body-stage ${bodyStageClass}`.trim()}>
+          {chartsStatus === 'ready' ? (
+            <ConsoleCharts charts={charts} tiers={chartTiers} />
+          ) : (
+            <div className="sh-charts">
+              <SectionMessage
+                status={chartsStatus}
+                error={chartsError}
+                emptyLabel="No statistics to show yet."
+              />
+            </div>
+          )}
         </div>
       ) : null}
     </div>

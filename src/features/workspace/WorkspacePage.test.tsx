@@ -34,28 +34,32 @@ function renderPage(path = '/workspace') {
   );
 }
 
+/** The persona switcher now lives in a closed-by-default topbar dropdown. */
+function openPersonaMenu() {
+  fireEvent.click(screen.getByRole('button', { name: /test user/i }));
+}
+
 describe('WorkspacePage', () => {
   it('shows Producer enabled and other personas disabled by default', async () => {
     renderPage();
     await waitFor(() =>
       expect(screen.getByTestId('workspace-shell')).toBeInTheDocument(),
     );
-    expect(screen.getByRole('button', { name: 'Producer' })).toHaveAttribute(
-      'aria-pressed',
+    openPersonaMenu();
+    expect(screen.getByRole('menuitemradio', { name: 'Producer' })).toHaveAttribute(
+      'aria-checked',
       'true',
     );
-    expect(screen.getByRole('button', { name: 'Producer' })).not.toBeDisabled();
+    expect(screen.getByRole('menuitemradio', { name: 'Producer' })).not.toBeDisabled();
     for (const label of ['Governance', 'Consumer', 'Admin']) {
-      expect(screen.getByRole('button', { name: label })).toBeDisabled();
+      expect(screen.getByRole('menuitemradio', { name: label })).toBeDisabled();
     }
   });
 
   it('loads hero, tiered charts, consumers, and subscription panels from APIs', async () => {
     renderPage();
     await waitFor(() =>
-      expect(
-        screen.getByText(/Good (morning|afternoon|evening), Test\./i),
-      ).toBeInTheDocument(),
+      expect(screen.getByTestId('producer-console')).toBeInTheDocument(),
     );
     expect(
       screen.getByText(/Everything you produce — governed, bound, and accounted for/i),
@@ -84,18 +88,6 @@ describe('WorkspacePage', () => {
     );
     expect(heroRegister).toBeDisabled();
     await waitFor(() => {
-      expect(screen.getByText('My production health')).toBeInTheDocument();
-      expect(screen.getByText('Publish SLA adherence')).toBeInTheDocument();
-      expect(document.querySelector('.bi-tier-l')?.textContent).toMatch(
-        /My production health/,
-      );
-      expect(
-        Array.from(document.querySelectorAll('.bi-tier-l')).some((el) =>
-          el.textContent?.includes('My data'),
-        ),
-      ).toBe(true);
-    });
-    await waitFor(() => {
       expect(
         screen.getByRole('heading', {
           level: 3,
@@ -108,6 +100,20 @@ describe('WorkspacePage', () => {
           name: /Subscription requests · awaiting your approval/i,
         }),
       ).toBeInTheDocument();
+    });
+    // Charts moved under the Analytics tab to keep the Overview landing uncluttered.
+    fireEvent.click(within(consoleRoot).getByRole('tab', { name: 'Analytics' }));
+    await waitFor(() => {
+      expect(screen.getByText('My production health')).toBeInTheDocument();
+      expect(screen.getByText('Publish SLA adherence')).toBeInTheDocument();
+      expect(document.querySelector('.bi-tier-l')?.textContent).toMatch(
+        /My production health/,
+      );
+      expect(
+        Array.from(document.querySelectorAll('.bi-tier-l')).some((el) =>
+          el.textContent?.includes('My data'),
+        ),
+      ).toBe(true);
     });
     expect(
       screen.queryByRole('heading', { level: 3, name: 'Sent to governance' }),
@@ -163,7 +169,8 @@ describe('WorkspacePage', () => {
       ).toBeGreaterThanOrEqual(1);
     });
 
-    const governance = screen.getByRole('button', { name: 'Governance' });
+    openPersonaMenu();
+    const governance = screen.getByRole('menuitemradio', { name: 'Governance' });
     expect(governance).toBeDisabled();
     fireEvent.click(governance);
     expect(
@@ -188,10 +195,9 @@ describe('WorkspacePage', () => {
     setConsoleSectionScenario('charts', 'error');
     renderPage();
     await waitFor(() =>
-      expect(
-        screen.getByText(/Good (morning|afternoon|evening), Test\./i),
-      ).toBeInTheDocument(),
+      expect(screen.getByTestId('producer-console')).toBeInTheDocument(),
     );
+    fireEvent.click(screen.getByRole('tab', { name: 'Analytics' }));
     await waitFor(() => {
       expect(screen.getByRole('alert')).toHaveTextContent(
         /Unable to retrieve console charts/i,
