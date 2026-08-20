@@ -11,6 +11,8 @@
   --gold-deep: #8f6e32;
   --gold-lt: #f8f2e6;
   --gold-mid: #e0c48a;
+  /* Lighter gold for accents on white surfaces (still readable, less heavy than --gold-deep) */
+  --gold-soft: #c9a35f;
   --navy: #0f2338;
   --navy2: #1b3a5b;
   --navy-2: #0b1c2e;
