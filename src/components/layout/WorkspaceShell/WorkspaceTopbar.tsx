@@ -115,10 +115,7 @@ export function WorkspaceTopbar({
           <span className="ws-profile-av">{userInitials}</span>
           <span className="ws-profile-meta">
             <span className="ws-profile-name">{userName}</span>
-            <span className="ws-profile-role">
-              {activePersona ? <PersonaIcon personaId={activePersona.id} /> : null}
-              {activePersona?.label ?? 'Select role'}
-            </span>
+            <span className="ws-profile-role">{activePersona?.label ?? 'Select role'}</span>
           </span>
           <svg
             className={`ws-profile-chev${open ? ' is-open' : ''}`}

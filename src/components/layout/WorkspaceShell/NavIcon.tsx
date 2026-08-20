@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-const ICON_SIZE = 18.5;
+const ICON_SIZE = 19.5;
 
 /**
  * Presentation-only swap for the unicode glyphs stored in mock/API nav JSON
