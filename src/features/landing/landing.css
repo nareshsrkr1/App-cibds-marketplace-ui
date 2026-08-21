@@ -21,7 +21,7 @@
   margin: var(--space-4) 52px;
   padding: 14px var(--space-4);
   border-radius: 10px;
-  font-size: 13.5px;
+  font-size: 14.5px;
   font-weight: 500;
 }
 
@@ -55,12 +55,12 @@
   z-index: 30;
 }
 .pl-brand .b1 {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ink);
 }
 .pl-brand .b2 {
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-deep);
@@ -71,7 +71,7 @@
   margin-left: 12px;
 }
 .pl-navlinks a {
-  font-size: 14.5px;
+  font-size: 15.5px;
   font-weight: 500;
   color: var(--mid);
   text-decoration: none;
@@ -113,7 +113,7 @@
   align-items: center;
 }
 .pl-eyebrow {
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold-deep);
@@ -145,7 +145,7 @@
   letter-spacing: 0;
 }
 .pl-hero-p {
-  font-size: 16.5px;
+  font-size: 17.5px;
   color: var(--mid);
   font-weight: 400;
   line-height: 1.72;
@@ -160,7 +160,7 @@
 .pl-nav-cta {
   margin-left: 0;
   padding: 9px 16px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .pl-hero-r {
   border-left: 1px solid var(--border);
@@ -175,7 +175,7 @@
 }
 .pl-dg-h {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-deep);
@@ -215,7 +215,7 @@
   background: var(--green-lt);
 }
 .pl-dg-k {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--light);
@@ -223,7 +223,7 @@
 }
 .pl-dg-id {
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--navy);
 }
@@ -234,7 +234,7 @@
   color: var(--green);
 }
 .pl-dg-d {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--mid);
   font-style: italic;
 }
@@ -265,7 +265,7 @@
   top: 50%;
   transform: translateY(-50%);
   white-space: nowrap;
-  font-size: 9.5px;
+  font-size: 10.5px;
   color: var(--mid);
   font-style: italic;
   font-family: var(--mono);
@@ -299,7 +299,7 @@
   font-family: var(--serif-kpi);
   font-style: italic;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 31px;
   color: var(--navy);
   line-height: 1;
   letter-spacing: -0.01em;
@@ -309,7 +309,7 @@
 .pl-pf-l {
   display: block;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11.5px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -328,7 +328,7 @@
   margin: 0 auto;
 }
 .pl-sec-eyebrow {
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-deep);
@@ -346,7 +346,7 @@
   line-height: 1.12;
 }
 .pl-sec-lead {
-  font-size: 16px;
+  font-size: 17px;
   color: var(--mid);
   font-weight: 400;
   line-height: 1.7;
@@ -372,7 +372,7 @@
 }
 .pl-cap-n {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--gold);
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -380,13 +380,13 @@
 }
 .pl-cap-h {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 400;
   color: var(--ink);
   margin-bottom: 10px;
 }
 .pl-cap p {
-  font-size: 13.5px;
+  font-size: 14.5px;
   color: var(--mid);
   line-height: 1.62;
   font-weight: 400;
@@ -399,7 +399,7 @@
 }
 .pl-cap-tags span {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.03em;
   color: var(--gold-deep);
   background: var(--gold-lt);
@@ -416,7 +416,7 @@
 }
 .pl-cap-ai-tag {
   font-family: var(--mono);
-  font-size: 8.5px;
+  font-size: 9.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--navy);
@@ -461,7 +461,7 @@
   background: var(--navy);
   color: #fff;
   font-family: var(--mono);
-  font-size: 14px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -473,12 +473,12 @@
 }
 .pl-ph {
   font-family: var(--display);
-  font-size: 17px;
+  font-size: 18px;
   color: var(--ink);
   margin-bottom: 7px;
 }
 .pl-pd {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--mid);
   line-height: 1.55;
   font-weight: 400;
@@ -509,7 +509,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 18px 20px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--ink);
   background: transparent;
@@ -524,7 +524,7 @@
   outline-offset: -2px;
 }
 .pl-faq-i {
-  font-size: 20px;
+  font-size: 21px;
   color: var(--gold);
   flex-shrink: 0;
   transition: transform 0.2s;
@@ -539,7 +539,7 @@
     max-height 0.25s,
     padding 0.25s;
   padding: 0 20px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--mid);
   line-height: 1.65;
   font-weight: 400;
@@ -558,7 +558,7 @@
   margin: 0 auto;
 }
 .pl-cta-eyebrow {
-  font-size: 11.5px;
+  font-size: 12.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-mid);
@@ -581,7 +581,7 @@
   color: var(--gold-mid);
 }
 .pl-cta-p {
-  font-size: 16px;
+  font-size: 17px;
   color: rgba(232, 227, 216, 0.9);
   font-weight: 400;
   line-height: 1.7;
@@ -627,16 +627,16 @@
 .pl-foot-brand {
   color: #fff;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
   margin-right: 14px;
 }
 .pl-foot-meta {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: rgba(232, 227, 216, 0.78);
 }
 .pl-foot-r {
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(232, 227, 216, 0.78);
 }
 
