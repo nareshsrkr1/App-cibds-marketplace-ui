@@ -1,7 +1,5 @@
 import type { ReactNode } from 'react';
 
-const ICON_SIZE = 19.5;
-
 /**
  * Presentation-only swap for the unicode glyphs stored in mock/API nav JSON
  * (`NavItem.icon`, still a plain string) — each entry mirrors the shape of the
@@ -89,8 +87,8 @@ export function NavIcon({ glyph }: { glyph?: string }) {
   if (!path) return glyph ? <>{glyph}</> : null;
   return (
     <svg
-      width={ICON_SIZE}
-      height={ICON_SIZE}
+      width="1em"
+      height="1em"
       viewBox="0 0 16 16"
       aria-hidden="true"
       focusable="false"

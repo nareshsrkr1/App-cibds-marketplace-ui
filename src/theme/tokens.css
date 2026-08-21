@@ -57,11 +57,32 @@
   --control-height: 40px;
   --control-height-sm: 32px;
   --control-height-lg: 48px;
-  --sidebar-width: 296px;
+  /* Sidebar width scales with viewport — narrower on a small laptop, wider on a
+     large desktop — using the same 1024–1920px "CSS lock" range as --fs-* below. */
+  --sidebar-width: clamp(
+    264px,
+    calc(264px + (340px - 264px) * ((100vw - 1024px) / 896px)),
+    340px
+  );
 
   /* Breakpoints (reference values) */
   --bp-md: 820px;
   --bp-lg: 1100px;
+
+  /* Fluid type scale — sizes tuned by eye at a ~1280px viewport now scale smoothly
+     between a small-laptop floor (1024px) and a large-desktop ceiling (1920px),
+     instead of staying fixed regardless of screen size. Below 1024px or above
+     1920px the value holds at its floor/ceiling. */
+  --fs-nav-item: clamp(15.5px, calc(15.5px + (21px - 15.5px) * ((100vw - 1024px) / 896px)), 21px);
+  --fs-nav-sub-item: clamp(15px, calc(15px + (20px - 15px) * ((100vw - 1024px) / 896px)), 20px);
+  --fs-nav-icon: clamp(15.5px, calc(15.5px + (21px - 15.5px) * ((100vw - 1024px) / 896px)), 21px);
+  --fs-nav-group-label: clamp(11.5px, calc(11.5px + (15.5px - 11.5px) * ((100vw - 1024px) / 896px)), 15.5px);
+  --fs-brand-name: clamp(17px, calc(17px + (23px - 17px) * ((100vw - 1024px) / 896px)), 23px);
+  --fs-brand-sub: clamp(9.5px, calc(9.5px + (12.5px - 9.5px) * ((100vw - 1024px) / 896px)), 12.5px);
+  --fs-topbar-title: clamp(19px, calc(19px + (25px - 19px) * ((100vw - 1024px) / 896px)), 25px);
+  --fs-topbar-subtitle: clamp(12px, calc(12px + (16px - 12px) * ((100vw - 1024px) / 896px)), 16px);
+  --fs-kpi-value: clamp(32px, calc(32px + (42.5px - 32px) * ((100vw - 1024px) / 896px)), 42.5px);
+  --fs-kpi-label: clamp(11px, calc(11px + (15px - 11px) * ((100vw - 1024px) / 896px)), 15px);
 
   /* Focus / disabled */
   --focus-ring: 0 0 0 3px rgba(176, 138, 79, 0.45);
